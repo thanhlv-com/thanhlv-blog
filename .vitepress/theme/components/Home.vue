@@ -1,9 +1,7 @@
 <script setup lang="ts">
 import { onMounted } from 'vue'
-import SiteMap from './SiteMap.vue'
 // import NewsLetter from './NewsLetter.vue'
 import { load, data, base } from './sponsors'
-import SponsorsGroup from './SponsorsGroup.vue'
 import VueMasteryModal from './VueMasteryModal.vue'
 
 onMounted(async () => {
@@ -89,15 +87,6 @@ onMounted(async () => {
     </div>
   </section>
 
-  <section id="sponsors">
-    <h2>Platinum Sponsors</h2>
-    <SponsorsGroup tier="platinum" placement="landing" />
-    <h2>Gold Sponsors</h2>
-    <SponsorsGroup tier="gold" placement="landing" />
-  </section>
-
-  <SiteMap />
-  <!-- <NewsLetter /> -->
 </template>
 
 <style scoped>
