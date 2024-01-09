@@ -1,5 +1,6 @@
 ---
 footer: true
+title: "CPU, CORE và Thread khác gì nhau ?"
 ---
 
 # CPU, CORE và Thread khác gì nhau ? {#cpu-core-va-thread-khac-gi-nhau}
