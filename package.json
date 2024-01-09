@@ -4,7 +4,9 @@
   },
   "type": "module",
   "scripts": {
-    "dev": "vitepress",
+    "pre_start": "node prebuild/prebuild.cjs",
+    "pre_run": "yarn run pre_start",
+    "dev": "yarn run pre_run && vitepress",
     "build": "vitepress build",
     "preview": "vitepress preview",
     "preinstall": "npx only-allow pnpm"
