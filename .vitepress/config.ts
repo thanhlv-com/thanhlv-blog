@@ -14,33 +14,20 @@ const nav: ThemeConfig['nav'] = [
   }
 ]
 
+const postBlogs = [
+  {
+    text: 'CPU, CORE và Thread khác gì nhau ?',
+    link: '/blog/2024-01-09-cpu-core-and-thread-khac-gi-nhau'
+  }
+]
+
 export const sidebar: ThemeConfig['sidebar'] = {
   '/blog/': [
     {
       text: '',
       items: [
-        { text: 'Giới thiệu', link: '/blog/gioi-thieu' }
-      ]
-    },
-    {
-      text: 'Best Practices',
-      items: [
-        {
-          text: 'Production Deployment',
-          link: '/blog/best-practices/production-deployment'
-        },
-        {
-          text: 'Performance',
-          link: '/blog/best-practices/performance'
-        },
-        {
-          text: 'Accessibility',
-          link: '/blog/best-practices/accessibility'
-        },
-        {
-          text: 'Security',
-          link: '/blog/best-practices/security'
-        }
+        { text: 'Giới thiệu', link: '/blog/gioi-thieu' },
+        ...postBlogs
       ]
     }
   ]
