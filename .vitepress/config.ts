@@ -10,20 +10,16 @@ const nav: ThemeConfig['nav'] = [
   {
     text: 'Blog',
     activeMatch: `^/blog/`,
-    link: '/blog/introduction'
+    link: '/blog/gioi-thieu'
   }
 ]
 
 export const sidebar: ThemeConfig['sidebar'] = {
   '/blog/': [
     {
-      text: 'Getting Started',
+      text: '',
       items: [
-        { text: 'Introduction', link: '/blog/introduction' },
-        {
-          text: 'Quick Start',
-          link: '/blog/quick-start'
-        }
+        { text: 'Giới thiệu', link: '/blog/gioi-thieu' }
       ]
     },
     {

@@ -19,7 +19,7 @@ onMounted(async () => {
       user interfaces.
     </p>
     <p class="actions">
-      <a class="get-started" href="/blog/introduction.html">
+      <a class="get-started" href="/blog/gioi-thieu.html">
         Blog
         <svg
           class="icon"
