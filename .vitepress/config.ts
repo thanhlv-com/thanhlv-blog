@@ -120,57 +120,6 @@ export default defineConfigWithTheme<ThemeConfig>({
   themeConfig: {
     nav,
     sidebar,
-    // Placeholder of the i18n config for @vuejs-translations.
-    // i18n,
-
-    localeLinks: [
-      {
-        link: 'https://cn.vuejs.org',
-        text: '简体中文',
-        repo: 'https://github.com/vuejs-translations/docs-zh-cn'
-      },
-      {
-        link: 'https://ja.vuejs.org',
-        text: '日本語',
-        repo: 'https://github.com/vuejs-translations/docs-ja'
-      },
-      {
-        link: 'https://ua.vuejs.org',
-        text: 'Українська',
-        repo: 'https://github.com/vuejs-translations/docs-uk'
-      },
-      {
-        link: 'https://fr.vuejs.org',
-        text: 'Français',
-        repo: 'https://github.com/vuejs-translations/docs-fr'
-      },
-      {
-        link: 'https://ko.vuejs.org',
-        text: '한국어',
-        repo: 'https://github.com/vuejs-translations/docs-ko'
-      },
-      {
-        link: 'https://pt.vuejs.org',
-        text: 'Português',
-        repo: 'https://github.com/vuejs-translations/docs-pt'
-      },
-      {
-        link: 'https://bn.vuejs.org',
-        text: 'বাংলা',
-        repo: 'https://github.com/vuejs-translations/docs-bn'
-      },
-      {
-        link: 'https://it.vuejs.org',
-        text: 'Italiano',
-        repo: 'https://github.com/vuejs-translations/docs-it'
-      },
-      {
-        link: '/translations/',
-        text: 'Help Us Translate!',
-        isTranslationsDesc: true
-      }
-    ],
-
     algolia: {
       indexName: 'vuejs',
       appId: 'ML0LEBN7FQ',
@@ -190,11 +139,6 @@ export default defineConfigWithTheme<ThemeConfig>({
       { icon: 'twitter', link: 'https://twitter.com/vuejs' },
       { icon: 'discord', link: 'https://discord.com/invite/HBherRA' }
     ],
-
-    editLink: {
-      repo: 'vuejs/docs',
-      text: 'Edit this page on GitHub'
-    },
 
     footer: {
       license: {
