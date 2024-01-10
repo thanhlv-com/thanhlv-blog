@@ -17,6 +17,10 @@ const nav: ThemeConfig['nav'] = [
 
 const postBlogs = [
   {
+    text: 'Thêm 10 triệu data vào cuối list với ArrayList và LinkedList trong java thì dùng cái nào nhanh hơn',
+    link: '/blog/2024-01-11-them-10-trieu-data-vao-cuoi-list-voi-array-list-va-linked-list-trong-java-thi-dung-cai-nao-nhanh-hon'
+  },
+  {
     text: 'Concurrency và parallelism. Giải thích Concurrency và parallelism của OS và business khác gì nhau ?.',
     link: '/blog/2024-01-10-concurrency-va-parallelism-giai-thich-concurrency-va-parallelism-cua-os-va-business-khac-gi-nhau'
   },
