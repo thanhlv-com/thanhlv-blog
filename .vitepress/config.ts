@@ -49,7 +49,6 @@ export const sidebar: ThemeConfig['sidebar'] = {
 export default defineConfigWithTheme<ThemeConfig>({
   extends: baseConfig,
   lastUpdated: true,
-  cleanUrls: true,
   lang: 'en-US',
   title: 'Thanhlv',
   description: 'Thanhlv - Yêu công nghệ',
