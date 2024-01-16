@@ -17,6 +17,10 @@ const nav: ThemeConfig['nav'] = [
 
 const postBlogs = [
   {
+    text: 'Sự khác biệt giữa import wildcard và import một class trong java',
+    link: '/blog/2024-01-16-su-khac-biet-giua-import-wildcard-va-import-mot-class-trong-java'
+  },
+  {
     text: 'Thêm 10 triệu data vào cuối list với ArrayList và LinkedList trong java thì dùng cái nào nhanh hơn',
     link: '/blog/2024-01-11-them-10-trieu-data-vao-cuoi-list-voi-array-list-va-linked-list-trong-java-thi-dung-cai-nao-nhanh-hon'
   },
