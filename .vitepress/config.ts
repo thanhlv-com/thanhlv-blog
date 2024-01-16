@@ -71,7 +71,7 @@ export default defineConfigWithTheme<ThemeConfig>({
       'meta',
       {
         property: 'og:image',
-        content: 'https://vuejs.org/images/logo.png'
+        content: 'images/logo_thanhlv.png'
       }
     ],
     ['meta', { name: 'twitter:site', content: '@vuejs' }],
@@ -112,20 +112,20 @@ export default defineConfigWithTheme<ThemeConfig>({
   themeConfig: {
     nav,
     sidebar,
-    algolia: {
-      indexName: 'vuejs',
-      appId: 'ML0LEBN7FQ',
-      apiKey: 'f49cbd92a74532cc55cfbffa5e5a7d01',
-      searchParameters: {
-        facetFilters: ['version:v3']
-      }
-    },
+    // algolia: {
+    //   indexName: 'vuejs',
+    //   appId: 'ML0LEBN7FQ',
+    //   apiKey: 'f49cbd92a74532cc55cfbffa5e5a7d01',
+    //   searchParameters: {
+    //     facetFilters: ['version:v3']
+    //   }
+    // },
 
-    socialLinks: [
-      { icon: 'github', link: 'https://github.com/vuejs/' },
-      { icon: 'twitter', link: 'https://twitter.com/vuejs' },
-      { icon: 'discord', link: 'https://discord.com/invite/HBherRA' }
-    ],
+    // socialLinks: [
+    //   { icon: 'github', link: 'https://github.com/vuejs/' },
+    //   { icon: 'twitter', link: 'https://twitter.com/vuejs' },
+    //   { icon: 'discord', link: 'https://discord.com/invite/HBherRA' }
+    // ],
 
     editLink: {
       repo: 'thanhlv-it/thanhlv-blog',
