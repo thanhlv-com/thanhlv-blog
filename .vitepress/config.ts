@@ -17,6 +17,10 @@ const nav: ThemeConfig['nav'] = [
 
 const postBlogs = [
   {
+    text: 'Sửa lỗi 404 khi deploy một số ứng dụng web Single Page Application với Nginx',
+    link: '/blog/2024-01-17-sua-loi-404-khi-deploy-mot-so-ung-dung-web-single-page-application-voi-nginx'
+  },
+  {
     text: 'Sự khác biệt giữa import wildcard và import một class trong java',
     link: '/blog/2024-01-16-su-khac-biet-giua-import-wildcard-va-import-mot-class-trong-java'
   },
