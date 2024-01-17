@@ -124,14 +124,11 @@ export default defineConfigWithTheme<ThemeConfig>({
   themeConfig: {
     nav,
     sidebar,
-    // algolia: {
-    //   indexName: 'vuejs',
-    //   appId: 'ML0LEBN7FQ',
-    //   apiKey: 'f49cbd92a74532cc55cfbffa5e5a7d01',
-    //   searchParameters: {
-    //     facetFilters: ['version:v3']
-    //   }
-    // },
+    algolia: {
+      indexName: 'thanhlv.com',
+      appId: 'H0MJEW3QD8',
+      apiKey: '6a8d7bdce829f6f9e16011f0a16e6f5d',
+    },
 
     // socialLinks: [
     //   { icon: 'github', link: 'https://github.com/vuejs/' },
