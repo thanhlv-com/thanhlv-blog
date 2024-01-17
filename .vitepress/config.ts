@@ -17,6 +17,10 @@ const nav: ThemeConfig['nav'] = [
 
 const postBlogs = [
   {
+    text: 'Thread safe, Lock object là gì ?',
+    link: '/blog/2024-01-18-thread-safe-va-lock-object-la-gi'
+  },
+  {
     text: 'Sửa lỗi 404 khi deploy một số ứng dụng web Single Page Application với Nginx',
     link: '/blog/2024-01-17-sua-loi-404-khi-deploy-mot-so-ung-dung-web-single-page-application-voi-nginx'
   },
