@@ -47,10 +47,15 @@ const pageClass = computed(() => {
       <div class="content">
         <slot name="content-top" />
         <main>
+          <div  class="author"  v-if="frontmatter.authors && frontmatter.authors.length > 0">
+            <div class="aside-container" style="margin: auto;text-align: center ; width: auto;">
+              <slot name="author" />
+            </div>
+          </div>
           <Content class="vt-doc" :class="pageClass" />
-          <div  class="aside-mobile"  v-if="frontmatter.aside !== false">
-            <div class="aside-container" style="margin: auto; width: auto;">
-              <slot name="aside-mid" />
+          <div  class="author"  v-if="frontmatter.authors && frontmatter.authors.length > 0">
+            <div class="aside-container" style="margin: auto;text-align: center ; width: auto;">
+              <slot name="author" />
             </div>
           </div>
           <p
@@ -92,7 +97,7 @@ const pageClass = computed(() => {
   padding-left: 64px;
   width: 320px;
 }
-.aside-mobile {
+.author {
   position: relative;
   flex-shrink: 0;
   width: 100%;
@@ -168,7 +173,7 @@ const pageClass = computed(() => {
     display: block;
     order: 2;
   }
-  .aside-mobile {
+  .author {
     display: none;
     order: 2;
   }

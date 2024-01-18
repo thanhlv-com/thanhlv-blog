@@ -73,6 +73,9 @@ provide('close-sidebar', closeSidebar)
       <template #aside-mid>
         <slot name="aside-mid" />
       </template>
+      <template #author>
+        <slot name="author" />
+      </template>
       <template #aside-bottom>
         <slot name="aside-bottom" />
       </template>

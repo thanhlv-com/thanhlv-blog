@@ -15,7 +15,8 @@ export default Object.assign({}, VPTheme, {
     // @ts-ignore
     return h(VPTheme.Layout, null, {
       'sidebar-top': () => h(PreferenceSwitch),
-      'aside-mid': () => h(Author)
+      'aside-mid': () => h(Author),
+      'author': () => h(Author)
     })
   },
   enhanceApp({ app }: { app: App }) {
