@@ -4,15 +4,9 @@
   },
   "type": "module",
   "scripts": {
-    "pre_start": "node prebuild/prebuild.cjs",
-    "pre_run": "yarn run pre_start",
-    "dev": "vitepress",
-    "build": "pnpm -r --filter='./packages/libs/**' run build",
-    "build_to_folder_nginx": "yarn run ci && yarn run pre_run && vitepress build --outDir=./../../ung-dung-web/web-du-an-ca-nhan-all/nginx-router-root/build/www/thanhlv.com/blog-v2",
-    "preview": "vitepress preview",
-    "preinstall": "npx only-allow pnpm",
-    "ci": "npm i -g pnpm && pnpm install",
-    "pdf-blog": "press-export-pdf export src/blog"
+    "dev": "pnpm -C packages/apps run dev",
+    "build": "pnpm -C packages/apps run build",
+    "ci": "npm i -g pnpm && pnpm install"
   },
   "devDependencies": {
     "blog": "workspace:*",
