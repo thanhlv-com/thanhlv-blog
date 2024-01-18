@@ -7,8 +7,8 @@
   "scripts": {
     "pre_start": "node prebuild/prebuild.cjs",
     "pre_run": "yarn run pre_start",
-    "dev": "yarn run pre_run && vitepress",
-    "build": "yarn run pre_run && vitepress build",
+    "dev": "vitepress",
+    "build": "vitepress build",
     "build_to_folder_nginx": "yarn run ci && yarn run pre_run && vitepress build --outDir=./../../ung-dung-web/web-du-an-ca-nhan-all/nginx-router-root/build/www/thanhlv.com/blog-v2",
     "preview": "vitepress preview",
     "preinstall": "npx only-allow pnpm",
@@ -17,7 +17,7 @@
   },
   "dependencies": {
     "@vue/repl": "^3.0.0",
-    "@vue/theme": "^2.2.5",
+    "@vue/theme": "workspace:*",
     "dynamics.js": "^1.1.5",
     "gsap": "^3.9.0",
     "vitepress": "1.0.0-rc.33",

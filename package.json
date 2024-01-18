@@ -6,8 +6,8 @@
   "scripts": {
     "pre_start": "node prebuild/prebuild.cjs",
     "pre_run": "yarn run pre_start",
-    "dev": "yarn run pre_run && vitepress",
-    "build": "pnpm -r --filter='./packages/*' run build",
+    "dev": "vitepress",
+    "build": "pnpm -r --filter='./packages/libs/**' run build",
     "build_to_folder_nginx": "yarn run ci && yarn run pre_run && vitepress build --outDir=./../../ung-dung-web/web-du-an-ca-nhan-all/nginx-router-root/build/www/thanhlv.com/blog-v2",
     "preview": "vitepress preview",
     "preinstall": "npx only-allow pnpm",
@@ -15,7 +15,8 @@
     "pdf-blog": "press-export-pdf export src/blog"
   },
   "devDependencies": {
-    "blog": "workspace:*"
+    "blog": "workspace:*",
+    "@vue/theme": "workspace:*"
   },
   "pnpm": {
     "overrides": {
