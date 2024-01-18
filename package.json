@@ -8,6 +8,7 @@
     "pre_run": "yarn run pre_start",
     "dev": "yarn run pre_run && vitepress",
     "build": "yarn run pre_run && vitepress build",
+    "build_to_folder_nginx": "yarn run ci && yarn run pre_run && vitepress build --outDir=./../../ung-dung-web/web-du-an-ca-nhan-all/nginx-router-root/build/www/thanhlv.com/blog-v2",
     "preview": "vitepress preview",
     "preinstall": "npx only-allow pnpm",
     "ci": "npm i -g pnpm && pnpm install",
