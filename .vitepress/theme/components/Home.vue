@@ -15,8 +15,7 @@ onMounted(async () => {
      <span class="accent">Lê Văn Thành</span>
     </h1>
     <p class="description">
-      An approachable, performant and versatile framework for building web
-      user interfaces.
+      Hãy tiếp tục bước đi, bởi vì khi dừng lại bạn có thể sẽ dừng lại mãi mãi.
     </p>
     <p class="actions">
       <a class="get-started" href="/blog/gioi-thieu.html">
