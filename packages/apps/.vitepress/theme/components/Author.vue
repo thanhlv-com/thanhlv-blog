@@ -20,7 +20,7 @@ const members = computed(() => blogs[findCurrentIndex()]?.authors?.map((key) => 
 
 <template>
   <div v-if='frontmatter.authors'>
-    <a class='sponsors-aside-text'>Author</a>
+    <a class='sponsors-aside-text'>Tác giả</a>
     <VPTeamMembers size='small' :members='members' />
   </div>
 </template>

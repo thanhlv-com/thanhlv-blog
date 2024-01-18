@@ -50,7 +50,7 @@ function load() {
       <button
         type="button"
         class="DocSearch DocSearch-Button"
-        :aria-label="config.i18n?.search ?? 'Search'"
+        :aria-label="config.i18n?.search ?? 'Tìm kiếm'"
       >
         <span class="DocSearch-Button-Container">
           <svg
@@ -69,7 +69,7 @@ function load() {
             ></path>
           </svg>
           <span class="DocSearch-Button-Placeholder">{{
-            config.i18n?.search ?? 'Search'
+            config.i18n?.search ?? 'Tìm kiếm'
           }}</span>
         </span>
         <ClientOnly>

@@ -128,6 +128,45 @@ export default defineConfigWithTheme<ThemeConfig>({
       indexName: 'thanhlv',
       appId: 'O2PN3Z02M2',
       apiKey: 'b8303151f5f69276a688c1531f5cc803',
+      placeholder:"Tìm kiếm",
+      translations : {
+      button:{
+        buttonText:"Tìm kiếm",
+        buttonAriaLabel:"Tìm kiếm"
+      },
+      modal:{
+          searchBox:{
+              resetButtonTitle:"Xóa tìm kiếm",
+              resetButtonAriaLabel:"Xóa tìm kiếm",
+              cancelButtonText:"Hủy tìm kiếm",
+              cancelButtonAriaLabel:"Hủy tìm kiếm",
+          },
+          startScreen: {
+              recentSearchesTitle: 'Gần đây',
+              noRecentSearchesText: 'Không có tìm kiếm gần đây',
+              saveRecentSearchButtonTitle: 'Lưu kết quả tìm kiếm này',
+              removeRecentSearchButtonTitle: 'Xóa tìm kiếm này khỏi lịch sử',
+              favoriteSearchesTitle: 'Yêu thích',
+              removeFavoriteSearchButtonTitle: 'Xóa tìm kiếm này khỏi mục yêu thích',
+          },
+          errorScreen: {
+              titleText: 'Không tìm thấy kết quả',
+              helpText: 'Dữ liệu không tồn tại hoặc kết nối mạng của bạn có vấn đề, vui lòng kiểm tra',
+          },
+          footer:{
+              selectText:"Chọn để đọc",
+              navigateText:"Điều hướng",
+              closeText:"Đóng",
+              searchByText:"Tìm kiểm bởi",
+          },
+          noResultsScreen: {
+              noResultsText: 'Không có kết quả cho',
+              suggestedQueryText: 'Hãy thử tìm kiếm',
+              reportMissingResultsText: 'Bạn tin rằng truy vấn này sẽ trả về kết quả?',
+              reportMissingResultsLinkText: 'Hãy cho tôi biết.',
+          },
+      }
+      }
     },
 
     // socialLinks: [
@@ -136,17 +175,24 @@ export default defineConfigWithTheme<ThemeConfig>({
     //   { icon: 'discord', link: 'https://discord.com/invite/HBherRA' }
     // ],
 
+    i18n: {
+      toc:"Trên trang này",
+      previous:"Bài trước",
+      next:"Bài tiếp theo",
+      search:"Tìm kiếm"
+    },
+
     editLink: {
       repo: 'thanhlv-it/thanhlv-blog',
       appFolder: 'packages/apps',
-      text: 'Edit this page on GitHub'
+      text: 'Chỉnh sửa trang này trên GitHub'
     },
     footer: {
       license: {
         text: 'MIT License',
         link: 'https://opensource.org/licenses/MIT'
       },
-      copyright: `Copyright © 2014-${new Date().getFullYear()} ThanhLv`
+      copyright: `Copyright © 2022-${new Date().getFullYear()} ThanhLv`
     }
   },
 
