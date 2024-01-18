@@ -48,6 +48,11 @@ const pageClass = computed(() => {
         <slot name="content-top" />
         <main>
           <Content class="vt-doc" :class="pageClass" />
+          <div  class="aside-mobile"  v-if="frontmatter.aside !== false">
+            <div class="aside-container" style="margin: auto; width: auto;">
+              <slot name="aside-mid" />
+            </div>
+          </div>
           <p
             class="edit-link"
             v-if="config.editLink && frontmatter.editLink !== false"
@@ -86,6 +91,12 @@ const pageClass = computed(() => {
   flex-shrink: 0;
   padding-left: 64px;
   width: 320px;
+}
+.aside-mobile {
+  position: relative;
+  flex-shrink: 0;
+  width: 100%;
+  padding-bottom: 60px;
 }
 
 .aside-container {
@@ -155,6 +166,10 @@ const pageClass = computed(() => {
   }
   .aside {
     display: block;
+    order: 2;
+  }
+  .aside-mobile {
+    display: none;
     order: 2;
   }
 }
