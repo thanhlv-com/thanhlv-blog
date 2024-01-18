@@ -10,7 +10,7 @@ outline: deep
 
 Xin chào mọi người,
 
-Hôm nay, tôi đã có dịp tham gia một buổi Seminar thú vị cùng anh Bảo (Nguyễn Quốc Bảo) - một đồng nghiệp cũ từng sát cánh cùng tôi. Anh Bảo đã dành thời gian để chia sẻ kiến thức sâu sắc về Concurrency và Thread, và tôi phải nói rằng có những phần trong bài thuyết trình của anh ấy thật sự là rất bổ ích.
+Hôm nay, tôi đã có dịp tham gia một buổi Seminar thú vị cùng anh Bảo ([Nguyễn Quốc Bảo](https://www.facebook.com/bao.bao.bm)) - một đồng nghiệp cũ từng sát cánh cùng tôi. Anh Bảo đã dành thời gian để chia sẻ kiến thức sâu sắc về Concurrency và Thread, và tôi phải nói rằng có những phần trong bài thuyết trình của anh ấy thật sự là rất bổ ích.
 <br/>
 Nhờ có buổi seminar này, tôi đã hiểu rõ hơn nhiều về các khái niệm này và cách chúng tác động đến lập trình hiện đại.
 
