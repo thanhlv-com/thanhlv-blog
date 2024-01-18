@@ -125,9 +125,9 @@ export default defineConfigWithTheme<ThemeConfig>({
     nav,
     sidebar,
     algolia: {
-      indexName: 'thanhlv.com',
-      appId: 'H0MJEW3QD8',
-      apiKey: '6a8d7bdce829f6f9e16011f0a16e6f5d',
+      indexName: 'thanhlv',
+      appId: 'O2PN3Z02M2',
+      apiKey: 'b8303151f5f69276a688c1531f5cc803',
     },
 
     // socialLinks: [
