@@ -138,6 +138,7 @@ export default defineConfigWithTheme<ThemeConfig>({
 
     editLink: {
       repo: 'thanhlv-it/thanhlv-blog',
+      appFolder: 'packages/apps',
       text: 'Edit this page on GitHub'
     },
     footer: {

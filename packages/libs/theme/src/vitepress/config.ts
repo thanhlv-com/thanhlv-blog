@@ -45,6 +45,7 @@ export interface Config {
      * If a branch isn't specified, it defaults to `main`.
      */
     repo?: string
+    appFolder?: string
     text?: string
   }
 
