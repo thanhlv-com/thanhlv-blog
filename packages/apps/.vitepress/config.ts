@@ -179,7 +179,8 @@ export default defineConfigWithTheme<ThemeConfig>({
       toc:"Trên trang này",
       previous:"Bài trước",
       next:"Bài tiếp theo",
-      search:"Tìm kiếm"
+      search:"Tìm kiếm",
+      returnToTop:"Cuộn lên đầu trang"
     },
 
     editLink: {
