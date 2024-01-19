@@ -5,11 +5,9 @@
   "name": "blog",
   "type": "module",
   "scripts": {
-    "pre_start": "node prebuild/prebuild.cjs",
-    "pre_run": "yarn run pre_start",
     "dev": "vitepress",
     "build": "vitepress build",
-    "build_to_folder_nginx": "yarn run ci && yarn run pre_run && vitepress build --outDir=./../../ung-dung-web/web-du-an-ca-nhan-all/nginx-router-root/build/www/thanhlv.com/blog-v2",
+    "build_to_folder_nginx": "yarn run ci && vitepress build --outDir=./../../../../ung-dung-web/web-du-an-ca-nhan-all/nginx-router-root/build/www/thanhlv.com/blog-v2",
     "preview": "vitepress preview",
     "preinstall": "npx only-allow pnpm",
     "ci": "npm i -g pnpm && pnpm install",
