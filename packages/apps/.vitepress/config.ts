@@ -4,8 +4,7 @@ import { defineConfigWithTheme } from 'vitepress'
 import type { Config as ThemeConfig } from '@vue/theme'
 import baseConfig from '@vue/theme/config'
 import { headerPlugin } from './headerMdPlugin'
-import { textAdPlugin } from './textAdMdPlugin'
-// import { textAdPlugin } from './textAdMdPlugin'
+import blogsSidebar from './cache/blogs-sidebar.json'
 
 const nav: ThemeConfig['nav'] = [
   {
@@ -15,44 +14,13 @@ const nav: ThemeConfig['nav'] = [
   }
 ]
 
-const postBlogs = [
-  {
-    text: 'Thread ứng dụng phần mềm và Thread hardware CPU khác gì nhau',
-    link: '/blog/2024-01-26-thread-ung-dung-phan-mem-va-thread-hardware-cpu-khac-gi-nhau'
-  },
-  {
-    text: 'Thread safe, Lock object là gì ?',
-    link: '/blog/2024-01-18-thread-safe-va-lock-object-la-gi'
-  },
-  {
-    text: 'Sửa lỗi 404 khi deploy một số ứng dụng web Single Page Application với Nginx',
-    link: '/blog/2024-01-17-sua-loi-404-khi-deploy-mot-so-ung-dung-web-single-page-application-voi-nginx'
-  },
-  {
-    text: 'Sự khác biệt giữa import wildcard và import một class trong java',
-    link: '/blog/2024-01-16-su-khac-biet-giua-import-wildcard-va-import-mot-class-trong-java'
-  },
-  {
-    text: 'Thêm 10 triệu data vào cuối list với ArrayList và LinkedList trong java thì dùng cái nào nhanh hơn',
-    link: '/blog/2024-01-11-them-10-trieu-data-vao-cuoi-list-voi-array-list-va-linked-list-trong-java-thi-dung-cai-nao-nhanh-hon'
-  },
-  {
-    text: 'Concurrency và parallelism. Giải thích Concurrency và parallelism của OS và business khác gì nhau ?.',
-    link: '/blog/2024-01-10-concurrency-va-parallelism-giai-thich-concurrency-va-parallelism-cua-os-va-business-khac-gi-nhau'
-  },
-  {
-    text: 'CPU, CORE và Thread khác gì nhau ?',
-    link: '/blog/2024-01-09-cpu-core-and-thread-khac-gi-nhau'
-  }
-]
-
 export const sidebar: ThemeConfig['sidebar'] = {
   '/blog/': [
     {
       text: '',
       items: [
         { text: 'Giới thiệu', link: '/blog/gioi-thieu' },
-        ...postBlogs
+        ...blogsSidebar
       ]
     }
   ]
