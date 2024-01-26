@@ -17,6 +17,10 @@ const nav: ThemeConfig['nav'] = [
 
 const postBlogs = [
   {
+    text: 'Thread ứng dụng phần mềm và Thread hardware CPU khác gì nhau',
+    link: '/blog/2024-01-26-thread-ung-dung-phan-mem-va-thread-hardware-cpu-khac-gi-nhau'
+  },
+  {
     text: 'Thread safe, Lock object là gì ?',
     link: '/blog/2024-01-18-thread-safe-va-lock-object-la-gi'
   },
