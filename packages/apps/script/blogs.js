@@ -22,6 +22,9 @@ function extractPagesData(dirPath) {
       // Phân tích cú pháp frontmatter để lấy title
       const { data } = matter(fileContents);
       if (data.title) {
+        if(data.draft){
+          return;
+        }
         pagesData.push({
           text: data.title,
           date: data.date,
