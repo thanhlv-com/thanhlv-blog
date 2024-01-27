@@ -28,7 +28,7 @@ function extractPagesData(dirPath) {
         pagesData.push({
           text: data.title,
           date: data.date,
-          link: "/blog/"+fullPath.replace(PAGES_DIR, '').replace(/\.md$/, '.html') // điều chỉnh lại cách URL được tạo
+          link: "/blog"+fullPath.replace(PAGES_DIR, '').replace(/\.md$/, '.html') // điều chỉnh lại cách URL được tạo
         });
       }
     }
