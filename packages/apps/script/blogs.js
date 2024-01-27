@@ -1,7 +1,8 @@
 import fs from 'fs';
 import path from 'path';
 import matter from 'gray-matter';
-import { fileURLToPath } from 'url'
+import {fileURLToPath} from 'url'
+
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 // Đường dẫn đến thư mục chứa các trang markdown trong dự án VitePress của bạn
 const PAGES_DIR = path.join(__dirname, '../src/blog');
@@ -20,15 +21,17 @@ function extractPagesData(dirPath) {
       const fileContents = fs.readFileSync(fullPath, 'utf8');
 
       // Phân tích cú pháp frontmatter để lấy title
-      const { data } = matter(fileContents);
+      const {data} = matter(fileContents);
       if (data.title) {
-        if(data.draft){
+        if (data.draft) {
           return;
         }
+        let link = fullPath.replace(PAGES_DIR, '').replace(/\.md$/, '.html');
+        link = link.replace("\\", "/")
         pagesData.push({
           text: data.title,
           date: data.date,
-          link: "/blog"+fullPath.replace(PAGES_DIR, '').replace(/\.md$/, '.html') // điều chỉnh lại cách URL được tạo
+          link: "/blog/" + link
         });
       }
     }
@@ -44,7 +47,7 @@ function exportPagesDataToFile(pagesData, outputPath) {
 
 // Sử dụng hàm
 const pagesData = extractPagesData(PAGES_DIR);
-const pathExport = path.join(__dirname+"/../.vitepress/cache", 'blogs-sidebar.json');
+const pathExport = path.join(__dirname + "/../.vitepress/cache", 'blogs-sidebar.json');
 exportPagesDataToFile(pagesData, pathExport);
 
 console.log(`Exported pages data to ${pathExport}`);
