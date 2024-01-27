@@ -27,11 +27,12 @@ function extractPagesData(dirPath) {
           return;
         }
         let link = fullPath.replace(PAGES_DIR, '').replace(/\.md$/, '.html');
-        link = link.replace("\\", "/")
+        link = "/blog" + link.replaceAll("\\", "/");
+        link = link.replaceAll("//", "/");
         pagesData.push({
           text: data.title,
           date: data.date,
-          link: "/blog/" + link
+          link: link
         });
       }
     }
