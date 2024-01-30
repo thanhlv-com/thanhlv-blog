@@ -55,7 +55,7 @@ export default defineConfigWithTheme<ThemeConfig>({
       'meta',
       {
         property: 'og:image',
-        content: 'images/logo_thanhlv.png'
+        content: 'https://thanhlv.com/images/logo.png'
       }
     ],
     ['meta', { name: 'twitter:site', content: '@vuejs' }],
@@ -65,6 +65,13 @@ export default defineConfigWithTheme<ThemeConfig>({
       {
         rel: 'preconnect',
         href: 'https://sponsors.vuejs.org'
+      }
+    ],
+    [
+      'link',
+      {
+        rel: 'apple-touch-icon',
+        href: 'https://thanhlv.com/images/logo.png'
       }
     ],
     [
