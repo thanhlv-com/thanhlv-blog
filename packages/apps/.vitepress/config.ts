@@ -50,7 +50,7 @@ export default defineConfigWithTheme<ThemeConfig>({
     ['meta', { name: 'theme-color', content: '#3c8772' }],
     ['meta', { property: 'og:url', content: 'https://thanhlv.com/' }],
     ['meta', { property: 'og:type', content: 'website' }],
-    ['meta', { property: 'og:title', content: 'thanhlv.com' }],
+    ['meta', { property: 'og:title', content: 'Thanhlv - Yêu công nghệ' }],
     [
       'meta',
       {
