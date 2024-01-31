@@ -48,7 +48,13 @@ function exportPagesDataToFile(pagesData, outputPath) {
 
 // Sử dụng hàm
 const pagesData = extractPagesData(PAGES_DIR);
-const pathExport = path.join(__dirname + "/../.vitepress/cache", 'blogs-sidebar.json');
+const folderPath = path.join(__dirname, "/../.vitepress/cache");
+if (!fs.existsSync(folderPath)) {
+  // Tạo thư mục
+  fs.mkdirSync(folderPath, { recursive: true }); // Option `recursive: true` đảm bảo rằng tất cả các thư mục cha sẽ được tạo nếu chúng chưa tồn tại
+  console.log(`Folder "${folderPath}" has been created.`);
+}
+const pathExport = path.join(folderPath, 'blogs-sidebar.json');
 exportPagesDataToFile(pagesData, pathExport);
 
 console.log(`Exported pages data to ${pathExport}`);
