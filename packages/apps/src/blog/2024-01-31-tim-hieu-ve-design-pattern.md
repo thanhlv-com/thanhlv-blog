@@ -3,9 +3,8 @@ footer: true
 title: Tìm hiểu về Design Pattern
 authors: [ lethanh ]
 lastUpdated: true
-date: 2024-01-27
+date: 2024-01-31
 outline: deep
-draft: false
 ---
 # Tìm hiểu về Design Pattern
 Chào mọi người,
