@@ -49,10 +49,9 @@ Kiến trúc phần mềm là một khuôn khổ tổng quát cho cách thức t
             - 2. **Thư viện Xử lý Hình ảnh**: Cung cấp các chức năng để chỉnh sửa và biến đổi hình ảnh. (Component này sẽ được sử dụng bởi một Component khác)
             - 3. **Cơ sở dữ liệu**: Được xem xét như là một thành phần độc lập quản lý tất cả các hoạt động liên quan đến lưu trữ và truy xuất dữ liệu. (Được triển khai thành một dịch vụ độc lập)
             - 4. **UI Framework**: Một bộ thư viện hoặc thành phần cung cấp các thành phần giao diện người dùng để xây dựng các màn hình tương tác.
-            - 5. **Thư viện xử lý Json**: Một bộ thư viện hoặc thành phần cung cấp các chức năng giúp xử lý dữ liệu json.( Ví dụ [Jackson](https://github.com/FasterXML/jackson)) 
-            - 6. **Monitoring**: Thành phần giúp giám sát hệ thống.( Ví dụ : [Prometheus](https://github.com/prometheus/prometheus)) 
-            - 7. Hệ Thống Xử Lý Đơn Hàng (Order Processing System).
-            - 8. Hệ thống thanh toán.
+            - 5. **Monitoring**: Thành phần giúp giám sát hệ thống.( Ví dụ : [Prometheus](https://github.com/prometheus/prometheus)) 
+            - 6. Hệ Thống Xử Lý Đơn Hàng (Order Processing System).
+            - 7. Hệ thống thanh toán.(Payment System).
    - 2. **Mô-đun (Module)**: Mô-đun trong hệ thống phần mềm còn có thể được coi là một **phần** của thành phần(**Component**) - là các đơn vị nhỏ hơn cung cấp chức năng cụ thể và thường được nhóm lại theo năng lực, chức năng hoặc tính năng.
       -  Đặc điểm của Module:
            - 1. **Tính cụ thể**: Chứa một tập hợp chức năng liên quan và thường là một phần của ngữ cảnh lập trình.
