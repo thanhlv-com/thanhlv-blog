@@ -4,5 +4,6 @@ export default defineUserConfig({
   pdfOptions: {
     displayHeaderFooter: false
   },
-  urlOrigin: 'https://thanhlv.com/ '
+  urlOrigin: 'https://thanhlv.com/ ',
+  outDir:'./.vitepress/cache'
 })
