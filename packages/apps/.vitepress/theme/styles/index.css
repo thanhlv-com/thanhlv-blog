@@ -4,6 +4,7 @@
 @import "./inline-demo.css";
 @import "./utilities.css";
 @import "./style-guide.css";
+@import "./print.css";
 
 /* vitepress rc.31 migrated to shijiki and need this to apply code styles */
 .vp-code span {
