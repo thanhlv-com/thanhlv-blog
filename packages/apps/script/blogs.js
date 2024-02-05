@@ -2,7 +2,10 @@ import fs from 'fs';
 import path from 'path';
 import matter from 'gray-matter';
 import {fileURLToPath} from 'url'
-
+// app.js
+const dataInject = process.argv.slice(2); // Input data from command-line arguments
+console.log('Injected Data:', dataInject);
+// Do something with the data
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 // Đường dẫn đến thư mục chứa các trang markdown trong dự án VitePress của bạn
 const PAGES_DIR = path.join(__dirname, '../src/blog');
@@ -23,8 +26,10 @@ function extractPagesData(dirPath) {
       // Phân tích cú pháp frontmatter để lấy title
       const {data} = matter(fileContents);
       if (data.title) {
-        if (data.draft) {
-          return;
+        if(dataInject.includes("env:live")){
+          if (data.draft) {
+            return;
+          }
         }
         let link = fullPath.replace(PAGES_DIR, '').replace(/\.md$/, '.html');
         link = "/blog" + link.replaceAll("\\", "/");
