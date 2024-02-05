@@ -4,9 +4,9 @@
   },
   "type": "module",
   "scripts": {
-    "dev": "pnpm -C packages/apps run dev",
-    "build": "pnpm -C packages/apps run build",
-    "build_to_folder_nginx": "pnpm -C packages/apps run build_to_folder_nginx",
+    "dev": "yarn run ci && pnpm -C packages/apps run dev",
+    "build": "yarn run ci && pnpm -C packages/apps run build",
+    "build_to_folder_nginx": "yarn run ci && pnpm -C packages/apps run build_to_folder_nginx",
     "ci": "npm i -g pnpm && pnpm install"
   },
   "devDependencies": {

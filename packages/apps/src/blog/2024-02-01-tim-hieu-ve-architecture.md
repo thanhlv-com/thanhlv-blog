@@ -36,7 +36,8 @@ Các Software architecture thường tập trung giải quyết các vấn đề
 ### Đặc điểm của Software Architecture
 Kiến trúc phần mềm là một khuôn khổ tổng quát cho cách thức thiết kế và xây dựng một hệ thống phần mềm. Đây là những đặc điểm chủ chốt của kiến trúc phần mềm:
 
-1. **Xác định các thành phần và mô-đun(Module)**: **Software Architecture** giúp xác định các thành phần hoặc module của phần mềm, cũng như chức năng và giao diện của chúng.
+#### 1. **Xác định các thành phần và mô-đun(Module)**: 
+- **Software Architecture** giúp xác định các thành phần hoặc module của phần mềm, cũng như chức năng và giao diện của chúng.
    ![img](images/2024-02-01-tim-hieu-ve-architecture/2.svg)
    - 1. **Thành phần(Component)**: Architecture giúp xác định các thành phần riêng lẻ như cơ sở dữ liệu, các dịch vụ web, và các lớp logic nghiệp vụ. Mỗi thành phần được thiết kế để thực hiện một nhóm chức năng cụ thể. Trong kiến trúc phần mềm, thành phần (component) là một đơn vị cấu trúc tự chứa có thể bao gồm một hoặc nhiều mô-đun (module) và có những nhiệm vụ cụ thể.
       -  Đặc điểm của Component:
@@ -83,29 +84,29 @@ Kiến trúc phần mềm là một khuôn khổ tổng quát cho cách thức t
        - Trong đó Business systems là tất cả các chức năng mà business cung cấp cho người dùng.(Nó ở mức trừu tượng cao nhất)
        - Component là chức năng năng cung cấp cho người dùng.
        - Module là các mảnh ghép trong một Component để lắp ghép thành một chức năng hoạt động hoàn chỉnh.
-2. **Mô tả các mối quan hệ**: 
+#### 2. **Mô tả các mối quan hệ**: 
    - 1. **Quan hệ giữa các thành phần**: **Architecture** sẽ chỉ rõ cách giao tiếp giữa các thành phần (thông qua APIs), phụ thuộc lẫn nhau và cách chúng kết nối trong cấu trúc tổng thể của hệ thống.
    - 2. **Loose coupling và High cohesion**: **Architecture** hiệu quả thường nhấn mạnh việc có sự ràng buộc lỏng lẻo (loose coupling) giữa các thành phần và sự liên kết cao (high cohesion) bên trong mỗi thành phần.
-3. **Xác định patterns**: 
+#### 3. **Xác định patterns**: 
    - 1. **Xác định kiến trúc**: Việc áp dụng các kiến trúc như MVC hoặc microservices... giúp giải quyết các vấn đề chung trong kỹ thuật phần mềm và tạo ra một cách tiếp cận chuẩn hóa cho các tình huống thường gặp.
-4. **Quản lý rủi ro kỹ thuật**:
+#### 4. **Quản lý rủi ro kỹ thuật**:
    - 1. **Nhận diện rủi ro**: **Architecture** làm nổi bật các thành phần(Component) và mô-đun(Module) hệ thống có nguy cơ rủi do cao và giúp nhóm phát triển tập trung vào việc giảm thiểu rủi ro từ sớm.
    - 2. **Đối phó với biến đổi**: Các quyết định **Architecture** giúp hệ thống phần mềm linh hoạt và dễ thích nghi với các thay đổi trong tương lai, như thay đổi công nghệ hoặc yêu cầu kinh doanh.
-5. **Đảm bảo chất lượng**:
+#### 5. **Đảm bảo chất lượng**:
    - 1. **Chất lượng phần mềm**: **Architecture** phần mềm đặt nền móng cho performance (hiệu suất), security (bảo mật), scalability (khả năng mở rộng), và maintainability (khả năng bảo trì).
    - 2. **Đánh giá và kiểm định**: **Architecture** cho phép tiến hành đánh giá và kiểm định chất lượng dựa trên những chỉ tiêu đã định trước.
-6. **Cung cấp một bản kế hoạch**: 
+#### 6. **Cung cấp một bản kế hoạch**: 
    - 1. **Lập kế hoạch**: **Architecture** cung cấp một kế hoạch toàn diện, giống như một bản vẽ kiến trúc cho một tòa nhà, mô tả cấu trúc, công nghệ và cách thức triển khai của hệ thống phần mềm.
    - 2. **Hỗ trợ quản lý dự án**: Nó giúp các nhà quản lý dự án hiểu được phạm vi công việc, dự đoán nguồn lực cần thiết và lịch trình dự kiến.
-7. **Định hình và quyết định công nghệ**
+#### 7. **Định hình và quyết định công nghệ**
    - 1. **Lựa chọn công nghệ**: **Architecture** xác định các công nghệ cần sử dụng trong dự án, từ ngôn ngữ lập trình, database, middleware, cho đến hạ tầng mạng...
    - 2. **Thích ứng với yêu cầu**: Quyết định kiến trúc bảo đảm rằng các công nghệ được chọn phù hợp với yêu cầu về chức năng và không gian, như khả năng mở rộng hoặc tích hợp.
-8. **Khả năng tái sử dụng và tích hợp** 
+#### 8. **Khả năng tái sử dụng và tích hợp** 
    - 1. **Tái sử dụng**: **Architecture** tốt thúc đẩy việc thiết kế các thành phần(Component) có thể tái sử dụng trong các dự án khác nhau, giúp tiết kiệm thời gian và nguồn lực.
    - 2. **Tích hợp**: **Architecture**  cung cấp một hướng dẫn để tích hợp các thành phần(Component) mới hay các hệ thống bên ngoài một cách suôn sẻ mà không làm xáo trộn đến cấu trúc cốt lõi của hệ thống hiện tại.
-9. **Kiểm soát sự thay đổi**
+#### 9. **Kiểm soát sự thay đổi**
    - 1. **Kiểm soát phiên bản**:  **Architecture** xác định cách các thay đổi được quản lý thông qua kiểm soát phiên bản, đảm bảo rằng các cập nhật không làm ảnh hưởng đến tính ổn định của hệ thống.
    - 2. **Quản lí sự thay đổi**: Nó giúp lập kế hoạch cho việc thay đổi, đảm bảo rằng mọi cải tiến hoặc bảo trì đều diễn ra một cách có tổ chức mà không làm xáo trộn đến hoạt động hiện tại.
-10. **Giao tiếp giữa các bên liên quan**
+#### 10. **Giao tiếp giữa các bên liên quan**
    - 1. **Ngôn ngữ chung**: **Architecture** cung cấp một ngôn ngữ và cấu trúc chung giúp các bên liên quan từ nhiều lĩnh vực khác nhau có thể hiểu và thảo luận về hệ thống.
    - 2. **Rõ ràng và dễ hiểu**: Các biểu đồ kiến trúc như diagram class, sequence diagram và các tài liệu mô tả giúp truyền đạt rõ ràng, đảm bảo mọi người đều hiểu về hướng đi và mục tiêu của dự án.

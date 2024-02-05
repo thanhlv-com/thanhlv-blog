@@ -9,10 +9,9 @@
     "prebuild:live": "node script/blogs.js env:live",
     "dev": " yarn run prebuild:dev && vitepress",
     "build": "yarn run prebuild:live && vitepress build",
-    "build_to_folder_nginx": "yarn run ci && yarn run prebuild:live && vitepress build --outDir=./../../../../ung-dung-web/web-du-an-ca-nhan-all/nginx-router-root/build/www/thanhlv.com/blog-v2",
+    "build_to_folder_nginx": "yarn run prebuild:live && vitepress build --outDir=./../../../../ung-dung-web/web-du-an-ca-nhan-all/nginx-router-root/build/www/thanhlv.com/blog-v2",
     "preview": "vitepress preview",
     "preinstall": "npx only-allow pnpm",
-    "ci": "npm i -g pnpm && pnpm install",
     "pdf-blog": "press-export-pdf export src/blog"
   },
   "dependencies": {
