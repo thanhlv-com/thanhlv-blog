@@ -386,6 +386,54 @@ Tại thời điểm 2018 nhóm chúng tôi đã triển khai dịch vụ trên 
 
 ---
 
+## Kỹ năng
+Các kỹ năng tôi đã học tập thông qua các dự án, kinh nghiệm thực chiến.
+### Programming language
+- **Java** : Đây là kỹ năng chính của tôi.
+- **Kotlin** : Đã có 2 năm kinh nghiệm thực chiến dự án lớn tại [LINE NEXT Inc](https://www.linkedin.com/company/line-us-corporation/mycompany/)
+- **Typescript**, **Rust(Begin)**, **Go lang (Begin)**, **JS**.
+- **NodeJS** : Tôi và nhóm của tôi sử dụng nó để viết script hoặc các dự án nhỏ gọn dưới 200 Line.
+### Framework
+- **Angular** : Thực chiến nhiều dự án với nhiều phiên bản **AngularJs**, **Angular 4**, **Angular 5** và **Angular 6**.
+- **Spring**, **Hibernate** : Framework chính tôi sử dụng trên Java và Kotlin. Tất cả các dự án tôi tham gia đều sử dụng **Spring** và **Hibernate**.
+- **React native** , **Cosmos SDK**, **tKey SDK**: Tôi đã được thực chiến nó tại [LINE NEXT Inc](https://www.linkedin.com/company/line-us-corporation/mycompany/), dự án rất quan trọng trong hệ sinh thái của blockchain tại [LINE NEXT Inc](https://www.linkedin.com/company/line-us-corporation/mycompany/).
+- **Search engine** : 
+  - **Elasticsearch**(begin): Tôi đã sử dụng nó trên 2 dự án, nhưng tôi chưa có thời gian đọc và tìm hiểu kỹ về nó.
+  - **Algolia**(begin): Tất nhiên rồi, Blog của tôi đang sử dụng **Algolia** :)
+- **Vuejs**: Tôi sử dụng để thiết kê blog của tôi.
+- **JUnit**: Một framework cho viết Unit test. Tôi sử dụng nó trong các dự án Java và Kotlin của tôi. Thông thường độ bao phủ sẽ trên 80%
+- **Armeria**: Một framework được phát triển bởi [LINE](https://engineering.linecorp.com/en) và [Trustin](https://github.com/trustin). Tôi sử dụng nó nhiều tại LINE.
+### Cloud
+- **Google cloud**, **AWS(begin)** và **private cloud** sử dụng **openstack**.
+### Architectures
+- **Monolithic**, **Microservices**, **MVC**, **Hexagonal**, **Domain driven design**.
+### Security
+- **HSM Hardware**, **Vault by HashiCorp**., JWT.
+### Database
+- **MySql**, **MariaDB**, **MongoDB**(begin), **H2**
+### Tool
+- **Git**, **Github**, **Bitbucket**, **Maven**, **NPM**, **Yarn**, **Pnpm**, **k6**
+### Thư viện nổi bật.
+- RxJava, Jacoco, **testcontainers**, **openapi generator**
+### Cache
+- **Caffeine**, **Redis**, Memory :)
+### Infrastructure
+- **Docker**, **VM**.
+### Standard
+- **Open API**: Một đặc tả API, thường được gọi là Swagger
+- **JWT(`JSON Web Token`)**: Thường sử dụng để xác thực cho Client và Server.
+- 
+### Communicate
+- **Restfull**: FE giao tiếp với BE
+- **Grpc**: Tôi sử dụng nó để giao tiếp nội bộ với các hệ thống.
+- **Socket.IO** : Tôi đã từng sử dụng nó cho game server.
+- **Apache Kafka** : Tôi đã sử dụng nó để gửi các sự kiện của ứng dụng và có các thành phần khác xử lý.
+### Data transfer
+- **Protobuf**, **Json**, **XML**.
+### Khác
+  - **SASS/SCSS**, **Jenkin**, **Jenkins pipeline**, **Kibana**, **Firebase**, **Sentry**, **grafana** , **Prometheus**, **Sonarqube**, **Amazon S3**, **Sonatype Nexus**, **Slf4j**.
+---
+
 ## Education
 
 **MSc in Finance**  
@@ -398,13 +446,6 @@ City University - City Name
 
 ---
 
-## Skills
-- Financial Analysis & Reporting
-- Data Analysis & Visualization (Excel, Tableau)
-- Budgeting and Forecasting
-- Strong Knowledge of GAAP
-- SAP and Oracle Financial Systems
-- SQL and Python Basics
 
 ---
 
