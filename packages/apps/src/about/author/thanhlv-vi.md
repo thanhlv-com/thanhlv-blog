@@ -276,6 +276,114 @@ Mobile money là một tính năng phổ biến trên nhiều quốc gia trên t
 :::
 
 
+### Onesoft imosys | Server game Engineer
+
+#### **06-2019 – 02-2020** | **Car war**
+![img](images/thanhlv/car-war.webp)
+
+Game MOBA dành cho điện thoại di động, trong đó người chơi sẽ điều khiển xe để tham gia vào các trận chiến với người chơi khác. Mỗi chiếc xe sẽ được trang bị các kỹ năng và tính năng đặc biệt của chính nó.
+- **Nghiệm vụ** :
+  - Phát triển các API cho tính năng của client.
+
+  - Tiếp nhận và phân tích yêu cầu tính năng mới, đưa ra giải pháp cho các tính năng đó.
+
+  - Thực hiện triển khai ứng dụng trên các môi trường (Alpha, Staging, Production)
+
+  - Phân tích dữ liệu người dùng để tạo ra các bảng thống kê.
+- **Công nghệ**: Java, Netty, Socket.IO, Apache Kafka, MongoDB,
+
+- **Video giới thiệu**: https://www.youtube.com/watch?v=760UgmHBUVo
+
+
+### Higgsup | developer
+
+#### **11-2018 – 4-2019** | **ZAAP**
+![img](images/thanhlv/zaap.png)
+
+Hệ thống quản lý và chuyển tiền cho các con, nơi mà các phụ huynh có khả năng chọn hình ảnh cho thẻ Mastercard của con cái. Cha mẹ cũng có khả năng chuyển tiền cho con cái bất cứ lúc nào và theo dõi các khoản chi tiêu của các con.
+- **Nghiệm vụ** :
+  - Tiếp nhận và phân tích yêu cầu từ khách hàng ở Singapore.
+
+  - Phát triển API (Backend) và xây dựng giao diện (Frontend).
+
+  - Hỗ trợ giải quyết các vấn đề kỹ thuật cho các thành viên trong dự án.
+
+  - Khởi tạo kiến trúc cho cả phần Frontend và Backend của dự án.
+- **Công nghệ**: Angualr 6 , Cybersource, Spring boot...
+
+- **Truy cập tại**: https://get.zaap.com.au/parentweb/#/dashboard
+
+#### **10-2018 – 04-2019** | **ReadyRooms**
+![img](images/thanhlv/readyRooms_computer.jpg)
+
+Hệ thống đặt khách sạn và tour du lịch trên toàn thế giới, với khả năng tính toán trước tất cả các chi phí trên lịch trình du lịch.
+- **Nghiệm vụ** :
+  - Tích hợp với các hệ thống OTA (Online Travel Agency).
+  - Thiết kế và phát triển các tính năng theo yêu cầu từ QA.
+- **Công nghệ**: Angular 4, Spring Boot...
+
+- **Truy cập tại**: https://www.readyrooms.com.au/
+
+#### **8-2018 – 12-2018** | **Intellifinder**
+![img](images/thanhlv/intellifinder.jpeg)
+
+**Hệ Thống Quản Lý Tài Nguyên Doanh Nghiệp**: Một nền tảng toàn diện giúp doanh nghiệp quản lý hiệu quả các nguồn lực, bao gồm công việc, nhân viên, theo dõi phương tiện và lập kế hoạch hoạt động.
+- **Nghiệm vụ** :
+  - Xác định và phân tích yêu cầu cho các tính năng mới, đảm bảo tính đáp ứng với nhu cầu doanh nghiệp.
+  - Tối ưu hóa lại mã nguồn hiện tại trong dự án để đảm bảo hiệu suất và khả năng mở rộng.
+- **Công nghệ**: Angular 4, Spring Boot...
+
+- **Truy cập tại**: https://intellifinder.dk/
+
+#### **6-2018 – 11-2018** | **KPI (Key Performance Indicator) Dự án nội bộ**
+![img](images/thanhlv/kpi.png)
+Hệ thống quản lý, tính toán KPI của nhân viên trong công ty.
+
+Hệ thống giúp hỗ trợ mọi vấn để cho công ty, giao việc, theo dõi việc,theo dõi xe, quản lý nhân viên....
+
+Khen thưởng, danh hiệu, vinh danh, tạo các event cho công ty...
+
+- **Nghiệm vụ** :
+  - Phát triển API bên BE, phát triển FE, hỗ giải quyết vấn đề về về kỹ thuật của các thành viên trong team BE và FE, Review code...
+- **Công nghệ**: Spring boot, Angular 6, Restful, Oauth, JWT, Ldap...
+
+
+#### **1-2018 – 6-2018** | **Hotel OTA SYNC**
+![img](images/thanhlv/ota-sync.png)
+
+[Vntrip](https://www.vntrip.vn/en) ( Công ty ) chuyên cung cấp dịch vụ booking du lịch top 5 Việt Nam.
+
+Hotel OTA SYNC là một dự án được làm cho Vntrip để hệ thống có thể tự động đồng bộ dữ liệu phòng của các Hotel tại Việt Nam và trên thế giới thông qua một hệ thống trung gian OTA.
+
+- **Nghiệm vụ** :
+  - Thiết kế hệ thống.
+  - Thiết kế database.
+  - Thiết kế UI.
+  - Phát triển API.
+  - Phát triển UI bằng Angular.
+  - Tối ưu hóa lại mã nguồn hiện tại trong dự án để đảm bảo hiệu suất và khả năng mở rộng.
+- **Công nghệ**: Java, Spring boot, Angular js, Restful, Hibernate, SOAP.
+
+- **Truy cập tại**:  https://www.vntrip.vn/
+
+
+
+#### **5-2017 – 1-2018** | **Inxpress**
+![img](images/thanhlv/Inxpress.jpeg)
+
+Một giải pháp Logistics toàn cầu, cung cấp dịch vụ chuyển phát nhanh trong nước, quốc tế,vận chuyển hàng hóa và dịch vụ thư cho khách hàng, tận dụng các thỏa thuận với nhà cung cấp dịch vụ (TNT, DHL…) để nhận mức chiết khấu phần trăm.
+
+Tại thời điểm 2018 nhóm chúng tôi đã triển khai dịch vụ trên 9 quốc gia.
+
+- **Nghiệm vụ** :
+  - Phát triển tính năng mới do QA yêu cầu
+  - Phát triển dự án trên các quốc gia mới
+  - Convert PHP sang Java.
+- **Công nghệ**: Infrastructure : AWS, Jenkins , docker
+
+- **Truy cập tại**:  https://www.inxpress.com/
+
+
 ---
 
 ## Education
