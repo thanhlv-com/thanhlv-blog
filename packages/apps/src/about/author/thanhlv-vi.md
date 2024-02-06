@@ -434,11 +434,11 @@ Các kỹ năng tôi đã học tập thông qua các dự án, kinh nghiệm th
   - **SASS/SCSS**, **Jenkin**, **Jenkins pipeline**, **Kibana**, **Firebase**, **Sentry**, **grafana** , **Prometheus**, **Sonarqube**, **Amazon S3**, **Sonatype Nexus**, **Slf4j**.
 ---
 
-## Education
+## Học vấn
 
-**MSc in Finance**  
-University of Economics - City Name  
-*Sep 2013 – May 2015*
+**FPT Aptech**  
+Chuyên ngành: Lập trình phần mềm | Loại Giỏi
+*8-2016 – 04-2018*
 
 **BSc in Economics**  
 City University - City Name  
@@ -446,36 +446,7 @@ City University - City Name
 
 ---
 
+## CHÂM NGÔN CUỘC SỐNG
 
----
+Hãy tiếp tục đi, bởi vì khi bạn dừng lại bạn sẽ đứng tại chỗ mãi mãi.
 
-## Certifications
-
-- Chartered Financial Analyst (CFA) - CFA Institute, 2017
-- Certified Public Accountant (CPA) - American Institute of CPAs, 2016
-
----
-
-## Languages
-- English (Native)
-- Spanish (Fluent)
-- Mandarin (Intermediate)
-
----
-
-## Volunteering
-
-**Financial Literacy Volunteer Trainer**  
-*Money Matters Non-profit - City Name | Jan 2019 – Present*
-- Conduct regular workshops on personal finance and budget management for community members.
-
----
-
-## Hobbies & Interests
-- Traveling and experiencing new cultures.
-- Running and participating in marathons.
-- Reading about the latest technological advancements.
-
----
-
-**References available upon request**
