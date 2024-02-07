@@ -30,6 +30,7 @@ date: 2024-01-08
 **Email:** lethanh9398@gmail.com  
 **LinkedIn:** [linkedin.com/in/lethanh9398](https://www.linkedin.com/in/lethanh9398)  
 **Facebook:** [www.facebook.com/lethanh9398](https://www.facebook.com/lethanh9398)  
+**Website:** [thanhlv.com](https://thanhlv.com)  
 
 ## Mục Tiêu Nghề Nghiệp
 
