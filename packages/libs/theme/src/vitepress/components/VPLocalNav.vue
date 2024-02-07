@@ -13,16 +13,26 @@ const { frontmatter } = useData()
 </script>
 
 <template>
-  <div v-if="hasSidebar" class="VPLocalNav">
-    <button
-      class="menu"
-      :aria-expanded="open"
-      aria-controls="VPSidebarNav"
-      @click="$emit('open-menu')"
-    >
-      <VTIconAlignLeft class="menu-icon" />
-      <span class="menu-text">{{ config.i18n?.menu || 'Menu' }}</span>
-    </button>
+  <div class="VPLocalNav">
+    <template v-if="hasSidebar">
+      <button
+        class="menu"
+        :aria-expanded="open"
+        aria-controls="VPSidebarNav"
+        @click="$emit('open-menu')"
+      >
+        <VTIconAlignLeft class="menu-icon" />
+        <span class="menu-text">{{ config.i18n?.menu || 'Menu' }}</span>
+      </button>
+    </template>
+    <template v-if="!hasSidebar">
+      <button
+        class="menu"
+        :disabled='!hasSidebar'
+        style='cursor: default'
+      >
+      </button>
+    </template>
 
     <VPLocalNavOutlineDropdown v-if="frontmatter.outline !== false" />
   </div>

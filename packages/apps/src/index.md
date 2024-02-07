@@ -1,6 +1,7 @@
 ---
 page: true
 title: Thanhlv - Yêu công nghệ
+outline : false
 ---
 
 <script setup>
