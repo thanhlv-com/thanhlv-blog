@@ -244,7 +244,7 @@ Development Self-Service là một công cụ tự động phục vụ các nhu 
 :::
 
 
-#### **06-2020 – 08-2019** | **Vault Enterprise (Nâng cấp open source)**
+#### **06-2020 – 08-2020** | **Vault Enterprise (Nâng cấp open source)**
 ![img](images/thanhlv/HashicorpVault_Logo.webp)
 
 Đảm nhận trách nhiệm nâng cấp Vault Community bằng cách thêm các tính năng từ phiên bản Enterprise và các tính năng đặc biệt khác.
