@@ -456,7 +456,7 @@ Các kỹ năng tôi đã học tập thông qua các dự án, kinh nghiệm th
 ## Học vấn
 
 **FPT Aptech**  
-Chuyên ngành: Lập trình phần mềm | Loại Giỏi
+Chuyên ngành: Lập trình phần mềm | Loại Giỏi  
 *8-2016 – 04-2018*
 
 ---
