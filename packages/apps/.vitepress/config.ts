@@ -45,7 +45,10 @@ export default defineConfigWithTheme<ThemeConfig>({
   description: 'Thanhlv - Yêu công nghệ',
   srcDir: 'src',
   srcExclude: ['tutorial/**/description.md'],
-
+  sitemap: {
+    hostname: 'https://thanhlv.com/',
+    lastmodDateOnly: false
+  },
   head: [
     ['meta', { name: 'theme-color', content: '#3c8772' }],
     ['meta', { property: 'og:url', content: 'https://thanhlv.com/' }],
