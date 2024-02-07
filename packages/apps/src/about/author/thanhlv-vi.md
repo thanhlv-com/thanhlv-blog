@@ -458,10 +458,6 @@ Các kỹ năng tôi đã học tập thông qua các dự án, kinh nghiệm th
 Chuyên ngành: Lập trình phần mềm | Loại Giỏi
 *8-2016 – 04-2018*
 
-**BSc in Economics**  
-City University - City Name  
-*Sep 2009 – May 2013*
-
 ---
 
 ## CHÂM NGÔN CUỘC SỐNG
