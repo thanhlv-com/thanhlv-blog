@@ -3,6 +3,7 @@
   .VPLocalNav,
   .edit-link,
   .VPContentDocFooter,
+  .print-hide,
   .VPDocFooter {
     display: none !important;
   }

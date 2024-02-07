@@ -6,5 +6,6 @@ export default defineUserConfig({
   },
   routePatterns: ['/about/author/thanhlv-vi.html'],
   urlOrigin: 'https://thanhlv.com/ ',
-  outDir:'./.vitepress/cache'
+  outDir:'./src/public',
+  outFile:"thanhlv-vi-cv.pdf"
 })

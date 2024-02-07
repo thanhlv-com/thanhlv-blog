@@ -12,7 +12,7 @@
     "build_to_folder_nginx": "yarn run prebuild:live && vitepress build --outDir=./../../../../ung-dung-web/web-du-an-ca-nhan-all/nginx-router-root/build/www/thanhlv.com/blog-v2",
     "preview": "vitepress preview",
     "preinstall": "npx only-allow pnpm",
-    "pdf-blog": "press-export-pdf export ./ -c .vitepress/vitepress-pdf.config.ts",
+    "pdf-blog": "press-export-pdf export ./ -c .vitepress/vitepress-pdf-cv.config.ts",
     "pdf-blog1": "press-export-pdf export --help"
   },
   "dependencies": {

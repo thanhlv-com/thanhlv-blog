@@ -11,7 +11,14 @@ const nav: ThemeConfig['nav'] = [
     text: 'Blog',
     activeMatch: `^/blog/`,
     link: '/blog/gioi-thieu'
-  }
+  },
+  {
+    text: 'About',
+    activeMatch: `^/about/`,
+    items: [
+      { text: 'Thanhlv', link: '/about/author/thanhlv-vi' },
+    ]
+  },
 ]
 
 export const sidebar: ThemeConfig['sidebar'] = {
