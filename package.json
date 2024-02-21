@@ -7,12 +7,14 @@
     "dev": "yarn run ci && pnpm -C packages/apps run dev",
     "build": "yarn run ci && pnpm -C packages/apps run build",
     "build_github": "yarn run ci && pnpm -C packages/apps run build_github",
-    "build_to_folder_nginx": "yarn run ci && pnpm -C packages/apps run build_to_folder_nginx",
+    "build_to_folder_nginx": "yarn run ci && pnpm -C packages/apps run build_github",
+    "deploy": "yarn run ci && pnpm -C packages/apps run build_github && gh-pages -d build",
     "ci": "npm i -g pnpm && pnpm install"
   },
   "devDependencies": {
     "blog": "workspace:*",
-    "@vue/theme": "workspace:*"
+    "@vue/theme": "workspace:*",
+    "gh-pages": "6.1.1"
   },
   "pnpm": {
     "overrides": {
