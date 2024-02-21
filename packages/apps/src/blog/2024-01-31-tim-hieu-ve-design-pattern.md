@@ -9,14 +9,14 @@ outline: deep
 # Tìm hiểu về Design Pattern
 Chào mọi người,
 
-Gần đây, mình nhận thấy một số bạn đã gửi câu hỏi liên quan đến các Mẫu thiết kế(**Design Pattern**) và Kiến trúc Phần mềm(**Architecture**), điều đó cho thấy có một sự nhầm lẫn nhất định giữa hai khái niệm này trong cộng đồng. 
+Gần đây, mình nhận thấy một số bạn đã gửi câu hỏi liên quan đến các Mẫu thiết kế(**Design Pattern**) và [Kiến trúc Phần mềm(**Architecture**)](2024-02-01-tim-hieu-ve-architecture.md), điều đó cho thấy có một sự nhầm lẫn nhất định giữa hai khái niệm này trong cộng đồng. 
 
-Vì lẽ đó, mình quyết định viết bài viết này nhằm mang lại cái nhìn rõ ràng và chi tiết cho mọi người về những điểm tương đồng và khác biệt giữa **Design Pattern** và **Architecture**, hy vọng rằng sau bài viết này, mọi khúc mắc sẽ được giải tỏa.
+Vì lẽ đó, mình quyết định viết bài viết này nhằm mang lại cái nhìn rõ ràng và chi tiết cho mọi người về những điểm tương đồng và khác biệt giữa **Design Pattern** và [**Architecture( Kiến trúc phần mềm )**](2024-02-01-tim-hieu-ve-architecture.md), hy vọng rằng sau bài viết này, mọi khúc mắc sẽ được giải tỏa.
 <br/>
 
 Để không ngợp kiến thức, mình dự định sẽ viết thành 3 bài.
 1. Hiểu về **Design Patterns**
-2. Hiểu về **Architecture**
+2. Hiểu về [**Architecture( Kiến trúc phần mềm )**](2024-02-01-tim-hieu-ve-architecture.md)
 2. So sách sự khác biệt
 
 Trước tiên, hãy cùng nhau khám phá ý nghĩa và tầm quan trọng của **Design Pattern** từ đó dẫn dắt đến nhận thức sáng tỏ về sự phân biệt giữa hai.
@@ -114,4 +114,4 @@ Dưới đây là một số tình huống mà việc sử dụng Design Pattern
 
 4. Nên sử dụng Design Patterns để giải quyết vấn đề đã được hiểu rõ, áp dụng best practices, tái sử dụng code có chủ đích, đồng nhất và dễ hiểu mã nguồn, và đối phó với các vấn đề thiết kế khó khăn hoặc mở rộng mã nguồn.
 
-Trong bài tiếp theo mình sẽ giải thích về Architecture, cùng chờ đợi nhé.
+Trong bài tiếp theo mình sẽ giải thích về [**Architecture( Kiến trúc phần mềm )**](2024-02-01-tim-hieu-ve-architecture.md), cùng chờ đợi nhé.

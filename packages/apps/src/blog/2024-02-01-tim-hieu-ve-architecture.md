@@ -250,5 +250,14 @@ Những nhược điểm này không nhất thiết phải xuất hiện trong m
 #### 13. Tiêu chuẩn và quy định
    - 1. **Tuân thủ tiêu chuẩn**: Một số kiến trúc có thể không tuân thủ các tiêu chuẩn ngành hoặc quy định pháp luật, gây ra rủi ro pháp lý và tuân thủ.
    - 2. **Tích hợp với hệ thống khác**: Kiến trúc có thể gặp khó khăn trong việc tích hợp với các hệ thống và công nghệ khác, đặc biệt là khi có những tiêu chuẩn giao tiếp khác nhau.
-## REF:
-- https://www.geeksforgeeks.org/difference-between-module-and-software-component/
+
+## Tổng kết
+
+- 1. **Kiến trúc phần mềm** đóng vai trò như bản đồ xây dựng(`Giống như là bản vẽ thiết kế một tòa nhà hoặc một sơn trang`), giúp sắp xếp các phần mềm thành một hệ thống gọn gàng và hiệu quả.
+- 2. **Chức năng chính** bao gồm việc phân loại các khối xây dựng cơ bản của phần mềm, mô tả cách chúng liên kết và giao tiếp, áp dụng các mẫu thiết kế đã được thử nghiệm, và đảm bảo rằng hệ thống có thể phát triển mà không gặp rủi ro.
+- 3. **Quy trình xây dựng** gồm nhiều bước từ việc hiểu rõ yêu cầu đến thiết kế, đánh giá, và cải tiến liên tục, đảm bảo rằng kiến trúc luôn phản ánh mục tiêu và thách thức hiện tại của dự án.
+- 4. **Thách thức** có thể gặp phải như việc kiến trúc quá phức tạp hoặc lỗi thời, chi phí cao cho việc thiết kế và duy trì, khó khăn trong việc thích nghi với công nghệ mới, và những rủi ro do quyết định sai lầm trong quá khứ.
+- 5. **Kiến trúc phần mềm** cần được thiết kế một cách cân nhắc, không chỉ phục vụ cho hiện tại mà còn có khả năng thích ứng với tương lai, đồng thời phải dễ hiểu và dễ bảo trì để đội ngũ phát triển có thể tiếp tục xây dựng và cải thiện sản phẩm mà không gặp trở ngại.
+
+Trong bài tiếp theo mình sẽ giải thích về sự khác biệt giữa [**Design Patterns**](2024-01-31-tim-hieu-ve-design-pattern.md) và **Architecture( Kiến trúc phần mềm )** , cùng chờ đợi nhé.
+
