@@ -5,7 +5,6 @@ authors: [ lethanh ]
 lastUpdated: true
 date: 2024-02-01
 outline: deep
-draft: true
 ---
 # Tìm hiểu về Architecture ( Kiến trúc phần mềm )
 Chào mọi người,
