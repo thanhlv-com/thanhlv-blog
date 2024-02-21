@@ -92,8 +92,7 @@ pnpm-global
 # parcel-bundler cache (https://parceljs.org/)
 .cache
 
-# rollup.js default build output
-dist/
+build/
 
 # vitepress build output
 .vitepress/dist

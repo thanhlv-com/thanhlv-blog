@@ -6,7 +6,7 @@ date: 2024-01-08
 
 # Giới thiệu {#gioi-thieu}
 
-Xin chào mọi người.
+Xin chào mọi người. :)
 
 Tôi là Thành, một nhà phát triển phần mềm đang công tác tại [**Line Technology Viet Nam**](https://vietnamdevcenter.linecorp.com/en).
 Hôm nay, tôi rất vui khi bạn lần đầu đến blog cá nhân của mình, nơi tôi không chỉ truyền đạt kiến thức về lập trình mà còn sử dụng như một nơi để ghi chú và học hỏi.
