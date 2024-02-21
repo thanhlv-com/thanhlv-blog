@@ -21,9 +21,9 @@ Hôm nay chúng ta sẽ tiếp tục cùng nhau khám phá về ý nghĩa và t�
 ![img](images/2024-02-01-tim-hieu-ve-architecture/1.png)
 
 ### **Software Architecture(Kiến trúc phần mềm)** là gì ?
-Architecture, trong bối cảnh của phần mềm, đề cập đến kiến trúc phần mềm, là một khung khái niệm chung chung cho cách thức tổ chức và xây dựng một hệ thống phần mềm. 
+Architecture, trong bối cảnh của phần mềm, đề cập đến **Architecture( Kiến trúc phần mềm )**, là một khung khái niệm chung chung cho cách thức tổ chức và xây dựng một hệ thống phần mềm. 
 
-Kiến trúc phần mềm định nghĩa ra cấu trúc chính của hệ thống, bao gồm các thành phần của nó, những thuộc tính quan trọng của từng thành phần, và cách các thành phần này tương tác với nhau.
+**Architecture( Kiến trúc phần mềm )** định nghĩa ra cấu trúc chính của hệ thống, bao gồm các thành phần của nó, những thuộc tính quan trọng của từng thành phần, và cách các thành phần này tương tác với nhau.
 
 Thông thường các ứng dụng của chúng ta sẽ cần giao tiếp với nhiều ứng dụng nội bộ hoặc các ứng dụng bên thứ 3. 
 
@@ -34,12 +34,12 @@ Nó tương tự như một tòa biệt phủ, Software architecture có chức 
 Các Software architecture thường tập trung giải quyết các vấn đề liên quan đến các mối quan hệ, cách liên lạc... giữa các ứng dụng trong hệ thống của chúng ta.
 
 ### Đặc điểm của Software Architecture
-Kiến trúc phần mềm là một khuôn khổ tổng quát cho cách thức thiết kế và xây dựng một hệ thống phần mềm. Đây là những đặc điểm chủ chốt của kiến trúc phần mềm:
+**Architecture( Kiến trúc phần mềm )** là một khuôn khổ tổng quát cho cách thức thiết kế và xây dựng một hệ thống phần mềm. Đây là những đặc điểm chủ chốt của **Architecture( Kiến trúc phần mềm )**:
 
 #### 1. **Xác định các thành phần và mô-đun(Module)**: 
 - **Software Architecture** giúp xác định các thành phần hoặc module của phần mềm, cũng như chức năng và giao diện của chúng.
    ![img](images/2024-02-01-tim-hieu-ve-architecture/2.svg)
-   - 1. **Thành phần(Component)**: Architecture giúp xác định các thành phần riêng lẻ như cơ sở dữ liệu, các dịch vụ web, và các lớp logic nghiệp vụ. Mỗi thành phần được thiết kế để thực hiện một nhóm chức năng cụ thể. Trong kiến trúc phần mềm, thành phần (component) là một đơn vị cấu trúc tự chứa có thể bao gồm một hoặc nhiều mô-đun (module) và có những nhiệm vụ cụ thể.
+   - 1. **Thành phần(Component)**: Architecture giúp xác định các thành phần riêng lẻ như cơ sở dữ liệu, các dịch vụ web, và các lớp logic nghiệp vụ. Mỗi thành phần được thiết kế để thực hiện một nhóm chức năng cụ thể. Trong **Architecture( Kiến trúc phần mềm )**, thành phần (component) là một đơn vị cấu trúc tự chứa có thể bao gồm một hoặc nhiều mô-đun (module) và có những nhiệm vụ cụ thể.
       -  Đặc điểm của Component:
             - 1. Được định nghĩa bởi các chức năng mà nó cung cấp (thường thông qua một giao diện - interface).
             - 2. Có thể tái sử dụng nên được thiết kế để có khả năng kết hợp trong các hệ thống khác nhau.( Có thể sử dụng lại Component này mà không cần viết lại từ đầu )
@@ -134,7 +134,7 @@ Là quá trình nhận diện, đánh giá, và giảm thiểu các rủi ro có
    - 2. **Rõ ràng và dễ hiểu**: Các biểu đồ kiến trúc như diagram class, sequence diagram và các tài liệu mô tả giúp truyền đạt rõ ràng, đảm bảo mọi người đều hiểu về hướng đi và mục tiêu của dự án.
 
 ### Các bước cơ bản khi thực hiện Software Architecture
-Khi thực hiện kiến trúc phần mềm (Software Architecture), các bước thường được tuân theo để đảm bảo rằng hệ thống được thiết kế một cách hợp lý và có thể mở rộng. Dưới đây là các bước cơ bản:
+Khi thực hiện **kiến trúc phần mềm (Software Architecture)**, các bước thường được tuân theo để đảm bảo rằng hệ thống được thiết kế một cách hợp lý và có thể mở rộng. Dưới đây là các bước cơ bản:
 
 Các bước phía dưới không nhất thiết phải tuân theo một trình tự cứng nhắc; chúng có thể được lặp lại, thay đổi thứ tự và thích ứng tùy thuộc vào phương pháp phát triển phần mềm được sử dụng (ví dụ: Agile, Waterfall(Thác nước), DevOps) và đặc điểm cụ thể của dự án.
 
@@ -163,7 +163,7 @@ Các bước phía dưới không nhất thiết phải tuân theo một trình 
    - 1. **Tạo tài liệu kiến trúc**: Ghi chép chi tiết về kiến trúc, bao gồm các sơ đồ, mô tả thành phần, và quy trình.
    - 2. **Tài liệu cho các bên liên quan**: Chuẩn bị tài liệu hướng dẫn sử dụng, bảo trì, và triển khai cho các bên liên quan khác nhau.
 #### 9. Xem xét và cập nhật kiến trúc
-   - 1. **Xem xét liên tục**: Kiến trúc phần mềm cần được xem xét định kỳ để đảm bảo rằng nó vẫn phù hợp với các yêu cầu thay đổi và công nghệ mới.
+   - 1. **Xem xét liên tục**: **Architecture( Kiến trúc phần mềm )** cần được xem xét định kỳ để đảm bảo rằng nó vẫn phù hợp với các yêu cầu thay đổi và công nghệ mới.
    - 2. **Cập nhật kiến trúc**: Khi cần thiết, cập nhật kiến trúc để phản ánh các thay đổi trong yêu cầu, công nghệ, hoặc các bài học kinh nghiệm từ việc triển khai và sử dụng hệ thống.
 #### 10. Quản lý rủi ro kiến trúc
    - 1. **Phân tích rủi ro**: Xác định các rủi ro tiềm ẩn liên quan đến kiến trúc, bao gồm sự phụ thuộc vào công nghệ, tính phức tạp, và các vấn đề về hiệu suất.
@@ -199,7 +199,7 @@ Những nhược điểm này không nhất thiết phải xuất hiện trong m
 #### 4. Rủi ro trong quyết định
    - 1. **Quyết định sai lầm trong quá khứ**: Các quyết định kiến trúc trong quá khứ bởi những người không có kinh nghiệm có thể khó thay đổi và có thể dẫn đến rủi ro lớn nếu chúng không phù hợp.
    - 2. **Giả định không chính xác**: Giả định sai về yêu cầu hoặc công nghệ có thể làm hỏng kiến trúc.
-     - Giả định không chính xác trong kiến trúc phần mềm thường xuất phát từ việc không hiểu đúng hoặc không đánh giá đúng các yếu tố ảnh hưởng đến hệ thống. Điều này có thể xảy ra ở nhiều khía cạnh khác nhau của dự án, từ yêu cầu kỹ thuật đến hành vi của người dùng cuối. 
+     - Giả định không chính xác trong **Architecture( Kiến trúc phần mềm )** thường xuất phát từ việc không hiểu đúng hoặc không đánh giá đúng các yếu tố ảnh hưởng đến hệ thống. Điều này có thể xảy ra ở nhiều khía cạnh khác nhau của dự án, từ yêu cầu kỹ thuật đến hành vi của người dùng cuối. 
      - Ví dụ về 1 số giả định sai:
        - 1. Yêu cầu Người Dùng: Giả định sai về những gì người dùng thực sự cần hoặc muốn từ hệ thống có thể dẫn đến việc thiết kế các tính năng không cần thiết hoặc bỏ qua các chức năng quan trọng.
        - 2. Tải Trọng Hệ Thống: Nếu giả định sai về mức độ tải trọng mà hệ thống sẽ phải xử lý, kiến trúc có thể không được thiết kế để đối phó với lượng người dùng thực tế, dẫn đến vấn đề hiệu suất hoặc sự cố hệ thống.
@@ -207,7 +207,7 @@ Những nhược điểm này không nhất thiết phải xuất hiện trong m
        - 4. Tích Hợp và Tương Thích: Giả sử rằng các hệ thống khác (mà hệ thống mới cần tích hợp) sử dụng các giao thức hoặc API tiêu chuẩn khác, chúng có thể dẫn đến vấn đề tích hợp sau này.
        - 5. Khả năng Mở Rộng và Bảo Trì: Giả định rằng hệ thống hiện tại sẽ dễ dàng mở rộng hoặc bảo trì có thể dẫn đến việc chọn một kiến trúc không thích hợp, khiến việc thêm chức năng mới hoặc cập nhật hệ thống trở nên khó khăn.
        - 6. Công Nghệ và Thư Viện: Giả định công nghệ hoặc thư viện sẽ luôn được hỗ trợ hoặc không lỗi thời có thể tạo ra rủi ro lớn nếu công nghệ đó bị ngừng phát triển hoặc không còn được cộng đồng hỗ trợ.
-     - Những giả định không chính xác này có thể dẫn đến việc phải thực hiện các thay đổi lớn về sau, tốn kém thời gian và nguồn lực, và thậm chí có thể yêu cầu phải thiết kế lại toàn bộ kiến trúc. Do đó, việc xác minh các giả định thông qua phân tích kỹ lưỡng, thử nghiệm, và thu thập phản hồi là quan trọng để xây dựng một kiến trúc phần mềm vững chắc và linh hoạt.
+     - Những giả định không chính xác này có thể dẫn đến việc phải thực hiện các thay đổi lớn về sau, tốn kém thời gian và nguồn lực, và thậm chí có thể yêu cầu phải thiết kế lại toàn bộ kiến trúc. Do đó, việc xác minh các giả định thông qua phân tích kỹ lưỡng, thử nghiệm, và thu thập phản hồi là quan trọng để xây dựng một **Architecture( Kiến trúc phần mềm )** vững chắc và linh hoạt.
 #### 5. Đồng bộ hóa và tích hợp
    - 1. **Khó đồng bộ hóa**: Các thành phần kiến trúc độc lập có thể gặp khó khăn trong việc đồng bộ hóa và làm việc cùng nhau một cách hiệu quả.
       - 1. **Đồng bộ hóa dữ liệu**: Trong một hệ thống phân tán hoặc microservices, việc đảm bảo rằng tất cả các dịch vụ có cùng một thông tin mới nhất có thể rất khó khăn. Các vấn đề như độ trễ mạng, thất bại trong việc giao tiếp, và xung đột dữ liệu có thể làm cho việc đồng bộ hóa dữ liệu trở nên phức tạp.
