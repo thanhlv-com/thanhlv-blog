@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "prebuild:dev": "node script/blogs.js env:dev",
-    "prebuild:live": "node script/blogs.js env:live",
+    "prebuild:live": "node script/blogs.js env:live && yarn run pdf-cv",
     "dev": " yarn run prebuild:dev && vitepress",
     "build_github": "yarn run prebuild:live && vitepress build --outDir=./../../build",
     "preview": "vitepress preview",
