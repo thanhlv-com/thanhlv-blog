@@ -11,8 +11,7 @@
     "build_github": "yarn run prebuild:live && vitepress build --outDir=./../../build",
     "preview": "vitepress preview",
     "preinstall": "npx only-allow pnpm",
-    "pdf-blog": "press-export-pdf export ./ -c .vitepress/vitepress-pdf-cv.config.ts",
-    "pdf-blog1": "press-export-pdf export --help"
+    "pdf-cv": "press-export-pdf export ./ -c .vitepress/vitepress-export-pdf/thanhlv-cv-vi-config.ts"
   },
   "dependencies": {
     "@vue/repl": "^3.0.0",
@@ -20,7 +19,7 @@
     "dynamics.js": "^1.1.5",
     "gsap": "^3.9.0",
     "vitepress": "1.0.0-rc.33",
-    "vitepress-export-pdf": "1.0.0-beta.0",
+    "@thanhlv.com/vitepress-export-pdf": "1.0.2",
     "vue": "^3.4.0"
   },
   "devDependencies": {

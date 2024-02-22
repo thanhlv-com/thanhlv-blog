@@ -24,6 +24,9 @@ importers:
 
   packages/apps:
     dependencies:
+      '@thanhlv.com/vitepress-export-pdf':
+        specifier: 1.0.2
+        version: 1.0.2(esbuild@0.19.11)(vitepress@1.0.0-rc.33)
       '@vue/repl':
         specifier: ^3.0.0
         version: 3.3.0
@@ -39,9 +42,6 @@ importers:
       vitepress:
         specifier: 1.0.0-rc.33
         version: 1.0.0-rc.33(@types/node@20.11.5)(terser@5.27.0)
-      vitepress-export-pdf:
-        specifier: 1.0.0-beta.0
-        version: 1.0.0-beta.0(esbuild@0.19.11)(vitepress@1.0.0-rc.33)
       vue:
         specifier: ^3.4.0
         version: 3.4.15(typescript@4.9.5)
@@ -703,6 +703,26 @@ packages:
     os: [win32]
     requiresBuild: true
     optional: true
+
+  /@thanhlv.com/vitepress-export-pdf@1.0.2(esbuild@0.19.11)(vitepress@1.0.0-rc.33):
+    resolution: {integrity: sha512-nKJp2mtMWcUzb653yN/Ea47kPWlqp9B9E582l80uQyx+Kmxg9aT3sNXB+4UDdCteJ1K6OtUpNbvHWfnF8z+2hQ==}
+    engines: {node: '>=14.6.0'}
+    hasBin: true
+    peerDependencies:
+      vitepress: '>=1.0.0-alpha.35 <=1.x'
+    dependencies:
+      '@condorhero/vuepress-plugin-export-pdf-core': 3.0.2(esbuild@0.19.11)
+      debug: 4.3.4
+      hash-sum: 2.0.0
+      vitepress: 1.0.0-rc.33(@types/node@20.11.5)(terser@5.27.0)
+    transitivePeerDependencies:
+      - bufferutil
+      - encoding
+      - esbuild
+      - supports-color
+      - typescript
+      - utf-8-validate
+    dev: false
 
   /@tootallnate/quickjs-emscripten@0.23.0:
     resolution: {integrity: sha512-C5Mc6rdnsaJDjO3UpGW/CQTHtCKaYlScZTly4JIu97Jxo/odCiH0ITnDXSJPTOrEKk/ycSZ0AOgTmkDtkOsvIA==}
@@ -2463,26 +2483,6 @@ packages:
       terser: 5.27.0
     optionalDependencies:
       fsevents: 2.3.3
-
-  /vitepress-export-pdf@1.0.0-beta.0(esbuild@0.19.11)(vitepress@1.0.0-rc.33):
-    resolution: {integrity: sha512-DTI1A0ntWy08OXNWmwZC9lSEG69z/tTzng8MVwdvttG4mIHOrEwD9NUZucQPr6o5YgpWDIEsm/J92/Yt+/IgRg==}
-    engines: {node: '>=14.6.0'}
-    hasBin: true
-    peerDependencies:
-      vitepress: '>=1.0.0-alpha.35 <=1.x'
-    dependencies:
-      '@condorhero/vuepress-plugin-export-pdf-core': 3.0.2(esbuild@0.19.11)
-      debug: 4.3.4
-      hash-sum: 2.0.0
-      vitepress: 1.0.0-rc.33(@types/node@20.11.5)(terser@5.27.0)
-    transitivePeerDependencies:
-      - bufferutil
-      - encoding
-      - esbuild
-      - supports-color
-      - typescript
-      - utf-8-validate
-    dev: false
 
   /vitepress@1.0.0-rc.33(@types/node@18.19.8)(typescript@4.9.5):
     resolution: {integrity: sha512-XMwr5eXEB3KB1uCuOkojVaqsVSijmd6N9QmaM2M6aqJqzXzxNwuvWSiEGYl4qbwRAX6/nFRofhx9+FndtCNjGQ==}

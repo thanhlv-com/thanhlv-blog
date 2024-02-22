@@ -1,4 +1,4 @@
-import { defineUserConfig } from 'vitepress-export-pdf'
+import { defineUserConfig } from '@thanhlv.com/vitepress-export-pdf'
 
 export default defineUserConfig({
   pdfOptions: {
