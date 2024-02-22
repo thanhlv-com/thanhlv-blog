@@ -26,7 +26,7 @@ date: 2024-01-08
 
 ## Thông tin liên lạc
 **Address:** Thôn 3, Song Phưương, Hoài Đức, Hà Nội.  
-**Phone:** 096 621 1618  | +84 96 621 1618
+**Phone:** 096 621 1618  | +84 96 621 1618  
 **Email:** lethanh9398@gmail.com  
 **LinkedIn:** [linkedin.com/in/lethanh9398](https://www.linkedin.com/in/lethanh9398)  
 **Facebook:** [www.facebook.com/lethanh9398](https://www.facebook.com/lethanh9398)  
