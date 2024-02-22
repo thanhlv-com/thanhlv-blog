@@ -9,7 +9,7 @@ date: 2024-01-08
 
 <p class="actions print-hide">
       <a target='_blank' class="get-started" href="/thanhlv-vi-cv.pdf">
-        Download PDF
+        Download PDF.
         <svg
           class="icon"
           xmlns="http://www.w3.org/2000/svg"
