@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "yarn run ci && pnpm -C packages/apps run dev",
     "build_github": "yarn run ci && pnpm -C packages/apps run build_github",
-    "deploy": "yarn run ci && pnpm -C packages/apps run build_github && gh-pages -d build",
+    "deploy": "yarn run build_github && gh-pages -d build",
     "ci": "npm i -g pnpm && pnpm install"
   },
   "devDependencies": {
