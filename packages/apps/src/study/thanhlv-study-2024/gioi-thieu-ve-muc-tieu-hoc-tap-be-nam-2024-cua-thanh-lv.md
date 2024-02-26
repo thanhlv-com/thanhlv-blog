@@ -47,7 +47,10 @@ Tất nhiên là tôi không phải DBA, vì vậy tôi sẽ chỉ học ở m�
 5. ACID
 6. Multi-Version Concurrency Control (MVCC in PostgreSQL)
 6. Transactions
-
+7. N plus one problem
+8. Database Normalization
+9. Failure Modes
+10. Profiling Performance
 
 ### 3 : API
  - https://jsonapi.org/
@@ -57,3 +60,8 @@ Tất nhiên là tôi không phải DBA, vì vậy tôi sẽ chỉ học ở m�
   - Redis
   - Memcached
 - CDN (Content Delivery Network)
+
+### 5. Web Security Knowledge
+- Dự án `OWASP Security Risks`: https://cheatsheetseries.owasp.org/index.html
+- Content Security Policy
+- Server Security
