@@ -50,6 +50,8 @@ export default defineConfigWithTheme<ThemeConfig>({
     lastmodDateOnly: false
   },
   head: [
+    ['meta', { name: 'viewport', content: 'viewport-fit=cover, width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no' }],
+    ['meta', { name: 'apple-mobile-web-app-capable', content: 'yes' }],
     ['meta', { name: 'theme-color', content: '#3c8772' }],
     ['meta', { property: 'og:url', content: 'https://thanhlv.com/' }],
     ['meta', { property: 'og:type', content: 'website' }],
