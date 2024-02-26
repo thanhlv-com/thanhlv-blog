@@ -24,7 +24,7 @@ Hiện tại tất các ứng dụng đều sẽ được phát hành trên Inte
 ## 2. Relational Databases(RDBMS)
 Cơ sở dữ liệu là một thức rất quan trọng, nó sử dụng để lưu trữ các dữ liệu của doanh nghiệp và ứng dụng của chúng ta.
 
-Vì vậy tôi muốn học lại các kiến thức cơ bản về nó và học thêm về `[PostgreSQL](https://www.postgresql.org/)`
+Vì vậy tôi muốn học lại các kiến thức cơ bản về nó
 
 1. Database là gì ?
 2. Relational Databases là gì ?
@@ -39,8 +39,21 @@ Tất nhiên là tôi không phải DBA, vì vậy tôi sẽ chỉ học ở m�
    1. cài đặt trên máy chủ vật lý.( Cài đặt thử cả cluster )
    2. Cài đặt sử dụng docker image.( Cài đặt thử cả cluster )
 #### 2.1.1 RDBMS Concepts
-1. Các Data Types trong PostgreSQL
+1. Các Data Types
 2. Schemas là gì ?
 2. Domains là gì ?
 3. Attributes là gì ?
+4. Các Constraints.
+5. ACID
+6. Multi-Version Concurrency Control (MVCC in PostgreSQL)
+6. Transactions
 
+
+### 3 : API
+ - https://jsonapi.org/
+### 4 : Caching
+- Client Side Caching
+- Server side
+  - Redis
+  - Memcached
+- CDN (Content Delivery Network)
