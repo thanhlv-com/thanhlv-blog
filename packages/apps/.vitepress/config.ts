@@ -4,13 +4,21 @@ import { defineConfigWithTheme } from 'vitepress'
 import type { Config as ThemeConfig } from '@vue/theme'
 import baseConfig from '@vue/theme/config'
 import { headerPlugin } from './headerMdPlugin'
-import blogsSidebar from './cache/blogs-sidebar.json'
+import blogsSidebar from './cache/sidebar/blogs-sidebar.json'
+import thanhlvStudy2024Sidebar from './cache/sidebar/study/thanhlv-study-2024-sidebar.json'
 
 const nav: ThemeConfig['nav'] = [
   {
     text: 'Blog',
     activeMatch: `^/blog/`,
     link: '/blog/gioi-thieu'
+  },
+  {
+    text: 'Study',
+    activeMatch: `^/study/`,
+    items: [
+      { text: 'Học tập BE Thanhlv 2024', link: '/study/thanhlv-study-2024/gioi-thieu-ve-muc-tieu-hoc-tap-be-nam-2024-cua-thanh-lv' },
+    ]
   },
   {
     text: 'About',
@@ -28,6 +36,15 @@ export const sidebar: ThemeConfig['sidebar'] = {
       items: [
         { text: 'Giới thiệu', link: '/blog/gioi-thieu' },
         ...blogsSidebar
+      ]
+    }
+  ],
+  '/study/thanhlv-study-2024': [
+    {
+      text: '',
+      items: [
+        { text: 'Giới thiệu', link: '/study/thanhlv-study-2024/gioi-thieu-ve-muc-tieu-hoc-tap-be-nam-2024-cua-thanh-lv' },
+        ...thanhlvStudy2024Sidebar
       ]
     }
   ]

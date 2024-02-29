@@ -1,5 +1,4 @@
 ---
-title: Giới thiệu về mục tiêu học tập BE năm 2024 của Thanhlv
 footer: true
 outline: deep
 date: 2024-02-22
