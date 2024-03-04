@@ -5,6 +5,7 @@ authors: [ lethanh ]
 lastUpdated: true
 date: 2024-02-29
 outline: deep
+draft: false
 ---
 # Sự khác biệt giữa Design Pattern và Software Architecture.
 Chào mọi người,
