@@ -46,20 +46,26 @@ Trong bài viết nay mình sẽ thực hiện so sách sự khác biệt giữa
 
 ### 1. Design Pattern
 ![img](images/2024-02-29-su-khac-biet-giua-design-patternsva-architechture/1.jpg)
-- Design Pattern sẽ target `Function`, `Class` và `Project`. Với `Design Pattern` sẽ thực hiện đi sâu vào chi tiết của một `Project`.
-- **Ở mức độ Function và Class** Design Patterns cung cấp các giải pháp tái sử dụng cho các vấn đề thiết kế thường gặp ở mức độ này, như cách tạo đối tượng (Factory Pattern), cách tổ chức mã nguồn, hoặc cách các đối tượng tương tác với nhau (Observer Pattern..etc..).
-- **Ở mức độ Project** Design Patterns giúp định hình cách các class trong một dự án tương tác với nhau, nhưng không định nghĩa cấu trúc tổng thể của dự án.
+
+- [Design Pattern](2024-01-31-tim-hieu-ve-design-pattern.md) sẽ target `Function`, `Class` và `Project`. Với [Design Pattern](2024-01-31-tim-hieu-ve-design-pattern.md) sẽ thực hiện đi sâu vào chi tiết của một `Project`.
+
+- **Ở mức độ Function và Class** [Design Pattern](2024-01-31-tim-hieu-ve-design-pattern.md) cung cấp các giải pháp tái sử dụng cho các vấn đề thiết kế thường gặp ở mức độ này, như cách tạo đối tượng (Factory Pattern), cách tổ chức mã nguồn, hoặc cách các đối tượng tương tác với nhau (Observer Pattern..etc..).
+
+- **Ở mức độ Project** [Design Pattern](2024-01-31-tim-hieu-ve-design-pattern.md) giúp định hình cách các class trong một dự án tương tác với nhau, nhưng không định nghĩa cấu trúc tổng thể của dự án.
 
 ### 2. Software Architecture
 ![img](images/2024-02-29-su-khac-biet-giua-design-patternsva-architechture/2.png)
-- Software Architecture sẽ target `Project`, `Solution` và `System`.
-- **Ở mức độ Project trong Software Architecture** sẽ định nghĩa cấu trúc tổng thể của một dự án cụ thể, bao gồm cách các class và modules được tổ chức và tương tác với nhau. Kiến trúc sư phần mềm sẽ quyết định sử dụng các mô hình như n-tier, clean architecture, hoặc các mô hình khác để đảm bảo rằng dự án có thể mở rộng, bảo trì và thử nghiệm dễ dàng.
-- **Ở mức độ Solution trong Software Architecture**, Software Architecture định nghĩa cách thức các dự án khác nhau (ví dụ: các microservices, thư viện chia sẻ, hoặc các ứng dụng con) được tổ chức và làm việc cùng nhau. Kiến trúc sư phần mềm sẽ xác định các giao diện, hợp đồng(Contract về dữ liệu giao tiếp), và giao thức giao tiếp giữa các dự án để đảm bảo tích hợp và hoạt động mượt mà.
-- **Ở mức độ System trong Software Architecture** khi nói đến toàn bộ hệ thống, Software Architecture xem xét cách thức các giải pháp khác nhau tương tác và hợp tác để tạo nên một hệ thống lớn, phức tạp. Điều này bao gồm việc quản lý các mối quan hệ giữa các hệ thống con, các dịch vụ bên ngoài, và các hệ thống bên thứ ba. Kiến trúc sư phần mềm cần phải xem xét đến các yếu tố như khả năng mở rộng, hiệu suất, bảo mật, và khả năng chịu lỗi của hệ thống.
+- [Software Architecture](2024-02-01-tim-hieu-ve-architecture.md) sẽ target `Project`, `Solution` và `System`.
+
+- **Ở mức độ Project trong [Software Architecture](2024-02-01-tim-hieu-ve-architecture.md)** sẽ định nghĩa cấu trúc tổng thể của một dự án cụ thể, bao gồm cách các class và modules được tổ chức và tương tác với nhau. Kiến trúc sư phần mềm sẽ quyết định sử dụng các mô hình như n-tier, clean architecture, hoặc các mô hình khác để đảm bảo rằng dự án có thể mở rộng, bảo trì và thử nghiệm dễ dàng.
+
+- **Ở mức độ Solution trong [Software Architecture](2024-02-01-tim-hieu-ve-architecture.md)**, Software Architecture định nghĩa cách thức các dự án khác nhau (ví dụ: các microservices, thư viện chia sẻ, hoặc các ứng dụng con) được tổ chức và làm việc cùng nhau. Kiến trúc sư phần mềm sẽ xác định các giao diện, hợp đồng(Contract về dữ liệu giao tiếp), và giao thức giao tiếp giữa các dự án để đảm bảo tích hợp và hoạt động mượt mà.
+
+- **Ở mức độ System trong [Software Architecture](2024-02-01-tim-hieu-ve-architecture.md)** khi nói đến toàn bộ hệ thống, Software Architecture xem xét cách thức các giải pháp khác nhau tương tác và hợp tác để tạo nên một hệ thống lớn, phức tạp. Điều này bao gồm việc quản lý các mối quan hệ giữa các hệ thống con, các dịch vụ bên ngoài, và các hệ thống bên thứ ba. Kiến trúc sư phần mềm cần phải xem xét đến các yếu tố như khả năng mở rộng, hiệu suất, bảo mật, và khả năng chịu lỗi của hệ thống.
 
 ## Bảng so sánh giữa Design Pattern và Software Architecture
 
-| Type     | Design Pattern                                                                                                                      | Software Architecture                                                                                                           |
+| Type     | [Design Pattern](2024-01-31-tim-hieu-ve-design-pattern.md)                                                                                                                      | [Software Architecture](2024-02-01-tim-hieu-ve-architecture.md)                                                                                                           |
 |----------|-------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------|
 | Mục đích | Cung cấp giải pháp tiêu chuẩn được nhiều người kiểm chứng để giải quyết các vấn đề cụ thể trong thiết kế phần mềm                   | Xác định cấu trúc chính của hệ thống, bao gồm các thành phần, thuộc tính của chúng và cách tương tác với nhau.                  |
 | Phạm vi  | Tập trung vào cách giải quyết các vấn đề thiết kế ở mức độ lớp (class) và method trong một project.                                 | Tập trung vào cấu trúc tổng thể của hệ thống và mối quan hệ giữa các thành phần lớn như modules, components và external systems |
@@ -70,15 +76,15 @@ Trong bài viết nay mình sẽ thực hiện so sách sự khác biệt giữa
 |  Nhược điểm  | Có thể tạo thêm sự phức tạp không cần thiết, yêu cầu sự hiểu biết sâu sắc, và có thể hạn chế khả năng áp dụng với người không hiểu. | Có thể tốn kém, khó hiểu và khó duy trì, có thể hạn chế khả năng mở rộng và linh hoạt, và phụ thuộc vào công nghệ.              |
 
 ### Sự Khác Biệt Chính
-- **Phạm vi Ứng Dụng:** Design Patterns tập trung vào giải quyết các vấn đề thiết kế cụ thể ở mức độ lớp và đối tượng, trong khi Software Architecture tập trung vào cấu trúc tổng thể và mối quan hệ giữa các thành phần lớn của hệ thống.
+- **Phạm vi Ứng Dụng:** [Design Pattern](2024-01-31-tim-hieu-ve-design-pattern.md) tập trung vào giải quyết các vấn đề thiết kế cụ thể ở mức độ lớp và đối tượng, trong khi [Software Architecture](2024-02-01-tim-hieu-ve-architecture.md) tập trung vào cấu trúc tổng thể và mối quan hệ giữa các thành phần lớn của hệ thống.
 
-- **Tái sử dụng và Trừu tượng:** Cả hai đều khuyến khích tái sử dụng và cung cấp giải pháp ở mức độ trừu tượng, nhưng Design Patterns là các mô hình giải quyết vấn đề cụ thể, trong khi Software Architecture là bản kế hoạch tổng thể cho toàn bộ hệ thống.
+- **Tái sử dụng và Trừu tượng:** Cả hai đều khuyến khích tái sử dụng và cung cấp giải pháp ở mức độ trừu tượng, nhưng [Design Pattern](2024-01-31-tim-hieu-ve-design-pattern.md) là các mô hình giải quyết vấn đề cụ thể, trong khi [Software Architecture](2024-02-01-tim-hieu-ve-architecture.md) là bản kế hoạch tổng thể cho toàn bộ hệ thống.
 
 ## Tổng kết
-- 1. **Design Patterns** tập trung vào giải pháp tái sử dụng cho các vấn đề thiết kế cụ thể ở mức độ function, class và project.
-- 2. **Software Architecture** định nghĩa cấu trúc tổng thể của hệ thống, từ mức độ project đến solution và system.
-- 3. **Design Patterns** giúp định hình cách các class tương tác trong một dự án, không định nghĩa cấu trúc tổng thể.
-- 4. **Software Architecture** quyết định cách các class, modules và dự án tương tác, đảm bảo mở rộng, bảo trì và thử nghiệm dễ dàng.
+- 1. **[Design Pattern](2024-01-31-tim-hieu-ve-design-pattern.md)** tập trung vào giải pháp tái sử dụng cho các vấn đề thiết kế cụ thể ở mức độ function, class và project.
+- 2. **[Software Architecture](2024-02-01-tim-hieu-ve-architecture.md)** định nghĩa cấu trúc tổng thể của hệ thống, từ mức độ project đến solution và system.
+- 3. **[Design Pattern](2024-01-31-tim-hieu-ve-design-pattern.md)** giúp định hình cách các class tương tác trong một dự án, không định nghĩa cấu trúc tổng thể.
+- 4. **[Software Architecture](2024-02-01-tim-hieu-ve-architecture.md)** quyết định cách các class, modules và dự án tương tác, đảm bảo mở rộng, bảo trì và thử nghiệm dễ dàng.
 - 5. **Cả hai** khuyến khích tái sử dụng và trừu tượng hóa, nhưng ở hai mức độ khác nhau: 
-  - 1. Design Patterns ở mức độ giải pháp cụ thể.
-  - 2. Software Architecture ở mức độ kế hoạch tổng thể.
+  - 1. [Design Pattern](2024-01-31-tim-hieu-ve-design-pattern.md) ở mức độ giải pháp cụ thể.
+  - 2. [Software Architecture](2024-02-01-tim-hieu-ve-architecture.md) ở mức độ kế hoạch tổng thể.
