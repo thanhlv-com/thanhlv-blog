@@ -11,7 +11,7 @@
   },
   "devDependencies": {
     "blog": "workspace:*",
-    "@vue/theme": "workspace:*",
+    "@thanhlv.com/blog-theme": "workspace:*",
     "gh-pages": "6.1.1"
   },
   "pnpm": {
