@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { VTLink } from '@thanhlv.com/blog-theme'
+import { VTLink } from '@vue/theme'
 </script>
 
 <template>

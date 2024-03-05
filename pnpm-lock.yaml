@@ -12,7 +12,7 @@ importers:
 
   .:
     devDependencies:
-      '@thanhlv.com/blog-theme':
+      '@vue/theme':
         specifier: workspace:*
         version: link:packages/libs/theme
       blog:
@@ -24,15 +24,15 @@ importers:
 
   packages/apps:
     dependencies:
-      '@thanhlv.com/blog-theme':
-        specifier: workspace:*
-        version: link:../libs/theme
       '@thanhlv.com/vitepress-export-pdf':
         specifier: 1.0.2
         version: 1.0.2(esbuild@0.19.11)(vitepress@1.0.0-rc.33)
       '@vue/repl':
         specifier: ^3.0.0
         version: 3.3.0
+      '@vue/theme':
+        specifier: workspace:*
+        version: link:../libs/theme
       dynamics.js:
         specifier: ^1.1.5
         version: 1.1.5

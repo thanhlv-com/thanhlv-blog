@@ -1,6 +1,6 @@
 import './styles/index.css'
 import { h, App } from 'vue'
-import { VPTheme } from '@thanhlv.com/blog-theme'
+import { VPTheme } from '@vue/theme'
 import PreferenceSwitch from './components/PreferenceSwitch.vue'
 import {
   preferComposition,

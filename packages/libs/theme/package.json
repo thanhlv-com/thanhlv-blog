@@ -1,7 +1,7 @@
 {
-  "name": "@thanhlv.com/blog-theme",
+  "name": "@vue/theme",
   "version": "2.2.5",
-  "description": "The VitePress theme for thanhlv.com.",
+  "description": "The VitePress theme for vuejs.org.",
   "main": "src/index.ts",
   "exports": {
     ".": "./src/index.ts",

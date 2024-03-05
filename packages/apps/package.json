@@ -15,7 +15,7 @@
   },
   "dependencies": {
     "@vue/repl": "^3.0.0",
-    "@thanhlv.com/blog-theme": "workspace:*",
+    "@vue/theme": "workspace:*",
     "dynamics.js": "^1.1.5",
     "gsap": "^3.9.0",
     "vitepress": "1.0.0-rc.33",
