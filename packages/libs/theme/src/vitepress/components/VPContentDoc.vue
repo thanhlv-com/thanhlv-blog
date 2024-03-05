@@ -74,7 +74,7 @@ const pageClass = computed(() => {
               }}</VTLink>
 
           </p>
-          <VPDocFooterLastUpdated />
+          <VPDocFooterLastUpdated v-if="frontmatter.lastUpdated !== false" />
         </div>
 
         </main>
