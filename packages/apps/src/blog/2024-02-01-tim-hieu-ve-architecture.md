@@ -2,7 +2,6 @@
 footer: true
 title: Tìm hiểu về Architecture
 authors: [ lethanh ]
-lastUpdated: true
 date: 2024-02-01
 outline: deep
 ---

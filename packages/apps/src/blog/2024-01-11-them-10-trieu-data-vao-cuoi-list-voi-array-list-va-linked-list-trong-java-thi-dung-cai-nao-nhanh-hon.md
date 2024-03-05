@@ -2,7 +2,6 @@
 footer: true
 title: Thêm 10 triệu data vào cuối list với ArrayList và LinkedList trong java thì dùng cái nào nhanh hơn
 authors: [ "lethanh" ]
-lastUpdated: true
 date: 2024-01-11
 outline: deep
 ---

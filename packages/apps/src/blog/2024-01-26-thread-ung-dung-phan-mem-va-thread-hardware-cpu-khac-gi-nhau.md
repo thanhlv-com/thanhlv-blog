@@ -2,7 +2,6 @@
 footer: true
 title: Thread ứng dụng phần mềm và Thread hardware CPU khác gì nhau
 authors: [ lethanh ]
-lastUpdated: true
 date: 2024-01-26
 outline: deep
 ---

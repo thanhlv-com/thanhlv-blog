@@ -2,7 +2,6 @@
 footer: true
 title: Sửa lỗi 404 khi deploy một số ứng dụng web Single Page Application với Nginx
 authors: [ "lethanh" ]
-lastUpdated: true
 date: 2024-01-17
 outline: deep
 ---

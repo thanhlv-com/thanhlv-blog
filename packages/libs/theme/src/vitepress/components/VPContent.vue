@@ -3,6 +3,7 @@ import { useData } from 'vitepress'
 import { useSidebar } from '../composables/sidebar'
 import VPContentPage from './VPContentPage.vue'
 import VPContentDoc from './VPContentDoc.vue'
+import VPDocFooterLastUpdated from './VPDocFooterLastUpdated.vue'
 import VPNotFound from './VPNotFound.vue'
 
 const { page, frontmatter } = useData()

@@ -2,7 +2,6 @@
 footer: true
 title: Thread safe, Lock object là gì ?
 authors: [ lethanh ]
-lastUpdated: true
 date: 2024-01-18
 outline: deep
 ---

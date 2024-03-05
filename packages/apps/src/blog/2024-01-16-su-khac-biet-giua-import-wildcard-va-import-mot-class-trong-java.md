@@ -2,7 +2,6 @@
 footer: true
 title: Sự khác biệt giữa import wildcard và import một class trong java
 authors: [ "lethanh" ]
-lastUpdated: true
 date: 2024-01-16
 outline: deep
 ---

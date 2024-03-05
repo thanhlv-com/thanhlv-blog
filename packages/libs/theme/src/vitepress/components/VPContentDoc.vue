@@ -6,6 +6,7 @@ import VPContentDocFooter from './VPContentDocFooter.vue'
 import VPCarbonAds from './VPCarbonAds.vue'
 import { VTLink, VTIconEdit } from '../../core'
 import { useConfig } from '../composables/config'
+import VPDocFooterLastUpdated from './VPDocFooterLastUpdated.vue'
 
 const { page, frontmatter } = useData()
 const { config } = useConfig()
@@ -21,6 +22,9 @@ const repoUrl = computed(() => {
   }`
 })
 
+const hasLastUpdated = computed(() => {
+  return page.value.lastUpdated && frontmatter.value.lastUpdated !== false;
+});
 const pageClass = computed(() => {
   const { relativePath } = page.value
   return relativePath.slice(0, relativePath.indexOf('/'))
@@ -58,15 +62,21 @@ const pageClass = computed(() => {
               <slot name="author" />
             </div>
           </div>
+        <div
+        style='display: flex;'>
           <p
             class="edit-link"
             v-if="config.editLink && frontmatter.editLink !== false"
           >
             <VTIconEdit class="vt-icon" />
             <VTLink :href="repoUrl" :no-icon="true">{{
-              config.editLink.text
-            }}</VTLink>
+                config.editLink.text
+              }}</VTLink>
+
           </p>
+          <VPDocFooterLastUpdated />
+        </div>
+
         </main>
         <slot name="content-bottom" />
         <VPContentDocFooter v-if="frontmatter.footer !== false" />

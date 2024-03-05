@@ -2,7 +2,6 @@
 footer: true
 title: "CPU, CORE và Thread khác gì nhau ?"
 authors: ["lethanh"]
-lastUpdated: true
 date: 2024-01-09
 outline: deep
 ---
