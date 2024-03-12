@@ -48,8 +48,9 @@ const config = {
     )
     const head = []
 
-    head.push(['meta', { property: 'og:description', content: pageData.frontmatter.description || pageData.frontmatter.title }])
-    head.push(['meta', { name: 'description', content: pageData.frontmatter.description || pageData.frontmatter.title }])
+    head.push(['meta', { property: 'og:title', content: pageData.frontmatter.title }])
+    head.push(['meta', { property: 'og:description', content: pageData.description || pageData.frontmatter.title }])
+    head.push(['meta', { name: 'description', content: pageData.description || pageData.frontmatter.title }])
 
     if (font) {
       head.push(
