@@ -57,13 +57,6 @@ export const sidebar: ThemeConfig['sidebar'] = {
 export default defineConfigWithTheme<ThemeConfig>({
   extends: baseConfig,
   lastUpdated: true,
-  transformHead: ({ pageData }) => {
-    const head: HeadConfig[] = []
-
-    head.push(['meta', { property: 'og:description', content: pageData.frontmatter.description }])
-
-    return head
-  },
   lang: 'en-US',
   title: 'Thanhlv',
   description: 'Thanhlv - Yêu công nghệ',
@@ -80,13 +73,6 @@ export default defineConfigWithTheme<ThemeConfig>({
     ['meta', { property: 'og:url', content: 'https://thanhlv.com/' }],
     ['meta', { property: 'og:type', content: 'website' }],
     ['meta', { property: 'og:title', content: 'Thanhlv - Yêu công nghệ' }],
-    [
-      'meta',
-      {
-        property: 'og:description',
-        content: 'Thanhlv - Yêu công nghệ'
-      }
-    ],
     [
       'meta',
       {

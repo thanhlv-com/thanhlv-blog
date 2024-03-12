@@ -41,12 +41,18 @@ const config = {
     }
   },
 
-  transformHead({ assets }) {
+  // @ts-ignore
+  transformHead({ assets, pageData }) {
     const font = assets.find((file) =>
       /inter-roman-latin\.\w+\.woff2/.test(file)
     )
+    const head = []
+
+    head.push(['meta', { property: 'og:description', content: pageData.frontmatter.description || pageData.frontmatter.title }])
+    head.push(['meta', { name: 'description', content: pageData.frontmatter.description || pageData.frontmatter.title }])
+
     if (font) {
-      return [
+      head.push(
         [
           'link',
           {
@@ -57,8 +63,9 @@ const config = {
             crossorigin: ''
           }
         ]
-      ]
+      )
     }
+    return head;
   },
 
   shouldPreload(link) {
