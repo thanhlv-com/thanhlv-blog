@@ -50,6 +50,6 @@ const { config } = useConfig()
 }
 
 .link:hover {
-  color: var(--vt-c-text-2);
+  color: var(--vt-c-text-link);
 }
 </style>

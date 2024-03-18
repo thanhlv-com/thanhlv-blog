@@ -97,6 +97,7 @@
 
   --vt-c-text-1: var(--vt-c-text-light-1);
   --vt-c-text-2: var(--vt-c-text-light-2);
+  --vt-c-text-link: var(--vt-c-green);
   --vt-c-text-3: var(--vt-c-text-light-3);
   --vt-c-text-4: var(--vt-c-text-light-4);
   --vt-c-text-code: var(--vt-c-text-light-code);
