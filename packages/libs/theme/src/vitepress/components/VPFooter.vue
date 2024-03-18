@@ -45,7 +45,7 @@ const { config } = useConfig()
 }
 
 .link {
-  color: var(--vt-c-text-1);
+  color: var(--vt-c-text-link);
   transition: color 0.25s;
 }
 
