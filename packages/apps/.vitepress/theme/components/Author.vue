@@ -1,6 +1,6 @@
 <script setup lang='ts'>
 import { useData, useRoute } from 'vitepress'
-import { data as blogs } from './blogs.data'
+import { data as blogs } from './all.data'
 import { AUTHORS } from '@theme/components/constants'
 import { computed } from 'vue'
 import { VPTeamMembers } from 'vitepress/theme'
