@@ -2,7 +2,7 @@ export type MenuItem = MenuItemWithLink | MenuItemWithChildren
 
 export interface MenuItemWithLink {
   text: string
-  link: string
+  link?: string
 }
 
 export interface MenuItemWithChildren {
@@ -19,5 +19,6 @@ export interface MenuItemChildWithChildren {
 
 export type LocaleLinkItem = MenuItemWithLink & {
   repo?: string
+  baseUrl?: string
   isTranslationsDesc?: boolean
 }

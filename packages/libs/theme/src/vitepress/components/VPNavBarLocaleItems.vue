@@ -12,11 +12,18 @@ const localeLinks = computed(() => {
   const pathname = route.path || ''
   return items
     .filter(({ isTranslationsDesc }) => !isTranslationsDesc)
-    .map(({ text, link, repo }) => {
+    .map(({ text, link, repo, baseUrl }) => {
+      let url = ""
+      if (baseUrl) {
+        url = baseUrl + pathname
+      }
+      if(!url){
+        url = window.location.origin + pathname
+      }
       return {
         text,
-        link: new URL(pathname, link).toString(),
-        repo,
+        link: new URL(url).toString(),
+        repo
       }
     })
 })
@@ -24,7 +31,7 @@ const localeLinks = computed(() => {
 
 <template>
   <div v-for="item in localeLinks" :key="item.text" class="vt-locales-menu-item">
-    <a 
+    <a
       :href="item.link"
       target="_blank"
       class="vt-locales-menu-item-text"
