@@ -24,5 +24,19 @@ Hãy cùng nhau khám phá và mở rộng kiến thức về World Wide Web, m�
 
 ## Các thành phần của WWW (World Wide Web)
 WWW (World Wide Web) sẽ có 4 thành phần chính để có thể hoạt động.
-1. HyperText Markup Language (HTML): HTML là ngôn ngữ đánh dấu sử dụng các thẻ để tạo ra cấu trúc và nội dung cho các web page. Nó cho phép văn bảm, hình ảnh, video và nhiều dữ liệu khác được nhúng và hiển thị trên trình duyệt.
-2. HyperText Transfer Protocol (HTTP): HTTP là giao thức truyền tải siêu văn bản, HTTP quy ước các thức dữ liệu được truyền tải trên web. Khi bạn nhập vào một URL trên trình duyệt, HTTP sẽ đưược kích hoatj
+1. **HyperText Markup Language (HTML)**: HTML là ngôn ngữ đánh dấu sử dụng các thẻ để tạo ra cấu trúc và nội dung cho các web page. Nó cho phép văn bảm, hình ảnh, video và nhiều dữ liệu khác được nhúng và hiển thị trên trình duyệt.
+2. **HyperText Transfer Protocol (HTTP)**: HTTP là giao thức truyền tải siêu văn bản, HTTP quy ước các thức dữ liệu được truyền tải trên web. Khi bạn nhập vào một URL trên trình duyệt, HTTP sẽ đưược kích hoatj
+3. **Uniform Resource Locator (URL)**: URL là địa chỉ của một tài nguyên trên Web, URL giúp xác định ví trị của tài nguyên trên Internet. Đến thời điểm 18-3-2014 thì URL hiện tại có 2 giao thức là Http và Https
+   - Cấu trúc của 1 URL gồm: Giao thức(http/https) + tên miền hoặc IP + đường dẫn tài nguyên(path)
+4. **Trình duyệt web (Web browser)**: Trình duyệt là một phần mềm cho phép người dùng xem và tương tác với nội dung trên World Wide Web. Các trình duyệt phổ biến hiện tại gồm Chrome, Firefox, Safari và Edge.
+
+## Các phiên bản của WWW.
+### Web 1.0 (The static web)
+- **Thời gian**: Khoảng 1991 - 2000
+- **Đặc điểm**:
+  - Web 1.0 là phiên bản đầu tiên của World Wide Web, phiên bản này thường được gọi là `Web tĩnh`.
+  - Các trang web sẽ chỉ chứa các thông tin tĩnh và chỉ có thể đọc, không thể tương tác hoặc cập nhật dữ liệu bởi người dùng.
+  - Thời điểm đầu tiên các trang web chỉ có HTML. Đến năm 1995 Javascript  ra đời và 1996 Css 1.0 ra đời nhưng nó vẫn rất hạn chế và ít được sử dụng.
+    - Tại giai đoạn này Css và Javascript vẫn chưa có chuẩn chung, các trình duyệt vẫn chưa tích hợp đồng nhất nên có nhiều sự khác biệt khi hiển thị trên các trình duyệt khác nhau.
+  - Các trang web chỉ có thể cập nhật dữ liệu bởi các nhà phát triển hoặc chủ sở hữu Web, người dùng không thể cập nhật.
+### Web 2.0 (The Social Web)
