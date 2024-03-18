@@ -14,11 +14,12 @@ Xin chào mọi người :)
 ## 1. Internet
 Hiện tại tất các ứng dụng đều sẽ được phát hành trên Internet, vì vậy tìm hiểu về Internet là một điều cần thiết để biết cách Internet hoạt động trên trái đất :).
 
-1. Internet hoạt động như thế nào?
-2. HTTP là gì ?
-3. Làm cách nào để Browsers hoạt động ?
-4. Domain Name là gì ? Làm cách nào để nó hoạt động ?
-5. DNS là gì ? làm cách nào để nó nó hoạt động ?
+1. [Internet hoạt động như thế nào?](2024-03-14-Internet-Internet-hoat-dong-nhu-the-nao.md)
+2. WWW(`World Wide Web`) là gì ?
+3. HTTP là gì ?
+4. Làm cách nào để Browsers hoạt động ?
+5. Domain Name là gì ? Làm cách nào để nó hoạt động ?
+6. DNS là gì ? làm cách nào để nó nó hoạt động ?
 
 ## 2. Relational Databases(RDBMS)
 Cơ sở dữ liệu là một thức rất quan trọng, nó sử dụng để lưu trữ các dữ liệu của doanh nghiệp và ứng dụng của chúng ta.
