@@ -32,7 +32,7 @@ function extractPagesData(dirPath) {
           }
         }
         let link = fullPath.replace(PAGES_DIR, '').replace(/\.md$/, '.html');
-        link = "/blog" + link.replaceAll("\\", "/");
+        link = "/study/thanhlv-study-2024" + link.replaceAll("\\", "/");
         link = link.replaceAll("//", "/");
         pagesData.push({
           text: data.title,
