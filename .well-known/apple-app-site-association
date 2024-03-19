@@ -1,0 +1,16 @@
+{
+  "applinks": {
+      "apps": [
+
+      ],
+      "details": [
+           {
+             "appID": "R2KKXX6H83.world.dosi",
+             "paths": [
+                  "NOT /_/*",
+                  "/*"
+                ]
+           }
+       ]
+   }
+}
