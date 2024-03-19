@@ -105,6 +105,22 @@ export default defineConfigWithTheme<ThemeConfig>({
         'data-spa': 'auto',
         defer: ''
       }
+    ],
+    [
+      'script',
+      {
+        src: 'https://www.googletagmanager.com/gtag/js?id=G-DHC69X8F8N',
+        async: ''
+      }
+    ],
+    [
+      'script',
+      {},
+      "  window.dataLayer = window.dataLayer || [];\n" +
+      "  function gtag(){dataLayer.push(arguments);}\n" +
+      "  gtag('js', new Date());\n" +
+      "\n" +
+      "  gtag('config', 'G-DHC69X8F8N');"
     ]
   ],
 
