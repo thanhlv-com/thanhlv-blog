@@ -23,13 +23,18 @@ const { config } = useConfig()
 
 <style scoped>
 .VPFooter {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
   border-top: 1px solid var(--vt-c-bg-soft);
   padding: 23px 24px 24px;
   background-color: var(--vt-c-bg-soft);
   transition: border-top 0.5s, background-color 0.5s;
+}
+
+@media (min-height: 750px) {
+  .VPFooter {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+  }
 }
 
 .dark .VPFooter {
