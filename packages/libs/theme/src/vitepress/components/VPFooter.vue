@@ -23,6 +23,9 @@ const { config } = useConfig()
 
 <style scoped>
 .VPFooter {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
   border-top: 1px solid var(--vt-c-bg-soft);
   padding: 23px 24px 24px;
   background-color: var(--vt-c-bg-soft);
