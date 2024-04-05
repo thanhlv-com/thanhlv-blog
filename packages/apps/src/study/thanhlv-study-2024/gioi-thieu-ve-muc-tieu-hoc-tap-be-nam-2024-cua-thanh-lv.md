@@ -66,7 +66,7 @@ Tất nhiên là tôi không phải DBA, vì vậy tôi sẽ chỉ học ở m�
 - Content Security Policy
 - Server Security
 
-### 6. Ngôn ngữ
+##  Ngôn ngữ
 - Tiếng anh : 
   - https://www.duolingo.com/profile/solitarysp
     - Ngày dành time ít nhất 30p 
