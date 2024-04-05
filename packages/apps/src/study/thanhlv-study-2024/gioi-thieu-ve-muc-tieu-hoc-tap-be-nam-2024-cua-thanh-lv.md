@@ -69,6 +69,8 @@ Tất nhiên là tôi không phải DBA, vì vậy tôi sẽ chỉ học ở m�
 ### 6. Ngôn ngữ
 - Tiếng anh : 
   - https://www.duolingo.com/profile/solitarysp
+    - Ngày dành time ít nhất 30p 
+    - Ít nhất hoàn thành hết phần 5 tiếng anh ở duolingo
   - Đăng ký trung tâp (Optional)
  
 Sẽ cập nhật nếu có thay đổi về item học tập.
