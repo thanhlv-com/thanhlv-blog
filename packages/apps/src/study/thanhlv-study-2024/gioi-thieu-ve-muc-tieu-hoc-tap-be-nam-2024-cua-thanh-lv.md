@@ -21,38 +21,10 @@ Hiện tại tất các ứng dụng đều sẽ được phát hành trên Inte
 5. Domain Name là gì ? Làm cách nào để nó hoạt động ?
 6. DNS là gì ? làm cách nào để nó nó hoạt động ?
 
-## 2. Relational Databases(RDBMS)
-Cơ sở dữ liệu là một thức rất quan trọng, nó sử dụng để lưu trữ các dữ liệu của doanh nghiệp và ứng dụng của chúng ta.
-
-Vì vậy tôi muốn học lại các kiến thức cơ bản về nó
-
-1. Database là gì ?
-2. Relational Databases là gì ?
-3. Lợi ích và hạn chế của RDBMS(`Relational Database Management System`)
-### 2.1 PostgreSQL
-Trong 1 vài năm gây đây tôi thấy PostgreSQL đang khá nổi và được sử dụng nhiều. Vì vậy tôi quyết định học nó.
-
-Tất nhiên là tôi không phải DBA, vì vậy tôi sẽ chỉ học ở mức độ cơ bản sau đó sẽ ưu tiên học các phần quan trọng khác.
-
-1. Vì sao là PostgreSQL ?
-2. Học cách cài đặt PostgreSQL.
-   1. cài đặt trên máy chủ vật lý.( Cài đặt thử cả cluster )
-   2. Cài đặt sử dụng docker image.( Cài đặt thử cả cluster )
-#### 2.1.1 RDBMS Concepts
-1. Các Data Types
-2. Schemas là gì ?
-2. Domains là gì ?
-3. Attributes là gì ?
-4. Các Constraints.
-5. ACID
-6. Multi-Version Concurrency Control (MVCC in PostgreSQL)
-6. Transactions
-7. N plus one problem
-8. Database Normalization
-9. Failure Modes
-10. Profiling Performance
-
-### 3 : API
+## 2. Message and event stream
+- What is message and event and stream and event stream.
+- https://kafka.apache.org/
+## 3 : API
  - https://jsonapi.org/
 ### 4 : Caching
 - Client Side Caching
