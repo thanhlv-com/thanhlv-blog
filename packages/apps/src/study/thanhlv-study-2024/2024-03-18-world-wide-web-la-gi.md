@@ -7,6 +7,7 @@ outline: deep
 draft: false
 ---
 
+# World wide web là gì ?
 Trong thế giới kỹ thuật số ngày nay, World Wide Web đã trở thành một phần không thể tách rời của Internet, là nơi diễn ra hàng loạt hoạt động từ học tập, làm việc đến giải trí. 
 
 Mặc dù vậy, không phải lập trình viên nào cũng thấu hiểu hoặc nắm rõ về World Wide Web và những tầng nền vững chắc mà nó dựa trên. 

@@ -22,6 +22,7 @@ Hiện tại tất các ứng dụng đều sẽ được phát hành trên Inte
 6. DNS là gì ? làm cách nào để nó nó hoạt động ?
 
 ## 2. Message and event stream
+- Message là gì ?
 - What is message and event and stream and event stream.
 - https://kafka.apache.org/
 ## 3 : API
