@@ -1,6 +1,6 @@
 ---
 footer: true
-title: Mesage là gì ?
+title: Message là gì ?
 authors: ["lethanh"]
 date: 2024-04-015
 outline: deep
