@@ -1,7 +1,9 @@
 ---
+title: Mục tiêu công nghệ của Thanhlv năm 2024
 footer: true
 outline: deep
-date: 2024-02-22
+date: 2024-02-1
+group: Giới thiệu
 ---
 
 # Chào mọi người :)

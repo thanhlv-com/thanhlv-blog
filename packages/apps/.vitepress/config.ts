@@ -40,13 +40,7 @@ export const sidebar: ThemeConfig['sidebar'] = {
     }
   ],
   '/study/thanhlv-study-2024': [
-    {
-      text: '',
-      items: [
-        { text: 'Giới thiệu', link: '/study/thanhlv-study-2024/gioi-thieu-ve-muc-tieu-hoc-tap-be-nam-2024-cua-thanh-lv' },
-        ...thanhlvStudy2024Sidebar
-      ]
-    }
+    ...thanhlvStudy2024Sidebar
   ]
 }
 
