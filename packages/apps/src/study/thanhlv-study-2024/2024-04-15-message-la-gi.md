@@ -49,7 +49,8 @@ Gửi thư từ nhà của **A** ở **Hà Nội** đến **B** ở **Đà Nẵn
   - 4. Sau khi B nhận thư, tiến hành đọc và xử lý các yêu cầu dựa trên **business rule**( Chơi thân không? Mình có 500k VND không ...)
   - 5. Nếu thỏa mãn **business rule** B sẽ gửi Message lại đến B với 500K VND họặc không thỏa mãn sẽ gửi lại Message từ chối yêu cầu đến A thông qua giao thức bưu điện.
 
-## Cách Message  đóng vai trò quan trọng trong việc xây dựng các hệ thống phân phối hiệu quả
-Message đóng vai trò quan trọng trong việc xây dựng các hệ thống phân phối hiệu quả bởi vì nó là phương tiện chính để truyền thông và tương tác giữa các thành phần của hệ thống
-## REF:
-- https://www.rfc-editor.org/rfc/rfc2616.html
+## Tổng kết
+- **Message** là một yêu cầu chứa dữ liệu được gửi từ hệ thống này sang hệ thống khác, có mục đích xử lý hoặc trao đổi thông tin.
+- **Không chỉ là dữ liệu**, Message mang giá trị, ý nghĩa và mục đích, đóng vai trò là cầu nối giữa các thành phần trong hệ thống, tạo luồng thông tin liên tục.
+- **Metadata đi kèm với Message** mô tả thông tin về người gửi, thời gian gửi, người nhận, giúp quản lý và xử lý Message hiệu quả.
+- **Format dữ liệu của Message** thường được xác định bởi hợp đồng giữa hệ thống gửi và hệ thống nhận, thường là JSON, bao gồm cả thuật toán mã hóa và dữ liệu cần thiết.
