@@ -54,3 +54,4 @@ Gửi thư từ nhà của **A** ở **Hà Nội** đến **B** ở **Đà Nẵn
 - **Không chỉ là dữ liệu**, Message mang giá trị, ý nghĩa và mục đích, đóng vai trò là cầu nối giữa các thành phần trong hệ thống, tạo luồng thông tin liên tục.
 - **Metadata đi kèm với Message** mô tả thông tin về người gửi, thời gian gửi, người nhận, giúp quản lý và xử lý Message hiệu quả.
 - **Format dữ liệu của Message** thường được xác định bởi hợp đồng giữa hệ thống gửi và hệ thống nhận, thường là JSON, bao gồm cả thuật toán mã hóa và dữ liệu cần thiết.
+- **Mục đích** của việc gửi Message là để truyền đạt thông tin hoặc yêu cầu thực hiện một công việc cụ thể giữa các thành phần trong hệ thống.
