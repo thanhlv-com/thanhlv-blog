@@ -63,5 +63,5 @@ Bắt đầu cuộc hành trình khám phá về Event, chúng ta sẽ mở ra n
 - 2. Xử lý kho hàng:
   - Hệ thống quản lý kho hàng sẽ lắng nghẹ event **"Đặt hàng mới"**. Khi nhận được event, nó kiểm tra sự có sẵn của sản phẩm trong kho. Nếu thiếu hàng nó sẽ phát ra Event **"Yêu cầu bổ xung hàng"** để thông báo cho bộ phận bán hàng.
 - 3. Xử lý thanh toán : 
-  - Hệ thống thanh toán sẽ lắng nghe sự kiện **"Đặt hàng mới"**. Dựa trên thông tin đơn hàng, tiến hành xác minh và xử lý thanh tó từ khách hàng.
-  - Nếu thanh toán thành công,
+  - Hệ thống thanh toán sẽ lắng nghe Event **"Đặt hàng mới"**. Dựa trên thông tin đơn hàng, tiến hành xác minh và xử lý thanh tó từ khách hàng.
+  - Nếu thanh toán thành công, hệ thống sẽ phát Event **"Thanh toán thành công"**; nếu thất bại hệ thống phát Event **"Thanh toán thất bại"**
