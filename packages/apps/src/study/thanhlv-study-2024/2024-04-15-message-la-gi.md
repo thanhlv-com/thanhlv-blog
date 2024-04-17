@@ -5,7 +5,7 @@ authors: ["lethanh"]
 date: 2024-04-015
 outline: deep
 draft: false
-group: Message and event stream
+group: 2. Message and event stream
 ---
 # Message là gì ?
 

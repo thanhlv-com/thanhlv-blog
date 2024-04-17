@@ -4,7 +4,7 @@ title: Internet hoạt động như thế nào?
 authors: ["lethanh"]
 date: 2024-03-14
 outline: deep
-group: Internet
+group: 1. Internet
 ---
 
 # Internet hoạt động như thế nào?
