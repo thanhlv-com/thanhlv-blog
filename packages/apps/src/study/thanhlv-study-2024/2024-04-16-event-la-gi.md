@@ -4,7 +4,7 @@ title: Event là gì ?
 authors: ["lethanh"]
 date: 2024-04-015
 outline: deep
-draft: true
+draft: false
 group: 2. Message and event stream
 ---
 
