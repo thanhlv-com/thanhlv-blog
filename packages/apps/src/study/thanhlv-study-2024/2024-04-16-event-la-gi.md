@@ -55,7 +55,7 @@ Bắt đầu cuộc hành trình khám phá về Event, chúng ta sẽ mở ra n
 #### **Bối cảnh:** 
 - Khi một khách hàng hoàn tất quá trình đặt hàng trên web thương mai điện tử, hệ thống sẽ tạo ra một event **"Đặt hàng mới"**. (Ví dụ sẽ là Thanh toán khi nhận hàng)
 
-#### Quá trình sự lý event
+#### Quá trình xử lý event
 - 1. Hệ thống phát ra Event **"Đặt hàng mới"**.
   - Hệ thống đặt hàng tạo và phát ra event **"Đặt hàng mới"**, bao gồm tất cả thông tin cần thiết về đơn hàng, ID đơn hàng, thông tin sản phẩm, thông tin khách hàng, tổng giá trị đơn.
 - 2. **Xử lý kho hàng:**
