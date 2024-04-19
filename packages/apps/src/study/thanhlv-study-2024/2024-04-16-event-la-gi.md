@@ -18,7 +18,6 @@ Hãy cùng mình đi sâu vào việc tìm hiểu về bản chất của Event,
 
 Bắt đầu cuộc hành trình khám phá về Event, chúng ta sẽ mở ra những hiểu biết mới và cách tiếp cận mới trong việc xây dựng và thiết kế hệ thống. Hãy cùng nhau tiếp tục hành trình này và khám phá sức mạnh của Event trong việc tạo ra các hệ thống thông minh và tự động!
 
-![Image](2024-04-16-event-la-gi/1.jpg)
 
 [[TOC]]
 
@@ -26,11 +25,14 @@ Bắt đầu cuộc hành trình khám phá về Event, chúng ta sẽ mở ra n
 - Event có thể được hiểu là một sự kiện, một thay đổi trạng thái, hoặc một hành động cụ thể nào đó xảy ra trong hệ thống hoặc ứng dụng.
 
 - Thông thường **Event** sẽ được tạo sau khi một **Message** kết thúc (Thành công hoặc thất bại), tùy nhiên điều đó không bắt buộc. (Có thể từ một Event khác, từ kết quả của một tính toán định kỳ(Định kỳ 10s đo thân nhiệt).....)
+  ![Image](2024-04-16-event-la-gi/1.jpg)
 
 ### Đặc điểm của event.
 - **Thời điểm xác định**: Mỗi Event đều liên quan đến một thời điểm cụ thể Event đó xảy ra.(Ví dụ 12h)
+  ![Image](2024-04-16-event-la-gi/2.jpg)
 
 - **Thông tin**: Event mang theo thông tin liên quan đến event đó, giúp các thành phần khác trong hệ thống có thể phản ứng một cách thích hợp.
+  ![Image](2024-04-16-event-la-gi/3.jpg)
 
 - **Không đồng bộ**: Việc xử lý Event **thường** diễn ra không đồng bộ, tức là hệ thống không cần dừng lại để chờ đợi 1 event xử lý thành công.
 
@@ -39,6 +41,7 @@ Bắt đầu cuộc hành trình khám phá về Event, chúng ta sẽ mở ra n
 - **Tính phân tán(Broadcast Nature)**: Khác với [Message](2024-04-15-message-la-gi.md) sẽ có người nhận cụ thể vì nó là yêu cầu gửi đến thành phần khác, Event không nhất thiết phải có một người nhận cụ thể.
   - Event được phát ra để thông báo một sự kiện thay đổi trạng thái, hành động xảy ra. Ứng dụng tạo ra event và không cần biết ai sẽ nhận event và xử lý nó.
   - Các thành phần trong hệ thống có thể lắng nghe tất cả hoặc đăng ký lắng nghe các event mà hệ thống quan tâm sau đó phản ứng với event xảy ra mà không cần Evetn chỉ định trực tiếp người nhận.
+    ![Image](2024-04-16-event-la-gi/4.webp)
 
 ### Vai trò của Event trong hệ thống:
 - **Tăng cường tính linh hoạt**: Event giúp các thành phần trong hệ thống có thể tương tác với nhau một cách linh hoạt và không cần phải biết trước về sau

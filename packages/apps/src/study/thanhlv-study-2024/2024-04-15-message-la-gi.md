@@ -28,7 +28,8 @@ Hãy cùng mình khám phá sâu hơn về bản chất và ý nghĩa thực s�
 
 - **Thứ tư**, **Message** được mang ý nghĩa giả định người gửi sẽ gửi dữ liệu và sẽ có một người nhận yêu cầu và xử lý yêu cầu. Nếu hành động không được thực hiện tức là đã bi phạm một **business rule** nào đó.
   - Thông thường, đây là bước đầu tiên của một quá trình dẫn đến, A nhận được dữ liệu của B(HTML), B thay đổi dữ liệu....
-  - 
+    ![Image](2024-04-15-message-la-gi/1.jpg)
+  
 ### **Tóm gọn Message là gì**
 - Message là một yêu cầu thường chứa một khối lượng dữ liệu được chuyển từ một hệ thống sang hệ thống khác để thực hiện các hành động xử lý hoặc trao đổi thông tin. 
 
