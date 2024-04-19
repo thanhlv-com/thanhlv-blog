@@ -18,6 +18,8 @@ Hãy cùng mình đi sâu vào việc tìm hiểu về bản chất của Event,
 
 Bắt đầu cuộc hành trình khám phá về Event, chúng ta sẽ mở ra những hiểu biết mới và cách tiếp cận mới trong việc xây dựng và thiết kế hệ thống. Hãy cùng nhau tiếp tục hành trình này và khám phá sức mạnh của Event trong việc tạo ra các hệ thống thông minh và tự động!
 
+![Image](2024-04-16-event-la-gi/1.jpg)
+
 [[TOC]]
 
 ## Event là gì ?
@@ -72,7 +74,10 @@ Bắt đầu cuộc hành trình khám phá về Event, chúng ta sẽ mở ra n
 
 ## Tổng kết
 - Event là khái niệm cốt lõi trong xây dựng hệ thống phần mềm dựa trên sự kiện. Mỗi Event là một sự kiện đã xảy ra(Thay đổi trạng thái, thiệt độ) hoặc hành động đã xảy ra....
+
 - Event không chỉ thông báo sự kiện, nó còn có thể kích hoat các sự kiện khác (Lắng nghe sau đó kích hoạt sự kiện mới), tạo ra hệ thống linh hoạt.
+
 - Event có thời điểm xác định, mang các thông tin liên quan đến Event, không đồng bộ và có tính phân tán không cần người nhận cụ thể.
+
 - Trong hệ thống phần mềm, Event tăng tính linh hoạt, phản ứng thay đổi, tách biệt nghiệp vụ và tối ưu hiệu suất.
-- 
+
