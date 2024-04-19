@@ -1,5 +1,5 @@
 dev:
-	git pull -f && yarn run dev
+	yarn run dev
 deploy:
 	git pull -f && yarn run deploy
 build:
