@@ -7,7 +7,6 @@ outline: deep
 draft: false
 group: 2. Message and event stream
 ---
-# Message là gì ?
 
 Mở đầu học về `Message and event stream` thì mình sẽ giải thích các kiến thức cơ bản trước. Kiến thức đầu tiên là hiểu về **Message**.
 

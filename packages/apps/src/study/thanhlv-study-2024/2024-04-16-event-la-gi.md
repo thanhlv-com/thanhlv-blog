@@ -7,7 +7,6 @@ outline: deep
 draft: true
 group: 2. Message and event stream
 ---
-# Event là gì ?
 
 Sau khi đã hiểu về **[Message](2024-04-15-message-la-gi.md)**, bước tiếp theo không kém phần quan trọng là khám phá về **Event**.
 
@@ -49,19 +48,31 @@ Bắt đầu cuộc hành trình khám phá về Event, chúng ta sẽ mở ra n
 - 
 - **Tối ưu hóa hiệu suất**:  Việc sử dụng Event có thể giúp tối ưu hóa hiệu suất hệ thống bằng cách giảm thiểu sự phụ thuộc và chờ đợi giữa các thành phần.
 
-### Ví dụ
+### Ví dụ về hệ thống đặt hàng.
 
-#### Ví dụ 1
-##### Ví dụ về hệ thống đặt hàng.
-
-###### **Bối cảnh:** 
+#### **Bối cảnh:** 
 - Khi một khách hàng hoàn tất quá trình đặt hàng trên web thương mai điện tử, hệ thống sẽ tạo ra một event **"Đặt hàng mới"**. (Ví dụ sẽ là Thanh toán khi nhận hàng)
 
-###### Quá trình sự lý event
+#### Quá trình sự lý event
 - 1. Hệ thống phát ra Event **"Đặt hàng mới"**.
   - Hệ thống đặt hàng tạo và phát ra event **"Đặt hàng mới"**, bao gồm tất cả thông tin cần thiết về đơn hàng, ID đơn hàng, thông tin sản phẩm, thông tin khách hàng, tổng giá trị đơn.
-- 2. Xử lý kho hàng:
+- 2. **Xử lý kho hàng:**
   - Hệ thống quản lý kho hàng sẽ lắng nghẹ event **"Đặt hàng mới"**. Khi nhận được event, nó kiểm tra sự có sẵn của sản phẩm trong kho. Nếu thiếu hàng nó sẽ phát ra Event **"Yêu cầu bổ xung hàng"** để thông báo cho bộ phận bán hàng.
-- 3. Xử lý thanh toán : 
-  - Hệ thống thanh toán sẽ lắng nghe Event **"Đặt hàng mới"**. Dựa trên thông tin đơn hàng, tiến hành xác minh và xử lý thanh tó từ khách hàng.
+- 3. **Xử lý thanh toán :** 
+  - Hệ thống thanh toán sẽ lắng nghe Event **"Đặt hàng mới"**. Dựa trên thông tin đơn hàng, tiến hành xác minh và xử lý thanh từ khách hàng.
   - Nếu thanh toán thành công, hệ thống sẽ phát Event **"Thanh toán thành công"**; nếu thất bại hệ thống phát Event **"Thanh toán thất bại"**
+  - Nếu thanh toán khi nhận hàng sẽ không làm gì cả.
+- 4. **Xử lý thông báo**
+  - Hệ thống thông báo sẽ lắng nghe Events **"Đặt hàng mới"** , **"Thanh toán thành công"**, **"Thanh toán thất bại"**, **"Yêu cầu bổ xung hàng"**
+  - Tuy thuộc vào Event và các cài đặt nhận thông báo của người dùng, hệ thống sẽ gửi thông báo đến người dùng khi nhận được Event (APp, SMS, Email...)
+- 5. **Xử lý vận chuyển**.
+  - Hệ thống Xử lý vận chuyển sẽ lắng nghe Events **"Đặt hàng mới"** , **"Thanh toán thành công"**.
+  - Trong trường hợp thanh toán nhận hàng, khi nhận được  **"Đặt hàng mới"** thì hệ thống sẽ tự động tiến hành logic xử lý vận chuyển
+  - Trong trường hợp thanh toán trước sẽ đợi Event **"Thanh toán thành công"**
+
+## Tổng kết
+- Event là khái niệm cốt lõi trong xây dựng hệ thống phần mềm dựa trên sự kiện. Mỗi Event là một sự kiện đã xảy ra(Thay đổi trạng thái, thiệt độ) hoặc hành động đã xảy ra....
+- Event không chỉ thông báo sự kiện, nó còn có thể kích hoat các sự kiện khác (Lắng nghe sau đó kích hoạt sự kiện mới), tạo ra hệ thống linh hoạt.
+- Event có thời điểm xác định, mang các thông tin liên quan đến Event, không đồng bộ và có tính phân tán không cần người nhận cụ thể.
+- Trong hệ thống phần mềm, Event tăng tính linh hoạt, phản ứng thay đổi, tách biệt nghiệp vụ và tối ưu hiệu suất.
+- 
