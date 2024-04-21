@@ -7,7 +7,7 @@ export const AUTHORS_LIST: Author[] =
       title: 'Java engineer và App engineer tại Line',
       links: [
         { icon: 'github', link: 'https://github.com/lethanh9398' },
-        { icon: 'linkedin', link: 'https://linkedin.com/in/lethanh9398' },
+        { icon: 'linkedin', link: 'https://linkedin.com/in/thanhlv-com' },
         { icon: 'facebook', link: 'https://www.facebook.com/lethanh9398' },
       ]
     }
