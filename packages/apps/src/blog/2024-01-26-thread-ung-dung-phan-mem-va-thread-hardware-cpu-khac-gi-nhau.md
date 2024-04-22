@@ -1,6 +1,7 @@
 ---
 footer: true
 title: Thread ứng dụng phần mềm và Thread hardware CPU khác gì nhau
+description: Thread phần mềm và thread phần cứng là hai khái niệm độc lập; thread phần mềm có thể chạy trên bất kỳ thread phần cứng nào, nhưng số lượng thread phần mềm thường lớn hơn và chỉ thực sự hiệu quả khi CPU hỗ trợ SMT hoặc HT.
 authors: [ lethanh ]
 date: 2024-01-26
 image: /assets/2.5TH4fWSy.jpg

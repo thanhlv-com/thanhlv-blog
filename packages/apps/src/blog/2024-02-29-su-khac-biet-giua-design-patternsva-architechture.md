@@ -1,6 +1,7 @@
 ---
 footer: true
 title: Sự khác biệt giữa Design Pattern và Software Architecture.
+description: Design Pattern tập trung vào giải pháp tái sử dụng cho các vấn đề thiết kế cụ thể ở mức độ function, class và project. Software Architecture định nghĩa cấu trúc tổng thể của hệ thống, từ mức độ project đến solution và system.
 authors: [ lethanh ]
 date: 2024-02-29
 outline: deep

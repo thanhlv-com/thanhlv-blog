@@ -1,6 +1,7 @@
 ---
 footer: true
 title: Tìm hiểu về Architecture
+description: Software Architecture định nghĩa cấu trúc tổng thể của hệ thống, từ mức độ project đến solution và system.
 authors: [ lethanh ]
 date: 2024-02-01
 image: /assets/1.U2POy9T8.png

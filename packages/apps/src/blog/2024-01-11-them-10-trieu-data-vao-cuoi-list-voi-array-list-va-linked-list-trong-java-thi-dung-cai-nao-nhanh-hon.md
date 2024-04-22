@@ -1,6 +1,7 @@
 ---
 footer: true
 title: Thêm 10 triệu data vào cuối list với ArrayList và LinkedList trong java thì dùng cái nào nhanh hơn
+description: Về mặt lý thuyết, thuật toán và kiến trúc triển khai, có rất nhiều tài liệu trên sách và blog đã đề cập đến hai loại cấu trúc dữ liệu này
 authors: [ "lethanh" ]
 date: 2024-01-11
 image: /assets/arrayList.tfrPDn97.png

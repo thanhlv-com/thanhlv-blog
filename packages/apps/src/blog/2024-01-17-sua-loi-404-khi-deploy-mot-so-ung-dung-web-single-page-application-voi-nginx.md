@@ -1,6 +1,7 @@
 ---
 footer: true
 title: Sửa lỗi 404 khi deploy một số ứng dụng web Single Page Application với Nginx
+description: Tại thời điểm hiện tại (17-01-2024), các công ty sử dụng Single Page Application(SPA) đang khá là phổ biến. Trong số đó, ba framework nổi bật nhất chính là Angular, Vue.js, và React.
 authors: [ "lethanh" ]
 date: 2024-01-17
 image: /assets/1.8xAG0WGk.jpg
