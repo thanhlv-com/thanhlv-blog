@@ -42,15 +42,15 @@ const config = {
   },
 
   // @ts-ignore
-  transformHead({assets, pageData}) {
+  transformHead({assets, pageData,siteConfig, siteData}) {
     const font = assets.find((file) =>
       /inter-roman-latin\.\w+\.woff2/.test(file)
     )
     const head = []
     if (pageData.frontmatter.image) {
-      head.push(['meta', {property: 'og:image', content: "https://thanhlv.com/"+pageData.frontmatter.image, itemprop: "thumbnailUrl"}])
+      head.push(['meta', {property: 'og:image', content: siteData?.base+pageData.frontmatter.image, itemprop: "thumbnailUrl"}])
     }
-    head.push(['meta', {property: 'og:url', content: "https://thanhlv.com/"+pageData.relativePath.replaceAll(".md",".html"), itemprop: "url"}])
+    head.push(['meta', {property: 'og:url', content: siteData?.base+pageData.relativePath.replaceAll(".md",".html"), itemprop: "url"}])
 
     head.push(['meta', {property: 'og:title', content: pageData.frontmatter.title, itemprop: "headline"}])
     head.push(['meta', {property: 'og:description', content: pageData.description || pageData.frontmatter.title, itemprop: "description"}])
