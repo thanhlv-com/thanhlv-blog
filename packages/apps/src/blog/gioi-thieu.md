@@ -1,6 +1,7 @@
 ---
 footer: true
 title: Giới thiệu Blog ThanhLv
+description: Tôi là Thành, một nhà phát triển phần mềm đang công tác tại Line Technology Viet Nam. Mục đích chính của blog này là tạo ra một không gian chia sẻ kiến thức lập trình. Tôi tin rằng việc chia sẻ thông tin sẽ giúp cộng đồng phát triển và tiến bộ
 outline: false
 lastUpdated : false
 disableGenerateSidebar : true
