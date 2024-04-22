@@ -3,6 +3,7 @@ footer: true
 title: "CPU, CORE và Thread khác gì nhau ?"
 authors: ["lethanh"]
 date: 2024-01-09
+image: /assets/thread-trong-cpu-logical-core-la-gi.gm3MGFq9.png
 outline: deep
 ---
 

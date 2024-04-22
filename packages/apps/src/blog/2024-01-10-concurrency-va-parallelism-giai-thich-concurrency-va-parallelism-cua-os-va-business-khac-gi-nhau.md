@@ -3,6 +3,7 @@ footer: true
 title: "Concurrency và parallelism. Giải thích Concurrency và parallelism của OS và business khác gì nhau ?."
 authors: [ "lethanh" ]
 date: 2024-01-10
+image: /assets/concurrency_2.9Ib2ra_o.png
 outline: deep
 ---
 # Concurrency và parallelism. Giải thích Concurrency và parallelism của OS và business khác gì nhau ? {#2024-01-10-concurrency-va-parallelism-giai-thich-concurrency-va-parallelism-cua-os-va-business-khac-gi-nhau}

@@ -3,6 +3,7 @@ footer: true
 title: Thêm 10 triệu data vào cuối list với ArrayList và LinkedList trong java thì dùng cái nào nhanh hơn
 authors: [ "lethanh" ]
 date: 2024-01-11
+image: /assets/arrayList.tfrPDn97.png
 outline: deep
 ---
 # Thêm 10 triệu data vào cuối list với ArrayList và LinkedList trong java thì dùng cái nào nhanh hơn
