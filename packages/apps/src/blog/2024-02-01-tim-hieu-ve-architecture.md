@@ -3,6 +3,7 @@ footer: true
 title: Tìm hiểu về Architecture
 authors: [ lethanh ]
 date: 2024-02-01
+image: /assets/1.U2POy9T8.png
 outline: deep
 ---
 # Tìm hiểu về Architecture ( Kiến trúc phần mềm )

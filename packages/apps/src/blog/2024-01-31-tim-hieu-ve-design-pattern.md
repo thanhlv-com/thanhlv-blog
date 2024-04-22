@@ -3,6 +3,7 @@ footer: true
 title: Tìm hiểu về Design Pattern
 authors: [ lethanh ]
 date: 2024-01-31
+image: /assets/1.tgNQEE1P.jpg
 outline: deep
 ---
 # Tìm hiểu về Design Pattern

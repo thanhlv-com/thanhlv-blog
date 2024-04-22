@@ -3,6 +3,7 @@ footer: true
 title: Thread ứng dụng phần mềm và Thread hardware CPU khác gì nhau
 authors: [ lethanh ]
 date: 2024-01-26
+image: /assets/2.5TH4fWSy.jpg
 outline: deep
 ---
 # Thread ứng dụng phần mềm và Thread hardware CPU khác gì nhau
