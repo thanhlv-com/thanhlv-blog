@@ -6,6 +6,7 @@ import baseConfig from '@vue/theme/config'
 import { headerPlugin } from './headerMdPlugin'
 import blogsSidebar from './cache/sidebar/blogs-sidebar.json'
 import thanhlvStudy2024Sidebar from './cache/sidebar/study/thanhlv-study-2024-sidebar.json'
+import {environment} from "../environments/environment";
 
 const nav: ThemeConfig['nav'] = [
   {
@@ -52,7 +53,7 @@ export default defineConfigWithTheme<ThemeConfig>({
   extends: baseConfig,
   lastUpdated: true,
   lang: 'en-US',
-  base: 'https://thanhlv.com',
+  base: environment.baseDomain,
   title: 'Thanhlv',
   description: 'Thanhlv - Yêu công nghệ',
   srcDir: 'src',
