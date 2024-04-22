@@ -1,6 +1,7 @@
 ---
 page: true
-title: Thanhlv - Yêu công nghệ
+title: ThanhLv - Yêu công nghệ
+description: Hãy tiếp tục bước đi, bởi vì khi dừng lại bạn có thể sẽ dừng lại mãi mãi.
 outline : false
 ---
 
