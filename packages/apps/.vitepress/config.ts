@@ -6,7 +6,6 @@ import baseConfig from '@vue/theme/config'
 import { headerPlugin } from './headerMdPlugin'
 import blogsSidebar from './cache/sidebar/blogs-sidebar.json'
 import thanhlvStudy2024Sidebar from './cache/sidebar/study/thanhlv-study-2024-sidebar.json'
-import {environment} from "../environments/environment";
 
 const nav: ThemeConfig['nav'] = [
   {
