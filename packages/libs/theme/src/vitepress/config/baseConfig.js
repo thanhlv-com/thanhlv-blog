@@ -50,6 +50,8 @@ const config = {
     if (pageData.frontmatter.image) {
       const urlIamge = pageData.frontmatter.image.indexOf("http") > -1 ? pageData.frontmatter.image :  pageData.frontmatter.image
       head.push(['meta', {property: 'og:image', content: urlIamge, itemprop: "thumbnailUrl"}])
+    }else {
+      head.push(['meta', {property: 'og:image', content: "/images/avatar/thanhlv.jpg", itemprop: "thumbnailUrl"}])
     }
     head.push(['meta', {property: 'og:url', content: pageData.relativePath.replaceAll(".md",".html"), itemprop: "url"}])
 
