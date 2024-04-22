@@ -1,5 +1,6 @@
 ---
 footer: true
+title: Giới thiệu Blog ThanhLv
 outline: false
 lastUpdated : false
 date: 2024-01-08
