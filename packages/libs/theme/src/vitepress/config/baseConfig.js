@@ -48,7 +48,8 @@ const config = {
     )
     const head = []
     if (pageData.frontmatter.image) {
-      head.push(['meta', {property: 'og:image', content: siteData?.base+pageData.frontmatter.image, itemprop: "thumbnailUrl"}])
+      const urlIamge = pageData.frontmatter.image.indexOf("http") > -1 ? pageData.frontmatter.image : siteData?.base + pageData.frontmatter.image
+      head.push(['meta', {property: 'og:image', content: urlIamge, itemprop: "thumbnailUrl"}])
     }
     head.push(['meta', {property: 'og:url', content: siteData?.base+pageData.relativePath.replaceAll(".md",".html"), itemprop: "url"}])
 
