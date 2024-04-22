@@ -4,7 +4,7 @@ title: Sự khác biệt giữa Design Pattern và Software Architecture.
 authors: [ lethanh ]
 date: 2024-02-29
 outline: deep
-image: assets/1.tgNQEE1P.jpg
+image: /assets/1.tgNQEE1P.jpg
 draft: false
 ---
 # Sự khác biệt giữa Design Pattern và Software Architecture.
