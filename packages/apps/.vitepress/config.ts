@@ -53,7 +53,6 @@ export default defineConfigWithTheme<ThemeConfig>({
   extends: baseConfig,
   lastUpdated: true,
   lang: 'en-US',
-  base: environment.baseDomain,
   title: 'Thanhlv',
   description: 'Thanhlv - Yêu công nghệ',
   srcDir: 'src',

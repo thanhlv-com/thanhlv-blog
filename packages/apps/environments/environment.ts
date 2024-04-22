@@ -1,3 +1,3 @@
 export const environment = {
-  baseDomain: ''
+  baseDomain: 'https://thanhlv.com'
 };

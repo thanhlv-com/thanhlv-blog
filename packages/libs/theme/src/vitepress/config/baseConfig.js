@@ -48,10 +48,10 @@ const config = {
     )
     const head = []
     if (pageData.frontmatter.image) {
-      const urlIamge = pageData.frontmatter.image.indexOf("http") > -1 ? pageData.frontmatter.image : siteData?.base + pageData.frontmatter.image
+      const urlIamge = pageData.frontmatter.image.indexOf("http") > -1 ? pageData.frontmatter.image :  pageData.frontmatter.image
       head.push(['meta', {property: 'og:image', content: urlIamge, itemprop: "thumbnailUrl"}])
     }
-    head.push(['meta', {property: 'og:url', content: siteData?.base+pageData.relativePath.replaceAll(".md",".html"), itemprop: "url"}])
+    head.push(['meta', {property: 'og:url', content: pageData.relativePath.replaceAll(".md",".html"), itemprop: "url"}])
 
     head.push(['meta', {property: 'og:title', content: pageData.frontmatter.title, itemprop: "headline"}])
     head.push(['meta', {property: 'og:description', content: pageData.description || pageData.frontmatter.title, itemprop: "description"}])
