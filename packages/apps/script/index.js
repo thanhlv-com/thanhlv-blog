@@ -4,8 +4,15 @@ import path from 'path';
 import matter from 'gray-matter';
 import {fileURLToPath} from 'url'
 
+
 const dataInject = process.argv.slice(2); // Input data from command-line arguments
 console.log('Injected Data:', dataInject);
+
+if(dataInject.includes("env:dev")){
+  fs.createReadStream('environments/environment.dev.ts').pipe(fs.createWriteStream('environments/environment.ts'));
+}else {
+  fs.createReadStream('environments/environment.prod.ts').pipe(fs.createWriteStream('environments/environment.ts'));
+}
 
 // tạo folder nếu chưa tồn tại
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
