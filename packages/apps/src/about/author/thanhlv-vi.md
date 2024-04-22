@@ -1,5 +1,6 @@
 ---
 footer: true
+title: CV online ThanhLv
 outline: deep
 date: 2024-01-08
 ---
