@@ -1,6 +1,6 @@
 dev:
 	yarn run dev
 deploy:
-	git pull -f && yarn run deploy
+	yarn run deploy
 build:
-	git pull -f && yarn run build_github
+	yarn run build_github
