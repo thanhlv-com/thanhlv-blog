@@ -48,7 +48,7 @@ const config = {
     )
     const head = []
     if (pageData.frontmatter.image) {
-      head.push(['meta', {property: 'og:image', content: +pageData.frontmatter.image, itemprop: "thumbnailUrl"}])
+      head.push(['meta', {property: 'og:image', content: "/"+pageData.frontmatter.image, itemprop: "thumbnailUrl"}])
     }
     head.push(['meta', {property: 'og:url', content: "https://thanhlv.com/"+pageData.relativePath.replaceAll(".md",".html"), itemprop: "url"}])
 
