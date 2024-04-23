@@ -4,6 +4,7 @@ title: Event stream là gì ?
 authors: ["lethanh"]
 date: 2024-04-21
 outline: deep
+image: /assets/1png.s1tm4KaV.png
 draft: false
 group: 2. Message and event stream
 ---

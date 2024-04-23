@@ -3,6 +3,7 @@ footer: true
 title: Event là gì ?
 authors: ["lethanh"]
 date: 2024-04-16
+image: /assets/1.PDIRLfIW.jpg
 outline: deep
 draft: false
 group: 2. Message and event stream
