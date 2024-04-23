@@ -25,7 +25,7 @@ function extractPagesData(dirPath) {
 
       // Phân tích cú pháp frontmatter để lấy title
       const {data} = matter(fileContents);
-      if (data.title) {
+      if (!data.disableGenerateSidebar) {
         if(dataInject.includes("env:live")){
           if (data.draft) {
             return;
