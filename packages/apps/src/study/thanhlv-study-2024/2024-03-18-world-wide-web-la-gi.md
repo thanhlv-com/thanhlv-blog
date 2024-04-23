@@ -22,6 +22,7 @@ Hãy cùng nhau khám phá và mở rộng kiến thức về World Wide Web, m�
 - Như [lịch sử đã được viết ](2024-03-14-Internet-Internet-hoat-dong-nhu-the-nao#_4-su-bung-no-cua-world-wide-web-1990s) WWW được phát minh bởi [Tim Berners-Lee](https://vi.wikipedia.org/wiki/Tim_Berners-Lee) vào năm 1989 và công bố vào năm 1990.
 - [Tim Berners-Lee](https://vi.wikipedia.org/wiki/Tim_Berners-Lee) và các đồng nghiệp đã phát triển các công nghệ cơ bản như HTML, HTTP và URL để tạo lên nền tảng của WWW.
 - Ngày nay, `World Wide Web` là một phần không thể thiếu trong đời sống xã hội hiện đại, được sử dụng rộng rãi cho giáo dục, thông tin, giải trí, kinh doanh và nhiều lĩnh vực khác.
+  ![](2024-03-18-world-wide-web-la-gi/img.png)
 
 ## Các thành phần của WWW (World Wide Web)
 WWW (World Wide Web) sẽ có 4 thành phần chính để có thể hoạt động.
