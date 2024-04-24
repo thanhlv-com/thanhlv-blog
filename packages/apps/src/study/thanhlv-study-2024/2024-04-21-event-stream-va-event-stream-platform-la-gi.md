@@ -83,9 +83,9 @@ Event stream platform là một hệ thống phần mềm được thiết kế 
 ## Tổng kết
 1. Event Stream là một luồng dữ liệu liên tục được tạo ra bởi các Event xảy ra trong hệ thống, đại diện cho các hành động và trạng thái thay đổi đã xảy ra.
 
-2. Đặc điểm chinh của Event Stream là sự tức thời và thời gian thực hoặc gần thực trong việc sử lý Event, khả năng phân tán, đa nguồn dữ liệu và đa dạng định dạng.
+2. Đặc điểm chinh của Event Stream là sự tức thời và thời gian thực hoặc gần thực trong việc xử lý Event, khả năng phân tán, đa nguồn dữ liệu và đa dạng định dạng.
 
-3. Cho phép sử lý các Event ngay lập tức giúp hệ thống phản ứng nhanh chóng và linh hoạt.
+3. Cho phép xử lý các Event ngay lập tức giúp hệ thống phản ứng nhanh chóng và linh hoạt.
 
 4. Dễ dàng mở rộng nhờ tính linh hoạt và khả năng phân tán, đa nguồn.
 
