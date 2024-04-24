@@ -41,6 +41,26 @@ export const sidebar: ThemeConfig['sidebar'] = {
   ],
   '/study/thanhlv-study-2024': [
     ...thanhlvStudy2024Sidebar
+  ],
+  '/about/author/thanhlv': [
+    {
+      "text": "Thông tin",
+      "items": [
+        {
+          "text": "Cv Vietnames",
+          "link": "/about/author/thanhlv-vi",
+        }
+      ]
+    },
+    {
+      "text": "Note",
+      "items": [
+        {
+          "text": "My note",
+          "link": "/about/author/thanhlv/my-note.html",
+        }
+      ]
+    }
   ]
 }
 
