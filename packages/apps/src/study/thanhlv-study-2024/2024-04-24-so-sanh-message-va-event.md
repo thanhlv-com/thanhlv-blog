@@ -15,6 +15,7 @@ Có thể bạn vẫn còn thắc mắc về điểm giống và khác biệt gi
 
 [[TOC]]
 
+![event-and-message](2024-04-24-so-sanh-message-va-event/event-and-message.jpeg)
 ## Giống nhau giữa Message và Event
 Các điểm giống nhau này sẽ tùy thuộc vào bài toán và cách triển khai mà chúng sẽ giống hoặc không giống
 
@@ -48,6 +49,7 @@ Các điểm giống nhau này sẽ tùy thuộc vào bài toán và cách tri�
 - **Linh Hoạt trong Quy mô**: Dễ dàng điều triển quy mô của dịch vụ hoặc cả một hệ thống để đáp ứng nhu cầu.
 
 ## Khác nhau giữa Message và Event.
+![event-and-message](2024-04-24-so-sanh-message-va-event/event-and-message.jpeg)
 
 - **Định nghĩa mục đích**:
   - **Message**: 
@@ -105,6 +107,7 @@ Các điểm giống nhau này sẽ tùy thuộc vào bài toán và cách tri�
 
 ## Khác nhau về nhu cầu sử dụng
 Lựa chọn giữa Message và Event trong hệ thống phần mềm phụ thuộc vào nhiều yếu tố, kiến trúc, cách quản lý trạng thái, cách hệ thống tương tác với nhau,mức độ chặt chẽ...
+![event-and-message](2024-04-24-so-sanh-message-va-event/event-and-message.jpeg)
 
 ### Message
 - **Giao tiếp request/response** : 
@@ -132,6 +135,8 @@ Lựa chọn giữa Message và Event trong hệ thống phần mềm phụ thu�
 - **Xử lý xong xong và hiệu suất**: Trong các hệ thống cần xử lý song song và tối ưu hiệu suất, event cho phép phân tán xử lý và giảm độ trễ bằng cách cho phép các thành phần xử lý độc lập và song song với nhau.
 
 ## Các tiêu chí đánh giá lựa chọn giữa việc sử dụng message và event trong hệ thống
+![event-and-message](2024-04-24-so-sanh-message-va-event/event-and-message.jpeg)
+
 1. **Mục Tiêu Giao Tiếp**
    - **Message**: Sử dụng khi cần giao tiếp mục đích cụ thể giữa các thành phần, đặc biệt là khi cần một phản hồi hoặc xử lý dữ liệu cụ thể.
    - **Event**: Sử dụng khi muốn thông báo về sự kiện hoặc thay đổi trạng thái mà không yêu cầu phản hồi cụ thể từ người nhận.
@@ -153,7 +158,7 @@ Lựa chọn giữa Message và Event trong hệ thống phần mềm phụ thu�
 7. **Tích hợp Hệ thống**
    - **Message**: Phù hợp khi tích hợp với các hệ thống ngoại vi hoặc bên thứ ba yêu cầu giao thức giao tiếp chặt chẽ.
    - **Event**: Hữu ích trong việc tích hợp lỏng lẻo, nơi các hệ thống có thể phản ứng với sự kiện mà không cần biết chi tiết về nguồn phát.
-   - 
+   
 ## Kết Luận
 Lựa chọn giữa Message và Event phụ thuộc vào nhiều yêu cầu cụ thể của hệ thống, trong nhiều trường hợp việc sử dụng cả 2 trong hệ thống và kết hợp cả 2 phương pháp sẽ mang lại lợi ích tối ưu, tận dụng được các ưu điểm của cả message và event.
 
