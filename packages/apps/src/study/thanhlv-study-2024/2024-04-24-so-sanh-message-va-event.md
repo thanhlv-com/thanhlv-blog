@@ -85,17 +85,23 @@ Các điểm giống nhau này sẽ tùy thuộc vào bài toán và cách tri�
       - Các thành phần sẽ phản ứng lại với sự kiện nhận được mà không cần biết nguồn gốc của sự kiện.
       - Đối với Event, khi tạo ra người tạo ra Event không quan tâm có ai phản ứng với sự kiện đó hay không.
       
-  - Tần suất gửi và kiểm soát gửi và xử lý.
-    - Message:
-      - Tần suất: Tần suất gửi message 
-  
+  - **Tần suất gửi và kiểm soát gửi**.
+    - **Message**:
+      - **Tần suất**: Tần suất gửi message thường phụ thuộc vào nhu cầu giao tiếp cụ thể giữa người gửi và nhận tin nhắn. 
+      - **Kiểm soát gửi**: Tần suất gửi và xử lý message thường được kiểm soát chặt chẽ để đảm bảo người nhận có đủ khả năng xử lý.
+        - Ví dụ: Ngân hàng chỉ có thể nhận và xử lý 200-400 TPS/s, nếu gửi message lên đến 1k hoặc 2k thì có thể khiến bị treo.
+    - **Event**:
+        - **Tần suất**: Tần suất phát event thường phản ánh tần suất xảy ra của sự kiện trong hệ thống.
+          - Ví dụ: có 500 đơn hàng tạo trong 1s thì sẽ có 50 sự kiện được phát ra.
+        - **Kiểm soát gửi**: Tần suất phát event ít được kiểm soát hơn so với Message vì event chỉ thông báo có sự kiện và không yêu cầu người nhận phải xử lý ngay.
+          - Ví dụ: Ngân hàng chỉ có thể nhận và xử lý 200-400 TPS/s. Event vẫn được phát ra và ngân hàng sẽ lắng nghe và xử lý các event dần dần.
   - **Loại Thông tin**:
-    - Message: Thường chứa dữ liệu cụ thể và hướng dẫn xử lý hoặc yêu cầu một hành động cụ thể hoặc phản hồi.
-    - Event: Chỉ thông báo rằng có một sự kiện nào đó đã xảy ra, không yêu cầu hành động cụ thể tiếp theo.
+    - **Message**: Thường chứa dữ liệu cụ thể và hướng dẫn xử lý hoặc yêu cầu một hành động cụ thể hoặc phản hồi.
+    - **Event**: Chỉ thông báo rằng có một sự kiện nào đó đã xảy ra, không yêu cầu hành động cụ thể tiếp theo.
     
   - **Mục đích sử dụng**:
-    - Message: Thường sử dụng để thực hiện một giao tiếp hoặc trao đổi dữ liệu giữa các service hoặc thành phần 1 cách rõ ràng.(Gửi tạo message biết ai sẽ nhận message, và người nhận biết ai gửi)
-    - Event: Thường sử dụng để thông báo cho các thành phần khác là đã có một sự kiện xảy ra(Thay đổi trạng thái, đã làm một gì đó) cho phép các thành phần khác có thể phản ứng với sự kiện đó.
+    - **Message**: Thường sử dụng để thực hiện một giao tiếp hoặc trao đổi dữ liệu giữa các service hoặc thành phần 1 cách rõ ràng.(Gửi tạo message biết ai sẽ nhận message, và người nhận biết ai gửi)
+    - **Event**: Thường sử dụng để thông báo cho các thành phần khác là đã có một sự kiện xảy ra(Thay đổi trạng thái, đã làm một gì đó) cho phép các thành phần khác có thể phản ứng với sự kiện đó.
   
 ## REF:
 - https://www.linkedin.com/pulse/differences-between-message-queue-event-stream-frank-lieu/
