@@ -102,6 +102,60 @@ Các điểm giống nhau này sẽ tùy thuộc vào bài toán và cách tri�
   - **Mục đích sử dụng**:
     - **Message**: Thường sử dụng để thực hiện một giao tiếp hoặc trao đổi dữ liệu giữa các service hoặc thành phần 1 cách rõ ràng.(Gửi tạo message biết ai sẽ nhận message, và người nhận biết ai gửi)
     - **Event**: Thường sử dụng để thông báo cho các thành phần khác là đã có một sự kiện xảy ra(Thay đổi trạng thái, đã làm một gì đó) cho phép các thành phần khác có thể phản ứng với sự kiện đó.
-  
+
+## Khác nhau về nhu cầu sử dụng
+Lựa chọn giữa Message và Event trong hệ thống phần mềm phụ thuộc vào nhiều yếu tố, kiến trúc, cách quản lý trạng thái, cách hệ thống tương tác với nhau,mức độ chặt chẽ...
+
+### Message
+- **Giao tiếp request/response** : 
+  - Khi cần một mô hình giao tiếp rõ ràng giữa người gửi và người nhận, nơi người gửi mong đợi một phản hồi cụ thể từ người nhận.
+    - Ví dụ: Trong một hệ thống giao dịch, một yêu cầu thanh toán có thể được gửi dưới dạng message và người gửi mong đợi một phản hồi về việc thanh toán thành công hoặc thất bại.
+- **Xử lý đồng bộ hoặc Bất đồng bộ Cần Phản hồi**: 
+  - Khi chúng ta cần kiểm soát chặt chẽ quy trình xử lý, đảm bảo các task được thực hiện theo một trình tự nhất định.
+  - Khi chúng ta có task vụ xử lý bất đồng bộ như cần có phản hồi sau khi hoàn thành.
+    - Ví dụ tải lên video(Ví dụ này có thể thực hiện cả trên message và event):
+      - 1. Tải video lên máy chủ(Đồng bộ)
+      - 2. Xử lý video (Bất đồng bộ)
+        - Hệ thống đưa video vào hàng đợi để xử lý bất đồng bộ (ví dụ: mã hóa lại, tối ưu hóa cho web). Quá trình này có thể mất vài phút và được thực hiện mà không cản trở người dùng tiếp tục sử dụng ứng dụng.
+      - 3. Phản hồi lại người dùng thông báo đã thành công xử lý video (Đồng bộ có phản hồi)
+- **Quản lý trạng thái phức tạp**:
+  - Khi có các nghiệp vụ phức tạp yêu cầu quản lý trạng thái một cách rõ ràng qua từng bước, Message cho phép theo dõi và đảm bảo nhất quán của dữ liệu ở các service khác nhau.
+- **Tích hợp hệ thống bên thứ 3**:
+  - Khi tích hợp với các hệ thống bên thứ 3, message cho phép định nghĩa cách thức giao tiếp chặt chẽ, đảm bảo dữ liệu được gửi chính xác giữa các hệ thống bên ngoài khác.
+### Event
+- **Thông báo về Sự kiện**: Khi muốn thông báo một sự kiện đã xảy ra và không yêu cầu một hành động cụ thể hoặc phản hồi từ người nhận hoặc không yêu cầu người nhận xử lý ngay lập tức khi phát sự kiện.
+- **Lập trình Hướng sự kiện (Event-driven):**: Việc sử dụng Event giúp giảm sự phụ thuộc giữa các thành phần, cho phép linh phản ứng linh hoạt với các thay đổi.
+- **Mở rộng**: Các dịch vụ mới sẽ dễ dàng tích hợp vào hệ thống mà không cần sửa code.
+  - Tất nhiên là cùng nghiệp vụ, nếu cần thêm hoặc sửa nghiệp vụ thì vẫn cần sửa code.
+- **Giảm phụ thuộc giữa các thành phần**: Event cho phép các thành phần phản ứng với sự kiện mà không cần thiết đến nguồn gốc của Event. Các thành phần không trực tiếp giao tiếp với nhau.
+  - Giao tiếp qua Event Stream platform
+- **Xử lý xong xong và hiệu suất**: Trong các hệ thống cần xử lý song song và tối ưu hiệu suất, event cho phép phân tán xử lý và giảm độ trễ bằng cách cho phép các thành phần xử lý độc lập và song song với nhau.
+
+## Các tiêu chí đánh giá lựa chọn giữa việc sử dụng message và event trong hệ thống
+1. **Mục Tiêu Giao Tiếp**
+   - **Message**: Sử dụng khi cần giao tiếp mục đích cụ thể giữa các thành phần, đặc biệt là khi cần một phản hồi hoặc xử lý dữ liệu cụ thể.
+   - **Event**: Sử dụng khi muốn thông báo về sự kiện hoặc thay đổi trạng thái mà không yêu cầu phản hồi cụ thể từ người nhận.
+2. **Quản Lý Trạng Thái**
+   - **Message**: Phù hợp khi cần quản lý trạng thái của giao dịch hoặc quy trình một cách chặt chẽ.
+   - **Event**: Hợp lý khi muốn giảm bớt sự phức tạp trong việc quản lý trạng thái.
+3. **Độ Phụ Thuộc và Coupling**
+   - **Message**: Thường tạo ra mức độ coupling cao hơn giữa người gửi và người nhận.
+   - **Event**: Giảm coupling giữa người phát và người nhận, tăng tính độc lập giữa các thành phần.
+4. **Tính Mềm Dẻo và Mở Rộng**
+   - **Message**: Có thể hạn chế tính mềm dẻo do yêu cầu giao thức giao tiếp chặt chẽ.
+   - **Event**: Tăng tính mềm dẻo và khả năng mở rộng của hệ thống, cho phép dễ dàng thêm hoặc sửa đổi thành phần mà không ảnh hưởng đến các thành phần khác.
+5. **Đảm Bảo Giao Dịch**
+   - **Message**: Thích hợp cho các giao dịch cần đảm bảo tính đáng tin cậy và nhất quán, như trong các hệ thống tài chính hoặc đặt hàng.
+   - **Event**: Có thể không đảm bảo giao dịch một cách chặt chẽ như message, nhưng phù hợp cho việc thông báo về sự kiện mà không cần xử lý ngay lập tức.
+6. **Xử Lý Song Song và Hiệu Suất**
+   - **Message**: Cần cân nhắc cách xử lý và quản lý hàng đợi message để tối ưu hiệu suất.
+   - **Event**: Có thể tối ưu hóa xử lý song song và giảm độ trễ, nhất là trong các hệ thống phân tán lớn.
+7. **Tích hợp Hệ thống**
+   - **Message**: Phù hợp khi tích hợp với các hệ thống ngoại vi hoặc bên thứ ba yêu cầu giao thức giao tiếp chặt chẽ.
+   - **Event**: Hữu ích trong việc tích hợp lỏng lẻo, nơi các hệ thống có thể phản ứng với sự kiện mà không cần biết chi tiết về nguồn phát.
+   - 
+## Kết Luận
+Lựa chọn giữa Message và Event phụ thuộc vào nhiều yêu cầu cụ thể của hệ thống, trong nhiều trường hợp việc sử dụng cả 2 trong hệ thống và kết hợp cả 2 phương pháp sẽ mang lại lợi ích tối ưu, tận dụng được các ưu điểm của cả message và event.
+
 ## REF:
 - https://www.linkedin.com/pulse/differences-between-message-queue-event-stream-frank-lieu/
