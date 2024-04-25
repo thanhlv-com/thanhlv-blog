@@ -104,9 +104,9 @@ Tuy nhiên ở high level thì Message và Event đều có vẻ giống nhau v�
         - Ví dụ: Ngân hàng chỉ có thể nhận và xử lý 200-400 TPS/s, nếu gửi message lên đến 1k hoặc 2k thì có thể khiến bị treo.
     - **Event**:
         - **Tần suất**: Tần suất phát event thường phản ánh tần suất xảy ra của sự kiện trong hệ thống.
-          - Ví dụ: có 500 đơn hàng tạo trong 1s thì sẽ có 50 sự kiện được phát ra.
+          - Ví dụ: có 500 đơn hàng tạo trong 1s thì sẽ có 500 sự kiện được phát ra.
         - **Kiểm soát gửi**: Tần suất phát event ít được kiểm soát hơn so với Message vì event chỉ thông báo có sự kiện và không yêu cầu người nhận phải xử lý ngay.
-          - Ví dụ: Ngân hàng chỉ có thể nhận và xử lý 200-400 TPS/s. Event vẫn được phát ra và ngân hàng sẽ lắng nghe và xử lý các event dần dần.
+          - Ví dụ: Ngân hàng chỉ có thể nhận và xử lý 200-400 TPS/s. 5k Event vẫn được phát ra và ngân hàng sẽ lắng nghe và xử lý các event dần dần.
   - **Loại Thông tin**:
     - **Message**: Thường chứa dữ liệu cụ thể và hướng dẫn xử lý hoặc yêu cầu một hành động cụ thể hoặc phản hồi.
     - **Event**: Chỉ thông báo rằng có một sự kiện nào đó đã xảy ra, không yêu cầu hành động cụ thể tiếp theo.
