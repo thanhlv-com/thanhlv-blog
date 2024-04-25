@@ -4,8 +4,8 @@ title: So sánh Message và Event.
 authors: ["lethanh"]
 date: 2024-04-24
 outline: deep
-# image: /assets/1png.s1tm4KaV.png
-draft: true
+image: /event-and-message.UHUxhQ9h.jpeg
+draft: false
 group: 2. Message and event stream
 ---
 
@@ -17,7 +17,9 @@ Có thể bạn vẫn còn thắc mắc về điểm giống và khác biệt gi
 
 ![event-and-message](2024-04-24-so-sanh-message-va-event/event-and-message.jpeg)
 ## Giống nhau giữa Message và Event
-Các điểm giống nhau này sẽ tùy thuộc vào bài toán và cách triển khai mà chúng sẽ giống hoặc không giống
+Các điểm giống nhau này sẽ tùy thuộc vào bài toán và cách triển khai mà chúng sẽ giống hoặc không giống.
+
+Tuy nhiên ở high level thì Message và Event đều có vẻ giống nhau vì cả 2 đều tập trung vào giao tiếp giữa các thành phần khác nhau của hệ thống.
 
 - **Mục đích Giao tiếp**: Cả Message và Event đều được sử dụng như một phương tiện giao tiếp trong hệ thống phần mềm. Chúng cho phép các thành phần, dịch vụ hoặc ứng dụng trao đổi thông tin một cách linh hoạt.
 
@@ -123,6 +125,8 @@ Lựa chọn giữa Message và Event trong hệ thống phần mềm phụ thu�
       - 3. Phản hồi lại người dùng thông báo đã thành công xử lý video (Đồng bộ có phản hồi)
 - **Quản lý trạng thái phức tạp**:
   - Khi có các nghiệp vụ phức tạp yêu cầu quản lý trạng thái một cách rõ ràng qua từng bước, Message cho phép theo dõi và đảm bảo nhất quán của dữ liệu ở các service khác nhau.
+  - Ví dụ: Khi có một yêu cầu từ client và hệ thống cần call nhiều hệ thống và các hệ thống khác cũng call nhiều hệ thống khác. Các tin nhắn sẽ gửi tuần tự(Sequence) và duy trì trạng thái giữa các tin nhắn.
+    ![event-and-message 2](2024-04-24-so-sanh-message-va-event/event-and-message-2.jpg)
 - **Tích hợp hệ thống bên thứ 3**:
   - Khi tích hợp với các hệ thống bên thứ 3, message cho phép định nghĩa cách thức giao tiếp chặt chẽ, đảm bảo dữ liệu được gửi chính xác giữa các hệ thống bên ngoài khác.
 ### Event
@@ -164,3 +168,4 @@ Lựa chọn giữa Message và Event phụ thuộc vào nhiều yêu cầu cụ
 
 ## REF:
 - https://www.linkedin.com/pulse/differences-between-message-queue-event-stream-frank-lieu/
+- https://devdog.co/sniffs/scalability-vs-responsiveness-the-pros-and-cons-of-event-driven-and-message#whats-the-difference-then
