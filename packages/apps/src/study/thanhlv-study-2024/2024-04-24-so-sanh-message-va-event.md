@@ -89,6 +89,14 @@ Tuy nhiên ở high level thì Message và Event đều có vẻ giống nhau v�
       - Các thành phần sẽ phản ứng lại với sự kiện nhận được mà không cần biết nguồn gốc của sự kiện.
       - Đối với Event, khi tạo ra người tạo ra Event không quan tâm có ai phản ứng với sự kiện đó hay không.
       
+  - **Kiểu giao tiếp**:
+      - **Message**: là một loại giao tiếp kiểu **one-to-one** hoặc **one-to-many**,
+      - **Event**: Là một loại giao tiếp kiểu **One-to-many** hoặc **many-to-many**.
+        - **One-to-Many**: Một Event được phát ra có thể được lắng nghe và xử lý bởi 0 hoặc N thành phần.
+        - **Many-to-Many**:  Nhiều nguồn có thể phát ra sự kiện giống nhau và có thể được lắng nghe và xử lý bởi 0 hoặc N thành phần.
+          - Ví dụ: Các kênh bán hàng khác nhau(Web, ứng dụng di động, đối tác thứ 3, cò trực tiếp) có thể phát ra sự kiện **"Tạo đơn hàng mới"** (Nhiều nguồn cùng 1 sự kiện phát ra)
+          - Các hệ thống như quản lý kho, xử lý thành toán, dịch vụ giao hàng sẽ đăng ký lắng nghe sự kiện **"Tạo đơn hàng mới"** để thực hiện các nghiệp vụ của mình
+          ![example event many to many](2024-04-24-so-sanh-message-va-event/example-event-many-to-many.svg)
   - **Tần suất gửi và kiểm soát gửi**.
     - **Message**:
       - **Tần suất**: Tần suất gửi message thường phụ thuộc vào nhu cầu giao tiếp cụ thể giữa người gửi và nhận tin nhắn. 
