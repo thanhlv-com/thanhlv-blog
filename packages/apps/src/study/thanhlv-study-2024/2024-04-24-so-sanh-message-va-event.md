@@ -4,7 +4,7 @@ title: So sánh Message và Event.
 authors: ["lethanh"]
 date: 2024-04-24
 outline: deep
-image: /event-and-message.UHUxhQ9h.jpeg
+image: /assets/event-and-message.UHUxhQ9h.jpeg
 draft: false
 group: 2. Message and event stream
 ---
