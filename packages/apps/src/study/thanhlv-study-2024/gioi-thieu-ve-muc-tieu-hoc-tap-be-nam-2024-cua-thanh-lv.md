@@ -30,6 +30,9 @@ Hiện tại tất các ứng dụng đều sẽ được phát hành trên Inte
 - [Event stream và Event Stream platform là gì ?](2024-04-21-event-stream-va-event-stream-platform-la-gi.md)
 - [So sánh message và Event](2024-04-24-so-sanh-message-va-event.md)
 - https://kafka.apache.org/
+## 2.1 Kafka
+- Tìm hiểu lịch sử và mục đích của Kafka.
+
 ## 3 : API
  - https://jsonapi.org/
 ### 4 : Caching
