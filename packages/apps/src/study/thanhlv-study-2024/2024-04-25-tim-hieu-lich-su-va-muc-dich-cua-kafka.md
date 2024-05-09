@@ -20,7 +20,7 @@ Từ những đặc điểm đến những mục tiêu chiến lược mà Kafka
 ## Kafka là gì ?
 - Apache Kafka là một [Event stream platform](2024-04-21-event-stream-va-event-stream-platform-la-gi) được phát triển bởi [LinkedIn](https://www.linkedin.com/) và quyên góp cho apache và phát hành thành mã nguồn mở (Open-source) vào năm 2011.
 - Apache Kafka được viết bằng `Scala` và `Java`. Dự án này nhằm mục đích cung cấp một nền tảng có khả năng xử lý dữ liệu với lượng thông tin lớn, độ trễ thấp, phù hợp cho việc xử lý dữ liệu `real-time`
-
+- Ở high level, Kafka là một hệ thống phân tán servers và clients. Servers được gọi là **brokers** và client được chia làm 2 là **record producers sending** và **consumer clients read records**
 ## Đặc điểm của Apache kafka:
   - **Distributed System(Hệ thống phân tán)**: Apache Kafka là một hệ thống phân tán được thiết kế chạy trên nhiều máy chủ, đảm bảo tính sẵn sàng cao và khả năng chịu lỗi.
   

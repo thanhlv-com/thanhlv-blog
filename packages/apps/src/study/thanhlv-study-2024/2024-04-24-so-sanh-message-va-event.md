@@ -120,6 +120,7 @@ Lựa chọn giữa Message và Event trong hệ thống phần mềm phụ thu�
 ![event-and-message](2024-04-24-so-sanh-message-va-event/event-and-message.jpeg)
 
 ### Message
+![event-and-message 2](2024-04-24-so-sanh-message-va-event/message.png)
 - **Giao tiếp request/response** : 
   - Khi cần một mô hình giao tiếp rõ ràng giữa người gửi và người nhận, nơi người gửi mong đợi một phản hồi cụ thể từ người nhận.
     - Ví dụ: Trong một hệ thống giao dịch, một yêu cầu thanh toán có thể được gửi dưới dạng message và người gửi mong đợi một phản hồi về việc thanh toán thành công hoặc thất bại.
@@ -138,6 +139,8 @@ Lựa chọn giữa Message và Event trong hệ thống phần mềm phụ thu�
 - **Tích hợp hệ thống bên thứ 3**:
   - Khi tích hợp với các hệ thống bên thứ 3, message cho phép định nghĩa cách thức giao tiếp chặt chẽ, đảm bảo dữ liệu được gửi chính xác giữa các hệ thống bên ngoài khác.
 ### Event
+![event-and-message 2](2024-04-24-so-sanh-message-va-event/event.png)
+
 - **Thông báo về Sự kiện**: Khi muốn thông báo một sự kiện đã xảy ra và không yêu cầu một hành động cụ thể hoặc phản hồi từ người nhận hoặc không yêu cầu người nhận xử lý ngay lập tức khi phát sự kiện.
 - **Lập trình Hướng sự kiện (Event-driven):**: Việc sử dụng Event giúp giảm sự phụ thuộc giữa các thành phần, cho phép linh phản ứng linh hoạt với các thay đổi.
 - **Mở rộng**: Các dịch vụ mới sẽ dễ dàng tích hợp vào hệ thống mà không cần sửa code.
