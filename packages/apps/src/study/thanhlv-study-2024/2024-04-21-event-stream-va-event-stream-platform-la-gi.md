@@ -21,11 +21,15 @@ Trong bài viết này, chúng ta sẽ cùng nhau khám phá về **Event Stream
 - Event Stream là một luồng dữ liệu được tạo ra bởi các sự kiện(Event) xảy ra trong hệ thống theo thời gian. 
 - Mỗi Event thường đại diện cho một hành động cụ thể đã xảy ra hoặc thay đổi trạng thái trong ứng dụng hoặc hệ thống.
 - Các Event này có thể là mọi thứ đã xảy ra như thao tác người dùng chạm vào button, thậm chí là từ các thiết bị IoT.
+- Event Stream tương tự như hệ thống dây thần kinh của chúng ta. Xử lý hàng triệu, tỉ sự kiện và gửi tín hiệu đến các bộ phận trên cơ thể chúng ta.
+  - Một số tín hiệu được tạo ra bởi hành động của chúng ta (Lấy một quả táo) và cũng có các tín hiệu tạo ra một cách vô thức(Tăng nhịp tin khi bị mẹ mắng :D)
 ![](2024-04-21-event-stream-va-event-stream-platform-la-gi/1png.png)
 **Ví dụ**:
 - Người dùng nhấp vào nút mua hàng.
+- Các tương các của người dùng trên website.
 - Nhiệt độ phòng thay đổi.
 - Tin nhắn mới được gửi đến từ telegram, slack...
+- 
 
 ### Đặc điểm của Event Stream.
 Thực thế các đặc điểm này là sự kết hợp của các đặc điểm Event + Stream.
@@ -61,7 +65,9 @@ Các ứng dụng của Event Stream có thể là:
    - Sử dụng rộng dãi trong các ứng dụng IoT để thu thập, xử lý và phản hồi dữ liệu từ các thiết bị IoT. Điều này giúp tổ chức quản lý và điều khiển xác hệ thống IoT dễ dàng, nhanh chóng và hiệu quả.
 5. Xây dựng các ứng dụng real-time,
    - Các ứng dụng real-time như video stream, chat real-time, game trực tuyến...
-
+6. Gian lận thẻ tín dụng: Chủ thẻ có thể không biết thẻ bị sử dụng, sử dụng Event stream để phân tích thói quen sử dụng, địa chỉ hay sử dụng...etc..
+7. Ngành tài chính:
+   - Phân tích xu hướng tài chính để các nhà đầu tư và môi giới sử dụng.
 ## Event stream platform là gì ?
 Event stream platform là một hệ thống phần mềm được thiết kế để thu thập, lưu trữ, xử lý và phân phối các event stream trong thời gian thực hoặc gần thời gian thực.
 

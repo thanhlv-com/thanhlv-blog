@@ -28,6 +28,13 @@ Bắt đầu cuộc hành trình khám phá về Event, chúng ta sẽ mở ra n
 - Thông thường **Event** sẽ được tạo sau khi một **Message** kết thúc (Thành công hoặc thất bại), tùy nhiên điều đó không bắt buộc. (Có thể từ một Event khác, từ kết quả của một tính toán định kỳ(Định kỳ 10s đo thân nhiệt).....)
   ![Image](2024-04-16-event-la-gi/1.jpg)
 
+### 3 thành phần chính của Event
+- **Key** : Định danh của sự kiện.
+  - **Key** là định danh duy nhất của sự kiện, ví dụ key **"Tăng nhịp tim"** hoặc **"Chớp mắt"**
+- **Value** : Data của sự kiện
+  - "Value" là data của sự kiện này, ví dụ Key **"Tăng nhịp tim"** lên **120** thì **120** chính là **Value**
+- **Timestamp** : Thời gian xảy ra sự kiện.
+  - Chính là thời gian sự kiện này xảy ra ví dụ **Tuấn**  **"Tăng nhịp tim"** lên **120** lúc **10 sáng ngày 20-11-2024**
 ### Đặc điểm của event.
 - **Thời điểm xác định**: Mỗi Event đều liên quan đến một thời điểm cụ thể Event đó xảy ra.(Ví dụ 12h)
   ![Image](2024-04-16-event-la-gi/2.jpg)
