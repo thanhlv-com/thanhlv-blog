@@ -57,10 +57,6 @@ Hiện tại tất các ứng dụng đều sẽ được phát hành trên Inte
 Sẽ cập nhật nếu có thay đổi về item học tập.
 
 ## REF:
-- **Kafka book**: 
-<span >
-      <a target='_blank' class="get-started" href="/common_data/Kafka%20Event%20Streaming%20Platform%20In%20Action.pdf">
-    Kafka Event Streaming Platform In Action.pdf
-      </a>
-</span>
+- **Kafka book**: [Kafka Event Streaming Platform In Action.pdf](/study/thanhlv-study-2024/static/Kafka%20Event%20Streaming%20Platform%20In%20Action.pdf)
+
 
