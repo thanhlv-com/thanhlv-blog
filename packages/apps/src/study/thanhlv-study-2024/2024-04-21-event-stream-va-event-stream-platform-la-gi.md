@@ -9,6 +9,8 @@ draft: false
 group: 2. Message and event stream
 ---
 
+# Event Stream là gì ?
+
 Chúng ta đã cùng nhau tìm hiểu về **[Message](2024-04-15-message-la-gi.md)** và [**Event**](2024-04-16-event-la-gi.md)  là 2 khái niệm về dữ liệu và **[Stream](2024-04-19-stream-la-gi.md)** là khái niệm về dữ liệu truyền liên tục.
 
 Nhưng có một khái niệm khác nữa về dữ liệu mà chúng ta chưa khám phá sâu hơn đó là **Event Stream**. 
@@ -17,7 +19,7 @@ Trong bài viết này, chúng ta sẽ cùng nhau khám phá về **Event Stream
 
 [[TOC]]
 
-## Event Stream là gì ?
+## Vậy Event Stream là gì ?
 - Event Stream là một luồng dữ liệu được tạo ra bởi các sự kiện(Event) xảy ra trong hệ thống theo thời gian. 
 - Mỗi Event thường đại diện cho một hành động cụ thể đã xảy ra hoặc thay đổi trạng thái trong ứng dụng hoặc hệ thống.
 - Các Event này có thể là mọi thứ đã xảy ra như thao tác người dùng chạm vào button, thậm chí là từ các thiết bị IoT.

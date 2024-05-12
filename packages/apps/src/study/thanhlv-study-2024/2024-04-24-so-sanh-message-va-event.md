@@ -8,6 +8,7 @@ image: /assets/event-and-message.UHUxhQ9h.jpeg
 draft: false
 group: 2. Message and event stream
 ---
+# So sánh Message và Event.
 
 Chúng ta đã cùng nhau tìm hiểu về **[Message](2024-04-15-message-la-gi.md)** và [**Event**](2024-04-16-event-la-gi.md) 2 khái niệm và cũng thường là 2 kiểu dữ liệu chính trong ứng dụng của bạn.
 

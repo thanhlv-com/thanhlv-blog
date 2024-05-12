@@ -8,6 +8,7 @@ image: /assets/1.2_1UtjTS.png
 draft: false
 group: 2. Message and event stream
 ---
+# Stream là gì ?
 
 Hiểu biết về **[Message](2024-04-15-message-la-gi.md)** và [**Event**](2024-04-16-event-la-gi.md) là cơ sở quan trọng cho việc làm việc với dữ liệu trong ứng dụng của bạn.
 
@@ -19,7 +20,7 @@ Hãy cùng nhau khám phá sâu hơn về **Stream** và cách nó có thể t�
 
 [[TOC]]
 
-## Stream là gì ?
+## Vậy Stream là gì ?
 Stream là một khái niệm phổ biến trong lĩnh vực công nghệ và truyền thông. Trong bài viết này mình sẽ nói Stream ở ngữ cảnh công nghệ.
 
 Theo [Wikipedia](https://en.wikipedia.org/wiki/Stream_(computing)#:~:text=In%20computer%20science%2C%20a%20stream,rather%20than%20in%20large%20batches.), Stream là một chuỗi các phần tử dữ liệu được cung cấp theo thời gian. Trên một Stream, từng dữ liệu sẽ được xử lý thay vì xử lý một lô lớn( Batch data ).

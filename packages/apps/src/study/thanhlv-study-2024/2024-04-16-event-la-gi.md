@@ -8,6 +8,7 @@ outline: deep
 draft: false
 group: 2. Message and event stream
 ---
+# Event là gì ?
 
 Sau khi đã hiểu về **[Message](2024-04-15-message-la-gi.md)**, bước tiếp theo không kém phần quan trọng là khám phá về **Event**.
 
@@ -22,7 +23,7 @@ Bắt đầu cuộc hành trình khám phá về Event, chúng ta sẽ mở ra n
 
 [[TOC]]
 
-## Event là gì ?
+## Vậy Event là gì ?
 - Event có thể được hiểu là một sự kiện, một thay đổi trạng thái, hoặc một hành động cụ thể nào đó xảy ra trong hệ thống hoặc ứng dụng.
 
 - Thông thường **Event** sẽ được tạo sau khi một **Message** kết thúc (Thành công hoặc thất bại), tùy nhiên điều đó không bắt buộc. (Có thể từ một Event khác, từ kết quả của một tính toán định kỳ(Định kỳ 10s đo thân nhiệt).....)

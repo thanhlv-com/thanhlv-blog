@@ -8,7 +8,7 @@ image: /assets/img.ldf-rwrM.png
 draft: false
 group: 1. Internet
 ---
-
+# World wide web là gì ?
 Trong thế giới kỹ thuật số ngày nay, World Wide Web đã trở thành một phần không thể tách rời của Internet, là nơi diễn ra hàng loạt hoạt động từ học tập, làm việc đến giải trí. 
 
 Mặc dù vậy, không phải lập trình viên nào cũng thấu hiểu hoặc nắm rõ về World Wide Web và những tầng nền vững chắc mà nó dựa trên. 
@@ -17,7 +17,7 @@ Hãy cùng nhau khám phá và mở rộng kiến thức về World Wide Web, m�
 
 [[TOC]]
 
-## World wide web là gì ?
+## Vậy World wide web là gì ?
 - `WWW` hay gọi chuẩn là `World Wide Web` là một hế thống thông tin toàn cầu dựa trên [Internet](2024-03-14-Internet-Internet-hoat-dong-nhu-the-nao), cho phép người dùng truy cập vào các trang web và được liên kết với nhau thông qua siêu liên kết (hyperlinks).
 - `WWW` là dịch vụ phổ biến nhất trên Internet, `WWW` bị nhiều người nhầm lẫn với [Internet](2024-03-14-Internet-Internet-hoat-dong-nhu-the-nao) nhưng thực chất đây là một trong những dịch vụ phổ biến của [Internet](2024-03-14-Internet-Internet-hoat-dong-nhu-the-nao) được cung cấp dưới dạng Web cho phép truy cập và chia sẻ thông tin thông qua web page dựa trên HTML và được liên kết với nhau thông qua Hyperlinks.
 - Như [lịch sử đã được viết ](2024-03-14-Internet-Internet-hoat-dong-nhu-the-nao#_4-su-bung-no-cua-world-wide-web-1990s) WWW được phát minh bởi [Tim Berners-Lee](https://vi.wikipedia.org/wiki/Tim_Berners-Lee) vào năm 1989 và công bố vào năm 1990.

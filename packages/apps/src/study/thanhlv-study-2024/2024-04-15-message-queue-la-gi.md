@@ -14,7 +14,7 @@ Kiến thức đầu tiên chúng ta đã cùng học với nhau là [**Message*
 
 [[TOC]]
 
-## Message queue là gì ?
+## Vậy Message queue là gì ?
 
 [**Message queue (Hàng đợi tin nhấn)**](2024-04-15-message-queue-la-gi.md) là một cơ chế lưu trữ các tin nhắn ([**Message**](2024-04-15-message-la-gi.md)) trong một hàng đợi(Queue) theo thứ tự tuần tự hoặc ưu tiên.
 
