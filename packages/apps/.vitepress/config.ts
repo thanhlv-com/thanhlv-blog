@@ -141,28 +141,28 @@ export default defineConfigWithTheme<ThemeConfig>({
       '  gtag(\'js\', new Date());\n' +
       '\n' +
       '  gtag(\'config\', \'G-DHC69X8F8N\');'
-    ],
-    [
-      'script',
-      {
-        src: 'https://news.google.com/swg/js/v1/swg-basic.js',
-        async: ''
-      }
-    ],
-    [
-      'script',
-      {},
-      `
-  (self.SWG_BASIC = self.SWG_BASIC || []).push( basicSubscriptions => {
-    basicSubscriptions.init({
-      type: "NewsArticle",
-      isPartOfType: ["Product"],
-      isPartOfProductId: "CAowvpyuDA:openaccess",
-      clientOptions: { theme: "light", lang: "vi" },
-    });
-  });
-`
     ]
+//     [
+//       'script',
+//       {
+//         src: 'https://news.google.com/swg/js/v1/swg-basic.js',
+//         async: ''
+//       }
+//     ],
+//     [
+//       'script',
+//       {},
+//       `
+//   (self.SWG_BASIC = self.SWG_BASIC || []).push( basicSubscriptions => {
+//     basicSubscriptions.init({
+//       type: "NewsArticle",
+//       isPartOfType: ["Product"],
+//       isPartOfProductId: "CAowvpyuDA:openaccess",
+//       clientOptions: { theme: "light", lang: "vi" },
+//     });
+//   });
+// `
+//     ]
   ],
 
   themeConfig: {
