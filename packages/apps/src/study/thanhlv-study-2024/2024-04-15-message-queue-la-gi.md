@@ -33,7 +33,8 @@ Trong một hệ thống có [**Message queue (Hàng đợi tin nhấn)**](2024-
 - [**Message**](2024-04-15-message-la-gi.md): Thông tin(Thông điệp) thường được tạo dạng text hoặc JSON, tuy nhiên nó có thể là Binary hoặc bất kỳ dạng nào. [**Message**](2024-04-15-message-la-gi.md) sẽ do Producer tạo ra.
 - **Message Queue**: Nơi lưu trữ tạm thời các [**Message**](2024-04-15-message-la-gi.md) cho tới khi Consumer lấy ra và xử lý.
 - **Broker**: Xử lý Message và quản lý [**Message**](2024-04-15-message-la-gi.md) để đảm bảo Producer và Consumer sẽ truyền thông tin được cho nhau, Broker giúp định tuyến Message đến đúng queue, quản lý trạng thái của Queue, và đảm bảo [**Message**](2024-04-15-message-la-gi.md) được chuyển đến đúng Consumer và không bị mất message.
-- **Channel** : là cơ chế truyền thông tin giữa Producer và Consumer thông qua Message Queue. Channel đóng vai trò như là một cầu nối để truyền Message qua lại giữa các bên.
+  - thành phần EXCHANGES sẽ nằm trong Broker, EXCHANGES sẽ giúp định tuyến Message đến đúng queue.
+- **Channel** : là cơ chế truyền thông tin giữa Producer và Consumer thông qua Message Queue. Channel đóng vai trò như là một cầu nối để truyền Message qua lại giữa các bên. Mỗi channel là một kết nối riêng biệt giữa thành phần đến Broker.
 
 ## Producers và consumers
 ![message-queue-small-3](2024-04-15-message-queue-la-gi/message-queue-small-3.webp)

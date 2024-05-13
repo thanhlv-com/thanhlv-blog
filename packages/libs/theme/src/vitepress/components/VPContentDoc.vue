@@ -172,7 +172,7 @@ const pageClass = computed(() => {
     display: flex;
   }
   .content {
-    min-width: 0px;
+    min-width: 688px;
     margin: 0;
     order: 1;
   }
