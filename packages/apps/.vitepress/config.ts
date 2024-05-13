@@ -56,11 +56,15 @@ export const sidebar: ThemeConfig['sidebar'] = {
       ]
     },
     {
-      'text': 'Note',
+      'text': 'Và....',
       'items': [
         {
           'text': 'My note',
           'link': '/about/author/thanhlv/my-note.html'
+        },
+        {
+          'text': 'TODO list',
+          'link': '/about/author/thanhlv/todo-list.html'
         }
       ]
     }
