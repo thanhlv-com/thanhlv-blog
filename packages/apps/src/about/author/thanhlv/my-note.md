@@ -1,6 +1,6 @@
 ---
 footer: true
-title: CV online ThanhLv
+title: My note
 outline: deep
 date: 2024-01-08
 ---
