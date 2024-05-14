@@ -279,6 +279,26 @@ Your browser does not support the video tag.
 - **Tài nguyên và chi phí**: Việc duy trì một hệ thống message queue đòi hỏi tài nguyên máy chủ và băng thông mạng, đặc biệt là với các hệ thống lớn và phức tạp. Điều này có thể dẫn đến chi phí cao hơn cho cơ sở hạ tầng và quản lý.
 - **Khó khăn trong việc debug và giám sát**: Việc theo dõi và giám sát luồng thông điệp trong message queue có thể trở nên khó khăn, đặc biệt là khi xử lý lỗi hoặc tìm kiếm nguyên nhân của sự cố trong hệ thống phân tán.
 - **Nguy cơ sập toàn hệ thống**: Nếu hệ thống Message Queue bị sập, nguy cơ toàn hệ thống bị sập có thể xảy ra, vì mọi giao tiếp đều thông qua Message Queue. Vì vậy khi triển khai xử dụng Message Queue cần phòng ngừa điều này.
+
+## Một số Message Queue phổ biến
+- RabbitMQ
+- Amazon SQS (Simple Queue Service)
+- ActiveMQ
+- RocketMQ
+- Kafka (Là một Event Stream nhưng cũng có thể sử dụng Kafka như một Message Queue)
+
+## Tổng kết
+1. **Message Queue là gì?**: Là một thành phần kiến trúc hệ thống giúp buffer và phân phối các request bất đồng bộ, lưu trữ tin nhắn trong hàng đợi và chuyển đến Consumer khi sẵn sàng.
+2. **Các thành phần chính**: Bao gồm Producer (tạo Message), Consumer (nhận và xử lý Message), Message (thông tin dạng text, JSON, Binary, etc.), Message Queue (nơi lưu trữ tạm thời Message), và Broker (quản lý và định tuyến Message).
+3. **Producers và Consumers**: Producer tạo và gửi Message đến Queue, trong khi Consumer nhận và xử lý Message từ Queue.
+4. **Message Brokers**: Là một thành phần độc lập quản lý giao tiếp giữa Producers và Consumers, có khả năng xử lý permissions, validation, failure recovery, routing rules, và communication protocols.
+5. **Chiến lược nhận Message**: Bao gồm Pull Model (Consumer định kỳ kiểm tra và lấy Message) và Push Model (Queue chủ động gửi Message đến Consumer).
+6. **Chiến lược đăng ký nhận Message**: Bao gồm Direct worker queue method (phân phối tải giữa các instance của Consumer) và Publish/subscribe method (gửi Message đến nhiều Consumer với logic khác nhau).
+7. **Ưu điểm của Message Queue**: Tăng khả năng mở rộng, độc lập ngôn ngữ, hỗ trợ đồng bộ và không đồng bộ, tăng độ tin cậy, giảm giao tiếp trực tiếp giữa các ứng dụng, và căn bằng lưu lượng.
+8. **Nhược điểm của Message Queue**: Gây ra độ trễ, quản lý trạng thái phức tạp, tăng độ phức tạp hệ thống, nguy cơ mất mát dữ liệu, chi phí tài nguyên và quản lý cao, khó khăn trong debug và giám sát, và nguy cơ sập toàn hệ thống.
+9. Một số Message Queue phổ biến: Bao gồm RabbitMQ, Amazon SQS, ActiveMQ, RocketMQ, và Kafka.
+
+
 ## REF:
 - https://hookdeck.com/blog/introduction-message-queue
 - https://hookdeck.com/blog/message-queues-deep-dive
