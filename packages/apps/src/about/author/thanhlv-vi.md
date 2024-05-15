@@ -464,5 +464,5 @@ Chuyên ngành: Lập trình phần mềm | Loại Giỏi
 
 ## CHÂM NGÔN CUỘC SỐNG
 
-Hãy tiếp tục đi, bởi vì khi bạn dừng lại bạn sẽ đứng tại chỗ mãi mãi.
+Đừng thử đi làm điều mà bạn thích, hãy thích điều mà bạn đang làm.
 

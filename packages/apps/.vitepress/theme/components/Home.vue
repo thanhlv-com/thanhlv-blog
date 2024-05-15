@@ -15,7 +15,7 @@ onMounted(async () => {
      <span class="accent">Lê Văn Thành</span>
     </h1>
     <p class="description">
-      Hãy tiếp tục bước đi, bởi vì khi dừng lại bạn có thể sẽ dừng lại mãi mãi.
+      Đừng thử đi làm điều mà bạn thích, hãy thích điều mà bạn đang làm.
     </p>
     <p class="actions">
       <a class="get-started" href="/blog/gioi-thieu.html">
