@@ -25,6 +25,7 @@ Hiện tại tất các ứng dụng đều sẽ được phát hành trên Inte
 
 ## 2. Message and event stream
 - [Message là gì ?](2024-04-15-message-la-gi.md)
+- [Message queue là gì ?](2024-04-15-message-queue-la-gi.md)
 - [Event là gì ?](2024-04-16-event-la-gi)
 - [Stream là gì?](2024-04-19-stream-la-gi.md)
 - [Event stream và Event Stream platform là gì ?](2024-04-21-event-stream-va-event-stream-platform-la-gi.md)
