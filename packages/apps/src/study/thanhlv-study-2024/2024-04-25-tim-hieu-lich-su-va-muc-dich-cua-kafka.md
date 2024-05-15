@@ -32,3 +32,4 @@ Từ những đặc điểm đến những mục tiêu chiến lược mà Kafka
 
   - **Durability and Reliability(Độ bền và tin cậy cao), PERMANENT STORAGE**: Kafka chạy hệ thống phân tán, dữ liệu được lưu trữ an toàn trong một cụm phân tán, đảm bảo sẽ lưu sẽ an toàn và không bị lỗi.
 
+## Vì sao là kafka

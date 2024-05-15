@@ -227,6 +227,11 @@ Một trong những ứng dụng phổ biến của chiến lược này là ph�
 
 Ví dụ: Cần gửi email cho 1 tỉ người, Một tỷ Message sẽ được push dần dần đến Queue và các Consumer sẽ nhận Message và thực hiện gửi email.
 
+<video controls>
+  <source src="/study/thanhlv-study-2024/2024-04-15-message-queue-la-gi/video_queue.mp4" type="video/mp4">
+Your browser does not support the video tag.
+</video>
+
 ### Chiến lược Publish/subscribe (Publish/subscribe method)
 
 Chiến lược này Message sẽ được gửi đến một topic chứ không phải một Queue. Mỗi Consumer được kết nối đến Broker sẽ duy trì một Queue riêng để nhận các Message từ topic.
@@ -244,6 +249,11 @@ Không giống như chiến lược **Direct worker queue method**, với chiế
 Consumer đăng ký một topic, và khi có một Message mới. Message đó sẽ được sao chép và gửi đến tất cả các Queue của người đăng ký Topics. Chiến lược này sử dụng **observer pattern paradigm**
 
 Chiến lược này chúng ta có thể dễ ràng bổ xung thêm chức năng, ví dụ chúng ta có thể thêm một Consumer lưu trữ data để dành cho phân tích dữ liệu.
+
+<video controls>
+  <source src="/study/thanhlv-study-2024/2024-04-15-message-queue-la-gi/video_queue_topic.mp4" type="video/mp4">
+Your browser does not support the video tag.
+</video>
 
 ## Mô tả đơn giản các thức hoạt động của Message Queue.
 1. Producer tạo ra Message cần truyền đi. Message này sẽ được truyền vào Message Queue thông qua Channel và được lưu trữ tạm thời tại đây.
