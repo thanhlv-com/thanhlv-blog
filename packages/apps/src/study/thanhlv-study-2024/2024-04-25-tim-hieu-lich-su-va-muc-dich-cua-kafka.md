@@ -64,7 +64,8 @@ Trong thực tế, mỗi partition không lưu trữ tất cả records trong m�
 
 Kafka sẽ chia log thành các log segments. Mỗi log segments sẽ có thể được giới hạn size(Ví dụ 1G) và có thể giới hạn thời gian tồn tại ví dụ 1 ngày hoặc vĩnh viễn.
 
-Mỗi một Partition được chia thành nhiều segments
+Mỗi một Partition được chia thành nhiều segments.
+https://docs.cloudera.com/runtime/7.2.18/kafka-overview/topics/kafka-overview-logs-and-log-segments.html
 :::
 Mỗi một partition sẽ tương ứng với một người subscribe. Vì vậy nếu có 10 subscribe thì sẽ có 10 partition.
 
