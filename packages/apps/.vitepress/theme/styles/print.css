@@ -7,7 +7,16 @@
   .VPDocFooter {
     display: none !important;
   }
-  img{
+
+  img {
     display: none !important;
+  }
+
+  .vt-doc h3 {
+    margin: 1rem 0 1.25rem !important;
+  }
+
+  .vt-doc h2 {
+    margin: 2rem 0 1.8rem !important;
   }
 }
