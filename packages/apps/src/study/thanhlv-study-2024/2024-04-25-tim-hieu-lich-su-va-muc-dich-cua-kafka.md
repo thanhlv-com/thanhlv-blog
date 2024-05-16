@@ -4,7 +4,7 @@ title: Tìm hiểu lịch sử và mục đích của kafka
 authors: ["lethanh"]
 date: 2024-04-24
 outline: deep
-#image: /assets/event-and-message.UHUxhQ9h.jpeg
+image: /assets/info-kafka.RVShJb77.webp
 draft: false
 group: 2.1 Kafka
 ---
