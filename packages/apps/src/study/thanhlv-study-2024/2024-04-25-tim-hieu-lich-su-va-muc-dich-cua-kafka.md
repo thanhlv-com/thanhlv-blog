@@ -68,7 +68,7 @@ Kafka sẽ chia log thành các log segments. Mỗi log segments sẽ có thể 
 Mỗi một Partition được chia thành nhiều segments.
 https://docs.cloudera.com/runtime/7.2.18/kafka-overview/topics/kafka-overview-logs-and-log-segments.html
 :::
-Mỗi một partition sẽ tương ứng với một người subscribe. Vì vậy nếu có 10 subscribe thì sẽ có 10 partition.
+Mỗi một partition sẽ tương ứng với một người subscribe. Vì vậy nếu có 10 subscribe thì sẽ có 10 partition hoặc nếu là Consumer Group thì mỗi Group một partition. 
 
 Điều này có nghĩa là có thể có nhiều người subscribe cùng một topic, và mỗi người được chỉ định một partition để có khả năng mở rộng cao hơn.
 
