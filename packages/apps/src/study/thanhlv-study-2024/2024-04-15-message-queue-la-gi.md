@@ -10,14 +10,16 @@ group: 2. Message and event stream
 ---
 # Message queue là gì ?
 
-Kiến thức đầu tiên chúng ta đã cùng học với nhau là [**Message**](2024-04-15-message-la-gi.md), trong bài viết này chúng ta sẽ cùng nhau tìm hiểu về [**Message queue**](2024-04-15-message-queue-la-gi.md), một khái niệm quan trọng mà các hệ thống lớn thường sử dụng để gửi và nhận các tin nhắn giữa các thành phần của chúng.
+Kiến thức đầu tiên chúng ta đã cùng học với nhau là [**Message**](2024-04-15-message-la-gi.md), trong bài viết này chúng ta sẽ cùng nhau tìm hiểu về [**Message queue**](2024-04-15-message-queue-la-gi.md).
 
 [[TOC]]
 
 ## Vậy Message queue là gì ?
 ![message-queue-small](2024-04-15-message-queue-la-gi/message-queue-small.webp)
 
-[**Message queue (Hàng đợi tin nhấn)**](2024-04-15-message-queue-la-gi.md) là một component trong [system's architecture](../../blog/2024-02-01-tim-hieu-ve-architecture.md#đac-điem-cua-software-architecture) hỗ trợ buffer và phân phối các request bất đồng bộ.  
+Trong nhu cầu trao đổi thông tin sử dụng Message, để [gửi và nhận Message có nhiều phương pháp](2024-04-15-message-la-gi.md#cac-phuong-phap-trao-đoi-message-giua-cac-he-thong), trong đó [**Message queue (Hàng đợi tin nhấn)**](2024-04-15-message-queue-la-gi.md) là 1 trong nhiều phương pháp phổ biến được sử dụng trong các hệ thống lớn.
+
+[**Message queue (Hàng đợi tin nhấn)**](2024-04-15-message-queue-la-gi.md) là một component trong [system's architecture](../../blog/2024-02-01-tim-hieu-ve-architecture.md#đac-điem-cua-software-architecture) hỗ trợ buffer và phân phối các Message bất đồng bộ.  
 ![Producer-Consumer-buffer](2024-04-15-message-queue-la-gi/Producer-Consumer-buffer.png)
 
 Cơ chế của [**Message queue (Hàng đợi tin nhấn)**](2024-04-15-message-queue-la-gi.md) là lưu trữ các tin nhắn ([**Message**](2024-04-15-message-la-gi.md)) trong một hàng đợi(Queue) theo thứ tự tuần tự hoặc ưu tiên và sẽ được chuyển đến một đích(Thành phần nhận, Consumer ) đã chỉ định.

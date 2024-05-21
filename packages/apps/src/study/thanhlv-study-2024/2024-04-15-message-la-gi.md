@@ -21,16 +21,19 @@ Hãy cùng mình khám phá sâu hơn về bản chất và ý nghĩa thực s�
 [[TOC]]
 
 ## Message là gì ?
-- **Đầu tiên**, **Message** là một yêu cầu có chứa một lượng dữ liệu được gửi từ A đến B(Từ hệ thống A đến hệ thống B) và được B nhận và xử lý theo yêu cầu.
+Một lưu ý nhỏ trong định nghĩa Message ở bài viết này mình sẽ định nghĩa Message trong nhu cầu trao đổi thông tin.
+
+- **Đầu tiên**, **Message** Có nghĩa là **Tin nhắn** hoặc **Thông điệp** là một thông tin ở dạng dữ liệu được gửi từ A đến B(Từ hệ thống A đến hệ thống B) và được B nhận.
 
 - **Thứ hai**, **Message** thường đi kèm với metadata, tức là các thông tin mô tả về Message. Metadata này có thể gồm nhiều thông tin, người gửi, thời gian gửi, người nhận...
 
 - **Thứ ba**, Format của dữ liệu **Message** sẽ là một hợp đồng giữa A và B. hợp đồng này gồm nhiều thứ ví dụ: Định dạng tin nhắn(Json), thuật toán mã hóa, các dữ liệu require trong Json....
   - Thông thường Format này sẽ được hệ thống nhận tin nhắn, tức B xác định. Tuy nhiên nhiều trường hợp có thể A xác định và B sẽ làm theo.
 
-- **Thứ tư**, **Message** được mang ý nghĩa giả định người gửi sẽ gửi dữ liệu và sẽ có một người nhận yêu cầu và xử lý yêu cầu. Nếu hành động không được thực hiện tức là đã bi phạm một **business rule** nào đó.
-  - Thông thường, đây là bước đầu tiên của một quá trình dẫn đến, A nhận được dữ liệu của B(HTML), B thay đổi dữ liệu....
-    ![Image](2024-04-15-message-la-gi/1.jpg)
+- **Thứ tư**, **Message** được mang ý nghĩa giả định người gửi sẽ gửi dữ liệu và sẽ có một người nhận. Từ dữ liệu của người gửi, người nhận có thể thực hiện các hành động tương ứng hoặc không làm gì cả, điều này phụ thuộc vào nghiệp vụ của người nhận.
+  - Nếu nghiệp vụ của người nhận(B) có thực hiện một hành động nào đó khi nhận Message, nhưng hành động không được thực hiện tức là đã bị phạm một **business rule** nào đó của bên B.
+    - Thông thường, đây là bước đầu tiên của một quá trình dẫn đến, A nhận được dữ liệu của B(HTML), B thay đổi dữ liệu....
+      ![Image](2024-04-15-message-la-gi/1.jpg)
   
 ### **Tóm gọn Message là gì**
 - Message là một yêu cầu thường chứa một khối lượng dữ liệu được chuyển từ một hệ thống sang hệ thống khác để thực hiện các hành động xử lý hoặc trao đổi thông tin. 
@@ -70,6 +73,13 @@ Gửi thư từ nhà của **A** ở **Hà Nội** đến **B** ở **Đà Nẵn
 
   - 5. Nếu thỏa mãn **business rule** B sẽ gửi Message lại đến B với 500K VND họặc không thỏa mãn sẽ gửi lại Message từ chối yêu cầu đến A thông qua giao thức bưu điện.
 
+## Các phương pháp trao đổi Message giữa các hệ thống.
+- **Remote Procedure Calls (RPC)**: Một kỹ thuật sử dụng để cho phép một ứng dụng thực hiện call một method trên ứng dụng khác thông qua network.  RPC ẩn đi chi tiết về giao tiếp mạng, cho phép nhà phát triển tập trung vào logic nghiệp vụ. Ví dụ phổ biến bao gồm gRPC và XML-RPC
+- **Socket Programming** : Cho phép giao tiếp 2 chiều giữa một kết nối, Socket có thể được sử dụng để nhận dữ liệu thông qua TCP, UDP.
+- **APIs**: Các API (Application Programming Interfaces) như RESTful APIs hoặc GraphQL APIs cho phép các ứng dụng giao tiếp với nhau và trao đổi thông tin một cách có cấu trúc.
+- **Message Queuing**: Message Queuing (MQ) cho phép các ứng dụng gửi và nhận Message một cách đáng tin cậy và hiệu quả. Ví dụ phổ biến bao gồm RabbitMQ
+- Và rất nhiều phương pháp khác.
+
 ## Tổng kết
 - **Message** là một yêu cầu chứa dữ liệu được gửi từ hệ thống này sang hệ thống khác, có mục đích xử lý hoặc trao đổi thông tin.
 
@@ -80,3 +90,5 @@ Gửi thư từ nhà của **A** ở **Hà Nội** đến **B** ở **Đà Nẵn
 - **Format dữ liệu của Message** thường được xác định bởi hợp đồng giữa hệ thống gửi và hệ thống nhận, thường là JSON, bao gồm cả thuật toán mã hóa và dữ liệu cần thiết.
 
 - **Mục đích** của việc gửi Message là để truyền đạt thông tin hoặc yêu cầu thực hiện một công việc cụ thể giữa các thành phần trong hệ thống.
+
+- **Có nhiều phương pháp trao đổi message** như Message Queue, APIs, RPC...
