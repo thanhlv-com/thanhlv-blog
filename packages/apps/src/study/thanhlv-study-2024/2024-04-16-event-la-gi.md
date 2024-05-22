@@ -8,9 +8,9 @@ outline: deep
 draft: false
 group: 2. Message and event stream
 ---
-# Event là gì ?
+# Giới thiệu
 
-Sau khi đã hiểu về **[Message](2024-04-15-message-la-gi.md)**, bước tiếp theo không kém phần quan trọng là khám phá về **Event**.
+Vậy là chúng ta đã tìm hiểu về một trong những cách trao đổi thông tin giữa các hệ thống đó là sử dụng **[Message](2024-04-15-message-la-gi.md)** và Message Queue một trong các phương pháp sử dụng để để trao đổi Message. Bước tiếp theo chúng ta sẽ tìm hiểu về khái niệm Event, một cách thức khác được sử dụng để trao đổi thông tin.
 
 **Event** là một khái niệm cốt lõi trong việc xây dựng các hệ thống và tương tác. Không giống như Message chủ yếu mang thông tin, Event đại diện cho một sự kiện, một thay đổi trạng thái hoặc một hành động nào đó đã xảy ra trong hệ thống.
 
@@ -24,7 +24,7 @@ Bắt đầu cuộc hành trình khám phá về Event, chúng ta sẽ mở ra n
 [[TOC]]
 
 ## Vậy Event là gì ?
-- Event có thể được hiểu là một sự kiện, một thay đổi trạng thái, hoặc một hành động cụ thể nào đó xảy ra trong hệ thống hoặc ứng dụng.
+- Event có thể được hiểu là một sự kiện, một thay đổi trạng thái, hoặc một hành động cụ thể nào đó đã xảy ra.
 
 - Thông thường **Event** sẽ được tạo sau khi một **Message** kết thúc (Thành công hoặc thất bại), tùy nhiên điều đó không bắt buộc. (Có thể từ một Event khác, từ kết quả của một tính toán định kỳ(Định kỳ 10s đo thân nhiệt).....)
   ![Image](2024-04-16-event-la-gi/1.jpg)
