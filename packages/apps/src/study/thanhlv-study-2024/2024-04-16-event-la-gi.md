@@ -10,7 +10,7 @@ group: 2. Message and event stream
 ---
 # Giới thiệu
 
-Vậy là chúng ta đã tìm hiểu về một trong những cách trao đổi thông tin giữa các hệ thống đó là sử dụng **[Message](2024-04-15-message-la-gi.md)** và Message Queue một trong các phương pháp sử dụng để để trao đổi Message. Bước tiếp theo chúng ta sẽ tìm hiểu về khái niệm Event, một cách thức khác được sử dụng để trao đổi thông tin.
+Vậy là chúng ta đã tìm hiểu về một trong những cách trao đổi thông tin giữa các hệ thống đó là sử dụng **[Message](2024-04-15-message-la-gi.md)** và [Message Queue](2024-04-15-message-queue-la-gi.md) một trong các phương pháp sử dụng để để trao đổi **[Message](2024-04-15-message-la-gi.md)**. Bước tiếp theo chúng ta sẽ tìm hiểu về khái niệm Event..
 
 **Event** là một khái niệm cốt lõi trong việc xây dựng các hệ thống và tương tác. Không giống như Message chủ yếu mang thông tin, Event đại diện cho một sự kiện, một thay đổi trạng thái hoặc một hành động nào đó đã xảy ra trong hệ thống.
 
@@ -24,9 +24,11 @@ Bắt đầu cuộc hành trình khám phá về Event, chúng ta sẽ mở ra n
 [[TOC]]
 
 ## Vậy Event là gì ?
-- Event có thể được hiểu là một sự kiện, một thay đổi trạng thái, hoặc một hành động cụ thể nào đó đã xảy ra.
-
-- Thông thường **Event** sẽ được tạo sau khi một **Message** kết thúc (Thành công hoặc thất bại), tùy nhiên điều đó không bắt buộc. (Có thể từ một Event khác, từ kết quả của một tính toán định kỳ(Định kỳ 10s đo thân nhiệt).....)
+- Event dịch sang tiếng việt là **Sự Kiện** trong bối cảnh phát triển phần mềm có thể được hiểu là **một thay đổi trạng thái, một hành động cụ thể, một thứ gì đó** ===> **đã xảy ra**.
+Ví dụ:
+1. Thành đã xuống máy tại ở Sài Gòn lúc 10h sáng ngày 20-11-2024.
+2. Team phát triển đã Deploy service lúc 23h ngày 20-11-2024
+- Thông thường **Event** sẽ được tạo sau khi một **Message** kết thúc, tùy nhiên điều đó không bắt buộc. (Có thể từ một Event khác, hệ thống tự phát ra, từ kết quả của một tính toán định kỳ(Định kỳ 10s đo thân nhiệt).....)
   ![Image](2024-04-16-event-la-gi/1.jpg)
 
 ### 3 thành phần chính của Event
@@ -93,3 +95,7 @@ Bắt đầu cuộc hành trình khám phá về Event, chúng ta sẽ mở ra n
 
 - Trong hệ thống phần mềm, Event tăng tính linh hoạt, phản ứng thay đổi, tách biệt nghiệp vụ và tối ưu hiệu suất.
 
+
+
+# REF:
+https://viblo.asia/p/domain-events-la-gi-924lJ8j8KPM
