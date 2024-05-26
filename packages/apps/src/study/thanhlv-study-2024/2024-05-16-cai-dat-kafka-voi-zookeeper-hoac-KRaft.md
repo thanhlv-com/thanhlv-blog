@@ -18,7 +18,30 @@ Trong bài viết này, chúng ta sẽ cùng nhau bước vào hành trình khá
 ![Zookeeper-Architecture](2024-05-16-cai-dat-kafka-voi-zookeeper-hoac-KRaft/Zookeeper-Architecture.png)
 Zookeeper là một open source cho centralized service để duy trì thông tin cấu hình, đặt tên và cung cấp đồng bộ hóa cho các ứng dụng phân tán.
 
-Zookeeper cho phép các ứng dụng đọc và viết vào một cấu trúc phân tán giống như mộ hệ thống tập tin phân tán nhỏ và quản lý thông tin cấu hình cũng như cung cấp chức năng service discovery.
+Zookeeper Cho phép các process phân tán phối hợp với nhau thông qua một Share hierarchical namespace(Chia sẽ hệ thống tệp phân cấp), nó giống như một [File system](https://vi.wikipedia.org/wiki/H%E1%BB%87_th%E1%BB%91ng_t%E1%BA%ADp_tin)
+![what-is-file-system-1.png](2024-05-16-cai-dat-kafka-voi-zookeeper-hoac-KRaft/what-is-file-system-1.png)
+Trong đó mỗi một folder trong Share hierarchical namespace được gọi là Znodes. Mỗi Znodes trong Zookeeper name space được xác định bởi một path. Và mọi Znodes đều có cha mẹ có đường dẫn là prefix của Znodes hiện tại. Ngoại lệ duy nhaast là Root("/") sẽ không có cha mẹ.
+
+::: details Ví dụ về Znodes
+```
+/opt/containerd/lib/
+```
+
+Nhìn vào đường dẫn ở trên chúng ta có thể nhận thấy là đang có 4 Znodes.
+1. Znode Root chính là "/" đầu tiên từ trái qua phải, Znodes đầu tiên chứa các con là "opt"
+ và có thể có nhiều con khác nữa.
+2. Znode thứ 2 trong phân cấp có cha là **Root** là **Opt**
+3. Znode thứ 3 trong phân cấp có cha là **opt** là **containerd**
+4. Znode thứ 4 trong phân cấp có cha là **containerd** là **lib**
+:::
+
+Và giống như các [File system](https://vi.wikipedia.org/wiki/H%E1%BB%87_th%E1%BB%91ng_t%E1%BA%ADp_tin) khác,Znode cha không thể bị xóa nếu có các Znode con. Vì vậy muốn xóa Znode cha thì tất cả các Znode con cũng sẽ bị xóa.
+
+Và Zookeeper để duy trì thông tin cấu hình, vì vậy các data trong Znode thường đo bằng kilobyte, thậm chí là byte.
+
+::: details REF
+https://cwiki.apache.org/confluence/display/ZOOKEEPER/ProjectDescription
+:::
 
 ### Các tính năng chính của ZooKeeper bao gồm.
 - **Đồng bộ hóa**: Zookeeper giúp đồng bộ hóa trạng thái giữa các node trong hệ thống phân tán, đảm bảo tất cả các node đều có dữ liệu nhất quán.
