@@ -18,11 +18,13 @@ Trong bài viết này, chúng ta sẽ cùng nhau bước vào hành trình khá
 **Đây là ý kiến cá nhân, là sự cảm nhận của mình nên có thể đúng hoặc sai.**
 Một lưu ý trước tiên đó là Zookeeper là một component riêng và độc lập, còn Kraft là một thành phần nằm sẵn trong kafka từ phiên bản 2.8.0
 
-Zookeeper hoặc Kraft đóng vai trò giúp quản lý, đồng bộ trạng thái, cấu hình của Kafka Cluster, một số khía cạnh chính là:
+Zookeeper hoặc Kraft đóng vai trò giúp quản lý, đồng bộ trạng thái, cấu hình của Kafka Cluster, một số khía cạnh chính khi sử dụng trong Kafka là:
 - Quản lý metadata: Lưu trữ và quản lý các metadata liên quan đến Kafka Cluster bao gồm thông tin về Brokers, topic, partitions và replicas.
 - Đồng bộ há và điều phối : Đóng vai trò là người điều phối, giúp đảm bảo các Brokers trong Cluster có trạng thái nhất quán, cũng cung cấp tính năng đồng bộ hóa các cấu hình và gửi các thay đổi đến các nodes trong cluster.
-- Bầu Leader Partition:
-
+- Bầu Leader Partition: Bầu chọn Leader cho các Partition đảm bảo mỗi Partition có một Leader để xử lý yêu cầu ghi và đọc.
+- Quản lý trạng thái của Brokers: Zookeeper theo dõi trạng thái hoạt động của các Broker trong Cluster thông qua cơ chế chế [heartbeat](https://demanejar.github.io/posts/hdfs-introduction/#:~:text=C%C6%A1%20ch%E1%BA%BF%20heartbeat,datanode%20%C4%91%C3%B3%20c%C3%B2n%20ho%E1%BA%A1t%20%C4%91%E1%BB%99ng.)
+  - Khi một brokers định kỳ không gửi trạng thái báo cáo đang hoạt động đến Zookeeper, Zookeeper coi broker đó là đã chết và thông báo cho các Brokers khác trong Cluster để cho các brokers khác biết và thực hiện các thao tác phục hồi cần thiết.
+- Rebalancing: Khi có sự thêm hoặc loại bỏ một brokers trong cluster, Zookeeper giúp điều phối quá trình rebalancing, đảm bảo dữ liệu được phân phối trên các Broker và các partition được sao chép.
 ## Zookeeper là gì ?
 ![Zookeeper-Architecture](2024-05-16-cai-dat-kafka-voi-zookeeper-hoac-KRaft/Zookeeper-Architecture.png)
 Zookeeper là một open source cho centralized service để duy trì thông tin cấu hình, đặt tên và cung cấp đồng bộ hóa cho các ứng dụng phân tán.
@@ -62,8 +64,8 @@ https://cwiki.apache.org/confluence/display/ZOOKEEPER/ProjectDescription
   - Zookeeper đảm bảo tính nhất quán của dữ liệu thông qua một thuật toán tên là : Zab (ZooKeeper Atomic Broadcast) thuật toán này đảm bảo rằng tất cả các thay đổi đối với cấu trúc dữ liệu của Zookeeper được áp dụng một cách đồng bộ trên tất cả các Node trong cụm.
 - **Cơ chế Watchers**: Cơ chế này cho phép các client đăng ký nhận thông báo khi có sự thay đổi đối với dữ liệu mà họ quan tâm. Khi có dữ liệu tại một znode thay đổi, các client đăng ký watcher sẽ nhận đưược thông báo, điều này giúp các ứng dụng phản ứng nhanh chóng với các thay đổi trong cấu hình hoặc trạng thái của hệ thống
 
-### Cách thức hoạt động của Zookeeper.
 ![Zookeeper-Architecture](2024-05-16-cai-dat-kafka-voi-zookeeper-hoac-KRaft/Zookeeper-Architecture.png)
-Zookeeper duy trì một cấu chúc dữ liệu phân cấp và lưu trữ các dữ liệu trong các Node gọi là Znodes. Mỗi Znodes có thể chứa dữ liệu và có thể có các Znode con. Zookeeper đảm bảo rằng tất cả các bản sao của cơ sở dữ liệu các nó trên các node khác nhau đều được cập nhật với trạng thái nhất quán.
+Zookeeper duy trì một cấu chúc dữ liệu phân cấp và lưu trữ các dữ liệu trong các Node gọi là Znodes. Mỗi Znodes có thể chứa dữ liệu và có thể có các Znode con. Zookeeper đảm bảo rằng tất cả các bản sao của cơ sở dữ liệu các nó trên các node(Node zookeeper) khác nhau đều được cập nhật với trạng thái nhất quán.
 
-### 
+### Setup Kafka với Zookeeper.
+#### Docker
