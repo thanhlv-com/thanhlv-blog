@@ -68,4 +68,6 @@ https://cwiki.apache.org/confluence/display/ZOOKEEPER/ProjectDescription
 Zookeeper duy trì một cấu chúc dữ liệu phân cấp và lưu trữ các dữ liệu trong các Node gọi là Znodes. Mỗi Znodes có thể chứa dữ liệu và có thể có các Znode con. Zookeeper đảm bảo rằng tất cả các bản sao của cơ sở dữ liệu các nó trên các node(Node zookeeper) khác nhau đều được cập nhật với trạng thái nhất quán.
 
 ### Setup Kafka với Zookeeper.
+Chúng ta sẽ tìm hiểu cách setup thông qua docker và cài trực tiếp trên máy chủ. Mỗi loại sẽ có setup kiểu single-node(Dành cho môi trường phát triển local) và cluster dành cho môi trường Release.
 #### Docker
+##### Single-node
