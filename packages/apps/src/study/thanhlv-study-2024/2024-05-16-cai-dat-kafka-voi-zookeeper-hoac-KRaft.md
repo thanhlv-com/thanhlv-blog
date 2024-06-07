@@ -123,5 +123,6 @@ services:
 
 # REF:
 - https://www.baeldung.com/ops/kafka-docker-setup
+- https://viblo.asia/p/007-simple-kafka-producer-client-api-voi-java-WAyK86PplxX
 - https://stackoverflow.com/questions/61002881/docker-compose-doesnt-save-data-in-volume/61008432#61008432
 - Kafka tool view: https://kafkatool.com/
