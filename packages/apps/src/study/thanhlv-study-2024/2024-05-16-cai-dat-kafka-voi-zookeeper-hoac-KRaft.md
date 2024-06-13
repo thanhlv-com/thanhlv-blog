@@ -68,9 +68,64 @@ https://cwiki.apache.org/confluence/display/ZOOKEEPER/ProjectDescription
 Zookeeper duy trì một cấu chúc dữ liệu phân cấp và lưu trữ các dữ liệu trong các Node gọi là Znodes. Mỗi Znodes có thể chứa dữ liệu và có thể có các Znode con. Zookeeper đảm bảo rằng tất cả các bản sao của cơ sở dữ liệu các nó trên các node(Node zookeeper) khác nhau đều được cập nhật với trạng thái nhất quán.
 
 ### Setup Kafka với Zookeeper.
-Chúng ta sẽ tìm hiểu cách setup thông qua docker và cài trực tiếp trên máy chủ. Mỗi loại sẽ có setup kiểu single-node(Dành cho môi trường phát triển local) và cluster dành cho môi trường Release.
+
+Chúng ta sẽ tìm hiểu cách setup thông qua docker và cài trực tiếp trên máy chủ. 
+
+Mỗi loại sẽ có setup kiểu single-node(Dành cho môi trường phát triển local) và cluster dành cho môi trường Release.
+
+Tuy nhiên vì là học tập nên tại thời điểm này mình sẽ học cài với docker, cài trực tiếp trên máy chủ mình sẽ cập nhật sau.
+
 #### Docker
 ##### Single-node
+docker-compose.yml
+```docker-compose.yml
+version: '2'
+services:
+  zookeeper:
+    image: confluentinc/cp-zookeeper:7.4.4
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
+      ZOOKEEPER_TICK_TIME: 2000
+    ports:
+      - 22181:2181
+    volumes:
+      - ./data/zoo/data:/var/lib/zookeeper/data
+      - ./data/zoo/log:/var/lib/zookeeper/log
+  kafka:
+    image: confluentinc/cp-kafka:7.4.4
+    depends_on:
+      - zookeeper
+    ports:
+      - 29092:29092
+    environment:
+      KAFKA_BROKER_ID: 1
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092,PLAINTEXT_HOST://localhost:29092
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
+      KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+    volumes:
+      - ./data/broker/data:/var/lib/kafka/data
+  init-topic-kafka:
+    image: confluentinc/cp-kafka:7.4.4
+    depends_on:
+      - kafka
+    entrypoint: [ '/bin/sh', '-c' ]
+    command: |
+      "
+      # sleep 15
+      sleep 15
+      # blocks until kafka is reachable
+      kafka-topics --bootstrap-server kafka:9092 --list
+      
+      echo -e 'Creating kafka topics'
+      kafka-topics --bootstrap-server kafka:9092 --create --if-not-exists --topic my-topic-2 --replication-factor 1 --partitions 1
+      
+      echo -e 'Successfully created the following topics:'
+      kafka-topics --bootstrap-server kafka:9092 --list
+      "
+```
+##### cluster
 docker-compose.yml
 ```docker-compose.yml
 version: '2'
