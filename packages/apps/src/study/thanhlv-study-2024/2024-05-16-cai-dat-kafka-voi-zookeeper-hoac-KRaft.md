@@ -79,7 +79,7 @@ Tuy nhiên vì là học tập nên tại thời điểm này mình sẽ học c
 ##### Single-node
 docker-compose.yml
 ```docker-compose.yml
-version: '2'
+version: '3'
 services:
   zookeeper:
     image: confluentinc/cp-zookeeper:7.4.4
@@ -125,54 +125,102 @@ services:
       kafka-topics --bootstrap-server kafka:9092 --list
       "
 ```
-##### cluster
+##### Cluster
+
 docker-compose.yml
+
+Thực tế tại setup Cluster thì các Kafka không kết nối trực tiếp đến nhau, Để setup thành một Cluster
+
 ```docker-compose.yml
-version: '2'
+version: '3'
 services:
-  zookeeper:
+  zookeeper-1:
     image: confluentinc/cp-zookeeper:7.4.4
+    container_name: "zookeeper-1"
     environment:
       ZOOKEEPER_CLIENT_PORT: 2181
       ZOOKEEPER_TICK_TIME: 2000
+      ZOOKEEPER_SERVER_ID: 1
+      ZOOKEEPER_SERVERS: zookeeper-1:2888:3888;zookeeper-2:2888:3888
     ports:
       - 22181:2181
     volumes:
-      - ./data/zoo/data:/var/lib/zookeeper/data
-      - ./data/zoo/log:/var/lib/zookeeper/log
-  kafka:
+      - ./data/zoo_1/data:/var/lib/zookeeper/data
+      - ./data/zoo_1/log:/var/lib/zookeeper/log
+    networks:
+      - example-network
+  zookeeper-2:
+    image: confluentinc/cp-zookeeper:7.4.4
+    container_name: "zookeeper-2"
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
+      ZOOKEEPER_TICK_TIME: 2000
+      ZOOKEEPER_SERVER_ID: 2
+      ZOOKEEPER_SERVERS: zookeeper-1:2888:3888;zookeeper-2:2888:3888
+    ports:
+      - 22182:2181
+    volumes:
+      - ./data/zoo_2/data:/var/lib/zookeeper/data
+      - ./data/zoo_2/log:/var/lib/zookeeper/log
+    networks:
+      - example-network
+  kafka-1:
     image: confluentinc/cp-kafka:7.4.4
+    container_name: "kafka-1"
     depends_on:
-      - zookeeper
+      - zookeeper-1
     ports:
       - 29092:29092
     environment:
       KAFKA_BROKER_ID: 1
-      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
-      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092,PLAINTEXT_HOST://localhost:29092
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper-1:2181
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka-1:9092,PLAINTEXT_HOST://localhost:29092
       KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
       KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
     volumes:
-      - ./data/broker/data:/var/lib/kafka/data
-  init-topic-kafka:
+      - ./data/broker-1/data:/var/lib/kafka/data
+    networks:
+      - example-network
+  kafka-2:
     image: confluentinc/cp-kafka:7.4.4
+    container_name: "kafka-2"
     depends_on:
-      - kafka
+      - zookeeper-2
+    ports:
+      - 29093:29093
+    environment:
+      KAFKA_BROKER_ID: 2
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper-2:2181
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka-2:9092,PLAINTEXT_HOST://localhost:29093
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
+      KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+    volumes:
+      - ./data/broker-2/data:/var/lib/kafka/data
+    networks:
+      - example-network
+  init-kafka:
+    image: confluentinc/cp-kafka:7.4.4
+    networks:
+      - example-network
     entrypoint: [ '/bin/sh', '-c' ]
     command: |
       "
       # sleep 15
-      sleep 15
+      # sleep 15
       # blocks until kafka is reachable
-      kafka-topics --bootstrap-server kafka:9092 --list
+      kafka-topics --bootstrap-server kafka-1:9092 --list
       
       echo -e 'Creating kafka topics'
-      kafka-topics --bootstrap-server kafka:9092 --create --if-not-exists --topic my-topic-2 --replication-factor 1 --partitions 1
+      kafka-topics --bootstrap-server kafka-2:9091 --create --if-not-exists --topic my-topic-2 --replication-factor 2 --partitions 5
       
       echo -e 'Successfully created the following topics:'
-      kafka-topics --bootstrap-server kafka:9092 --list
+      kafka-topics --bootstrap-server kafka-1:9092 --list
       "
+networks:
+  example-network:
+    external: true
 ```
 
 
