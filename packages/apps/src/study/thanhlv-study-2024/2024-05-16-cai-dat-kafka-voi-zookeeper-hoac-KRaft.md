@@ -129,7 +129,11 @@ services:
 
 docker-compose.yml
 
-Thực tế tại setup Cluster thì các Kafka không kết nối trực tiếp đến nhau, Để setup thành một Cluster
+Thực tế khi setup Cluster thì các Kafka không kết nối trực tiếp đến nhau, Để setup thành một Cluster thì có 2 cách sau.
+1. Tất cả Kafka node cùng kết nối đến một `zookeeper`.
+![apache-kafka-architecture.webp](2024-05-16-cai-dat-kafka-voi-zookeeper-hoac-KRaft/apache-kafka-architecture.webp)
+2. Tạo các Cluster `zookeeper`. Khi Kafka kết nối đên Cluster bằng cách kết nối 1-N các Node ở zookeeper trong Cluster `zookeeper`.
+  1. Thông thường Kafka sẽ kết nối đến tất cả các node `zookeeper` và số node `zookeeper` hiếm khi hay đổi.
 
 ```docker-compose.yml
 version: '3'
@@ -223,9 +227,11 @@ networks:
     external: true
 ```
 
+Trong bài viết này mình sẽ chỉ làm đơn giản về cách thứ setup Kafka, mình sẽ có một bài khác nói về chi tiết các cách thức cài đặt kafka cũng như ưu và nhược điểm.
 
 # REF:
 - https://www.baeldung.com/ops/kafka-docker-setup
 - https://viblo.asia/p/007-simple-kafka-producer-client-api-voi-java-WAyK86PplxX
 - https://stackoverflow.com/questions/61002881/docker-compose-doesnt-save-data-in-volume/61008432#61008432
 - Kafka tool view: https://kafkatool.com/
+- https://aws.amazon.com/blogs/big-data/best-practices-for-running-apache-kafka-on-aws/
