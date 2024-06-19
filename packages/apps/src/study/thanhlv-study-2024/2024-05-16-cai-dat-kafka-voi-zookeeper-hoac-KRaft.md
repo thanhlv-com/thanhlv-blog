@@ -226,7 +226,10 @@ networks:
   example-network:
     external: true
 ```
+### Setup Kafka với kraft.
+Sẽ làm sau:
 
+##
 Trong bài viết này mình sẽ chỉ làm đơn giản về cách thứ setup Kafka, mình sẽ có một bài khác nói về chi tiết các cách thức cài đặt kafka cũng như ưu và nhược điểm.
 
 # REF:
