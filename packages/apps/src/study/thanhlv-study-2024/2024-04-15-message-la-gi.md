@@ -8,7 +8,9 @@ outline: deep
 draft: false
 group: 2. Message and event stream
 ---
-# Message là gì ?
+## Các loại chỉ thông tin được truyền tải giữa các đối tượng
+
+[[TOC]]
 
 Mở đầu học về `Message and event stream` thì mình sẽ giải thích các kiến thức cơ bản trước. Kiến thức đầu tiên là hiểu về **Message**.
 
@@ -33,11 +35,29 @@ Có một số định nghĩa chung được nhiều bên sử dụng, có thể
      - Định nghĩa: Query trong Computing and technology là một yêu cầu để truy xuất dữ liệu trên database hoặc các hệ thống thông tin.
   5. Thông báo (Notification)
      - Ngữ cảnh: Ứng dụng và hệ thống gửi thông báo cho người dùng về sự kiện hoặc trạng thái
-     - Định nghĩa : 
-[[TOC]]
+     - [Định nghĩa](https://en.wikipedia.org/wiki/Notification) :  Thông tin được gửi từ một hệ thống hoặc ứng dụng để thông báo về một sự kiện hoặc trạng thái.
+  6. Sự kiện (Event)
+     - Ngữ cảnh: Lập trình sự kiện, hệ thống giám sát, hệ thống phản ứng sự kiện...
+     - [Định nghĩa](https://en.wikipedia.org/wiki/Event_(computing)): Một hành động hoặc trạng thái đã xảy ra và được phát hiện và thông báo trong hệ thống.
+  7. Log Entry (Bản ghi log)
+     - Ngữ cảnh: Giám sát hệ thống, phân tích sự kiện...
+     - [Định nghĩa](https://en.wikipedia.org/wiki/Logging_(computing)): Một mục trong tệp hoặc hệ thống nhật ký, ghi lại các sự kiện hoặc hành động trong hệ thống.
+  8. Siêu dữ liệu (Metadata)
+     - Ngữ cảnh: Quản lý thông tin, tài liệu, hệ thống lưu trữ dữ liệu.
+     - [Định nghĩa](https://en.wikipedia.org/wiki/Metadata):  Metadata là "dữ liệu cung cấp thông tin về dữ liệu khác", nhưng không phải nội dung của chính dữ liệu đó.
+  9. Thông điệp (Message)
+     - Ngữ cảnh: Giao tiếp thông qua các hệ thống như email, tin nhắn văn bản,hệ thống giao tiếp với nhau...
+     - [Định nghĩa](https://en.wikipedia.org/wiki/Message): Thông tin được truyền từ người gửi đến người nhận qua một kênh truyền thông cụ thể.
+  - Và nhiều khai niệm khác hoặc bạn có thể tự định nghĩa ra khái niệm của bạn, nhóm hoặc tổ chức của bạn.
+- Khi nào có thể sử dụng các khái niệm này?
+  1. Truyền dữ liệu qua mạng: Sử dụng "Gói tin (Packet)" và "Khung (Frame)" để mô tả các đơn vị dữ liệu truyền qua mạng.
+  2. Giao tiếp giữa người dùng: Sử dụng "Thông điệp (Message)" và "Thông báo (Notification)" trong ngữ cảnh gửi email, tin nhắn văn bản, và thông báo ứng dụng.
+  3. Tương tác hệ thống: Sử dụng "Lệnh (Command)" và "Truy vấn (Query)" khi mô tả các yêu cầu và hành động giữa người dùng và hệ thống
+  4. Giám sát và phản ứng: Sử dụng "Sự kiện (Event)" và "Log Entry (Bản ghi log)" để mô tả các hành động và tình huống trong hệ thống.
+  5. Quản lý thông tin: Sử dụng "Siêu dữ liệu (Metadata)" khi cần mô tả và quản lý các đặc tính của dữ liệu khác.
 
 ## Vậy Message là gì ?
-Một lưu ý nhỏ trong định nghĩa Message ở bài viết này mình sẽ định nghĩa Message trong nhu cầu trao đổi thông tin.
+Message là một trong các định nghĩa chung được nhiều bên, hệ thống sử dụng để `chỉ thông tin được truyền tải giữa các đối tượng`.
 
 - **Đầu tiên**, **Message** Có nghĩa là **Tin nhắn** hoặc **Thông điệp** là một thông tin ở dạng dữ liệu được gửi từ A đến B(Từ hệ thống A đến hệ thống B) và được B nhận.
 
