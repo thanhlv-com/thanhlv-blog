@@ -228,7 +228,131 @@ networks:
 ```
 ### Setup Kafka với kraft.
 https://docs.confluent.io/platform/current/installation/docker/config-reference.html#required-ak-configurations-for-kraft-mode
-Sẽ làm sau:
+##### Cluster
+create_cluster_id.sh
+Tạo ngẫu nhiên ID cụm
+```
+/bin/bash
+
+file_path="/tmp/clusterID/clusterID"
+
+if [ ! -f "$file_path" ]; then
+  /bin/kafka-storage random-uuid > /tmp/clusterID/clusterID
+  echo "Cluster id has been  created..."
+fi
+```
+
+Thực hiện chạy cụm, như tài liệu ở trên có nói, để xác định chạy cụm với Zookeeper hay Kraft thì sẽ có 1 số biến cần config để xác định đó là Kraft, nếu không mặc định sẽ là Zookeeper.
+- `KAFKA_PROCESS_ROLES`, `KAFKA_NODE_ID`, `KAFKA_CONTROLLER_QUORUM_VOTERS`, `KAFKA_CONTROLLER_LISTENER_NAMES` và `CLUSTER_ID` nếu dùng biến môi trường hoặc có thể dùng file trên máy chủ.
+
+docker-compose.yml
+```
+version: "3"
+services:
+#  kafka-gen:
+#    image: confluentinc/cp-kafka:7.4.4
+#    hostname: kafka-gen
+#    container_name: kafka-gen
+#    volumes:
+#      - ./scripts/create_cluster_id.sh:/tmp/create_cluster_id.sh
+#      - ./clusterID:/tmp/clusterID
+#    command: "bash -c '/tmp/create_cluster_id.sh'"
+
+  kafka1:
+    image: confluentinc/cp-kafka:7.4.4
+    hostname: kafka1
+    container_name: kafka1
+    ports:
+      - "39092:39092"
+    environment:
+      KAFKA_LISTENERS: BROKER://kafka1:19092,EXTERNAL://kafka1:39092,CONTROLLER://kafka1:9093
+      KAFKA_ADVERTISED_LISTENERS: BROKER://kafka1:19092,EXTERNAL://localhost:39092
+      KAFKA_INTER_BROKER_LISTENER_NAME: BROKER
+      KAFKA_CONTROLLER_LISTENER_NAMES: CONTROLLER
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: CONTROLLER:PLAINTEXT,BROKER:PLAINTEXT,EXTERNAL:PLAINTEXT
+      KAFKA_GROUP_INITIAL_REBALANCE_DELAY_MS: 0
+      KAFKA_PROCESS_ROLES: 'controller,broker'
+      KAFKA_NODE_ID: 1
+      KAFKA_CONTROLLER_QUORUM_VOTERS: '1@kafka1:9093,2@kafka2:9093,3@kafka3:9093'
+      KAFKA_METADATA_LOG_SEGMENT_MS: 15000
+      KAFKA_METADATA_MAX_RETENTION_MS: 1200000
+      KAFKA_METADATA_LOG_MAX_RECORD_BYTES_BETWEEN_SNAPSHOTS: 2800
+      KAFKA_LOG_DIRS: '/tmp/kraft-combined-logs'
+      CLUSTER_ID: 'LLvEj5aqR46S0qSIwFUhyw'
+    volumes:
+      - ./data/broker-1/data:/var/lib/kafka/data
+    command: "bash -c '/etc/confluent/docker/run'"
+    networks:
+      - example-network
+
+  kafka2:
+    image: confluentinc/cp-kafka:7.4.4
+    hostname: kafka2
+    container_name: kafka2
+    ports:
+      - "39093:39093"
+    environment:
+      KAFKA_LISTENERS: BROKER://kafka2:19093,EXTERNAL://kafka2:39093,CONTROLLER://kafka2:9093
+      KAFKA_ADVERTISED_LISTENERS: BROKER://kafka2:19093,EXTERNAL://localhost:39093
+      KAFKA_INTER_BROKER_LISTENER_NAME: BROKER
+      KAFKA_CONTROLLER_LISTENER_NAMES: CONTROLLER
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: CONTROLLER:PLAINTEXT,BROKER:PLAINTEXT,EXTERNAL:PLAINTEXT
+      KAFKA_GROUP_INITIAL_REBALANCE_DELAY_MS: 0
+      KAFKA_PROCESS_ROLES: 'controller,broker'
+      KAFKA_NODE_ID: 2
+      KAFKA_CONTROLLER_QUORUM_VOTERS: '1@kafka1:9093,2@kafka2:9093,3@kafka3:9093'
+      KAFKA_METADATA_LOG_SEGMENT_MS: 15000
+      KAFKA_METADATA_MAX_RETENTION_MS: 1200000
+      KAFKA_METADATA_LOG_MAX_RECORD_BYTES_BETWEEN_SNAPSHOTS: 2800
+      KAFKA_LOG_DIRS: '/tmp/kraft-combined-logs'
+      CLUSTER_ID: 'LLvEj5aqR46S0qSIwFUhyw'
+    volumes:
+      - ./data/broker-2/data:/var/lib/kafka/data
+    command: "bash -c '/etc/confluent/docker/run'"
+    networks:
+      - example-network
+
+  kafka3:
+    image: confluentinc/cp-kafka:7.4.4
+    hostname: kafka3
+    container_name: kafka3
+    ports:
+      - "39094:39094"
+    environment:
+      KAFKA_LISTENERS: BROKER://kafka3:19094,EXTERNAL://kafka3:39094,CONTROLLER://kafka3:9093
+      KAFKA_ADVERTISED_LISTENERS: BROKER://kafka3:19094,EXTERNAL://localhost:39094
+      KAFKA_INTER_BROKER_LISTENER_NAME: BROKER
+      KAFKA_CONTROLLER_LISTENER_NAMES: CONTROLLER
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: CONTROLLER:PLAINTEXT,BROKER:PLAINTEXT,EXTERNAL:PLAINTEXT
+      KAFKA_GROUP_INITIAL_REBALANCE_DELAY_MS: 0
+      KAFKA_PROCESS_ROLES: 'controller,broker'
+      KAFKA_NODE_ID: 3
+      KAFKA_CONTROLLER_QUORUM_VOTERS: '1@kafka1:9093,2@kafka2:9093,3@kafka3:9093'
+      KAFKA_METADATA_LOG_SEGMENT_MS: 15000
+      KAFKA_METADATA_MAX_RETENTION_MS: 1200000
+      KAFKA_METADATA_LOG_MAX_RECORD_BYTES_BETWEEN_SNAPSHOTS: 2800
+      KAFKA_LOG_DIRS: '/tmp/kraft-combined-logs'
+      CLUSTER_ID: 'LLvEj5aqR46S0qSIwFUhyw'
+    volumes:
+      - ./data/broker-3/data:/var/lib/kafka/data
+    command: "bash -c '/etc/confluent/docker/run'"
+    networks:
+      - example-network
+  kafka-ui:
+    container_name: kafka-ui
+    restart: unless-stopped
+    image: 'provectuslabs/kafka-ui:latest'
+    ports:
+      - "8080:8080"
+    environment:
+      - KAFKA_CLUSTERS_0_BOOTSTRAP_SERVERS=localhost:39092,localhost:39093,localhost:39094
+      - KAFKA_CLUSTERS_0_NAME=LLvEj5aqR46S0qSIwFUhyw
+    networks:
+      - example-network
+networks:
+  example-network:
+    external: true
+```
 
 ##
 Trong bài viết này mình sẽ chỉ làm đơn giản về cách thứ setup Kafka, mình sẽ có một bài khác nói về chi tiết các cách thức cài đặt kafka cũng như ưu và nhược điểm.
