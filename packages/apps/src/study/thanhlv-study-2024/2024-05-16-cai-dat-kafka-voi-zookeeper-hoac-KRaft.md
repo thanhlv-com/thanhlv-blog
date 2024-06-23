@@ -227,6 +227,7 @@ networks:
     external: true
 ```
 ### Setup Kafka với kraft.
+https://docs.confluent.io/platform/current/installation/docker/config-reference.html#required-ak-configurations-for-kraft-mode
 Sẽ làm sau:
 
 ##
