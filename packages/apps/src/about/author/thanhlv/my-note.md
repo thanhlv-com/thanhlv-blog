@@ -16,3 +16,4 @@ date: 2024-01-08
 - Tấn công web sheet : https://github.com/riramar/Web-Attack-Cheat-Sheet
 ## Other
 - https://www.ophiuchi.dev/ ==> Tạo local https để dành cho test(Hiện chỉ dành cho MACOS)
+- https://www.16personalities.com/ : Tools đánh giá tính cách
