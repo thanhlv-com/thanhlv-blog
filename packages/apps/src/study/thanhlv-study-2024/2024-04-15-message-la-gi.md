@@ -12,15 +12,31 @@ group: 2. Message and event stream
 
 Mở đầu học về `Message and event stream` thì mình sẽ giải thích các kiến thức cơ bản trước. Kiến thức đầu tiên là hiểu về **Message**.
 
-**Message** không chỉ là một khái niệm đơn giản; nó là trung tâm của hệ thống, là phương tiện mà dữ liệu di chuyển thông qua giữa các thành phần trong hệ thống.
+Ngày nay, 1 ngày có hàng tỉ GB dữ liệu được truyền tải, giao tiếp giữa các hệ thống hoặc giữa hệ thống và khách hàng.
 
-**Message** không chỉ là một dòng văn bản hay một chuỗi dữ liệu vô nghĩa. Nó mang trên mình một giá trị, một ý nghĩa, và một mục đích. Và điều quan trọng là, nó là cầu nối kết nối giữa các thành phần trong hệ thống, tạo ra một luồng thông tin liên tục và không gián đoạn.
+Tuy nhiên dữ liệu là một thứ khó để hiểu nếu chưa được làm mịn và xử lý, Trong các ngữ cảnh khác nhau thì dữ liệu có thể khác nhau, để dễ hiểu hơn về dữ liệu chúng ta gửi và nhận chúng ta thường sẽ phân loại và định nghĩa thông tin được truyền tải giữa các đối tượng.
 
-Hãy cùng mình khám phá sâu hơn về bản chất và ý nghĩa thực sự của Message, và cách nó đóng vai trò quan trọng trong việc xây dựng các hệ thống phân phối hiệu quả. Hãy bắt đầu cuộc hành trình này và khám phá cùng nhau!
+Có một số định nghĩa chung được nhiều bên sử dụng, có thể xem ở dưới đây.
 
+- Các loại chỉ thông tin được truyền tải giữa các đối tượng
+  1. Gói tin (Packet)
+     - Ngữ cảnh : Truyền dữ liệu qua mạng và internet, được sử dụng nhiều trong giao thức TCP/IP.
+     - [Định nghĩa](https://en.wikipedia.org/wiki/Network_packet): Một đơn vị(Unit) được truyền qua mạng, chứa dữ liệu và thông tin điều khiển như địa chỉ nguồn, đích và thông tin khác như số thứ tự (sequence number), kiểm tra lỗi (error checking),...
+  2. Frame (Khung)
+     - Ngữ cảnh : Tầng liên kết dữ liệu trong mô hình OSI, truyền thông Ethernet và các mạng khác.
+     - [Định nghĩa](https://en.wikipedia.org/wiki/Frame_(networking)): Một đơn vị dữ liệu trong tầng liên kết dữ liệu của mô hình OSI, Một frame bao gồm header (phần đầu), payload (phần dữ liệu), và trailer (phần cuối). Header chứa các thông tin như địa chỉ MAC (địa chỉ vật lý của thiết bị mạng), điều khiển lỗi và điều khiển truy cập vào phương trình mạng.
+  3. Lệnh (Command)
+     - Ngữ cảnh : Tương tác giữa các hệ thống hoặc người dùng với hệ thống(Lệnh điều khiển...etc..)
+     - [Định nghĩa](https://en.wikipedia.org/wiki/Command_(computing)): Thông tin chứa yêu cầu hoặc hướng dẫn để thực hiện một hành động cụ thể trên hệ thống.
+  4. Truy vấn (Query)
+     - Ngữ cảnh : Sử dụng để tìm kiếm thông tin
+     - Định nghĩa: Query trong Computing and technology là một yêu cầu để truy xuất dữ liệu trên database hoặc các hệ thống thông tin.
+  5. Thông báo (Notification)
+     - Ngữ cảnh: Ứng dụng và hệ thống gửi thông báo cho người dùng về sự kiện hoặc trạng thái
+     - Định nghĩa : 
 [[TOC]]
 
-## Message là gì ?
+## Vậy Message là gì ?
 Một lưu ý nhỏ trong định nghĩa Message ở bài viết này mình sẽ định nghĩa Message trong nhu cầu trao đổi thông tin.
 
 - **Đầu tiên**, **Message** Có nghĩa là **Tin nhắn** hoặc **Thông điệp** là một thông tin ở dạng dữ liệu được gửi từ A đến B(Từ hệ thống A đến hệ thống B) và được B nhận.
