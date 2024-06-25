@@ -16,3 +16,4 @@ date: 2024-01-09
 https://200lab.io/blog/message-broker-la-gi/
 ## Channel trong Message Queue
 
+## https://www.youtube.com/watch?v=TvLWozM182E
