@@ -17,3 +17,4 @@ date: 2024-01-08
 ## Other
 - https://www.ophiuchi.dev/ ==> Tạo local https để dành cho test(Hiện chỉ dành cho MACOS)
 - https://www.16personalities.com/ : Tools đánh giá tính cách
+- https://endoflife.date/ : Danh sách các phiên bản của các ứng dụng, thư viện trong lập trình(Ví dụ danh sách phiên bản mysql) và còn hỗ trợ hay không
