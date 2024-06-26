@@ -8,22 +8,12 @@ outline: deep
 draft: false
 group: 2. Message and event stream
 ---
-# Giới thiệu
-
-Vậy là chúng ta đã tìm hiểu về một trong những cách trao đổi thông tin giữa các hệ thống đó là sử dụng **[Message](2024-04-15-message-la-gi.md)** và [Message Queue](2024-04-15-message-queue-la-gi.md) một trong các phương pháp sử dụng để để trao đổi **[Message](2024-04-15-message-la-gi.md)**. Bước tiếp theo chúng ta sẽ tìm hiểu về khái niệm Event..
-
-**Event** là một khái niệm cốt lõi trong việc xây dựng các hệ thống và tương tác. Không giống như Message chủ yếu mang thông tin, Event đại diện cho một sự kiện, một thay đổi trạng thái hoặc một hành động nào đó đã xảy ra trong hệ thống.
-
-Event không chỉ là thông báo về một sự kiện đã xảy ra; nó còn là tín hiệu để kích hoạt các hành động tiếp theo, làm cho hệ thống trở nên linh hoạt và phản ứng nhanh chóng với các thay đổi. Điều này tạo nên một hệ thống có khả năng tự điều chỉnh, tự phục hồi và tối ưu hóa dựa trên các sự kiện xảy ra.
-
-Hãy cùng mình đi sâu vào việc tìm hiểu về bản chất của Event, cách chúng được tạo ra, phát tán, và xử lý trong các hệ thống. Chúng ta sẽ khám phá cách Event tạo ra một môi trường động, nơi mà các thành phần có thể tương tác một cách linh hoạt và hiệu quả.
-
-Bắt đầu cuộc hành trình khám phá về Event, chúng ta sẽ mở ra những hiểu biết mới và cách tiếp cận mới trong việc xây dựng và thiết kế hệ thống. Hãy cùng nhau tiếp tục hành trình này và khám phá sức mạnh của Event trong việc tạo ra các hệ thống thông minh và tự động!
-
 
 [[TOC]]
 
-## Vậy Event là gì ?
+##  Event là gì ?
+- Event là một trong các định nghĩa chung được nhiều bên, hệ thống sử dụng để `chỉ thông tin được truyền tải giữa các đối tượng`.
+
 - Event dịch sang tiếng việt là **Sự Kiện** trong bối cảnh phát triển phần mềm có thể được hiểu là **một thay đổi trạng thái, một hành động cụ thể, một thứ gì đó** ===> **đã xảy ra**.
 Ví dụ:
 1. Thành đã xuống máy tại ở Sài Gòn lúc 10h sáng ngày 20-11-2024.
