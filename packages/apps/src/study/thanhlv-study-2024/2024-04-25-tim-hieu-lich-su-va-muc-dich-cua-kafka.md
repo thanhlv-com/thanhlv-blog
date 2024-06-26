@@ -22,7 +22,7 @@ Từ những đặc điểm đến những mục tiêu chiến lược mà Kafka
 - Apache Kafka được viết bằng `Scala` và `Java`. Dự án này nhằm mục đích cung cấp một nền tảng có khả năng xử lý dữ liệu với lượng thông tin lớn, độ trễ thấp, phù hợp cho việc xử lý dữ liệu `real-time`
 - Ở high level, Kafka là một hệ thống phân tán servers và clients. Servers được gọi là **brokers** và client được chia làm 2 là **record producers sending** và **consumer clients read records**
   ![info-kafka](2024-04-25-tim-hieu-lich-su-va-muc-dich-cua-kafka/info-kafka.webp)
-
+- Kafka cung cấp đầy đủ mọi thứ để chúng ta có thể triển khai event Streaming application một cách đầy đủ
 ## Vì sao là kafka ?
   - **Distributed System(Hệ thống phân tán)**: Apache Kafka là một hệ thống phân tán được thiết kế chạy trên nhiều máy chủ, đảm bảo tính sẵn sàng cao và khả năng chịu lỗi.
   
@@ -71,7 +71,7 @@ Và mỗi Partition sẽ lưu trữ 1 phần các record của topic chứ khôn
 
 https://docs.cloudera.com/runtime/7.2.18/kafka-overview/topics/kafka-overview-logs-and-log-segments.html
 :::
-Mỗi một partition sẽ tương ứng với một người subscribe. Vì vậy nếu có 10 subscribe thì sẽ có 10 partition hoặc nếu là Consumer Group thì mỗi Group một partition. 
+Best nhất mỗi một partition sẽ tương ứng với một người subscribe (Một consumer đang consumer một Topic trên cùng một GroupId). Vì vậy nếu có 10 subscribe thì sẽ có 10 partition, cách này sẽ chia tải một cách hiệu quả để triển khai worker.(Tại sao ư ? phần khác nói nhé)
 
 Điều này có nghĩa là có thể có nhiều người subscribe cùng một topic, và mỗi người được chỉ định một partition để có khả năng mở rộng cao hơn.
 
