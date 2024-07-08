@@ -91,6 +91,105 @@ Sau khi nói về yêu cầu của Produce chúng ta sẽ nói đến Consumer.
 - Nhìn vào folder chúng ta có thể dễ hiểu được với tên topic là một nhóm dữ liệu và partititon là các đơn vị lưu trữ.
 - Trong hầu hết các case, số lượng của Partition càng cao thì throughput(Thông lượng) sẽ càng cao.
 #### Cách Kafka Broker map record đến partition.
+- Producer client sẽ xác định Topic và partition cho record trước khi gửi nó đến Broker.
+![kafka_broker-map-record-to-partition.png](2024-06-10-kafka-brokers/kafka_broker-map-record-to-partition.png)
+- Đối với java, thư viện sẽ sử dụng class `org.apache.kafka.clients.producer.internals.DefaultPartitioner` để xác định partition trước khi gửi đến.
+```
+public class DefaultPartitioner implements Partitioner {
+    private final StickyPartitionCache stickyPartitionCache = new StickyPartitionCache();
+
+    public DefaultPartitioner() {
+    }
+
+    public void configure(Map<String, ?> configs) {
+    }
+
+    public int partition(String topic, Object key, byte[] keyBytes, Object value, byte[] valueBytes, Cluster cluster) {
+        return this.partition(topic, key, keyBytes, value, valueBytes, cluster, cluster.partitionsForTopic(topic).size());
+    }
+
+    public int partition(String topic, Object key, byte[] keyBytes, Object value, byte[] valueBytes, Cluster cluster, int numPartitions) {
+        return keyBytes == null ? this.stickyPartitionCache.partition(topic, cluster) : Utils.toPositive(Utils.murmur2(keyBytes)) % numPartitions;
+    }
+
+    public void close() {
+    }
+
+    public void onNewBatch(String topic, Cluster cluster, int prevPartition) {
+        this.stickyPartitionCache.nextPartition(topic, cluster, prevPartition);
+    }
+}
+```
+Trong đoạn mã trên:
+1. partition Method:
+   - Method `partition` là nơi logic xác định `partition` được thực hiện.
+   - `Cluster` chứa thông tin về `cluster` cũng như các thông tin về `partition` của `topic`.
+   - `keyBytes` là mảng byte của khóa (nếu có).
+   - `valueBytes` là mảng byte của giá trị(data).
+2. Key-based Partitioning
+   - Nếu `keyBytes !== null` thì key-bash partition sẽ được thực hiện.
+   - method `partition` sẽ sử dụng hàm băm `murmur2` để tính toán giá trị băm của key.
+     - Method `toPositive` sẽ giúp dữ liệu trả về luôn là số dương
+   - Giá trị hash sẽ được chia cho số lượng `partition(numPartitions)` để xác định `partition` sẽ được lưu trữ.
+     ::: details Cùng 1 key sẽ được lưu vào cùng một partition
+      Vì sử dụng key tính ra mã băm sau đó chia cho số lượng partition, vì vậy các `record` có cùng 1 key sẽ được lưu trên cùng một partition.
+
+      Điều này đảm bảo rằng các bản ghi có cũng key sẽ được lưu trữ trong  cùng một partition, giúp duy trì order của các Record có cùng key.
+     :::
+3. sticky Partition Cache
+```
+package org.apache.kafka.clients.producer.internals;
+
+import ...
+
+public class StickyPartitionCache {
+    private final ConcurrentMap<String, Integer> indexCache = new ConcurrentHashMap();
+
+    public StickyPartitionCache() {
+    }
+
+    public int partition(String topic, Cluster cluster) {
+        Integer part = (Integer)this.indexCache.get(topic);
+        return part == null ? this.nextPartition(topic, cluster, -1) : part;
+    }
+
+    public int nextPartition(String topic, Cluster cluster, int prevPartition) {
+        List<PartitionInfo> partitions = cluster.partitionsForTopic(topic);
+        Integer oldPart = (Integer)this.indexCache.get(topic);
+        Integer newPart = oldPart;
+        if (oldPart != null && oldPart != prevPartition) {
+            return (Integer)this.indexCache.get(topic);
+        } else {
+            List<PartitionInfo> availablePartitions = cluster.availablePartitionsForTopic(topic);
+            if (availablePartitions.size() < 1) {
+                Integer random = Utils.toPositive(ThreadLocalRandom.current().nextInt());
+                newPart = random % partitions.size();
+            } else if (availablePartitions.size() == 1) {
+                newPart = ((PartitionInfo)availablePartitions.get(0)).partition();
+            } else {
+                while(newPart == null || newPart.equals(oldPart)) {
+                    int random = Utils.toPositive(ThreadLocalRandom.current().nextInt());
+                    newPart = ((PartitionInfo)availablePartitions.get(random % availablePartitions.size())).partition();
+                }
+            }
+
+            if (oldPart == null) {
+                this.indexCache.putIfAbsent(topic, newPart);
+            } else {
+                this.indexCache.replace(topic, prevPartition, newPart);
+            }
+
+            return (Integer)this.indexCache.get(topic);
+        }
+    }
+}
+
+```
+  - Nếu `keyBytes == null` thì sticky Partition Cache sẽ được thực hiện.
+  - `sticky Partition Cache` đơn giản như sau, Nếu có `oldPart` hiện trả về `oldPart` ====> `return part == null ? this.nextPartition(topic, cluster, -1) : part;`
+  - Sẽ có 2 trường hợp để lấy về partition mới(Gọi method `nextPartition`)
+    - 1. Nếu `oldPart == null` tức chưa xác định partition thì sẽ lấy và partition mới ==> trong method `partition` ở StickyPartitionCache
+    - 2. Khi đã đến ngưỡng của `BATCH_SIZE_CONFIG` trong flow thực hiện tạo lại batch thì sẽ xác định lại partition  ==> trong method `onNewBatch` ở `DefaultPartitioner`
 
 ## Một số lưu ý về Kafka Brokers
 - Nếu tạo một Cluster kafka thì độ trễ của network nên ở mức dưới 15ms, vì việc liên lạc giữa các Kafka brokers là rất nhiều (Cả zookeeper nếu sử dụng zookeeper )
