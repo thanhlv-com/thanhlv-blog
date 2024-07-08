@@ -137,6 +137,8 @@ Trong đoạn mã trên:
       Điều này đảm bảo rằng các bản ghi có cũng key sẽ được lưu trữ trong  cùng một partition, giúp duy trì order của các Record có cùng key.
      :::
 3. sticky Partition Cache
+ - Thực tế, với kafka phiên bản trước `2.4` thì với trường hợp `key == null` thì partition sẽ sử dụng `Round-robin` bằng cách có 1 biến `count` theo `topic` và chia cho số lượng partition để được `Round-robin`
+ 
 ```
 package org.apache.kafka.clients.producer.internals;
 
