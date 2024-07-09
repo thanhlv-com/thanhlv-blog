@@ -93,6 +93,8 @@ Sau khi nói về yêu cầu của Produce chúng ta sẽ nói đến Consumer.
 #### Cách Kafka Broker map record đến partition.
 - Producer client sẽ xác định Topic và partition cho record trước khi gửi nó đến Broker.
 ![kafka_broker-map-record-to-partition.png](2024-06-10-kafka-brokers/kafka_broker-map-record-to-partition.png)
+##### 
+Khi xây dựng ProducerRecord object, bạn set partition cho ProducerRecord thì producer sẽ sử dụng partition đó và gửi lên Broker.
 - Đối với java, thư viện sẽ sử dụng class `org.apache.kafka.clients.producer.internals.DefaultPartitioner` để xác định partition trước khi gửi đến.
 ```
 public class DefaultPartitioner implements Partitioner {
