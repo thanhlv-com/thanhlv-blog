@@ -49,50 +49,25 @@ Với 6 năm kinh nghiệm phong phú, tôi đã thu thập được một kho t
 ### [Line Technology VietNam](https://vietnamdevcenter.linecorp.com/en) & [LINE NEXT Inc](https://www.linkedin.com/company/line-us-corporation/mycompany/) | Senior Software Engineer
 ![img](images/thanhlv/line-center-vn.png)
 
-#### **10-2022 – Hiện tại** | **Dosi APP**
-![img](images/thanhlv/dosi-vault.svg)
+#### **09-2021 – Hiện tại** | **[Line Explorer Blockchain](https://explorer.blockchain.line.me/finschia)**
+![img](images/thanhlv/line-blockchain.ico)
 
-Sau thành công phát triển nền tảng ví giao dịch phi tập trung Dosi Vault, chúng tôi phát triển Dosi App base từ Dosi Vault. Dosi App trở Thành super App, đưa ra trải nghiệm độc đáo và tất cả các dịch vụ đều kết nối thông qua nền tảng này.
+Blockchain của Line không chỉ đơn giản là một **Blockchain as a Service** mà còn là một nguồn lực đa dạng với chain được tối ưu hóa để phục vụ các mục đích cụ thể như NFT, Tài Chính, và những mục đích đặc biệt khác. Explorer được tạo ra để giúp người dùng khám phá một cách dễ dàng và chi tiết dữ liệu đang được lưu trữ trên blockchain.
 - **Nghiệm vụ** :
-  1. Fork Dosi Vault, tận dụng và phát triển các tính năng đặc sắc dành riêng cho Dosi Vault.
-  2. Chịu trách nhiệm trong việc thiết lập các Job Jenkins đặc biệt cho việc tự động hóa quy trình xây dựng ứng dụng trên cả hai nền tảng Android và iOS.
-  3. Chịu trách nghiệm tạo và quản lý Keystore để xây dựng AOS, tạo và quản lý Certificates, Profiles và Identifiers sử dụng để xây dựng IOS.
-  4. Đóng góp tích cực và tham gia sâu rộng trong các buổi họp thảo luận cùng Production Planner và Spec Team dưới sự hướng dẫn của CTO, nhằm mục tiêu định hình và đề xuất các tính năng innovative cho ứng dụng Dosi App.
-  5. Nâng cấp **React Native** từ phiên bản **0.64.4** lên **0.72.4**, đồng thời giữ được ổn định và hiệu suất cao
-  6. Phát triển **code base Webview**, một thành phần then chốt cho cơ chế giao tiếp giữa ứng dụng và các dịch vụ bên ngoài, để cung cấp một trải nghiệm tích hợp và liền mạch cho người dùng.
-  7. Thực hiện phát triển các chức năng.
-- **Công nghệ**: [React native](https://reactnative.dev/), [CosmosJS](https://github.com/cosmos/cosmjs), [web3auth](https://web3auth.io/), [Tkey](https://github.com/tkey/tkey), [Firebase](https://firebase.google.com/), Webview.
-- **Thành quả**:
-  1. Mua bán, giao dịch NFT, Coin, Token trên nền tảng Dosi APP.
-  2. Thành công trong việc nâng cấp React Native từ phiên bản 0.64.4 lên 0.72.4, đồng thời giữ được ổn định và hiệu suất cao.
-- **Ref**:
-  1. **IOS**: https://apps.apple.com/us/app/dosi-digital-commerce/id6473919354
-  2. **AOS**: https://play.google.com/store/apps/details?id=world.dosi&hl=en_US
-:::info Cảm nhận cá nhân về dự án
-1. Phát triển nhanh chóng và vẫn đảm bảo chất lượng.
-2. Một ý tưởng tuyệt vời về bảo mật.
-:::
+  1. Phát triển các API mạnh mẽ cho Explorer, đảm bảo tính tương thích và khả năng mở rộng.
+  2. Viết các Unit test và integration test để đảm bảo tính ổn định và độ tin cậy của hệ thống.
+  3. Tham gia chặt chẽ trong cuộc thảo luận với các đội sản xuất và kỹ thuật để định hình chi tiết về specification.
+  4. Tối ưu code, database để đạt được hiệu suất tối ưu và sự linh hoạt trong triển khai.
 
-#### **10-2022 – Hiện tại** | **Dosi Vault**
-![img](images/thanhlv/dosi-vault.svg)
-
-Một dự án độc đáo, là sự phát triển từ Open Source Keplr Wallet, Dosi Vault đóng vai trò quan trọng trong việc xử lý thanh toán cho hệ thống giao dịch phi tập trung của Line Blockchain.
-- **Nghiệm vụ** :
-  1. Fork Open Source Keplr Wallet, tận dụng và phát triển các tính năng đặc sắc dành riêng cho Dosi Vault.
-  2. Chịu trách nghiệm tạo và quản lý Keystore để xây dựng AOS, tạo và quản lý Certificates, Profiles và Identifiers sử dụng để xây dựng IOS.
-  3. Xây dựng Job jenkins dành cho xây dựng AOS và IOS
-  4. Tham gia chặt chẽ trong cuộc thảo luận với Production Planner và Spec Team, cùng với sự hướng dẫn của CTO để định hình và phát triển tính năng mới.
-  5. Nâng cấp liên tục và triển khai các tính năng mới để nâng cao trải nghiệm người dùng.
-- **Công nghệ**: [React native](https://reactnative.dev/), [CosmosJS](https://github.com/cosmos/cosmjs), [web3auth](https://web3auth.io/), [Firebase](https://firebase.google.com/).
+- **Công nghệ**: [Kotlin](https://kotlinlang.org/), [Kotlin coroutines](https://kotlinlang.org/docs/coroutines-overview.html), [Spring boot](https://spring.io/projects/spring-boot), [gRPC](https://grpc.io/), [Armeria](https://armeria.dev/)
 - **Thành quả**:
-  1. Giao dịch phi tập trung 100%, hỗ trợ thanh toán NFT trên ứng dụng.
-  2. Hạnh phúc với việc nhận được bút và áo cảm ơn từ CTO của LINE NEXT, là động lực cho sự đóng góp đội ngũ phát triển.
-  3. Nhận đầu tư thêm thành công 140 triệu đô.([LINE NEXT Raises USD140 Million to Expand Web3 Ecosystem](https://www.lycorp.co.jp/en/news/release/001082/))
-- **Ref**:
-  1. **IOS**: https://apps.apple.com/us/app/dosi-vault/id1664013594
-  2. **AOS**: https://play.google.com/store/apps/details?id=world.dosi.vault
+  1. Đạt đến 100% coverage code logic, và từ 50 - 70% cấu hình trong dự án, đảm bảo sự toàn vẹn và khả năng tùy chỉnh cao.
+  2. Tăng cường hiệu suất ứng dụng để mang lại trải nghiệm người dùng tốt nhất có thể.
+  3. Cung cấp một hiểu biết sâu sắc hơn về blockchain, từ đó nâng cao kỹ năng và chuyên môn.
+- **Thành quả**:
+  1. Khám phá thêm tại: https://explorer.blockchain.line.me/finschia
 :::info Cảm nhận cá nhân về dự án
-1. Phát triển nhanh chóng và vẫn đảm bảo chất lượng.
+1. Một sự kết hợp tuyệt vời giữa khả năng linh hoạt và hiệu suất.
 :::
 
 
@@ -115,29 +90,54 @@ Hệ thống blockchain framework sẽ đóng vai trò quan trọng, là nền t
 
 :::info Cảm nhận cá nhân về dự án
 1. Một sự hòa quyện của sức mạnh kỹ thuật và sự sáng tạo.
-:::
+   :::
 
 
-#### **09-2021 – Hiện tại** | **[Line Explorer Blockchain](https://explorer.blockchain.line.me/finschia)**
-![img](images/thanhlv/line-blockchain.ico)
+#### **10-2022 – Hiện tại** | **Dosi APP**
+![img](images/thanhlv/dosi-vault.svg)
 
-Blockchain của Line không chỉ đơn giản là một **Blockchain as a Service** mà còn là một nguồn lực đa dạng với chain được tối ưu hóa để phục vụ các mục đích cụ thể như NFT, Tài Chính, và những mục đích đặc biệt khác. Explorer được tạo ra để giúp người dùng khám phá một cách dễ dàng và chi tiết dữ liệu đang được lưu trữ trên blockchain.
+Sau thành công phát triển nền tảng ví giao dịch phi tập trung Dosi Vault, chúng tôi phát triển Dosi App base từ Dosi Vault. Dosi App trở Thành super App, đưa ra trải nghiệm độc đáo và tất cả các dịch vụ đều kết nối thông qua nền tảng này.
 - **Nghiệm vụ** :
-  1. Phát triển các API mạnh mẽ cho Explorer, đảm bảo tính tương thích và khả năng mở rộng.
-  2. Viết các Unit test và integration test để đảm bảo tính ổn định và độ tin cậy của hệ thống.
-  3. Tham gia chặt chẽ trong cuộc thảo luận với các đội sản xuất và kỹ thuật để định hình chi tiết về specification.
-  4. Tối ưu code, database để đạt được hiệu suất tối ưu và sự linh hoạt trong triển khai.
+  1. Fork Dosi Vault, tận dụng và phát triển các tính năng đặc sắc dành riêng cho Dosi Vault.
+  2. Chịu trách nhiệm trong việc thiết lập các Job Jenkins đặc biệt cho việc tự động hóa quy trình xây dựng ứng dụng trên cả hai nền tảng Android và iOS.
+  3. Chịu trách nghiệm tạo và quản lý Keystore để xây dựng AOS, tạo và quản lý Certificates, Profiles và Identifiers sử dụng để xây dựng IOS.
+  4. Đóng góp tích cực và tham gia sâu rộng trong các buổi họp thảo luận cùng Production Planner và Spec Team dưới sự hướng dẫn của CTO, nhằm mục tiêu định hình và đề xuất các tính năng innovative cho ứng dụng Dosi App.
+  5. Nâng cấp **React Native** từ phiên bản **0.64.4** lên **0.72.4**, đồng thời giữ được ổn định và hiệu suất cao
+  6. Phát triển **code base Webview**, một thành phần then chốt cho cơ chế giao tiếp giữa ứng dụng và các dịch vụ bên ngoài, để cung cấp một trải nghiệm tích hợp và liền mạch cho người dùng.
+  7. Thực hiện phát triển các chức năng.
+- **Công nghệ**: [React native](https://reactnative.dev/), [CosmosJS](https://github.com/cosmos/cosmjs), [web3auth](https://web3auth.io/), [Tkey](https://github.com/tkey/tkey), [Firebase](https://firebase.google.com/), Webview.
+- **Thành quả**:
+  1. Mua bán, giao dịch NFT, Coin, Token trên nền tảng Dosi APP.
+  2. Thành công trong việc nâng cấp React Native từ phiên bản 0.64.4 lên 0.72.4, đồng thời giữ được ổn định và hiệu suất cao.
+- **Ref**:
+  1. **IOS**: https://apps.apple.com/us/app/dosi-digital-commerce/id6473919354
+  2. **AOS**: https://play.google.com/store/apps/details?id=world.dosi&hl=en_US
+     :::info Cảm nhận cá nhân về dự án
+1. Phát triển nhanh chóng và vẫn đảm bảo chất lượng.
+2. Một ý tưởng tuyệt vời về bảo mật.
+   :::
 
-- **Công nghệ**: [Kotlin](https://kotlinlang.org/), [Kotlin coroutines](https://kotlinlang.org/docs/coroutines-overview.html), [Spring boot](https://spring.io/projects/spring-boot), [gRPC](https://grpc.io/), [Armeria](https://armeria.dev/)
+#### **10-2022 – Hiện tại** | **Dosi Vault**
+![img](images/thanhlv/dosi-vault.svg)
+
+Một dự án độc đáo, là sự phát triển từ Open Source Keplr Wallet, Dosi Vault đóng vai trò quan trọng trong việc xử lý thanh toán cho hệ thống giao dịch phi tập trung của Line Blockchain.
+- **Nghiệm vụ** :
+  1. Fork Open Source Keplr Wallet, tận dụng và phát triển các tính năng đặc sắc dành riêng cho Dosi Vault.
+  2. Chịu trách nghiệm tạo và quản lý Keystore để xây dựng AOS, tạo và quản lý Certificates, Profiles và Identifiers sử dụng để xây dựng IOS.
+  3. Xây dựng Job jenkins dành cho xây dựng AOS và IOS
+  4. Tham gia chặt chẽ trong cuộc thảo luận với Production Planner và Spec Team, cùng với sự hướng dẫn của CTO để định hình và phát triển tính năng mới.
+  5. Nâng cấp liên tục và triển khai các tính năng mới để nâng cao trải nghiệm người dùng.
+- **Công nghệ**: [React native](https://reactnative.dev/), [CosmosJS](https://github.com/cosmos/cosmjs), [web3auth](https://web3auth.io/), [Firebase](https://firebase.google.com/).
 - **Thành quả**:
-  1. Đạt đến 100% coverage code logic, và từ 50 - 70% cấu hình trong dự án, đảm bảo sự toàn vẹn và khả năng tùy chỉnh cao.
-  2. Tăng cường hiệu suất ứng dụng để mang lại trải nghiệm người dùng tốt nhất có thể.
-  3. Cung cấp một hiểu biết sâu sắc hơn về blockchain, từ đó nâng cao kỹ năng và chuyên môn.
-- **Thành quả**:
-  1. Khám phá thêm tại: https://explorer.blockchain.line.me/finschia
-:::info Cảm nhận cá nhân về dự án
-1. Một sự kết hợp tuyệt vời giữa khả năng linh hoạt và hiệu suất.
-:::
+  1. Giao dịch phi tập trung 100%, hỗ trợ thanh toán NFT trên ứng dụng.
+  2. Hạnh phúc với việc nhận được bút và áo cảm ơn từ CTO của LINE NEXT, là động lực cho sự đóng góp đội ngũ phát triển.
+  3. Nhận đầu tư thêm thành công 140 triệu đô.([LINE NEXT Raises USD140 Million to Expand Web3 Ecosystem](https://www.lycorp.co.jp/en/news/release/001082/))
+- **Ref**:
+  1. **IOS**: https://apps.apple.com/us/app/dosi-vault/id1664013594
+  2. **AOS**: https://play.google.com/store/apps/details?id=world.dosi.vault
+     :::info Cảm nhận cá nhân về dự án
+1. Phát triển nhanh chóng và vẫn đảm bảo chất lượng.
+   :::
 
 ### [Viettel Digital Services](https://viettelmoney.vn/gioi-thieu) | Senior Software Engineer
 ![img](images/thanhlv/Viettel_Digital_Services.webp)
