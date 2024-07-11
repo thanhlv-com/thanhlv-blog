@@ -112,10 +112,10 @@ Sau thành công phát triển nền tảng ví giao dịch phi tập trung Dosi
 - **Ref**:
   1. **IOS**: https://apps.apple.com/us/app/dosi-digital-commerce/id6473919354
   2. **AOS**: https://play.google.com/store/apps/details?id=world.dosi&hl=en_US
-     :::info Cảm nhận cá nhân về dự án
+:::info Cảm nhận cá nhân về dự án
 1. Phát triển nhanh chóng và vẫn đảm bảo chất lượng.
 2. Một ý tưởng tuyệt vời về bảo mật.
-   :::
+:::
 
 #### **10-2022 – Hiện tại** | **Dosi Vault**
 ![img](images/thanhlv/dosi-vault.svg)
@@ -135,9 +135,9 @@ Một dự án độc đáo, là sự phát triển từ Open Source Keplr Walle
 - **Ref**:
   1. **IOS**: https://apps.apple.com/us/app/dosi-vault/id1664013594
   2. **AOS**: https://play.google.com/store/apps/details?id=world.dosi.vault
-     :::info Cảm nhận cá nhân về dự án
+:::info Cảm nhận cá nhân về dự án
 1. Phát triển nhanh chóng và vẫn đảm bảo chất lượng.
-   :::
+:::
 
 ### [Viettel Digital Services](https://viettelmoney.vn/gioi-thieu) | Senior Software Engineer
 ![img](images/thanhlv/Viettel_Digital_Services.webp)
