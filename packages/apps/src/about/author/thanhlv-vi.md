@@ -64,8 +64,6 @@ Blockchain của Line không chỉ đơn giản là một **Blockchain as a Serv
   1. Đạt đến 100% coverage code logic, và từ 50 - 70% cấu hình trong dự án, đảm bảo sự toàn vẹn và khả năng tùy chỉnh cao.
   2. Tăng cường hiệu suất ứng dụng để mang lại trải nghiệm người dùng tốt nhất có thể.
   3. Cung cấp một hiểu biết sâu sắc hơn về blockchain, từ đó nâng cao kỹ năng và chuyên môn.
-- **Thành quả**:
-  1. Khám phá thêm tại: https://explorer.blockchain.line.me/finschia
 :::info Cảm nhận cá nhân về dự án
 1. Một sự kết hợp tuyệt vời giữa khả năng linh hoạt và hiệu suất.
 :::
