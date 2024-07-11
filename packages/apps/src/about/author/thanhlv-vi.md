@@ -88,7 +88,7 @@ Hệ thống blockchain framework sẽ đóng vai trò quan trọng, là nền t
 
 :::info Cảm nhận cá nhân về dự án
 1. Một sự hòa quyện của sức mạnh kỹ thuật và sự sáng tạo.
-   :::
+:::
 
 
 #### **10-2022 – Hiện tại** | **Dosi APP**
