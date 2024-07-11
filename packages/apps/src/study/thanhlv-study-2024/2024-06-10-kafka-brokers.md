@@ -96,6 +96,13 @@ Sau khi nói về yêu cầu của Produce chúng ta sẽ nói đến Consumer.
 - Thực tế xác định partition chúng ta có thể chia ra làm 2 cách như sau:
 ##### Cách 1: Xác định partition tại thời điểm tạo object ProducerRecord
 Khi xây dựng ProducerRecord object, bạn set partition cho ProducerRecord thì producer sẽ sử dụng partition đó và gửi lên Broker.
+::: details Xác định partition tại thời điểm tạo object ProducerRecord
+![map-partition-at-create-obj-ProducerRecord.png](2024-06-10-kafka-brokers/map-partition-at-create-obj-ProducerRecord.png)
+![map-partition-at-create-obj-ProducerRecord-1.png](2024-06-10-kafka-brokers/map-partition-at-create-obj-ProducerRecord-1.png)
+
+:::
+
+
 - Đối với java, thư viện sẽ sử dụng class `org.apache.kafka.clients.producer.internals.DefaultPartitioner` để xác định partition trước khi gửi đến.
 ```
 public class DefaultPartitioner implements Partitioner {
