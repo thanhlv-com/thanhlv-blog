@@ -69,7 +69,7 @@ Blockchain của Line không chỉ đơn giản là một **Blockchain as a Serv
 :::
 
 
-#### **09-2021 – 10-2022** | **Blockchain framework**
+#### **09-2021 – Hiện tại** | **Blockchain framework**
 
 Hệ thống blockchain framework sẽ đóng vai trò quan trọng, là nền tảng chủ lực cho mọi yêu cầu đọc dữ liệu trên blockchain. Ứng dụng này không chỉ giúp đọc và lưu trữ dữ liệu một cách hiệu quả, mà còn tạo điều kiện thuận lợi cho bên thứ ba thực hiện truy vấn với hiệu suất cao mà không làm ảnh hưởng đến blockchain trực tiếp.
 - **Nghiệm vụ** :
