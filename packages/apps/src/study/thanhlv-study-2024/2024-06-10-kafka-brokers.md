@@ -203,6 +203,33 @@ public class StickyPartitionCache {
     - 1. Nếu `oldPart == null` tức chưa xác định partition thì sẽ lấy và partition mới ==> trong method `partition` ở StickyPartitionCache
     - 2. Khi đã đến ngưỡng của `BATCH_SIZE_CONFIG` trong flow thực hiện tạo lại batch thì sẽ xác định lại partition  ==> trong method `onNewBatch` ở `DefaultPartitioner`
   - Chốt lại đơn giản là với sticky Partition Cache thì partition sẽ được tính theo `BATCH`, tất cả các `Record` có `key == null` thì tất cả các Record trong cùng `BATCH của cùng 1 topic` đó sẽ trên cùng một `partition`
+
+### Offsets
+- Khi broker thêm một Record nó sẽ thêm một `id` được gọi là `offset`. Một `offset` sẽ bắt đầu từ `0` và là number, nó sẽ tặng lên 1 mỗi khi thêm một Record.
+  ![kafka-offset.png](2024-06-10-kafka-brokers/kafka-offset.png)
+- Vì các Record mới luôn được thêm ở cuối của file, nên nó được sắp xếp theo offset.
+- Kafka đảm bảo Record order được sẵp xếp theo thứ tự trên cùng một partition chứ không phải trên các partition khác.
+::: details Ví dụ
+Có một topic với  partition và có 10 Record.
+- Partition 1: R1 (Offset 0) , R3(Offset 2) , R6(Offset 5), R7(Offset 6)
+- Partition 2:, R2(Offset 1), R4(Offset 3), R5(Offset 4), R8(Offset 7), R9(Offset 8), R10(Offset 9)
+
+Partition 1 và 2 sẽ có thứ tự offset tăng dần.
+:::
+
+Consumer sử dụng `offset` để xác định vị trí của Record họ đã sử dụng, bằng cách này Consumer sẽ tìm các Record có `offset` cao hơn đã được Consumer đọc.
+![kafka-offset-2.png](2024-06-10-kafka-brokers/kafka-offset-2.png)
+
+### Xác định số lượng partition sử dụng
+- Việc chọn số lượng partition khi tạo một topic là một điều khó khắn, nó là cả một nghệ thuật.
+- Một trong nhưng cân nhắc quan trọng là đầu tiên là **lượng dữ liệu chạy chảy vào topic đó**. Nhiều data thì chúng ta có thể có nhiều partition hơn để throughput(Thông lượng) cao hơn, tuy nhiên nhiều partition chúng ta cũng sẽ có những đánh đổi nhất định.
+  - Tăng số lượng partition sẽ tăng số lượng TCP connect và open file. Và thời gian để Consumer xử lý một Record cũng là một điều ảnh hưởng đến throughput. Nếu thời gian xử lý cần rất nhiều thì việc thêm partition có thể hữu ích nhưng việc xử lý chậm vẫn làm hiệu xuất không được tốt.
+- Bắt đầu tốt nhất chúng ta có thể sử dụng con số 30 ==> 30 partition. Nó cũng giúp phân bổ key đồng đều hơn.
+
+Chúng ta sẽ có 1 chủ đề chi tiết hơn về điều này.
+
+### Tạo một topic
+
 ## Một số lưu ý về Kafka Brokers
 - Nếu tạo một Cluster kafka thì độ trễ của network nên ở mức dưới 15ms, vì việc liên lạc giữa các Kafka brokers là rất nhiều (Cả zookeeper nếu sử dụng zookeeper )
 
