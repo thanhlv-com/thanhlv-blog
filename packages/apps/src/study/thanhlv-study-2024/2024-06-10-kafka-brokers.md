@@ -102,7 +102,7 @@ Khi xây dựng ProducerRecord object, bạn set partition cho ProducerRecord th
 
 :::
 
-
+##### Cách 2: Xác định tự động partition tại bởi lib Producer trước khi gửi đến Brokers
 - Đối với java, thư viện sẽ sử dụng class `org.apache.kafka.clients.producer.internals.DefaultPartitioner` để xác định partition trước khi gửi đến.
 ```
 public class DefaultPartitioner implements Partitioner {
@@ -251,7 +251,10 @@ kafka-topics --create --if-not-exists --topic first-topic\ #1
   - Nếu không có parm này thì default sẽ được lấy trong `num.partitions`
 
 ### Segments
-
+- Như chúng ta đã biết Broker sẽ thêm các Record vào các partition. Tuy nhiên Broker sẽ không thêm vào một tập partition duy nhất, nếu làm vậy tệp partition này sẽ khổng lồ.
+- Broker sẽ chia thành các tệp nhỏ thành các phần riêng biệt và được gọi là segments.
+![kafka-partition-log-segments.png](2024-06-10-kafka-brokers/kafka-partition-log-segments.png)
+- Việc sử dụng Segments sẽ giúp thực hiện push Record mới và thực hiện truy suất bản ghi bằng offset trở lên dễ dàng hơn.
 ## Một số lưu ý về Kafka Brokers
 - Nếu tạo một Cluster kafka thì độ trễ của network nên ở mức dưới 15ms, vì việc liên lạc giữa các Kafka brokers là rất nhiều (Cả zookeeper nếu sử dụng zookeeper )
 
