@@ -224,12 +224,24 @@ Consumer sử dụng `offset` để xác định vị trí của Record họ đ�
 - Việc chọn số lượng partition khi tạo một topic là một điều khó khắn, nó là cả một nghệ thuật.
 - Một trong nhưng cân nhắc quan trọng là đầu tiên là **lượng dữ liệu chạy chảy vào topic đó**. Nhiều data thì chúng ta có thể có nhiều partition hơn để throughput(Thông lượng) cao hơn, tuy nhiên nhiều partition chúng ta cũng sẽ có những đánh đổi nhất định.
   - Tăng số lượng partition sẽ tăng số lượng TCP connect và open file. Và thời gian để Consumer xử lý một Record cũng là một điều ảnh hưởng đến throughput. Nếu thời gian xử lý cần rất nhiều thì việc thêm partition có thể hữu ích nhưng việc xử lý chậm vẫn làm hiệu xuất không được tốt.
-- Bắt đầu tốt nhất chúng ta có thể sử dụng con số 30 ==> 30 partition. Nó cũng giúp phân bổ key đồng đều hơn.
-
+- Bắt đầu tốt nhất chúng ta nên sử dụng càng ít partition càng tốt. Bởi vì chúng ta có thể tăng số lượng partition nhưng không thể giảm partition.
+- Nếu khi tạo topic chúng ta có thể xác định số lượng Consumer thì chúng ta nên cài đặt partition bằng với số lượng của consumer. Điều này là best cho phiên bản kafk < 2.4 bởi vì các phiên bản cũ sẽ `Round-robin` các partition nhưng ở phiên bản >= 2.4 thì đã random partiton cho mỗi batch của topic.
+- Nếu topic này có thẻ
 Chúng ta sẽ có 1 chủ đề chi tiết hơn về điều này.
 
 ### Tạo một topic
-
+- Để tạo một topic mới chúng ta có thể sử dụng cmd `kafka-topics` với param `--create`.
+```
+kafka-topics --create --if-not-exists --topic first-topic\ #1
+--bootstrap-server localhost:9092\ #2 
+--replication-factor 1\ #3  
+--partitions 1 #4
+```
+- `#1` 
+  - Với `kafka-topics` là câu lệnh để khởi chạy một `cmd`
+  - `--create` là param để mong muốn tạo mới một topic với và `--if-not-exists` là param tạo nếu topic chưa tồn tại, còn đã tồn tại sẽ bỏ qua. (Nếu không có cờ này, nếu đã tồn tại sẽ trả về lỗi ngoại lệ `Error while executing topic command : Topic 'first-topic' already exists.` )
+  - `--topic` là partam để xác định tên topic
+  - `first-topic` là tên topic
 ## Một số lưu ý về Kafka Brokers
 - Nếu tạo một Cluster kafka thì độ trễ của network nên ở mức dưới 15ms, vì việc liên lạc giữa các Kafka brokers là rất nhiều (Cả zookeeper nếu sử dụng zookeeper )
 
