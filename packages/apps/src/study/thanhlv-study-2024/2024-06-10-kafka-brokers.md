@@ -240,8 +240,13 @@ kafka-topics --create --if-not-exists --topic first-topic\ #1
 - `#1` 
   - Với `kafka-topics` là câu lệnh để khởi chạy một `cmd`
   - `--create` là param để mong muốn tạo mới một topic với và `--if-not-exists` là param tạo nếu topic chưa tồn tại, còn đã tồn tại sẽ bỏ qua. (Nếu không có cờ này, nếu đã tồn tại sẽ trả về lỗi ngoại lệ `Error while executing topic command : Topic 'first-topic' already exists.` )
-  - `--topic` là partam để xác định tên topic
+  - `--topic` là param để xác định tên topic
   - `first-topic` là tên topic
+- `#2` với `--bootstrap-serve` là danh sách server kafka để `cmd` thực hiện kết nối để gửi request tạo topic
+- `#3` với `--replication-factor` là số lượng replication để mỗi partition sễ được nhận rộng lên bao nhiêu.
+  - Là trị là số và phải ở giữa `1 và 32767`
+  - Số lượng phải nhỏ hơn hoặc bằng với số lượng Broker
+  - Nếu không có parma này, default sẽ được lấy ở config trong Broker `default.replication.factor`
 ## Một số lưu ý về Kafka Brokers
 - Nếu tạo một Cluster kafka thì độ trễ của network nên ở mức dưới 15ms, vì việc liên lạc giữa các Kafka brokers là rất nhiều (Cả zookeeper nếu sử dụng zookeeper )
 
