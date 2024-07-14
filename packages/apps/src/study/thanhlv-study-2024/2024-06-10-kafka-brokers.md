@@ -256,6 +256,10 @@ kafka-topics --create --if-not-exists --topic first-topic\ #1
 ![kafka-partition-log-segments.png](2024-06-10-kafka-brokers/kafka-partition-log-segments.png)
 ![kafka-partition-log-segments-file.png](2024-06-10-kafka-brokers/kafka-partition-log-segments-file.png)
 - Việc sử dụng Segments sẽ giúp thực hiện push Record mới và thực hiện truy suất bản ghi bằng offset trở lên dễ dàng hơn.
+- Mặc định kafka Broker sẽ để mỗi segment là một 1G hoặc chúng ta có thể chỉ định ở `log.segment.bytes`. Khi đến ngưỡng segment sẽ được close và một segment mới được tạo.
+  - Kích thước segment nhỏ hơn có nghĩa là các tệp phải được đóng và phân bổ thường xuyên hơn, điều này làm giảm hiệu quả chung của việc ghi đĩa.
+- Khi một segment bị close nó có thể được coi là expire(Hết hạn, bởi vì dữ liệu đã tồn tại quá lâu), việc điều chỉnh kích thước của các segment cũng rất quan trọng.
+- Chúng ta cũng có 1 config nữa đó là `log.segment.ms`, đây là thời gian nếu `segment` chưa đến ngưỡng giới hạn dung lượng thì kafka cũng sẽ close segment và tạo ra một segment mới. Default là 1 tuần.
 ## Một số lưu ý về Kafka Brokers
 - Nếu tạo một Cluster kafka thì độ trễ của network nên ở mức dưới 15ms, vì việc liên lạc giữa các Kafka brokers là rất nhiều (Cả zookeeper nếu sử dụng zookeeper )
 
