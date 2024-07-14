@@ -249,6 +249,9 @@ kafka-topics --create --if-not-exists --topic first-topic\ #1
   - Nếu không có parma này, default sẽ được lấy ở config trong Broker `default.replication.factor`
 - `#4` với `--partitions 1` là số lượng partition cho topic này. Với số lượng cần lớn hơn `0`
   - Nếu không có parm này thì default sẽ được lấy trong `num.partitions`
+
+### Segments
+
 ## Một số lưu ý về Kafka Brokers
 - Nếu tạo một Cluster kafka thì độ trễ của network nên ở mức dưới 15ms, vì việc liên lạc giữa các Kafka brokers là rất nhiều (Cả zookeeper nếu sử dụng zookeeper )
 
