@@ -12,8 +12,9 @@ draft: false
 
 ## Java
 ### Java core
-###### Nêu 4 tính chất của OOP
-1. **Kế thừa** : Class con có thể kế thừa tất cả các thuộc tính cũng như method của class cha, các class con có thể override các method của class cha để nâng cấp và phát triển thêm.
+##### Nêu 4 tính chất của OOP
+###### **1. Kế thừa** : 
+   - Class con có thể kế thừa tất cả các thuộc tính cũng như method của class cha, các class con có thể override các method của class cha để nâng cấp và phát triển thêm.
    - Kế thừa cho phép class mở rộng các đặc tính có sẵn mà không cần phải định nghĩa lại.
    - Chúng ta không thể khởi tạo một object cha và tham chiếu đến type của con. Bởi vì khi đó con sẽ không được khởi tạo. ===> `Con c = new Cha();`
 ::: details Ví dụ
@@ -84,7 +85,8 @@ public class Main {
 }
 ```
 :::
-2. **Đóng gói**: Là việc gói các dữ liệu(thuộc tính) và tạo ra các method hoạt động trên dữ liệu đó.
+######  **2. Đóng gói**: 
+   - Là việc gói các dữ liệu(thuộc tính) và tạo ra các method hoạt động trên dữ liệu đó.
    - Mục đích của đóng gói che giấu chi tiết về một object và chỉ cho phép tương tác với object thông qua các method.
    - Đóng gói sẽ giúp bảo vệ dữ liệu của đối tượng không bị truy cập hoặc thay đổi bất hợp pháp từ bên ngoài.
    - Tùy ngôn ngữ mà đóng gói sẽ thể hiện khác nhau, tuy nhiên đa phần là `thuộc tính được đặt quyền truy cập private `và có `getter` và `setter`
@@ -144,7 +146,8 @@ public class Main {
     }
     ```
     :::
-3. **Đa hình**: Đa hình là các method có cùng tên nhưng tùy vào hoàn cảnh sẽ có cách thức hoạt động khác nhau.
+###### **3. Đa hình**: 
+Đa hình là các method có cùng tên nhưng tùy vào hoàn cảnh sẽ có cách thức hoạt động khác nhau.
 Đa hình có 2 kiểu là `override` và `overloading`  
    - **Override**: Khi một class con kế thừa một class cha, nó khả năng ghi đè hành động của cha để hành động ở con sẽ khác với cha.
       ::: details Ví dụ
@@ -254,7 +257,8 @@ public class Main {
         
         ```
        :::
-4. **Trừu tượng**: Tính trừu tượng liên quan đến việc ẩn dấu chi tiết của object mà chỉ cung cấp các thuộc tính và method cần thiết để sử dụng object đó.
+######  **4. Trừu tượng**: 
+   - Tính trừu tượng liên quan đến việc ẩn dấu chi tiết của object mà chỉ cung cấp các thuộc tính và method cần thiết để sử dụng object đó.
    - Trừu tượng sẽ giúp người dùng tập trung cho việc object đó sẽ hỗ trợ làm những gì thay vì cách thức object đó làm.
    - Đối với java, tính trừu tượng được thể hiển bằng cách sử dụng `abstract class` hoặc `interface`
      ::: details Ví dụ 1 về `Abstract class`
