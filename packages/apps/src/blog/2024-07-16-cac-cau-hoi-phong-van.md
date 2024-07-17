@@ -6,7 +6,7 @@ authors: [ lethanh ]
 date: 2024-07-16
 outline: deep
 #image: /assets/1.tgNQEE1P.jpg
-draft: true
+draft: false
 ---
 # Các câu hỏi phỏng vấn
 
@@ -19,7 +19,7 @@ draft: true
 ::: details Ví dụ
    - Lớp cha động vật(`Animal`) sẽ có tên và hành động ăn và ngủ
    - Các loài động vật khác như `Dog` và `Cat` đều kế thừa từ cha và đều có `hành động ăn và ngủ` nhưng `DOg có thể sủa` và `Cat kêu meo meo`
-```
+```java
 // Lớp cha Animal
 class Animal {
     // Thuộc tính của lớp Animal
@@ -90,7 +90,7 @@ public class Main {
    - Tùy ngôn ngữ mà đóng gói sẽ thể hiện khác nhau, tuy nhiên đa phần là `thuộc tính được đặt quyền truy cập private `và có `getter` và `setter`
     ::: details Ví dụ
     Đảm bảo về thay đổi dữ liệu của age phải lớn hơn 0.
-    ```
+    ```java
     // Lớp Person với các thuộc tính private
     public class Person {
         // Các thuộc tính private
@@ -149,7 +149,7 @@ public class Main {
    - **Override**: Khi một class con kế thừa một class cha, nó khả năng ghi đè hành động của cha để hành động ở con sẽ khác với cha.
       ::: details Ví dụ
             - Nhìn ở ví dụ dưới, có một method ở cha là `makeSound`. Class `Dog` và `Cat` đều kế thừa từ `Animal` với override `makeSound` để với Dog và Cat sẽ kêu khác nhau
-      ```
+      ```java
       // Lớp cha Animal
       class Animal {
           // Thuộc tính của lớp Animal
@@ -218,7 +218,7 @@ public class Main {
        :::
        ::: details Ví dụ 2
        - Ví dụ thứ 2 là về tính tổng các số.
-        ```
+        ```java
         public class MathUtils {
         
             // Phương thức tính tổng hai số nguyên
@@ -254,3 +254,310 @@ public class Main {
         
         ```
        :::
+4. **Trừu tượng**: Tính trừu tượng liên quan đến việc ẩn dấu chi tiết của object mà chỉ cung cấp các thuộc tính và method cần thiết để sử dụng object đó.
+   - Trừu tượng sẽ giúp người dùng tập trung cho việc object đó sẽ hỗ trợ làm những gì thay vì cách thức object đó làm.
+   - Đối với java, tính trừu tượng được thể hiển bằng cách sử dụng `abstract class` hoặc `interface`
+     ::: details Ví dụ 1 về `Abstract class`
+        ```java
+        // Lớp trừu tượng Animal được khai báo với keyword abstract
+        abstract class Animal {
+            // Phương thức trừu tượng được khai báo với keyword abstract
+            abstract void makeSound();
+            
+            // Phương thức không trừu tượng
+            public void sleep() {
+                System.out.println("Zzz...");
+            }
+        }
+        // Lớp Dog kế thừa từ lớp trừu tượng Animal
+        class Dog extends Animal {
+            // Triển khai phương thức trừu tượng
+            void makeSound() {
+                System.out.println("Woof woof");
+            }
+        }
+        // Lớp Cat kế thừa từ lớp trừu tượng Animal
+        class Cat extends Animal {
+            // Triển khai phương thức trừu tượng
+            void makeSound() {
+                System.out.println("Meow meow");
+            }
+        }
+        public class Main {
+            public static void main(String[] args) {
+                Animal dog = new Dog();
+                Animal cat = new Cat();
+                
+                dog.makeSound(); // In ra "Woof woof"
+                cat.makeSound(); // In ra "Meow meow"
+                
+                dog.sleep(); // In ra "Zzz..."
+                cat.sleep(); // In ra "Zzz..."
+            }
+        }
+        ```
+     :::
+     ::: details Ví dụ 2 về `interface`
+       ```
+        // Giao diện Animal
+        interface Animal {
+            void makeSound();
+            void sleep();
+        }
+        
+        // Lớp Dog triển khai giao diện Animal
+        class Dog implements Animal {
+            public void makeSound() {
+                System.out.println("Woof woof");
+            }
+            
+            public void sleep() {
+                System.out.println("Zzz...");
+            }
+        }
+        
+        // Lớp Cat triển khai giao diện Animal
+        class Cat implements Animal {
+            public void makeSound() {
+                System.out.println("Meow meow");
+            }
+            
+            public void sleep() {
+                System.out.println("Zzz...");
+            }
+        }
+        
+        public class Main {
+            public static void main(String[] args) {
+                Animal dog = new Dog();
+                Animal cat = new Cat();
+                
+                dog.makeSound(); // In ra "Woof woof"
+                cat.makeSound(); // In ra "Meow meow"
+                
+                dog.sleep(); // In ra "Zzz..."
+                cat.sleep(); // In ra "Zzz..."
+            }
+        }
+        
+        ```
+     ::: 
+   - Khi nào sử dụng `abstract class` hoặc `interface`
+   - **Abstract class**: Nếu bạn muốn định nghĩa một class cha cho tất cả các class có cùng bản chất, một số thuộc tính và method giống nhau thì bạn có thể sử dụng `Abstract class`.
+     ::: details Ví dụ về `abstract class`
+       ```
+       // Lớp trừu tượng Animal
+       abstract class Animal {
+           // Các thuộc tính chung của tất cả loài động vật
+           protected String name;
+           protected int age;
+           
+           // Constructor
+           public Animal(String name, int age) {
+               this.name = name;
+               this.age = age;
+           }
+           
+           // Phương thức trừu tượng mà mỗi con vật sẽ khác nhau
+           abstract void makeSound();
+           
+           // Phương thức không trừu tượng các côn vật có hành động giống nhau
+           public void sleep() {
+               System.out.println(name + " is sleeping. Zzz...");
+           }
+           
+           // Phương thức để in thông tin về động vật
+           public void printInfo() {
+               System.out.println("Name: " + name);
+               System.out.println("Age: " + age);
+           }
+       }
+       
+       // Lớp Dog kế thừa từ lớp trừu tượng Animal
+       class Dog extends Animal {
+           // Constructor
+           public Dog(String name, int age) {
+               super(name, age);
+           }
+           
+           // Triển khai phương thức trừu tượng về cách kêu của Dog là gau gau
+           @Override
+           void makeSound() {
+               System.out.println(name + " says: Woof woof");
+           }
+           
+           // Phương thức riêng của Dog cho việc đi lấy bóng
+           public void fetch() {
+               System.out.println(name + " is fetching the ball.");
+           }
+           // Phương thức riêng của Dog cho việc vẫy đuôi
+           public void wagTail() {
+               System.out.println(name + " is wagging its tail.");
+           }
+       }
+       
+       // Lớp Cat kế thừa từ lớp trừu tượng Animal
+       class Cat extends Animal {
+           // Constructor
+           public Cat(String name, int age) {
+               super(name, age);
+           }
+           
+           // Triển khai phương thức trừu tượng về cách kêu của Cat là meo meo
+           @Override
+           void makeSound() {
+               System.out.println(name + " says: Meow meow");
+           }
+           
+           // Phương thức riêng của Cat cho việc cào đồ vật
+           public void scratch() {
+               System.out.println(name + " is scratching the furniture.");
+           }
+       }
+       
+       public class Main {
+           public static void main(String[] args) {
+               Animal dog = new Dog("Buddy", 3);
+               Animal cat = new Cat("Whiskers", 2);
+               
+               // Thông tin và hành vi của chó
+               dog.printInfo();
+               dog.makeSound();
+               dog.sleep();
+               
+               // Gọi phương thức riêng của Dog
+               ((Dog) dog).fetch();
+               ((Dog) dog).wagTail();
+               
+               System.out.println();
+               
+               // Thông tin và hành vi của mèo
+               cat.printInfo();
+               cat.makeSound();
+               cat.sleep();
+               
+               // Gọi phương thức riêng của Cat
+               ((Cat) cat).scratch();
+           }
+       }
+       ```
+     :::
+     - Khi thiết kế `Abstract class` chúng ta sẽ nghĩ về kiểu của đối tượng. Ví dụ thiết kế `Abstract class` cho đối tượng `Animal` thì đối với một `Animal` sẽ có các` thuộc tính` và `method chung nào`
+   - **Interface**: Với interface chúng ta có thể sử dụng để định nghĩa các chức năng mà class sẽ hỗ trợ.
+     ::: details Ví dụ 1 về `Interface`
+        ```java
+        interface Drawable {
+            void draw();
+        }
+        
+        class Circle implements Drawable {
+            public void draw() {
+                System.out.println("Drawing a circle");
+            }
+        }
+        
+        class Rectangle implements Drawable {
+            public void draw() {
+                System.out.println("Drawing a rectangle");
+            }
+        }
+        
+        ```
+     :::
+     - Khi thiết kế `Interface` chúng ta sẽ nghĩ về chức năng hoặc hành động sẽ hỗ trợ chữ không xác định rõ kiểu đối tượng.
+  - Ví dụ về kết hợp cả `abstract class` và `interface`
+    ::: details Ví dụ về kết hợp cả `abstract class` và `interface`
+       ```
+       // Interface chung AnimalBehavior cho tất cả động vật
+       interface AnimalBehavior {
+           void makeSound();
+           void move();
+       }
+       
+       // Interface riêng cho Dog
+       interface DogBehavior {
+           void fetch();
+           void wagTail();
+       }
+       
+       // Interface riêng cho Cat
+       interface CatBehavior {
+           void scratch();
+           void purr();
+       }
+       
+       // Abstract class Animal
+       abstract class Animal implements AnimalBehavior {
+           protected String name; // thuộc tính chung
+           protected int age; // thuộc tính chung
+           
+           public Animal(String name, int age) {
+               this.name = name;
+               this.age = age;
+           }
+           
+           public void sleep() {
+               System.out.println(name + " is sleeping. Zzz...");
+           }
+           
+           public void printInfo() {
+               System.out.println("Name: " + name);
+               System.out.println("Age: " + age);
+           }
+       }
+       
+       // Lớp Dog kế thừa từ abstract class Animal và triển khai DogBehavior
+       class Dog extends Animal implements DogBehavior {
+           public Dog(String name, int age) {
+               super(name, age);
+           }
+           
+           @Override
+           public void makeSound() {
+               System.out.println(name + " says: Woof woof");
+           }
+           
+           @Override
+           public void move() {
+               System.out.println(name + " is running.");
+           }
+           
+           @Override
+           public void fetch() {
+               System.out.println(name + " is fetching the ball.");
+           }
+           
+           @Override
+           public void wagTail() {
+               System.out.println(name + " is wagging its tail.");
+           }
+       }
+       
+       // Lớp Cat kế thừa từ abstract class Animal và triển khai CatBehavior
+       class Cat extends Animal implements CatBehavior {
+           public Cat(String name, int age) {
+               super(name, age);
+           }
+           
+           @Override
+           public void makeSound() {
+               System.out.println(name + " says: Meow meow");
+           }
+           
+           @Override
+           public void move() {
+               System.out.println(name + " is stalking.");
+           }
+           
+           @Override
+           public void scratch() {
+               System.out.println(name + " is scratching the furniture.");
+           }
+           
+           @Override
+           public void purr() {
+               System.out.println(name + " is purring.");
+           }
+       }
+       ```
+    :::
