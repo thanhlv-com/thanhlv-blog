@@ -112,3 +112,4 @@ draft.md
 .idea
 
 src/blog/.vitepress
+.pnpm-store
