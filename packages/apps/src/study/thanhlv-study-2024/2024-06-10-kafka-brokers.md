@@ -147,8 +147,7 @@ Trong đoạn mã trên:
       Điều này đảm bảo rằng các bản ghi có cũng key sẽ được lưu trữ trong  cùng một partition, giúp duy trì order của các Record có cùng key.
      :::
 3. sticky Partition Cache
- - Thực tế, với kafka phiên bản trước `2.4` thì với trường hợp `key == null` thì partition sẽ sử dụng `Round-robin` bằng cách có 1 biến `count` theo `topic` và chia cho số lượng partition để được `Round-robin`
- 
+ - Với sticky Partition Cache thì partition sẽ được tính theo `BATCH`, tất cả các `Record` có `key == null` thì tất cả các Record trong cùng `BATCH của cùng 1 topic` đó sẽ trên cùng một `partition`
 ```
 package org.apache.kafka.clients.producer.internals;
 
@@ -203,7 +202,80 @@ public class StickyPartitionCache {
     - 1. Nếu `oldPart == null` tức chưa xác định partition thì sẽ lấy và partition mới ==> trong method `partition` ở StickyPartitionCache
     - 2. Khi đã đến ngưỡng của `BATCH_SIZE_CONFIG` trong flow thực hiện tạo lại batch thì sẽ xác định lại partition  ==> trong method `onNewBatch` ở `DefaultPartitioner`
   - Chốt lại đơn giản là với sticky Partition Cache thì partition sẽ được tính theo `BATCH`, tất cả các `Record` có `key == null` thì tất cả các Record trong cùng `BATCH của cùng 1 topic` đó sẽ trên cùng một `partition`
+::: details Phiên bản < 2.4 sẽ sử dụng `Round-robin` nếu key == null
+- Với kafka phiên bản trước `2.4` thì với trường hợp `key == null` thì partition sẽ sử dụng `Round-robin` bằng cách có 1 biến `count` theo `topic` và chia cho số lượng partition để được `Round-robin`
 
+```java
+package org.apache.kafka.clients.producer.internals;
+.....
+
+public class DefaultPartitioner implements Partitioner {
+    // Bản đồ đồng thời để lưu trữ bộ đếm cho từng chủ đề
+    private final ConcurrentMap<String, AtomicInteger> topicCounterMap = new ConcurrentHashMap();
+
+    // Constructor mặc định
+    public DefaultPartitioner() {
+    }
+
+    // Phương thức cấu hình, hiện tại không làm gì
+    public void configure(Map<String, ?> configs) {
+    }
+
+    // Phương thức xác định phân vùng cho một bản ghi
+    public int partition(String topic, Object key, byte[] keyBytes, Object value, byte[] valueBytes, Cluster cluster) {
+        // Lấy danh sách các phân vùng cho chủ đề
+        List<PartitionInfo> partitions = cluster.partitionsForTopic(topic);
+        int numPartitions = partitions.size();
+        
+        // Nếu không có khóa, sử dụng bộ đếm tuần tự để chọn phân vùng
+        if (keyBytes == null) {
+            int nextValue = this.nextValue(topic);
+            List<PartitionInfo> availablePartitions = cluster.availablePartitionsForTopic(topic);
+            
+            // Nếu có phân vùng khả dụng, chọn một trong số chúng
+            if (availablePartitions.size() > 0) {
+                // Chuyển giá trị bộ đếm thành số dương và lấy phần dư khi chia cho số phân vùng khả dụng
+                // part = 2107121302 % 5 ==> 2
+                // part = 2107121303 % 5 ==> 3
+                // part = 2107121304 % 5 ==> 4
+                int part = Utils.toPositive(nextValue) % availablePartitions.size();
+                return ((PartitionInfo)availablePartitions.get(part)).partition();
+            } else {
+                // Nếu không có phân vùng khả dụng, chọn ngẫu nhiên trong tất cả các phân vùng
+                return Utils.toPositive(nextValue) % numPartitions;
+            }
+        } else {
+            // Nếu có khóa, sử dụng hàm băm Murmur2 để chọn phân vùng
+            return Utils.toPositive(Utils.murmur2(keyBytes)) % numPartitions;
+        }
+    }
+
+    // Phương thức lấy giá trị tiếp theo của bộ đếm cho một chủ đề
+    private int nextValue(String topic) {
+        // Lấy bộ đếm cho chủ đề từ bản đồ
+        AtomicInteger counter = (AtomicInteger)this.topicCounterMap.get(topic);
+        
+        // Nếu bộ đếm chưa tồn tại, khởi tạo nó với giá trị ngẫu nhiên
+        if (null == counter) {
+            counter = new AtomicInteger(ThreadLocalRandom.current().nextInt());
+            AtomicInteger currentCounter = (AtomicInteger)this.topicCounterMap.putIfAbsent(topic, counter);
+            if (currentCounter != null) {
+                counter = currentCounter;
+            }
+        }
+
+        // Tăng giá trị bộ đếm và trả về giá trị trước khi tăng
+        return counter.getAndIncrement();
+    }
+
+    // Phương thức đóng, hiện tại không làm gì
+    public void close() {
+    }
+}
+
+```
+
+- :::
 ### Offsets
 - Khi broker thêm một Record nó sẽ thêm một `id` được gọi là `offset`. Một `offset` sẽ bắt đầu từ `0` và là number, nó sẽ tặng lên 1 mỗi khi thêm một Record.
   ![kafka-offset.png](2024-06-10-kafka-brokers/kafka-offset.png)
