@@ -100,9 +100,120 @@ Và tất nhiên danh sách ở trong `availablePartitions` không được sort
 ![img](images/2024-08-07-Kafka-producer-da-khong-con-Round-Robin-Partition-voi-key-null/list-availablePartitions.png)
 
 
+## 2.4.0 đến 3.2.3 Kafka producer stickyPartition
+- REF: https://cwiki.apache.org/confluence/display/KAFKA/KIP-794%3A+Strictly+Uniform+Sticky+Partitioner
+Từ phiên bản 2.4.0 đến 3.2.3 (2.4.0 >= N <=3.2.3) Kafka Producer thay vì mặc định Round Robin Partition khi key null thì sẽ chuyển sang thuật toán stickyPartition khi key null.
+
+Với `sticky Partition Cache` thì partition sẽ được tính theo `BATCH`, tất cả các `Record` có `key == null` thì tất cả các Record trong cùng `BATCH của cùng 1 topic` được gửi lên cùng nhau sẽ trên cùng một `partition`.
+Khi tạo `Batch` mới thì Kafka Producer sẽ random ngẫu nhiên partition.
+
+```java
+package org.apache.kafka.clients.producer.internals;
+...
+public class DefaultPartitioner implements Partitioner {
+    private final StickyPartitionCache stickyPartitionCache = new StickyPartitionCache();
+
+    public DefaultPartitioner() {
+    }
+
+    public void configure(Map<String, ?> configs) {
+    }
+
+    public int partition(String topic, Object key, byte[] keyBytes, Object value, byte[] valueBytes, Cluster cluster) {
+        return this.partition(topic, key, keyBytes, value, valueBytes, cluster, cluster.partitionsForTopic(topic).size());
+    }
+
+    public int partition(String topic, Object key, byte[] keyBytes, Object value, byte[] valueBytes, Cluster cluster, int numPartitions) {
+        return keyBytes == null 
+        // nếu key null sử dụng stickyPartitionCache để lấy về partition 
+        ? this.stickyPartitionCache.partition(topic, cluster) 
+        // nếu key không null, tính hash của key và chia lấy dư cho numPartitions, 
+        // trong case này nếu cùng một key thì sẽ luôn trả về cùng một partition
+        : Utils.toPositive(Utils.murmur2(keyBytes)) % numPartitions;
+    }
+
+    public void close() {
+    }
+
+    public void onNewBatch(String topic, Cluster cluster, int prevPartition) {
+        // Mỗi khi tạo mới Batch cho topic sẽ thực hiện tính toán lại partition cho batch mới.
+        this.stickyPartitionCache.nextPartition(topic, cluster, prevPartition);
+    }
+}
 
 
 
+package org.apache.kafka.clients.producer.internals;
+...
+// Lớp chịu trách nhiệm quản lý sticky partitioning cho các topic trong Kafka.
+public class StickyPartitionCache {
+    // Cache để lưu trữ chỉ số partition hiện tại cho mỗi topic.
+    private final ConcurrentMap<String, Integer> indexCache = new ConcurrentHashMap<>();
+
+    // Constructor: Khởi tạo một đối tượng StickyPartitionCache mới.
+    public StickyPartitionCache() {
+    }
+
+    // Phương thức để lấy partition hiện tại cho một topic cụ thể.
+    // Nếu partition đã được cache, trả về nó; nếu không, tính toán partition tiếp theo.
+    // Đây là method được gọi bởi method partition trong class DefaultPartitioner để lấy về partititon
+    public int partition(String topic, Cluster cluster) {
+        Integer part = this.indexCache.get(topic);
+        return part == null ? this.nextPartition(topic, cluster, -1) : part;
+    }
+
+    // Phương thức xác định partition tiếp theo cho một topic cụ thể.
+    // Nếu không có partition khả dụng hoặc partition giống như trước, chọn một partition ngẫu nhiên.
+    public int nextPartition(String topic, Cluster cluster, int prevPartition) {
+        // Lấy danh sách tất cả các partition cho topic.
+        List<PartitionInfo> partitions = cluster.partitionsForTopic(topic);
+        Integer oldPart = this.indexCache.get(topic);
+        Integer newPart = oldPart;
+
+        // Nếu partition cũ(Partition hiện tại trong cache) không phải là partition trước đó, trả về partition cũ từ cache.
+        if (oldPart != null && oldPart != prevPartition) {
+            return this.indexCache.get(topic);
+        } else {
+            // Lấy danh sách các partition khả dụng cho topic.(Không bao gồm các partition off)
+            List<PartitionInfo> availablePartitions = cluster.availablePartitionsForTopic(topic);
+
+            // Nếu không có partition khả dụng, chọn một partition ngẫu nhiên.
+            if (availablePartitions.size() < 1) {
+                Integer random = Utils.toPositive(ThreadLocalRandom.current().nextInt());
+                newPart = random % partitions.size();
+            } 
+            // Nếu chỉ có một partition khả dụng, sử dụng partition đó.
+            else if (availablePartitions.size() == 1) {
+                newPart = availablePartitions.get(0).partition();
+            } 
+            // Nếu có nhiều partition khả dụng, chọn một partition ngẫu nhiên khác với partition cũ.
+            else {
+                while(newPart == null || newPart.equals(oldPart)) {
+                    int random = Utils.toPositive(ThreadLocalRandom.current().nextInt());
+                    newPart = availablePartitions.get(random % availablePartitions.size()).partition();
+                }
+            }
+
+            // Cập nhật cache với partition mới.
+            if (oldPart == null) {
+                this.indexCache.putIfAbsent(topic, newPart);
+            } else {
+                this.indexCache.replace(topic, prevPartition, newPart);
+            }
+
+            // Trả về partition mới từ cache.
+            return this.indexCache.get(topic);
+        }
+    }
+}
+
+
+```
+Nhìn vào đoạn code ở phía trên bạn có thể thấy, Mỗi khi bắt đầu một batch mới cho topic thì Kafka sẽ tính toán ngẫu nhiên lại Partition cho key  null.
+
+
+## 3.3.0 đến 3.8.0(3.8.0 là phiên bản hiện tại viết Block này ) Kafka producer stickyPartition sẽ ngẫu nhiên partition 
+- REF: https://issues.apache.org/jira/browse/KAFKA-14156
 ##
 Trong nhiều cuộc phỏng vấn và các bài thảo luận mới trên mạng mọi người vẫn nói best nên thiếp lập số lượng partition của topic bằng với số lượng consumer bởi vì nếu Record không có Key thì Kafka sẽ `Round Robin` để phân phối các Record vào các partition.
 
