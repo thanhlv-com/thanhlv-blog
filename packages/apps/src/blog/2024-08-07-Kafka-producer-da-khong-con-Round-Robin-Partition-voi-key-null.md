@@ -219,6 +219,86 @@ Nhìn vào đoạn code ở phía trên bạn có thể thấy, Mỗi khi bắt 
 - Mỗi khi thêm một Record mới, kafka sẽ tính toán Record tốn bao nhiêu byte( Metadata +data ) sau đó cộng vào một biến count, 
   - Sau đó thay vì ở phiên bản `2.4.0 đến 3.2.3` sẽ ngẫu nhiên lựa chọn lại partition mỗi lần tạo batch thì từ `phiên bản 3.3.0` sẽ thực kiểm tra khi biến count lớn hơn `batch.size` sẽ bắt đầu thực hiện chọn lại partition.
 
+Code lib Kafka, thực tế trong `BuiltInPartitioner` sẽ có nhiều method khác nữa, mình đã bỏ các method khác đi để chỉ tập trung vào `nextPartition` và `updatePartitionInfo` 
+```java
+package org.apache.kafka.clients.producer.internals;
+
+import ....
+
+public class BuiltInPartitioner {
+    private final Logger log;
+    private final String topic;
+    private final int stickyBatchSize;
+    private volatile PartitionLoadStats partitionLoadStats = null;
+    private final AtomicReference<StickyPartitionInfo> stickyPartitionInfo 
+      = new AtomicReference();
+    public static volatile Supplier<Integer> mockRandom = null;
+
+    public BuiltInPartitioner(LogContext logContext, String topic, int stickyBatchSize) {
+        this.log = logContext.logger(BuiltInPartitioner.class);
+        this.topic = topic;
+        if (stickyBatchSize < 1) {
+            throw new IllegalArgumentException("stickyBatchSize must be >= 1 but got " + stickyBatchSize);
+        } else {
+            // được config bởi "batch.size".
+            // Giá trị mặc định của "batch.size" là 16384 
+            // (https://github.com/apache/kafka/blob/4a485ddb71c844acc8bf241feda1fcbffc5ce9be/clients/src/main/java/org/apache/kafka/clients/producer/ProducerConfig.java#L384)
+            this.stickyBatchSize = stickyBatchSize;
+        }
+    }
+
+    private int nextPartition(Cluster cluster) {
+        // mockRandom là test của dev, có thể bỏ qua
+      
+        int random = mockRandom != null ? (Integer)mockRandom.get() : Utils.toPositive(ThreadLocalRandom.current().nextInt());
+        PartitionLoadStats partitionLoadStats = this.partitionLoadStats;
+        int partition;
+        if (partitionLoadStats == null) {
+            List<PartitionInfo> availablePartitions = cluster.availablePartitionsForTopic(this.topic);
+            if (!availablePartitions.isEmpty()) {
+                partition = ((PartitionInfo)availablePartitions.get(random % availablePartitions.size())).partition();
+            } else {
+                List<PartitionInfo> partitions = cluster.partitionsForTopic(this.topic);
+                partition = random % partitions.size();
+            }
+        } else {
+            assert partitionLoadStats.length > 0;
+
+            int[] cumulativeFrequencyTable = partitionLoadStats.cumulativeFrequencyTable;
+            int weightedRandom = random % cumulativeFrequencyTable[partitionLoadStats.length - 1];
+            int searchResult = Arrays.binarySearch(cumulativeFrequencyTable, 0, partitionLoadStats.length, weightedRandom);
+            int partitionIndex = Math.abs(searchResult + 1);
+
+            assert partitionIndex < partitionLoadStats.length;
+
+            partition = partitionLoadStats.partitionIds[partitionIndex];
+        }
+
+        this.log.trace("Switching to partition {} in topic {}", partition, this.topic);
+        return partition;
+    }
+
+    void updatePartitionInfo(StickyPartitionInfo partitionInfo, int appendedBytes, Cluster cluster, boolean enableSwitch) {
+        if (partitionInfo != null) {
+            assert partitionInfo == this.stickyPartitionInfo.get();
+
+            int producedBytes = partitionInfo.producedBytes.addAndGet(appendedBytes);
+            if (producedBytes >= this.stickyBatchSize * 2) {
+                this.log.trace("Produced {} bytes, exceeding twice the batch size of {} bytes, with switching set to {}", new Object[]{producedBytes, this.stickyBatchSize, enableSwitch});
+            }
+
+            if (producedBytes >= this.stickyBatchSize && enableSwitch || producedBytes >= this.stickyBatchSize * 2) {
+                StickyPartitionInfo newPartitionInfo = new StickyPartitionInfo(this.nextPartition(cluster));
+                this.stickyPartitionInfo.set(newPartitionInfo);
+            }
+
+        }
+    }
+}
+
+```
+DefaultRecordBatch.estimateBatchSizeUpperBound(key, value, headers);
+
 - REF: https://issues.apache.org/jira/browse/KAFKA-14156
 ##
 Trong nhiều cuộc phỏng vấn và các bài thảo luận mới trên mạng mọi người vẫn nói best nên thiếp lập số lượng partition của topic bằng với số lượng consumer bởi vì nếu Record không có Key thì Kafka sẽ `Round Robin` để phân phối các Record vào các partition.
