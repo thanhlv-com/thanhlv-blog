@@ -249,23 +249,30 @@ public class BuiltInPartitioner {
 
     private int nextPartition(Cluster cluster) {
         // mockRandom là test của dev, có thể bỏ qua
-      
+        // response của line code này là 1 số ngẫu nhiên
         int random = mockRandom != null ? (Integer)mockRandom.get() : Utils.toPositive(ThreadLocalRandom.current().nextInt());
         PartitionLoadStats partitionLoadStats = this.partitionLoadStats;
         int partition;
         if (partitionLoadStats == null) {
             List<PartitionInfo> availablePartitions = cluster.availablePartitionsForTopic(this.topic);
             if (!availablePartitions.isEmpty()) {
+                // từ số random, chia lấy dư cho số lượng availablePartitions
                 partition = ((PartitionInfo)availablePartitions.get(random % availablePartitions.size())).partition();
             } else {
+                // nếu không có availablePartitions, lấy ngẫu nhiên ở tất cho partition
                 List<PartitionInfo> partitions = cluster.partitionsForTopic(this.topic);
                 partition = random % partitions.size();
             }
         } else {
+            // tính toán dựa trên lượng tải của partition
             assert partitionLoadStats.length > 0;
 
             int[] cumulativeFrequencyTable = partitionLoadStats.cumulativeFrequencyTable;
+            
+            // tạo trọng số ngẫu nhiên bằng cách lấy dư của random / cho giá trị cuối cùng trong bảng tần suất tích lũy.
             int weightedRandom = random % cumulativeFrequencyTable[partitionLoadStats.length - 1];
+            
+            // Sử dụng tìm kiếm nhị phân để tìm chỉ số của partition tương ứng với số ngẫu nhiên có trọng số trong bảng tần suất tích lũy.
             int searchResult = Arrays.binarySearch(cumulativeFrequencyTable, 0, partitionLoadStats.length, weightedRandom);
             int partitionIndex = Math.abs(searchResult + 1);
 
