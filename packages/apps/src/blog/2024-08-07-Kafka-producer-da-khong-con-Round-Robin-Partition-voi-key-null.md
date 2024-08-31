@@ -270,6 +270,7 @@ public class BuiltInPartitioner {
             int[] cumulativeFrequencyTable = partitionLoadStats.cumulativeFrequencyTable;
             
             // tạo trọng số ngẫu nhiên bằng cách lấy dư của random / cho giá trị cuối cùng trong bảng tần suất tích lũy.
+            //
             int weightedRandom = random % cumulativeFrequencyTable[partitionLoadStats.length - 1];
             
             // Sử dụng tìm kiếm nhị phân để tìm chỉ số của partition tương ứng với số ngẫu nhiên có trọng số trong bảng tần suất tích lũy.
@@ -300,6 +301,21 @@ public class BuiltInPartitioner {
             }
 
         }
+    }
+
+    private final static class PartitionLoadStats {
+      // load tải table, có size array tối đa  = số lượng partition
+      public final int[] cumulativeFrequencyTable;
+      // danh sach partition id cua topic
+      public final int[] partitionIds;
+      public final int length;
+      public PartitionLoadStats(int[] cumulativeFrequencyTable, int[] partitionIds, int length) {
+        assert cumulativeFrequencyTable.length == partitionIds.length;
+        assert length <= cumulativeFrequencyTable.length;
+        this.cumulativeFrequencyTable = cumulativeFrequencyTable;
+        this.partitionIds = partitionIds;
+        this.length = length;
+      }
     }
 }
 
