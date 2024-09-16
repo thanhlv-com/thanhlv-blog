@@ -296,6 +296,7 @@ public class BuiltInPartitioner {
             }
 
             if (producedBytes >= this.stickyBatchSize && enableSwitch || producedBytes >= this.stickyBatchSize * 2) {
+                // Nếu tổng số producedBytes hiện tại lớn hớn config stickyBatchSize và enableSwitch = true hoặc producedBytes lớn hơn gấp 2 lần stickyBatchSize thì sẽ force update 
                 StickyPartitionInfo newPartitionInfo = new StickyPartitionInfo(this.nextPartition(cluster));
                 this.stickyPartitionInfo.set(newPartitionInfo);
             }
@@ -320,7 +321,72 @@ public class BuiltInPartitioner {
 }
 
 ```
-DefaultRecordBatch.estimateBatchSizeUpperBound(key, value, headers);
+### Các thành phần khác
+Nhìn đoạn code ở phía trên cũng đã rất phức tạp :D Tuy nhiên chúng ta còn rất nhiều logic khác nữa, mình sẽ kể ra 1 số logic đặc biệt cần lưu ý cho mọi người.
+
+#### Logic tính toán số lượng Bytes cho mỗi Record
+- Method static thực hiện điều này chính là `DefaultRecordBatch.estimateBatchSizeUpperBound(key, value, headers);`
+```java
+
+
+  static int estimateBatchSizeUpperBound(ByteBuffer key, ByteBuffer value, Header[] headers) {
+         //  return RECORD_BATCH_OVERHEAD = 61 ;
+         return RECORD_BATCH_OVERHEAD + DefaultRecord.recordSizeUpperBound(key, value, headers);
+  }
+
+  static int recordSizeUpperBound(ByteBuffer key, ByteBuffer value, Header[] headers) {
+    int keySize = key == null ? -1 : key.remaining();
+    int valueSize = value == null ? -1 : value.remaining();
+    // MAX_RECORD_OVERHEAD = 21
+    return MAX_RECORD_OVERHEAD + sizeOf(keySize, valueSize, headers);
+  }
+  
+  private static int sizeOf(int keySize, int valueSize, Header[] headers) {
+    int size = 0;
+    if (keySize < 0)
+    size += NULL_VARINT_SIZE_BYTES;
+    else
+    size += ByteUtils.sizeOfVarint(keySize) + keySize;
+
+    if (valueSize < 0)
+    size += NULL_VARINT_SIZE_BYTES;
+    else
+    size += ByteUtils.sizeOfVarint(valueSize) + valueSize;
+
+    if (headers == null)
+    throw new IllegalArgumentException("Headers cannot be null");
+
+    size += ByteUtils.sizeOfVarint(headers.length);
+    for (Header header : headers) {
+    String headerKey = header.key();
+    if (headerKey == null)
+    throw new IllegalArgumentException("Invalid null header key found in headers");
+
+    int headerKeySize = Utils.utf8Length(headerKey);
+    size += ByteUtils.sizeOfVarint(headerKeySize) + headerKeySize;
+
+    byte[] headerValue = header.value();
+    if (headerValue == null) {
+    size += NULL_VARINT_SIZE_BYTES;
+    } else {
+    size += ByteUtils.sizeOfVarint(headerValue.length) + headerValue.length;
+    }
+    }
+    return size;
+    }
+    
+```
+Nhìn có vẻ phức tạp nhưng bạn có thể hiểu đơn giản như này.
+ ```
+ Size = RECORD_BATCH_OVERHEAD + MAX_RECORD_OVERHEAD +  sizeOf(keySize, valueSize, headers)
+      = 61 + 21 + sizeOf(keySize, valueSize, headers)
+      
+ Trường hợp key null và value rỗng(0) và header empty 
+   = 61 + 21 + NULL_VARINT_SIZE_BYTES(Key) + NULL_VARINT_SIZE_BYTES(Value)+NULL_VARINT_SIZE_BYTES(headers)
+   = 61 + 21 + 1 + 1 + 1 =  85
+ Trường hợp có dữ liệu = 61 + 21 + keyByte + valueByte + headersByte
+ ```
+Vì vậy ít nhất mỗi Record sẽ có size bytes được tăng thêm là 85
 
 - REF: https://issues.apache.org/jira/browse/KAFKA-14156
 ##
