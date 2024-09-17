@@ -265,6 +265,9 @@ public class BuiltInPartitioner {
             }
         } else {
             // tính toán dựa trên lượng tải của partition
+            // Nếu lượng tải quá lớn cùng một thời gian ngắn, partitionLoadStats sẽ not null và sử dụng partitionLoadStats để tính toán partition mới
+            // Sau 1 khoản thời gian lượng tải hết lớn, partitionLoadStats sẽ null và sử dụng random
+            // 
             assert partitionLoadStats.length > 0;
 
             int[] cumulativeFrequencyTable = partitionLoadStats.cumulativeFrequencyTable;
@@ -387,6 +390,10 @@ Nhìn có vẻ phức tạp nhưng bạn có thể hiểu đơn giản như này
  Trường hợp có dữ liệu = 61 + 21 + keyByte + valueByte + headersByte
  ```
 Vì vậy ít nhất mỗi Record sẽ có size bytes được tăng thêm là 85
+
+#### Logic tính toán cumulativeFrequencyTable
+- cumulativeFrequencyTable là một table sử dụng để thống kê tải(load) partition cho từng topic, nó được sử dụng để xác định partition mới khi thực hiện xác định lại partition.
+- cumulativeFrequencyTable sẽ giúp chúng ta lựa chọn partition mới để chia tải gần như cân bằng giữa các partition.
 
 - REF: https://issues.apache.org/jira/browse/KAFKA-14156
 ##
