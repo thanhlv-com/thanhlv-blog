@@ -884,8 +884,8 @@ public class CalPartitionLoad {
 
 ## Thử nghiệm
 Thông tin thử nghiệm:
-- Gửi 500 triệu data
-- 3 node
+- Gửi 200 triệu data
+- 4 node
 - 10 partition
 - image docker confluentinc/cp-kafka:7.4.4 , kafka server version: 3.5.0
 - Hardware Overview:
@@ -906,12 +906,15 @@ kafka-topics --bootstrap-server kafka1:19092 --create --if-not-exists --topic to
 - Node Info ([Xem full tại đây](/blog/2024-08-07-Kafka-producer-da-khong-con-Round-Robin-Partition-voi-key-null/docker-compose-node-test.yml))
 ```
 Node 1: 
-- 0.1 cpu
+- 0.3 cpu
 - 3g RAM
 Node 2: 
 - 2 cpu
 - 3g RAM
 Node 3: 
+- 3 cpu
+- 3g RAM
+Node 4: 
 - 3 cpu
 - 3g RAM
 ```
@@ -921,7 +924,7 @@ Node 3:
 
         final var props = new Properties();
         props.setProperty(ProducerConfig.CLIENT_ID_CONFIG, "java-producer-producerRecordPartition-KeyNotNull");
-        props.setProperty(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:29092,localhost:29093");
+        props.setProperty(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:29091,localhost:29092,localhost:29093");
         props.setProperty(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName());
         props.setProperty(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName());
         // Khi tong so luong data gui = BATCH_SIZE_CONFIG thi se tinh toan lai partition moi
@@ -956,17 +959,18 @@ Node 3:
 
 ### Kafka Producer Partitioning (phiên bản <= 2.3.1):
 - Phiên bản sử dụng : kafka-clients-2.3.1
-- Tổng thời gian chạy là 2086184ms = 34.769733333 phút
+- Tổng thời gian chạy là 191392ms = 3.1898666667 phút
 - ![test-1.png](images/2024-08-07-Kafka-producer-da-khong-con-Round-Robin-Partition-voi-key-null/test-1.png)
 - Do có node 1 chậm(Chỉ 0.1 CPU) nên thời gian hoàn thành lên đến hơn 30 phút, tuy nhiên các partition được cân bằng Round Robin
 ### Kafka Producer Sticky Partitioning (phiên bản 2.4.0 đến 3.2.3):
 - Phiên bản sử dụng : kafka-clients-3.2.3
-- Tổng thời gian chạy là 476988ms = 7.9498 phút
+- Tổng thời gian chạy là 250148ms = 4.1691333333 phút
 - ![test-2.png](images/2024-08-07-Kafka-producer-da-khong-con-Round-Robin-Partition-voi-key-null/test-2.png)
 ### Kafka Producer Partitioning (phiên bản 3.3.0 trở lên):
 - Phiên bản sử dụng : kafka-clients-3.8.0
-- Tổng thời gian chạy là 301320ms = 5.022 phút
+- Tổng thời gian chạy là 175633ms = 2.9272166667 phút
 - ![test-3.png](images/2024-08-07-Kafka-producer-da-khong-con-Round-Robin-Partition-voi-key-null/test-3.png)
+- ![test-3-1.png](images/2024-08-07-Kafka-producer-da-khong-con-Round-Robin-Partition-voi-key-null/test-3-1.png)
 ## tổng kết
 ### Kafka Producer Partitioning (phiên bản <= 2.3.1):
 Trước phiên bản 2.3.1, khi key null, Kafka producer sử dụng thuật toán "Round Robin Partition" để chọn phân vùng. Các record sẽ được phân phối lần lượt giữa các partition.
