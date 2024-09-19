@@ -834,7 +834,7 @@ public class CalPartitionLoad {
   }
 
   public static void run(Integer[] queueSizes){
-    // queueSizes length = max partition, queueSizes là số lượng batch data đang cho gui den partition
+    // queueSizes length = max partition, queueSizes là số lượng batch data đang chờ gửi đến partition
     /**
      * ví dụ : Integer[] queueSizes = {8, 3, 14};
      * Có 3 partiotn là 0,1,2
@@ -859,7 +859,7 @@ public class CalPartitionLoad {
 
     //
     if (allEqual) {
-      System.out.println("allEqual && queueSizes.length == queueSizes.length");
+      System.out.println("allEqual && queueSizes.length == length");
       return;
     }
     // mỗi phần tử tiếp theo được tính bằng cách sử dụng giá trị lớn nhất và cộng dồn các phần tử trước đó.
@@ -877,7 +877,67 @@ public class CalPartitionLoad {
 }
 ```
 
-## Thử nghiệm và tổng kết
+## Thử nghiệm
+Thông tin thử nghiệm:
+- Gửi 500 triệu data
+- 5 partition
+- Hardware Overview:
+```
+  Model Name:	MacBook Pro
+  Model Identifier:	MacBookPro18,1
+  Chip:	Apple M1 Pro
+  Total Number of Cores:	10 (8 performance and 2 efficiency)
+  Memory:	16 GB
+  System Firmware Version:	8422.141.2
+  OS Loader Version:	8422.141.2
+  ```
+- `kafka-topics --bootstrap-server kafka1:19092 --create --if-not-exists --topic my-topic-2 --replication-factor 1 --partitions 5`
+- code:
+```java
+    public static void main(String[] args) throws IOException {
+
+        final var props = new Properties();
+        props.setProperty(ProducerConfig.CLIENT_ID_CONFIG, "java-producer-producerRecordPartition-KeyNotNull");
+        props.setProperty(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:29092,localhost:29093");
+        props.setProperty(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName());
+        props.setProperty(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName());
+        // Khi tong so luong data gui = BATCH_SIZE_CONFIG thi se tinh toan lai partition moi
+        props.setProperty(ProducerConfig.BATCH_SIZE_CONFIG, "20000");
+
+        try (var producer = new KafkaProducer<Object, String>(props)) {
+            try (BufferedReader br = new BufferedReader(new InputStreamReader(System.in));) {
+
+                while (true) {
+                    log.info("Enter number random message: ");
+                    Long start = System.currentTimeMillis();
+                    log.info("Start: {} ms",start);
+                    String number = br.readLine().trim();
+
+                    final var messageProducerRecord = new ProducerRecord<>(
+                            "my-topic-2",     //topic name
+                            UUID.randomUUID().toString()        // value
+                    );
+                    for (int i = 0; i < Integer.parseInt(number); i++) {
+                        producer.send(messageProducerRecord);
+                    }
+                    Long end = System.currentTimeMillis();
+                    log.info("END: {} ms and end - start = {}",end,end - start);
+
+                }
+            }
+        }
+
+    }
+
+```
+
+### Kafka Producer Partitioning (phiên bản <= 2.3.1):
+### Kafka Producer Sticky Partitioning (phiên bản 2.4.0 đến 3.2.3):
+### Kafka Producer Partitioning (phiên bản 3.3.0 trở lên):
+- Phiên bản sử dụng : kafka-clients-3.8.0
+- Tổng thời gian chạy là 385388ms = 385.388s = 6.4231333333 phút
+- ![test-1.png](images/2024-08-07-Kafka-producer-da-khong-con-Round-Robin-Partition-voi-key-null/test-1.png)
+## tổng kết
 ### Kafka Producer Partitioning (phiên bản <= 2.3.1):
 Trước phiên bản 2.3.1, khi key null, Kafka producer sử dụng thuật toán "Round Robin Partition" để chọn phân vùng. Các record sẽ được phân phối lần lượt giữa các partition.
 - Bởi vì mỗi lần gửi một record sẽ cần tính toán next partition nên khi tải cao việc tính toán gây tốn nhiều chi phí.
