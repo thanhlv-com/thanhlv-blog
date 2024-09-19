@@ -101,7 +101,12 @@ Và tất nhiên danh sách ở trong `availablePartitions` không được sort
 
 
 ## 2.4.0 đến 3.2.3 Kafka producer stickyPartition
-- REF: https://cwiki.apache.org/confluence/display/KAFKA/KIP-794%3A+Strictly+Uniform+Sticky+Partitioner
+### REF: https://cwiki.apache.org/confluence/display/KAFKA/KIP-794%3A+Strictly+Uniform+Sticky+Partitioner
+- Round Robin Partition là một tính năng rất hay và hữu ích, nó giúp chia tải cân bằng giữa các partition để các comsumer có thể chia tải xử lý.
+
+- Tuy nhiên bởi vì Round Robin Partition nên nếu có 1 trong N node trong cluster chậm, nó sẽ kéo theo cả cluster chậm.
+  - https://issues.apache.org/jira/browse/KAFKA-10888?focusedCommentId=17285383&page=com.atlassian.jira.plugin.system.issuetabpanels%3Acomment-tabpanel#comment-17285383
+  - Hiểu đơn giản là kafka khi kafka client chọn 1 batch của partition trên node chậm, quá trình gửi sẽ tốn nhiều thời gian vì vậy sẽ có càng nhiều batch được tạo ra vì vậy có càng nhiều sự chậm chễ.
 
 Từ phiên bản 2.4.0 đến 3.2.3 (2.4.0 >= N <=3.2.3) Kafka Producer thay vì mặc định Round Robin Partition khi key null thì sẽ chuyển sang thuật toán stickyPartition khi key null.
 
@@ -882,7 +887,7 @@ Thông tin thử nghiệm:
 - Gửi 500 triệu data
 - 3 node
 - 10 partition
-- image docker confluentinc/cp-kafka:7.4.4
+- image docker confluentinc/cp-kafka:7.4.4 , kafka server version: 3.5.0
 - Hardware Overview:
 ```
   Model Name:	MacBook Pro
@@ -893,7 +898,23 @@ Thông tin thử nghiệm:
   System Firmware Version:	8422.141.2
   OS Loader Version:	8422.141.2
   ```
-- `kafka-topics --bootstrap-server kafka1:19092 --create --if-not-exists --topic my-topic-2 --replication-factor 1 --partitions 5`
+- `Topic`
+```
+kafka-topics --bootstrap-server kafka1:19092 --create --if-not-exists --topic topic-rep-1-partition-10 --replication-factor 1 --partitions 10
+
+```
+- Node Info ([Xem full tại đây](/blog/2024-08-07-Kafka-producer-da-khong-con-Round-Robin-Partition-voi-key-null/docker-compose-node-test.yml))
+```
+Node 1: 
+- 0.1 cpu
+- 3g RAM
+Node 2: 
+- 2 cpu
+- 3g RAM
+Node 3: 
+- 3 cpu
+- 3g RAM
+```
 - code:
 ```java
     public static void main(String[] args) throws IOException {
@@ -934,6 +955,10 @@ Thông tin thử nghiệm:
 ```
 
 ### Kafka Producer Partitioning (phiên bản <= 2.3.1):
+- Phiên bản sử dụng : kafka-clients-2.3.1
+- Tổng thời gian chạy là 2086184ms = 34.769733333 phút
+- ![test-1.png](images/2024-08-07-Kafka-producer-da-khong-con-Round-Robin-Partition-voi-key-null/test-1.png)
+- Do có node 1 chậm(Chỉ 0.1 CPU) nên thời gian hoàn thành lên đến hơn 30 phút, tuy nhiên các partition được cân bằng Round Robin
 ### Kafka Producer Sticky Partitioning (phiên bản 2.4.0 đến 3.2.3):
 - Phiên bản sử dụng : kafka-clients-3.2.3
 - Tổng thời gian chạy là 476988ms = 7.9498 phút
