@@ -961,7 +961,6 @@ Node 4:
 - Phiên bản sử dụng : kafka-clients-2.3.1
 - Tổng thời gian chạy là 191392ms = 3.1898666667 phút
 - ![test-1.png](images/2024-08-07-Kafka-producer-da-khong-con-Round-Robin-Partition-voi-key-null/test-1.png)
-- Do có node 1 chậm(Chỉ 0.1 CPU) nên thời gian hoàn thành lên đến hơn 30 phút, tuy nhiên các partition được cân bằng Round Robin
 ### Kafka Producer Sticky Partitioning (phiên bản 2.4.0 đến 3.2.3):
 - Phiên bản sử dụng : kafka-clients-3.2.3
 - Tổng thời gian chạy là 250148ms = 4.1691333333 phút
