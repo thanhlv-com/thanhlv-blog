@@ -880,7 +880,9 @@ public class CalPartitionLoad {
 ## Thử nghiệm
 Thông tin thử nghiệm:
 - Gửi 500 triệu data
-- 5 partition
+- 3 node
+- 10 partition
+- image docker confluentinc/cp-kafka:7.4.4
 - Hardware Overview:
 ```
   Model Name:	MacBook Pro
@@ -933,10 +935,13 @@ Thông tin thử nghiệm:
 
 ### Kafka Producer Partitioning (phiên bản <= 2.3.1):
 ### Kafka Producer Sticky Partitioning (phiên bản 2.4.0 đến 3.2.3):
+- Phiên bản sử dụng : kafka-clients-3.2.3
+- Tổng thời gian chạy là 476988ms = 7.9498 phút
+- ![test-2.png](images/2024-08-07-Kafka-producer-da-khong-con-Round-Robin-Partition-voi-key-null/test-2.png)
 ### Kafka Producer Partitioning (phiên bản 3.3.0 trở lên):
 - Phiên bản sử dụng : kafka-clients-3.8.0
-- Tổng thời gian chạy là 385388ms = 385.388s = 6.4231333333 phút
-- ![test-1.png](images/2024-08-07-Kafka-producer-da-khong-con-Round-Robin-Partition-voi-key-null/test-1.png)
+- Tổng thời gian chạy là 301320ms = 5.022 phút
+- ![test-3.png](images/2024-08-07-Kafka-producer-da-khong-con-Round-Robin-Partition-voi-key-null/test-3.png)
 ## tổng kết
 ### Kafka Producer Partitioning (phiên bản <= 2.3.1):
 Trước phiên bản 2.3.1, khi key null, Kafka producer sử dụng thuật toán "Round Robin Partition" để chọn phân vùng. Các record sẽ được phân phối lần lượt giữa các partition.
