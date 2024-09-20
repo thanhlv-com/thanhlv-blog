@@ -1032,8 +1032,49 @@ public class KeyNull {
 - Tốn 150396ms = 2.5066 phút
 ### Kafka Producer Sticky Partitioning (phiên bản 2.4.0 đến 3.2.3):
 - Phiên bản sử dụng : kafka-clients-3.2.3
-- Tổng thời gian chạy là 250148ms = 4.1691333333 phút
-- ![test-2.png](images/2024-08-07-Kafka-producer-da-khong-con-Round-Robin-Partition-voi-key-null/test-2.png)
+- Gửi 10,000,000 data
+- Code này chạy tương tự nhưng chỉ khác phiên bản thư viện client
+```java
+@Slf4j
+public class KeyNull {
+  @SneakyThrows
+  public static void main(String[] args) throws IOException {
+    System.setProperty("org.slf4j.simpleLogger.defaultLogLevel", "ALL");
+    final var props = new Properties();
+    props.setProperty(ProducerConfig.CLIENT_ID_CONFIG, "java-producer-producerRecordPartition-KeyNotNull");
+    props.setProperty(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:29091,localhost:29092,localhost:29093,localhost:29094");
+    props.setProperty(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName());
+    props.setProperty(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName());
+    props.setProperty(ProducerConfig.BATCH_SIZE_CONFIG, "20000");
+
+    try (var producer = new KafkaProducer<Object, String>(props)) {
+      try (BufferedReader br = new BufferedReader(new InputStreamReader(System.in));) {
+        while (true) {
+          log.debug("Enter number random message: ");
+          String number = br.readLine().trim();
+          Long start = System.currentTimeMillis();
+          log.info("Start: {} ms",start);
+          final var messageProducerRecord = new ProducerRecord<>(
+            "topic-rep-1-partition-10",     //topic name
+            UUID.randomUUID().toString()        // value
+          );
+          Integer numberSend = Integer.parseInt(number);
+          CountDownLatch countDownLatch=new CountDownLatch(numberSend);
+          for (int i = 0; i < numberSend; i++) {
+            producer.send(messageProducerRecord, (metadata, exception) -> countDownLatch.countDown());
+          }
+          countDownLatch.await();
+          Long end = System.currentTimeMillis();
+          log.info("END: {} ms and end - start = {}",end,end - start);
+        }
+      }
+    }
+  }
+}
+```
+- Tổng 346680 request gửi lên máy chủ,
+- Tổng thời gian chạy là 118572ms = 1.9762 phút
+![test-2.png](images/2024-08-07-Kafka-producer-da-khong-con-Round-Robin-Partition-voi-key-null/test-3-2-3/img.png)
 ### Kafka Producer Partitioning (phiên bản 3.3.0 trở lên):
 - Phiên bản sử dụng : kafka-clients-3.8.0
 - Tổng thời gian chạy là 175633ms = 2.9272166667 phút
