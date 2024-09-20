@@ -1072,9 +1072,21 @@ public class KeyNull {
   }
 }
 ```
+##### Sử dụng `linger.ms` bằng 0(Mặc định cũng = 0)
+- Config
+```java
+        props.setProperty(ProducerConfig.LINGER_MS_CONFIG, "0");
+```
 - Tổng 346680 request gửi lên máy chủ,
 - Tổng thời gian chạy là 118572ms = 1.9762 phút
 ![test-2.png](images/2024-08-07-Kafka-producer-da-khong-con-Round-Robin-Partition-voi-key-null/test-3-2-3/img.png)
+##### Sử dụng `linger.ms` bằng 500 tức 500ms nếu chưa đầy batch sẽ gửi
+- Config
+```java
+        props.setProperty(ProducerConfig.LINGER_MS_CONFIG, "500");
+```
+- Tổng 21872 request gửi lên máy chủ,
+- Tổng thời gian chạy là 50683ms = 50.683 giây
 ### Kafka Producer Partitioning (phiên bản 3.3.0 trở lên):
 - Phiên bản sử dụng : kafka-clients-3.8.0
 - Tổng thời gian chạy là 175633ms = 2.9272166667 phút
