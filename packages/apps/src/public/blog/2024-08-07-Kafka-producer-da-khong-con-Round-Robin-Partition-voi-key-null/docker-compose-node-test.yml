@@ -14,25 +14,22 @@ services:
     hostname: kafka1
     container_name: kafka1
     ports:
-      - "29092:29092"
+      - "29091:29091"
     deploy:
       resources:
         limits:
-          cpus: "0.1"
-          memory: 3g
-        reservations:
-          cpus: "0.1"
+          cpus: "3"
           memory: 3g
     environment:
-      KAFKA_LISTENERS: BROKER://kafka1:19092,EXTERNAL://kafka1:29092,CONTROLLER://kafka1:9093
-      KAFKA_ADVERTISED_LISTENERS: BROKER://kafka1:19092,EXTERNAL://localhost:29092
+      KAFKA_LISTENERS: BROKER://kafka1:19091,EXTERNAL://kafka1:29091,CONTROLLER://kafka1:9911
+      KAFKA_ADVERTISED_LISTENERS: BROKER://kafka1:19091,EXTERNAL://localhost:29091
       KAFKA_INTER_BROKER_LISTENER_NAME: BROKER
       KAFKA_CONTROLLER_LISTENER_NAMES: CONTROLLER
       KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: CONTROLLER:PLAINTEXT,BROKER:PLAINTEXT,EXTERNAL:PLAINTEXT
       KAFKA_GROUP_INITIAL_REBALANCE_DELAY_MS: 0
       KAFKA_PROCESS_ROLES: 'controller,broker'
       KAFKA_NODE_ID: 1
-      KAFKA_CONTROLLER_QUORUM_VOTERS: '1@kafka1:9093,2@kafka2:9093,3@kafka3:9093'
+      KAFKA_CONTROLLER_QUORUM_VOTERS: '1@kafka1:9911,2@kafka2:9911,3@kafka3:9911,4@kafka4:9911'
       KAFKA_METADATA_LOG_SEGMENT_MS: 15000
       KAFKA_METADATA_MAX_RETENTION_MS: 1200000
       KAFKA_METADATA_LOG_MAX_RECORD_BYTES_BETWEEN_SNAPSHOTS: 2800
@@ -49,25 +46,22 @@ services:
     hostname: kafka2
     container_name: kafka2
     ports:
-      - "29093:29093"
+      - "29092:29092"
     deploy:
       resources:
         limits:
-          cpus: "2"
-          memory: 3g
-        reservations:
-          cpus: "2"
+          cpus: "3"
           memory: 3g
     environment:
-      KAFKA_LISTENERS: BROKER://kafka2:19093,EXTERNAL://kafka2:29093,CONTROLLER://kafka2:9093
-      KAFKA_ADVERTISED_LISTENERS: BROKER://kafka2:19093,EXTERNAL://localhost:29093
+      KAFKA_LISTENERS: BROKER://kafka2:19092,EXTERNAL://kafka2:29092,CONTROLLER://kafka2:9911
+      KAFKA_ADVERTISED_LISTENERS: BROKER://kafka2:19092,EXTERNAL://localhost:29092
       KAFKA_INTER_BROKER_LISTENER_NAME: BROKER
       KAFKA_CONTROLLER_LISTENER_NAMES: CONTROLLER
       KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: CONTROLLER:PLAINTEXT,BROKER:PLAINTEXT,EXTERNAL:PLAINTEXT
       KAFKA_GROUP_INITIAL_REBALANCE_DELAY_MS: 0
       KAFKA_PROCESS_ROLES: 'controller,broker'
       KAFKA_NODE_ID: 2
-      KAFKA_CONTROLLER_QUORUM_VOTERS: '1@kafka1:9093,2@kafka2:9093,3@kafka3:9093'
+      KAFKA_CONTROLLER_QUORUM_VOTERS: '1@kafka1:9911,2@kafka2:9911,3@kafka3:9911,4@kafka4:9911'
       KAFKA_METADATA_LOG_SEGMENT_MS: 15000
       KAFKA_METADATA_MAX_RETENTION_MS: 1200000
       KAFKA_METADATA_LOG_MAX_RECORD_BYTES_BETWEEN_SNAPSHOTS: 2800
@@ -84,25 +78,53 @@ services:
     hostname: kafka3
     container_name: kafka3
     ports:
-      - "29094:29094"
+      - "29093:29093"
     deploy:
       resources:
         limits:
           cpus: "3"
           memory: 3g
-        reservations:
-          cpus: "3"
-          memory: 3g
     environment:
-      KAFKA_LISTENERS: BROKER://kafka3:19094,EXTERNAL://kafka3:29094,CONTROLLER://kafka3:9093
-      KAFKA_ADVERTISED_LISTENERS: BROKER://kafka3:19094,EXTERNAL://localhost:29094
+      KAFKA_LISTENERS: BROKER://kafka3:19093,EXTERNAL://kafka3:29093,CONTROLLER://kafka3:9911
+      KAFKA_ADVERTISED_LISTENERS: BROKER://kafka3:19093,EXTERNAL://localhost:29093
       KAFKA_INTER_BROKER_LISTENER_NAME: BROKER
       KAFKA_CONTROLLER_LISTENER_NAMES: CONTROLLER
       KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: CONTROLLER:PLAINTEXT,BROKER:PLAINTEXT,EXTERNAL:PLAINTEXT
       KAFKA_GROUP_INITIAL_REBALANCE_DELAY_MS: 0
       KAFKA_PROCESS_ROLES: 'controller,broker'
       KAFKA_NODE_ID: 3
-      KAFKA_CONTROLLER_QUORUM_VOTERS: '1@kafka1:9093,2@kafka2:9093,3@kafka3:9093'
+      KAFKA_CONTROLLER_QUORUM_VOTERS: '1@kafka1:9911,2@kafka2:9911,3@kafka3:9911,4@kafka4:9911'
+      KAFKA_METADATA_LOG_SEGMENT_MS: 15000
+      KAFKA_METADATA_MAX_RETENTION_MS: 1200000
+      KAFKA_METADATA_LOG_MAX_RECORD_BYTES_BETWEEN_SNAPSHOTS: 2800
+      KAFKA_LOG_DIRS: '/tmp/kraft-combined-logs'
+      CLUSTER_ID: 'LLvEj5aqR46S0qSIwFUhyw'
+    #  volumes:
+    #    - ./data/broker-3/data:/var/lib/kafka/data
+    command: "bash -c '/etc/confluent/docker/run'"
+    networks:
+      - example-network
+  kafka4:
+    image: confluentinc/cp-kafka:7.4.4
+    hostname: kafka4
+    container_name: kafka4
+    ports:
+      - "29094:29094"
+    deploy:
+      resources:
+        limits:
+          cpus: "3"
+          memory: 3g
+    environment:
+      KAFKA_LISTENERS: BROKER://kafka4:19094,EXTERNAL://kafka4:29094,CONTROLLER://kafka4:9911
+      KAFKA_ADVERTISED_LISTENERS: BROKER://kafka4:19094,EXTERNAL://localhost:29094
+      KAFKA_INTER_BROKER_LISTENER_NAME: BROKER
+      KAFKA_CONTROLLER_LISTENER_NAMES: CONTROLLER
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: CONTROLLER:PLAINTEXT,BROKER:PLAINTEXT,EXTERNAL:PLAINTEXT
+      KAFKA_GROUP_INITIAL_REBALANCE_DELAY_MS: 0
+      KAFKA_PROCESS_ROLES: 'controller,broker'
+      KAFKA_NODE_ID: 4
+      KAFKA_CONTROLLER_QUORUM_VOTERS: '1@kafka1:9911,2@kafka2:9911,3@kafka3:9911,4@kafka4:9911'
       KAFKA_METADATA_LOG_SEGMENT_MS: 15000
       KAFKA_METADATA_MAX_RETENTION_MS: 1200000
       KAFKA_METADATA_LOG_MAX_RECORD_BYTES_BETWEEN_SNAPSHOTS: 2800
@@ -119,6 +141,7 @@ services:
       - kafka1
       - kafka2
       - kafka3
+      - kafka4
     networks:
       - example-network
     entrypoint: [ '/bin/sh', '-c' ]
@@ -127,19 +150,19 @@ services:
        sleep 30
       # sleep 15
       # blocks until kafka is reachable
-      kafka-topics --bootstrap-server kafka1:19092 --list
+      kafka-topics --bootstrap-server kafka1:19091 --list
 
       echo -e 'Creating kafka topics'
-      kafka-topics --bootstrap-server kafka1:19092 --create --if-not-exists --topic my-topic-2 --replication-factor 1 --partitions 5
+      kafka-topics --bootstrap-server kafka1:19091 --create --if-not-exists --topic my-topic-2 --replication-factor 1 --partitions 5
 
       echo -e 'Creating kafka topics'
-      kafka-topics --bootstrap-server kafka1:19092 --create --if-not-exists --topic topic-rep-1-partition-10 --replication-factor 1 --partitions 10
+      kafka-topics --bootstrap-server kafka1:19091 --create --if-not-exists --topic topic-rep-1-partition-10 --replication-factor 1 --partitions 10
 
       # bytes là hệ nhị phân
-      kafka-topics --bootstrap-server kafka1:19092 --create --if-not-exists --topic topic-demo-config --replication-factor 1 --partitions 1 --config segment.bytes=1048576 --config retention.ms=123400000
+      kafka-topics --bootstrap-server kafka1:19091 --create --if-not-exists --topic topic-demo-config --replication-factor 1 --partitions 1 --config segment.bytes=1048576 --config retention.ms=123400000
 
       echo -e 'Successfully created the following topics:'
-      kafka-topics --bootstrap-server kafka1:19092 --list
+      kafka-topics --bootstrap-server kafka1:19091 --list
       "
   kafka-ui:
     container_name: kafka-ui
@@ -149,10 +172,11 @@ services:
       - kafka1
       - kafka2
       - kafka3
+      - kafka4
     ports:
       - "8080:8080"
     environment:
-      - KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS=kafka1:19092,kafka2:19093,kafka3:19094
+      - KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS=kafka1:19091,kafka2:19092,kafka3:19911
       - KAFKA_CLUSTERS_0_NAME=test
     networks:
       - example-network

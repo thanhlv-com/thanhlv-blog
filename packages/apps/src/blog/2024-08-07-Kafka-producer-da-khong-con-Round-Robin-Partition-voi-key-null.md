@@ -101,13 +101,46 @@ Và tất nhiên danh sách ở trong `availablePartitions` không được sort
 
 
 ## 2.4.0 đến 3.2.3 Kafka producer stickyPartition
-### REF: https://cwiki.apache.org/confluence/display/KAFKA/KIP-794%3A+Strictly+Uniform+Sticky+Partitioner
+
+### Nói lại 1 chút về  Kafka producer Round Robin Partition
 - Round Robin Partition là một tính năng rất hay và hữu ích, nó giúp chia tải cân bằng giữa các partition để các comsumer có thể chia tải xử lý.
+- Tuy nhiên số lượng batch từ Producer đến Broker đóng một vai trò quan trọng trong độ trễ(Latency), Có nhiều batch lớn dẫn đến nhiều request hơn và queue nhiều hơn và tăng nhiều độ trễ.
+- `producer Round Robin Partition` giúp trải rộng các Record đến các partition nhưng nó cũng làm tăng nhiều Batch có size nhỏ. (Bởi vì các Record cùng 1 partition sẽ được cho vào cùng 1 batch để gửi)
+- Nói đơn giản, Khi cấu hình `linger.ms=0` Round Robin Partition nên sẽ tạo ra nhiều Batch nhỏ 
+```
+Giả sử bạn có 3 partitions (P0, P1, P2) và bạn gửi 9 records (R1, R2, ..., R9) mà không chỉ định partition hoặc key. Default partitioner sẽ phân phối các records theo vòng tròn (round-robin):
 
-- Tuy nhiên bởi vì Round Robin Partition nên nếu có 1 trong N node trong cluster chậm, nó sẽ kéo theo cả cluster chậm.
-  - https://issues.apache.org/jira/browse/KAFKA-10888?focusedCommentId=17285383&page=com.atlassian.jira.plugin.system.issuetabpanels%3Acomment-tabpanel#comment-17285383
-  - Hiểu đơn giản là kafka khi kafka client chọn 1 batch của partition trên node chậm, quá trình gửi sẽ tốn nhiều thời gian vì vậy sẽ có càng nhiều batch được tạo ra vì vậy có càng nhiều sự chậm chễ.
+R1 -> P0
+R2 -> P1
+R3 -> P2
+R4 -> P0
+R5 -> P1
+R6 -> P2
+R7 -> P0
+R8 -> P1
+R9 -> P2
+Với linger.ms=0, mỗi record sẽ được gửi ngay lập tức, dẫn đến mỗi record tạo ra một batch riêng biệt. Do đó, trường hợp xấu nhất sẽ có tổng cộng 9 batch, mỗi batch chứa một record:
 
+Batch 1: R1 (P0)
+Batch 2: R2 (P1)
+Batch 3: R3 (P2)
+Batch 4: R4 (P0)
+Batch 5: R5 (P1)
+Batch 6: R6 (P2)
+Batch 7: R7 (P0)
+Batch 8: R8 (P1)
+Batch 9: R9 (P2)
+```
+- Trong trường hợp cấu hình `linger.ms > 0`
+  - Nếu throughput cao thì sẽ có ít Batch hơn và độ trễ thấp hơn (Ví dụ ở trên thì có thể chỉ cần 3 Batch gửi lên)
+  ```
+  Batch 1: R1 (P0), R4 (P0), R7 (P0)
+  Batch 2: R2 (P1), R5 (P1), R8 (P1)
+  Batch 3: R3 (P2), R6 (P2), R9 (P2)
+  ```
+  - Nếu throughput thấp(Ít data cần gửi lên) thì sẽ gây ra độ trễ vì không có đủ `BatchSize` để bắt đầu gửi lên Broker nên sẽ cần chờ đủ `linger.ms` để gửi.
+###  Kafka producer stickyPartition
+- PR : https://github.com/apache/kafka/pull/6997/files , https://github.com/apache/kafka/pull/7199/files
 Từ phiên bản 2.4.0 đến 3.2.3 (2.4.0 >= N <=3.2.3) Kafka Producer thay vì mặc định Round Robin Partition khi key null thì sẽ chuyển sang thuật toán stickyPartition khi key null.
 
 Với `sticky Partition Cache` thì partition sẽ được tính theo `BATCH`, tất cả các `Record` có `key == null` thì tất cả các Record trong cùng `BATCH của cùng 1 topic` được gửi lên cùng nhau sẽ trên cùng một `partition`.
@@ -217,6 +250,7 @@ public class StickyPartitionCache {
 ```
 Nhìn vào đoạn code ở phía trên bạn có thể thấy, Mỗi khi bắt đầu một batch mới cho topic thì Kafka sẽ tính toán ngẫu nhiên lại Partition cho key  null.
 
+### REF: https://cwiki.apache.org/confluence/display/KAFKA/KIP-480%3A+Sticky+Partitioner
 
 ## 3.3.0 đến mới nhất(3.8.0 là phiên bản hiện tại viết Block này )
 - Từ phiên bản 3.3.0 đến hiện tại Kafka producer vẫn chọn ngẫu nhiên partition, tuy nhiên thời điểm để chọn lại partition đã thay đổi.
@@ -884,7 +918,8 @@ public class CalPartitionLoad {
 
 ## Thử nghiệm
 Thông tin thử nghiệm:
-- Gửi 200 triệu data
+- Gửi 200 triệu data cho kiểm trả thời gian chạy hoàn thành dữ liệu lớn
+- Gửi 10_000 data cho kiểm tra số lượng request gửi lên Broker
 - 4 node
 - 10 partition
 - image docker confluentinc/cp-kafka:7.4.4 , kafka server version: 3.5.0
@@ -906,61 +941,69 @@ kafka-topics --bootstrap-server kafka1:19092 --create --if-not-exists --topic to
 - Node Info ([Xem full tại đây](/blog/2024-08-07-Kafka-producer-da-khong-con-Round-Robin-Partition-voi-key-null/docker-compose-node-test.yml))
 ```
 Node 1: 
-- 0.3 cpu
-- 3g RAM
+- 3 cpu
+- max 3g RAM
 Node 2: 
-- 2 cpu
-- 3g RAM
+- 3 cpu
+- max 3g RAM
 Node 3: 
 - 3 cpu
-- 3g RAM
+- max 3g RAM
 Node 4: 
 - 3 cpu
-- 3g RAM
-```
-- code:
-```java
-    public static void main(String[] args) throws IOException {
-
-        final var props = new Properties();
-        props.setProperty(ProducerConfig.CLIENT_ID_CONFIG, "java-producer-producerRecordPartition-KeyNotNull");
-        props.setProperty(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:29091,localhost:29092,localhost:29093");
-        props.setProperty(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName());
-        props.setProperty(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName());
-        // Khi tong so luong data gui = BATCH_SIZE_CONFIG thi se tinh toan lai partition moi
-        props.setProperty(ProducerConfig.BATCH_SIZE_CONFIG, "20000");
-
-        try (var producer = new KafkaProducer<Object, String>(props)) {
-            try (BufferedReader br = new BufferedReader(new InputStreamReader(System.in));) {
-
-                while (true) {
-                    log.info("Enter number random message: ");
-                    Long start = System.currentTimeMillis();
-                    log.info("Start: {} ms",start);
-                    String number = br.readLine().trim();
-
-                    final var messageProducerRecord = new ProducerRecord<>(
-                            "my-topic-2",     //topic name
-                            UUID.randomUUID().toString()        // value
-                    );
-                    for (int i = 0; i < Integer.parseInt(number); i++) {
-                        producer.send(messageProducerRecord);
-                    }
-                    Long end = System.currentTimeMillis();
-                    log.info("END: {} ms and end - start = {}",end,end - start);
-
-                }
-            }
-        }
-
-    }
-
+- max 3g RAM
 ```
 
 ### Kafka Producer Partitioning (phiên bản <= 2.3.1):
 - Phiên bản sử dụng : kafka-clients-2.3.1
-- Tổng thời gian chạy là 191392ms = 3.1898666667 phút
-- ![test-1.png](images/2024-08-07-Kafka-producer-da-khong-con-Round-Robin-Partition-voi-key-null/test-1.png)
+#### kiểm tra số lượng request gửi lên Broker
+##### sử dụng `linger.ms` bằng 0(Mặc định cũng = 0)
+```java
+@SneakyThrows
+    public static void main(String[] args) throws IOException {
+        System.setProperty("org.slf4j.simpleLogger.defaultLogLevel", "ALL");
+        final var props = new Properties();
+        props.setProperty(ProducerConfig.CLIENT_ID_CONFIG, "java-producer-producerRecordPartition-KeyNotNull");
+        props.setProperty(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:29091,localhost:29092,localhost:29093,localhost:29094");
+        props.setProperty(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName());
+        props.setProperty(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName());
+        props.setProperty(ProducerConfig.BATCH_SIZE_CONFIG, "20000");
+        props.setProperty(ProducerConfig.LINGER_MS_CONFIG, "0");
+
+        try (var producer = new KafkaProducer<Object, String>(props)) {
+            try (BufferedReader br = new BufferedReader(new InputStreamReader(System.in));) {
+                while (true) {
+                    log.debug("Enter number random message: ");
+                    String number = br.readLine().trim();
+                    Long start = System.currentTimeMillis();
+                    log.info("Start: {} ms",start);
+                    final var messageProducerRecord = new ProducerRecord<>(
+                            "topic-rep-1-partition-10",     //topic name
+                            UUID.randomUUID().toString()        // value
+                    );
+                    for (int i = 0; i < Integer.parseInt(number); i++) {
+                        producer.send(messageProducerRecord);
+                        // sleep 5 để tạo ra khoảng cách giữa lần gửi Record
+                        Thread.sleep(5);
+                    }
+                    Long end = System.currentTimeMillis();
+                    log.info("END: {} ms and end - start = {}",end,end - start);
+                }
+            }
+        }
+    }
+```
+- ![test.png](images/2024-08-07-Kafka-producer-da-khong-con-Round-Robin-Partition-voi-key-null/test-2-3-1/img.png)
+- Tổng 10000 request gửi lên máy chủ, tức mỗi recored sẽ gửi một request đến Broker, vì linger.ms =0 nên tất cả batch chỉ có 1 Record
+- Tốn 61945ms = 1.0324166667 phút
+##### sử dụng `linger.ms` bằng 500 thức 500ms nếu chưa đầy batch sẽ gửi
+```java
+        props.setProperty(ProducerConfig.BATCH_SIZE_CONFIG, "20000");
+
+```
+- ![test.png](images/2024-08-07-Kafka-producer-da-khong-con-Round-Robin-Partition-voi-key-null/test-2-3-1/img_1.png)
+- Tổng 491 request gửi lên máy chủ, tức mỗi batch có khoảng 20 Record. Vì việc gửi Record sau mỗi 5ms nên 5*
+- Tốn 62534ms = 1.0422333333 phút  => Bởi vì mock mỗi Record sẽ chờ sleep để gửi, nên giá trị thời gian này sẽ không có sự khác biệt.
 ### Kafka Producer Sticky Partitioning (phiên bản 2.4.0 đến 3.2.3):
 - Phiên bản sử dụng : kafka-clients-3.2.3
 - Tổng thời gian chạy là 250148ms = 4.1691333333 phút
