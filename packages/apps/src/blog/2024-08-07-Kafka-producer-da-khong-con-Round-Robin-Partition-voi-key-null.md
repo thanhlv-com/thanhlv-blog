@@ -104,7 +104,7 @@ Và tất nhiên danh sách ở trong `availablePartitions` không được sort
 
 ### Nói lại 1 chút về  Kafka producer Round Robin Partition
 - Round Robin Partition là một tính năng rất hay và hữu ích, nó giúp chia tải cân bằng giữa các partition để các comsumer có thể chia tải xử lý.
-- Tuy nhiên số lượng batch từ Producer đến Broker đóng một vai trò quan trọng trong độ trễ(Latency), Có nhiều batch lớn dẫn đến nhiều request hơn và queue nhiều hơn và tăng nhiều độ trễ.
+- Tuy nhiên số lượng batch từ Producer đến Broker đóng một vai trò quan trọng trong độ trễ(Latency), Có nhiều batch dẫn đến nhiều request hơn và queue nhiều hơn và tăng nhiều độ trễ.
 - `producer Round Robin Partition` giúp trải rộng các Record đến các partition nhưng nó cũng làm tăng nhiều Batch có size nhỏ. (Bởi vì các Record cùng 1 partition sẽ được cho vào cùng 1 batch để gửi)
 - Nói đơn giản, Khi cấu hình `linger.ms=0` Round Robin Partition nên sẽ tạo ra nhiều Batch nhỏ 
 ```
@@ -140,6 +140,7 @@ Batch 9: R9 (P2)
   ```
   - Nếu throughput thấp(Ít data cần gửi lên) thì sẽ gây ra độ trễ vì không có đủ `BatchSize` để bắt đầu gửi lên Broker nên sẽ cần chờ đủ `linger.ms` để gửi.
 ###  Kafka producer stickyPartition
+- https://issues.apache.org/jira/browse/KAFKA-8601
 - PR : https://github.com/apache/kafka/pull/6997/files , https://github.com/apache/kafka/pull/7199/files
 Từ phiên bản 2.4.0 đến 3.2.3 (2.4.0 >= N <=3.2.3) Kafka Producer thay vì mặc định Round Robin Partition khi key null thì sẽ chuyển sang thuật toán stickyPartition khi key null.
 
