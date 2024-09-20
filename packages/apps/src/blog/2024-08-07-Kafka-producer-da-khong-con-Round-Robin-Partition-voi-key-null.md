@@ -919,7 +919,6 @@ public class CalPartitionLoad {
 ## Thử nghiệm
 Thông tin thử nghiệm:
 - Gửi 200 triệu data cho kiểm trả thời gian chạy hoàn thành dữ liệu lớn
-- Gửi 10_000 data cho kiểm tra số lượng request gửi lên Broker
 - 4 node
 - 10 partition
 - image docker confluentinc/cp-kafka:7.4.4 , kafka server version: 3.5.0
@@ -956,8 +955,57 @@ Node 4:
 
 ### Kafka Producer Partitioning (phiên bản <= 2.3.1):
 - Phiên bản sử dụng : kafka-clients-2.3.1
+- Lệnh count số lần gửi request push Batch lên máy chủ
+```
+grep -o "Sending PRODUC" kafka_client.log | wc -l
+```
+
 #### kiểm tra số lượng request gửi lên Broker
+- Gửi 10,000,000 data
 ##### sử dụng `linger.ms` bằng 0(Mặc định cũng = 0)
+```java
+@Slf4j
+public class KeyNull {
+  @SneakyThrows
+  public static void main(String[] args) throws IOException {
+    System.setProperty("org.slf4j.simpleLogger.defaultLogLevel", "ALL");
+    final var props = new Properties();
+    props.setProperty(ProducerConfig.CLIENT_ID_CONFIG, "java-producer-producerRecordPartition-KeyNotNull");
+    props.setProperty(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:29091,localhost:29092,localhost:29093,localhost:29094");
+    props.setProperty(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName());
+    props.setProperty(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName());
+    props.setProperty(ProducerConfig.BATCH_SIZE_CONFIG, "20000");
+
+    try (var producer = new KafkaProducer<Object, String>(props)) {
+      try (BufferedReader br = new BufferedReader(new InputStreamReader(System.in));) {
+        while (true) {
+          log.debug("Enter number random message: ");
+          String number = br.readLine().trim();
+          Long start = System.currentTimeMillis();
+          log.info("Start: {} ms",start);
+          final var messageProducerRecord = new ProducerRecord<>(
+            "topic-rep-1-partition-10",     //topic name
+            UUID.randomUUID().toString()        // value
+          );
+          Integer numberSend = Integer.parseInt(number);
+          CountDownLatch countDownLatch=new CountDownLatch(numberSend);
+          for (int i = 0; i < Integer.parseInt(number); i++) {
+            producer.send(messageProducerRecord, (metadata, exception) -> countDownLatch.countDown());
+          }
+          countDownLatch.await();
+          Long end = System.currentTimeMillis();
+          log.info("END: {} ms and end - start = {}",end,end - start);
+        }
+      }
+    }
+  }
+}
+```
+- Tổng 563189 request gửi lên máy chủ, tức mỗi batch có khoảng 17 Record
+- Tốn 125075ms = 2.0845833333 phút
+- 
+#### kiểm tra số lượng request gửi lên Broker và sleep 5ms mỗi lần gửi data
+- Gửi 10,000 data
 ```java
 @SneakyThrows
     public static void main(String[] args) throws IOException {
@@ -968,7 +1016,6 @@ Node 4:
         props.setProperty(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName());
         props.setProperty(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName());
         props.setProperty(ProducerConfig.BATCH_SIZE_CONFIG, "20000");
-        props.setProperty(ProducerConfig.LINGER_MS_CONFIG, "0");
 
         try (var producer = new KafkaProducer<Object, String>(props)) {
             try (BufferedReader br = new BufferedReader(new InputStreamReader(System.in));) {
@@ -993,17 +1040,21 @@ Node 4:
         }
     }
 ```
+##### sử dụng `linger.ms` bằng 0(Mặc định cũng = 0)
+```java
+        props.setProperty(ProducerConfig.LINGER_MS_CONFIG, "0");
+```
 - ![test.png](images/2024-08-07-Kafka-producer-da-khong-con-Round-Robin-Partition-voi-key-null/test-2-3-1/img.png)
 - Tổng 10000 request gửi lên máy chủ, tức mỗi recored sẽ gửi một request đến Broker, vì linger.ms =0 nên tất cả batch chỉ có 1 Record
 - Tốn 61945ms = 1.0324166667 phút
 ##### sử dụng `linger.ms` bằng 500 thức 500ms nếu chưa đầy batch sẽ gửi
 ```java
-        props.setProperty(ProducerConfig.BATCH_SIZE_CONFIG, "20000");
+        props.setProperty(ProducerConfig.LINGER_MS_CONFIG, "500");
 
 ```
 - ![test.png](images/2024-08-07-Kafka-producer-da-khong-con-Round-Robin-Partition-voi-key-null/test-2-3-1/img_1.png)
-- Tổng 491 request gửi lên máy chủ, tức mỗi batch có khoảng 20 Record. Vì việc gửi Record sau mỗi 5ms nên 5*
-- Tốn 62534ms = 1.0422333333 phút  => Bởi vì mock mỗi Record sẽ chờ sleep để gửi, nên giá trị thời gian này sẽ không có sự khác biệt.
+- Tổng 491 request gửi lên máy chủ, tức mỗi batch có khoảng 20 Record.
+- Tốn 62534ms = 1.0422333333 phút  => Bởi vì mock mỗi Record sẽ chờ sleep để gửi, nên giá trị thời gian này sẽ không có sự khác biệt quá lớn.
 ### Kafka Producer Sticky Partitioning (phiên bản 2.4.0 đến 3.2.3):
 - Phiên bản sử dụng : kafka-clients-3.2.3
 - Tổng thời gian chạy là 250148ms = 4.1691333333 phút
