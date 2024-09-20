@@ -953,9 +953,6 @@ Node 4:
 - 3 cpu
 - max 3g RAM
 ```
-
-### Kafka Producer Partitioning (phiên bản <= 2.3.1):
-- Phiên bản sử dụng : kafka-clients-2.3.1
 - Lệnh count số lần gửi request push Batch lên máy chủ
 ```
 grep -o "Sending PRODUC" kafka_client.log | wc -l
@@ -968,8 +965,8 @@ grep -o "Sending PRODUC" kafka_client.log | wc -l
 ```
 tail -r kafka_client.log| grep 'ms and end - start'
 ```
-
-#### kiểm tra số lượng request gửi lên Broker
+### Kafka Producer Partitioning (phiên bản <= 2.3.1):
+- Phiên bản sử dụng : kafka-clients-2.3.1
 - Gửi 10,000,000 data
 - Code chạy
 ```java
