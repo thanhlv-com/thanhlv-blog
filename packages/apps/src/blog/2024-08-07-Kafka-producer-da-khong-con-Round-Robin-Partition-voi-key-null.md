@@ -919,7 +919,6 @@ public class CalPartitionLoad {
 
 ## Thử nghiệm
 Thông tin thử nghiệm:
-- Gửi 200 triệu data cho kiểm trả thời gian chạy hoàn thành dữ liệu lớn
 - 4 node
 - 10 partition
 - image docker confluentinc/cp-kafka:7.4.4 , kafka server version: 3.5.0
@@ -952,10 +951,6 @@ Node 3:
 Node 4: 
 - 3 cpu
 - max 3g RAM
-```
-- Lệnh count số lần gửi request push Batch lên máy chủ
-```
-grep -o "Sending PRODUC" kafka_client.log | wc -l
 ```
 - Lệnh count số lần gửi request push Batch lên máy chủ
 ```
@@ -1007,7 +1002,7 @@ public class KeyNull {
   }
 }
 ```
-##### sử dụng `linger.ms` bằng 0(Mặc định cũng = 0)
+##### Sử dụng `linger.ms` bằng 0(Mặc định cũng = 0)
 - Config
 ```java
         props.setProperty(ProducerConfig.LINGER_MS_CONFIG, "0");
@@ -1015,7 +1010,7 @@ public class KeyNull {
 - Tổng 563189 request gửi lên máy chủ, tức mỗi batch có khoảng 17 Record
 - Tốn 125075ms = 2.0845833333 phút
 - `linger.ms` có data trong batch sẽ gửi ngay, vì tốc độ nhanh nên có thể push lên tới 17 Record trong thời gian ngắn vào Batch
-##### sử dụng `linger.ms` bằng 500 thức 500ms nếu chưa đầy batch sẽ gửi
+##### Sử dụng `linger.ms` bằng 500 tức 500ms nếu chưa đầy batch sẽ gửi
 - Config
 ```java
         props.setProperty(ProducerConfig.LINGER_MS_CONFIG, "500");
@@ -1023,7 +1018,7 @@ public class KeyNull {
 - Tổng 8812 request gửi lên máy chủ, tức mỗi batch có khoảng 1134 Record
 - Tốn 48585ms = 48.585 giây
 
-##### gửi 100,000 data và sử dụng `linger.ms` bằng 0 , sleep 1ms lỗi lần gửi Record
+##### Gửi 100,000 data và sử dụng `linger.ms` bằng 0 , sleep 1ms lỗi lần gửi Record
 - Ví dụ này sẽ cho chúng ta thấy việc bị gửi nhiều request liên tục khi `linger.ms` bằng 0
 ```java
         props.setProperty(ProducerConfig.LINGER_MS_CONFIG, "0");
