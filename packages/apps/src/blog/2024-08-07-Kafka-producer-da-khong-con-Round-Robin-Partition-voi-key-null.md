@@ -656,7 +656,7 @@ public class KeyNull {
 ```java
         props.setProperty(ProducerConfig.LINGER_MS_CONFIG, "500");
 ```
-- Tổng 21838 request gửi lên máy chủ,
+- Tổng 21838 request gửi lên máy chủ. Tổng số request của 3.2.3 lên máy chủ là nhiều hơn Round Robin,
 - Tổng thời gian chạy là 37361ms = 37.361 giây
 ### Kafka Producer Partitioning (phiên bản 3.3.0 trở lên):
 - Phiên bản sử dụng : kafka-clients-3.8.0
