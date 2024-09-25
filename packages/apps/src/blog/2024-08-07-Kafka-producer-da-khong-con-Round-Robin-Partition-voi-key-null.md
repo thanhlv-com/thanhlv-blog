@@ -358,7 +358,8 @@ public class Sender implements Runnable {
 ### Strictly Uniform Sticky Partitioner (3.3.0 > N)
 
 - Từ phiên bản 3.3.0 đến hiện tại Kafka producer vẫn chọn ngẫu nhiên partition, tuy nhiên thời điểm để chọn lại partition đã thay đổi.
-- Tại phiên bản này Kafka producer sẽ sử dụng config `batch.size` để xác định thời điểm lựa chọn lại partition.
+- Tại phiên bản này Kafka producer sẽ sử dụng config `batch.size` để xác định thời điểm lựa chọn lại partition và có một bộ cân bằng tải để hạn chế push nhiều Record vào Partition trên node slower trong trường hợp Throughput đang cao.
+- Về cơ bản từ phiên bản 3.3.0 vấn đề tối ưu đã khá ổn và ổn định cho nhiều case.
 - Mỗi khi thêm một Record mới, kafka sẽ tính toán Record tốn bao nhiêu byte( Metadata +data ) sau đó cộng vào một biến count, 
   - Sau đó thay vì ở phiên bản `2.4.0 đến 3.2.3` sẽ ngẫu nhiên lựa chọn lại partition mỗi lần tạo batch thì từ `phiên bản 3.3.0` sẽ thực kiểm tra khi biến count lớn hơn `batch.size` sẽ bắt đầu thực hiện chọn lại partition.
 
@@ -559,7 +560,7 @@ public class CalPartitionLoad {
     // lấy về số lớn nhất + 1
     int maxSizePlus1 = queueSizes[0];
 
-    // trong thực tế, length là tham số truyền vào biểu diễn số lượng partition đang có leader.
+    // trong thực tế, length là tham số truyền vào biểu diễn số lượng partition đang có leader và có thể gửi data
     int length = queueSizes.length;
 
     boolean allEqual = true;
@@ -590,6 +591,11 @@ public class CalPartitionLoad {
   }
 }
 ```
+#### Các config mới:
+- `partitioner.adaptive.partitioning.enable` Mặc định là `true`, nếu là `true` thì sẽ sử dụng bộ cân bằng tải thì sử dụng bộ cân bằng tải đeể điều chỉnh phù hợp theo hiệu suất của các Node (Gửi ít Record đến Node slower)
+  - Nếu là false thì các partition sẽ chọn ngẫu nhiên và
+- `partitioner.availability.timeout.ms` mặc định là 0. Nếu giá trị lớn hớn 0 và `partitioner.adaptive.partitioning.enable=true` và Produce không thể gửi reuqest send data đến partition trong `ms` thì sẽ đánh dấu bỏ qua partition đó.
+- `partitioner.ignore.keys` mặc định là `false` nếu là `false` và có `key` thì sẽ sử dụng `key` để tính toán partition. Nếu là `true` thì sẽ bỏ qua logic sử dụng `key` để tính toán partition và sử dụng logic `Strictly Uniform Sticky Partitioner`
 ## Thử nghiệm
 Thông tin thử nghiệm:
 - 4 node
