@@ -638,11 +638,11 @@ grep -n "Set last ack'd sequence number for topic-partition topic-rep-1-partitio
 ```
 ### Kafka Producer Partitioning (phiên bản <= 2.3.1):
 - Phiên bản sử dụng : kafka-clients-2.3.1
-- Gửi 10,000,000 data
+#### 1. Case test: Tái hiện Latency cao vì throughput thấp
 - Code chạy
 ```java
 @Slf4j
-public class KeyNull {
+public class KeyNullLoopDelay {
   @SneakyThrows
   public static void main(String[] args) throws IOException {
     System.setProperty("org.slf4j.simpleLogger.defaultLogLevel", "ALL");
@@ -651,61 +651,32 @@ public class KeyNull {
     props.setProperty(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:29091,localhost:29092,localhost:29093,localhost:29094");
     props.setProperty(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName());
     props.setProperty(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName());
-    props.setProperty(ProducerConfig.BATCH_SIZE_CONFIG, "20000");
+    props.setProperty(ProducerConfig.BATCH_SIZE_CONFIG, "5000");
+    // 15s
+    props.setProperty(ProducerConfig.LINGER_MS_CONFIG, "15000");
 
     try (var producer = new KafkaProducer<Object, String>(props)) {
-      try (BufferedReader br = new BufferedReader(new InputStreamReader(System.in));) {
-        while (true) {
-          log.debug("Enter number random message: ");
-          String number = br.readLine().trim();
-          Long start = System.currentTimeMillis();
-          log.info("Start: {} ms",start);
-          final var messageProducerRecord = new ProducerRecord<>(
-            "topic-rep-1-partition-10",     //topic name
-            UUID.randomUUID().toString()        // value
-          );
-          Integer numberSend = Integer.parseInt(number);
-          CountDownLatch countDownLatch=new CountDownLatch(numberSend);
-          for (int i = 0; i < numberSend; i++) {
-            producer.send(messageProducerRecord, (metadata, exception) -> countDownLatch.countDown());
-          }
-          countDownLatch.await();
-          Long end = System.currentTimeMillis();
-          log.info("END: {} ms and end - start = {}",end,end - start);
+      while (true) {
+        final var messageProducerRecord = new ProducerRecord<>(
+          "topic-rep-1-partition-10",     //topic name
+          // 36 byte
+          UUID.randomUUID().toString()        // value
+        );
+        Integer numberSend = 113;
+        for (int i = 1; i <= numberSend; i++) {
+          producer.send(messageProducerRecord);
         }
+        // 30s
+        Thread.sleep(30000);
       }
     }
   }
 }
 ```
-##### Sử dụng `linger.ms` bằng 0(Mặc định cũng = 0)
-- Config
-```java
-        props.setProperty(ProducerConfig.LINGER_MS_CONFIG, "0");
-```
-- Tổng 563189 request gửi lên máy chủ, tức mỗi batch có khoảng 17 Record
-- Tốn 125075ms = 2.0845833333 phút
-- `linger.ms` có data trong batch sẽ gửi ngay, vì tốc độ nhanh nên có thể push lên tới 17 Record trong thời gian ngắn vào Batch
-##### Sử dụng `linger.ms` bằng 500 tức 500ms nếu chưa đầy batch sẽ gửi
-- Config
-```java
-        props.setProperty(ProducerConfig.LINGER_MS_CONFIG, "500");
-```
-- Tổng 8812 request gửi lên máy chủ, tức mỗi batch có khoảng 1134 Record
-- Tốn 48585ms = 48.585 giây
+- Giải thích cách code hoạt động:
+  - Sẽ gửi 113 Record lến Kafka server, đối với `BATCH_SIZE_CONFIG = 5000` nếu push vào 1 Batch duy nhất sẽ đầy BatchSize và gửi lên Kafka server. Tuy nhiên bởi vì Round Robin trên 10 Partition nên có 10 Batch và mỗi Batch có 11 đến 12 Record nên chưa đủ BatchSize.
+  - Bởi vì chưa chưa đủ BatchSize nên cần chờ đến thời gian của `LINGER_MS_CONFIG` mới bắt đầu gửi Batch vì vậy nó tạo ra Latency cao vì throughput thấp
 
-##### Gửi 100,000 data và sử dụng `linger.ms` bằng 0 , sleep 1ms lỗi lần gửi Record
-- Ví dụ này sẽ cho chúng ta thấy việc bị gửi nhiều request liên tục khi `linger.ms` bằng 0
-```java
-        props.setProperty(ProducerConfig.LINGER_MS_CONFIG, "0");
-
-        for (int i = 0; i < numberSend; i++) {
-             producer.send(messageProducerRecord, (metadata, exception) -> countDownLatch.countDown());
-             Thread.sleep(1);
-        }
-```
-- Tổng 99978 request gửi lên máy chủ, tức mỗi gần như mỗi Record sẽ gửi một request đến Broker. (Vì tốc độ 1s vẫn rất gần nên có thể đôi khi cpu chưa kịp xử lý xong thì đã thêm 1 bản ghi vào batch)
-- Tốn 150396ms = 2.5066 phút
 ### Kafka Producer Sticky Partitioning (phiên bản 2.4.0 đến 3.2.3):
 - Phiên bản sử dụng : kafka-clients-3.2.3
 - Gửi 10,000,000 data
