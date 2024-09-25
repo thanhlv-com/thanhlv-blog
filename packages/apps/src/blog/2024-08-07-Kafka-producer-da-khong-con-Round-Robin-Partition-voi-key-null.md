@@ -308,8 +308,53 @@ Nhìn vào đoạn code ở phía trên bạn có thể thấy, Mỗi khi bắt 
 - REF: https://cwiki.apache.org/confluence/display/KAFKA/KIP-794%3A+Strictly+Uniform+Sticky+Partitioner
   - 
 ### Các vấn đề gặp phải của Kafka producer stickyPartition(2.4.0 >= N <=3.2.3)
-- Vấn đề của stickyPartition sẽ phân phối nhiều Record cho các máy chủ Kafka slow. Nếu có 1 máy chủ Kafka chậm sẽ khiến Batch gửi đến partition trên máy chủ đó sẽ lớn hơn, vì nó chậm nên lưu lâu hơn vì vậy nó làm chậm toàn hệ thống.
-- Vấn đề này xảy ra vì `stickyPartition` được điều khiển bởi việc tạo batch mới,
+- Vấn đề của stickyPartition sẽ phân phối nhiều Record đến các máy chủ Kafka slow. Nếu có 1 máy chủ Kafka chậm sẽ khiến Batch gửi đến partition trên máy chủ đó sẽ lớn hơn, vì nó chậm nên lưu lâu hơn vì vậy nó làm chậm toàn hệ thống.
+- Vấn đề này xảy ra vì `stickyPartition` được điều khiển bởi việc tạo batch mới, tuy nhiên `drain` các Batch cho máy chủ chậm sẽ lâu hơn vì máy chủ chưa sẵn sàng nhận cà Request mới, vì vậy Recored tiếp tục được push vào batch đang chờ gửi.
+```java
+package org.apache.kafka.clients.producer.internals;
+...
+public class Sender implements Runnable {
+  private long sendProducerData(long now) {
+    Cluster cluster = metadata.fetch();
+    // lấy về danh sách node có batch đủ điều kiện để gửi (đầy batch hoặc đủ lingerMs)
+    // get the list of partitions with data ready to send
+    RecordAccumulator.ReadyCheckResult result = this.accumulator.ready(cluster, now);
+
+    // if there are any partitions whose leaders are not known yet, force metadata update
+    if (!result.unknownLeaderTopics.isEmpty()) {
+      // The set of topics with unknown leader contains topics with leader election pending as well as
+      // topics which may have expired. Add the topic again to metadata to ensure it is included
+      // and request metadata update, since there are messages to send to the topic.
+      for (String topic : result.unknownLeaderTopics)
+        this.metadata.add(topic, now);
+
+      log.debug("Requesting metadata update due to unknown leader topics from the batched records: {}",
+        result.unknownLeaderTopics);
+      this.metadata.requestUpdate();
+    }
+    // remove any nodes we aren't ready to send to
+    Iterator<Node> iter = result.readyNodes.iterator();
+    long notReadyTimeout = Long.MAX_VALUE;
+    while(iter.hasNext()){
+        Node node = iter.next();
+        // kiểm tra các node là sẵn sàng nhận request
+        if (!this.client.ready(node, now)) {
+            // Nếu node không sẵn sàng, xóa nó khỏi danh sách. Các node slow có tỉ lệ sẵn sàng thấp nên hay bị xóa.
+            iter.remove();
+            notReadyTimeout = Math.min(notReadyTimeout, this.client.pollDelayMs(node, now));
+    }
+    }
+
+    // create produce requests trên các node sẵn sàng.
+   // drain sẽ thực hiện Rút các data trong batch ra
+    Map<Integer, List<ProducerBatch>> batches = this.accumulator.drain(cluster, result.readyNodes, this.maxRequestSize, now);
+  ...
+    // thực hiện gửi Batch và xóa batch sao khi gửi thành công.
+    sendProduceRequests(batches, now);
+    
+}
+
+```
 
 - Từ phiên bản 3.3.0 đến hiện tại Kafka producer vẫn chọn ngẫu nhiên partition, tuy nhiên thời điểm để chọn lại partition đã thay đổi.
 - Tại phiên bản này Kafka producer sẽ sử dụng config `batch.size` để xác định thời điểm lựa chọn lại partition.
@@ -586,6 +631,10 @@ grep -o "Sending PRODUC" kafka_client.log | wc -l
 - Lệnh tìm kiếm log để xem tổng thời gian xử lý hoàn thành
 ```
 tail -r kafka_client.log| grep 'ms and end - start'
+```
+- Lệnh xem log số lượng Record được gửi thành công lên server cho 1 request gửi (Tương ứng với Số lượng record trong batch sử dụng để gửi)
+```
+grep -n "Set last ack'd sequence number for topic-partition topic-rep-1-partition-10-"  kafka_client.log
 ```
 ### Kafka Producer Partitioning (phiên bản <= 2.3.1):
 - Phiên bản sử dụng : kafka-clients-2.3.1
