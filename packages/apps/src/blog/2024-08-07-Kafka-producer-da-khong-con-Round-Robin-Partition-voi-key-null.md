@@ -730,15 +730,16 @@ public class KeyNull {
   }
 }
 ```
-- Giải thích cách code hoạt động:
-  - Sẽ gửi 100_000 Record lến Kafka server. Khi nhìn vào kết quả ở log, bạn sẽ thấy các Partition cuủa Node 1 và 3 sẽ luôn có nhiều Record hơn. (1,3,4,7,9) và sẽ có nhiều Batch của các partition đó được gửi cuối cùng
+- Kết quả 
+  - Khi nhìn vào kết quả ở log, bạn sẽ thấy các Partition của Node 1 và 3 sẽ luôn có nhiều Record hơn. (1,3,4,7,9) và sẽ có nhiều Batch của các partition đó được gửi cuối cùng
    <video controls="controls" src="/blog/2024-08-07-Kafka-producer-da-khong-con-Round-Robin-Partition-voi-key-null/KIP-794.mov" />
 
 ### Kafka Producer Partitioning (phiên bản 3.3.0 trở lên):
 - Phiên bản sử dụng : kafka-clients-3.8.0
-- Tổng thời gian chạy là 175633ms = 2.9272166667 phút
-- ![test-3.png](images/2024-08-07-Kafka-producer-da-khong-con-Round-Robin-Partition-voi-key-null/test-3.png)
-- ![test-3-1.png](images/2024-08-07-Kafka-producer-da-khong-con-Round-Robin-Partition-voi-key-null/test-3-1.png)
+- Code và dâata tương tự ví dụ `Case test: Tái hiện việc phân phối nhiều Record vào Node Slower`
+- Kết quả
+  - Khi nhìn vào kết quả ở log, bạn sẽ thấy các Partition của Node 1 và 3 sẽ cón ít record Record hơn. (1,3,5,7,8)
+    <video controls="controls" src="/blog/2024-08-07-Kafka-producer-da-khong-con-Round-Robin-Partition-voi-key-null/3.3.0.mov" />
 ## tổng kết
 ### Kafka Producer Partitioning (phiên bản <= 2.3.1):
 Trước phiên bản 2.3.1, khi key null, Kafka producer sử dụng thuật toán "Round Robin Partition" để chọn phân vùng. Các record sẽ được phân phối lần lượt giữa các partition.
