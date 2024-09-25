@@ -17,7 +17,14 @@ Vì vậy, bài viết này mình sẽ thực hiện để đạt được hai m
 1. Viết một bài chia sẻ về công nghệ trên blog của LINE (Tuy nhiên, do thói quen viết blog, mình vẫn sẽ đăng trên blog cá nhân trước).
 2. Giải thích rõ ràng về tiêu đề bài viết `Kafka producer đã không còn Round Robin Partition` và cách Kafka hiện tại đang hoạt động.
 [[TOC]]
-
+## Giá trị cấu hình `linger.ms` ảnh hưởng thế nào đến Latency(Độ trễ) và Throughput.
+- `linger.ms` sẽ giúp chúng ta lựa chọn tối ưu Latency hoặc Throughput.
+### Latency thấp (gửi message nhanh chóng):
+- Cài đặt `linger.ms` nhỏ (0-10ms) thì Producer sẽ gửi Record gần như ngay lập tức, tuy nhiên throughput sẽ không cao vì không có nhiều Record được gộp vào 1 batch.
+- `linger.ms` nhỏ sẽ làm tăng nhiều request đến máy chủ Kafka.
+### Throughput cao (Gửi nhiều message cùng lúc):
+-  Cài đặt `linger.ms` lớn ( 100s -> N) điều này cho phép Producer đợi lâu hơn để gộp các Record thành một Batch để gửi, sẽ cải thiệt hiệu suất nhưng tăng độ trễ
+- `linger.ms` sẽ giảm request gửi đến máy chủ Kafka
 ## Từ phiên bản <=2.3.1 Kafka producer Round Robin Partition
 Từ những phiên bản đầu tiên khi Kafka được Open Source đến phiên bản 2.3.1, mặc định Kafka producer khi gửi các Record có key là null sẽ thực hiện Round Robin Partition
 
@@ -102,51 +109,95 @@ Và tất nhiên danh sách ở trong `availablePartitions` không được sort
 
 ## 2.4.0 đến 3.2.3 Kafka producer stickyPartition
 
-### Nói lại 1 chút về  Kafka producer Round Robin Partition
+### Nói lại 1 chút về  Kafka producer Round Robin Partition và vấn đề gặp phải
 - Round Robin Partition là một tính năng rất hay và hữu ích, nó giúp chia tải cân bằng giữa các partition để các comsumer có thể chia tải xử lý.
-- Tuy nhiên số lượng batch từ Producer đến Broker đóng một vai trò quan trọng trong độ trễ(Latency), Có nhiều batch dẫn đến nhiều request hơn và queue nhiều hơn và tăng nhiều độ trễ.
-- `producer Round Robin Partition` giúp trải rộng các Record đến các partition nhưng nó cũng làm tăng nhiều Batch có size nhỏ. (Bởi vì các Record cùng 1 partition sẽ được cho vào cùng 1 batch để gửi)
-- Nói đơn giản, Khi cấu hình `linger.ms=0` Round Robin Partition nên sẽ tạo ra nhiều Batch nhỏ 
+- Tuy nhiên tron trường hợp `linger.ms` được bật, throughput thấp sẽ làm tăng độ trễ push dữ liệu lên Kafka, bởi vì không có đủ Record để lấp đầy Batch theo config `batch.size` vì vậy cần chờ đủ `linger.ms` để gửi data.
+- `producer Round Robin Partition` giúp trải rộng các Record đến các partition nhưng nó cũng làm tăng nhiều Batch có size nhỏ và khi throughput thấp sẽ tạo ra vấn đề.
+  -  Bởi vì các Record cùng 1 partition sẽ được cho vào cùng 1 batch để gửi. Vì là `Round Robin` nên Record sẽ trải đều các partition nên nếu throughput thấp thường sẽ cần chờ đủ `linger.ms` để gửi data.
+- Nói đơn giản, Khi cấu hình `linger.ms` Round Robin Partition nên sẽ tạo ra nhiều Batch nhỏ và nếu throughput thấp sẽ không làm đầy `batch.size`vì vậy làm tăng độ trễ.
 ```
-Giả sử bạn có 3 partitions (P0, P1, P2) và bạn gửi 9 records (R1, R2, ..., R9) mà không chỉ định partition hoặc key. Default partitioner sẽ phân phối các records theo vòng tròn (round-robin):
+Giả sử bạn có 3 partitions (P0, P1, P2) và bạn gửi 9 records sau mỗi 5ms (R1, R2, ..., R9) mà không chỉ định partition hoặc key. Default partitioner sẽ phân phối các records theo vòng tròn (round-robin):
 
-R1 -> P0
-R2 -> P1
-R3 -> P2
-R4 -> P0
-R5 -> P1
-R6 -> P2
-R7 -> P0
-R8 -> P1
-R9 -> P2
-Với linger.ms=0, mỗi record sẽ được gửi ngay lập tức, dẫn đến mỗi record tạo ra một batch riêng biệt. Do đó, trường hợp xấu nhất sẽ có tổng cộng 9 batch, mỗi batch chứa một record:
+5ms : R1 -> P0
+10ms : R2 -> P1
+15ms : R3 -> P2
+20ms : R4 -> P0
+25ms : R5 -> P1
+30s : R6 -> P2
+35ms : R7 -> P0
+40ms : R8 -> P1
+45ms : R9 -> P2
 
-Batch 1: R1 (P0)
-Batch 2: R2 (P1)
-Batch 3: R3 (P2)
-Batch 4: R4 (P0)
-Batch 5: R5 (P1)
-Batch 6: R6 (P2)
-Batch 7: R7 (P0)
-Batch 8: R8 (P1)
-Batch 9: R9 (P2)
+Với linger.ms=0, mỗi record sẽ được gửi ngay lập tức với tổng cộng 9 batch, mỗi batch chứa một record:
+5ms : Batch 1: R1 (P0) ==> send request
+10ms :Batch 2: R2 (P1)  ==> send request
+15ms :Batch 3: R3 (P2)  ==> send request
+20ms :Batch 4: R4 (P0)  ==> send request
+25ms :Batch 5: R5 (P1)  ==> send request
+30s : Batch 6: R6 (P2)  ==> send request
+35ms :Batch 7: R7 (P0)  ==> send request
+40ms :Batch 8: R8 (P1)  ==> send request
+45ms :Batch 9: R9 (P2)  ==> send request
 ```
-- Trong trường hợp cấu hình `linger.ms > 0`
-  - Nếu throughput cao thì sẽ có ít Batch hơn và độ trễ thấp hơn (Ví dụ ở trên thì có thể chỉ cần 3 Batch gửi lên)
+- Trong trường hợp cấu hình `linger.ms > 0` ví dụ là 50ms = `linger.ms=50`
   ```
+  5ms : R1 -> P0  -> Batch 1
+  10ms : R2 -> P1 -> Batch 2
+  15ms : R3 -> P2 -> Batch 3
+  20ms : R4 -> P0 -> Batch 1
+  25ms : R5 -> P1 -> Batch 2
+  30ms : R6 -> P2 -> Batch 3
+  35ms : R7 -> P0 -> Batch 1
+  40ms : R8 -> P1 -> Batch 2
+  45ms : R9 -> P2 -> Batch 2
+  
+  50ms -> bắt đầu gửi data Batch 1
   Batch 1: R1 (P0), R4 (P0), R7 (P0)
+  
+  55ms -> bắt đầu gửi data Batch 2
   Batch 2: R2 (P1), R5 (P1), R8 (P1)
+  
+  60ms -> bắt đầu gửi data Batch 3
   Batch 3: R3 (P2), R6 (P2), R9 (P2)
+  
+  Tổng cộng 3 batch, mỗi batch chứa một 3 record nhưng sau 50ms(Tính từ khi tạo batch) thì mới bắt đầu gửi dữ liệu lên Kafka
   ```
-  - Nếu throughput thấp(Ít data cần gửi lên) thì sẽ gây ra độ trễ vì không có đủ `BatchSize` để bắt đầu gửi lên Broker nên sẽ cần chờ đủ `linger.ms` để gửi.
-###  Kafka producer stickyPartition
+  - Nếu throughput thấp(Ít data cần gửi lên) thì sẽ gây ra độ trễ vì không có đủ `BatchSize` để bắt đầu gửi lên Broker nên sẽ cần chờ đủ `linger.ms` để gửi. Ví dụ `linger.ms=50`
+   ```
+  5ms : R1 -> P0  -> Batch 1
+  10ms : R2 -> P1 -> Batch 2
+  15ms : R3 -> P2 -> Batch 3
+  
+  50ms -> bắt đầu gửi data Batch 1
+  Batch 1: R1 (P0)
+  
+  55ms -> bắt đầu gửi data Batch 2
+  Batch 2: R2 (P1)
+  
+  60ms -> bắt đầu gửi data Batch 3
+  Batch 3: R3 (P2)
+  
+  Tổng cộng 3 batch, mỗi batch chứa một 1 record nhưng sau 50ms(Tính từ khi tạo batch) thì mới bắt đầu gửi dữ liệu lên Kafka
+  ```
+###  Kafka producer stickyPartition(2.4.0 >= N <=3.2.3)
 - https://issues.apache.org/jira/browse/KAFKA-8601
 - PR : https://github.com/apache/kafka/pull/6997/files , https://github.com/apache/kafka/pull/7199/files
 Từ phiên bản 2.4.0 đến 3.2.3 (2.4.0 >= N <=3.2.3) Kafka Producer thay vì mặc định Round Robin Partition khi key null thì sẽ chuyển sang thuật toán stickyPartition khi key null.
 
 Với `sticky Partition Cache` thì partition sẽ được tính theo `BATCH`, tất cả các `Record` có `key == null` thì tất cả các Record trong cùng `BATCH của cùng 1 topic` được gửi lên cùng nhau sẽ trên cùng một `partition`.
-Khi tạo `Batch` mới thì Kafka Producer sẽ random ngẫu nhiên partition.
+Với sticky sẽ làm tăng tỉ lệ lấp đầy BatchSize.
 
+Ví dụ với `linger.ms=50` và BatchSize đủ cho khoảng 3 Record.
+Khi tạo `Batch` mới thì Kafka Producer sẽ random ngẫu nhiên partition.
+```
+  5ms : R1  -> Tạo Batch 1 và random partition -> P0 
+  10ms : R2 -> Batch 1
+  15ms : R3 -> Batch 1 -> lấp đầy BatchSie
+  16ms -> bắt đầu gửi data Batch 1
+  Batch 1: R1 (P0), R2 (P0), R3 (P0),
+  
+  Tổng cộng 1 batch chứa một 3 record nhưng sau khi lấp đầy BatchSize
+  ```
 ```java
 package org.apache.kafka.clients.producer.internals;
 ...
@@ -249,11 +300,17 @@ public class StickyPartitionCache {
 
 
 ```
-Nhìn vào đoạn code ở phía trên bạn có thể thấy, Mỗi khi bắt đầu một batch mới cho topic thì Kafka sẽ tính toán ngẫu nhiên lại Partition cho key  null.
+Nhìn vào đoạn code ở phía trên bạn có thể thấy, Mỗi khi bắt đầu một batch mới cho topic thì Kafka sẽ tính toán ngẫu nhiên lại Partition cho key null.
 
 ### REF: https://cwiki.apache.org/confluence/display/KAFKA/KIP-480%3A+Sticky+Partitioner
 
-## 3.3.0 đến mới nhất(3.8.0 là phiên bản hiện tại viết Block này )
+## 3.3.0 đến mới nhất(3.8.0 là phiên bản hiện tại viết Block này ) Strictly Uniform Sticky Partitioner'
+- REF: https://cwiki.apache.org/confluence/display/KAFKA/KIP-794%3A+Strictly+Uniform+Sticky+Partitioner
+  - 
+### Các vấn đề gặp phải của Kafka producer stickyPartition(2.4.0 >= N <=3.2.3)
+- Vấn đề của stickyPartition sẽ phân phối nhiều Record cho các máy chủ Kafka slow. Nếu có 1 máy chủ Kafka chậm sẽ khiến Batch gửi đến partition trên máy chủ đó sẽ lớn hơn, vì nó chậm nên lưu lâu hơn vì vậy nó làm chậm toàn hệ thống.
+- Vấn đề này xảy ra vì `stickyPartition` được điều khiển bởi việc tạo batch mới,
+
 - Từ phiên bản 3.3.0 đến hiện tại Kafka producer vẫn chọn ngẫu nhiên partition, tuy nhiên thời điểm để chọn lại partition đã thay đổi.
 - Tại phiên bản này Kafka producer sẽ sử dụng config `batch.size` để xác định thời điểm lựa chọn lại partition.
 - Mỗi khi thêm một Record mới, kafka sẽ tính toán Record tốn bao nhiêu byte( Metadata +data ) sau đó cộng vào một biến count, 
@@ -658,6 +715,18 @@ public class KeyNull {
 ```
 - Tổng 21838 request gửi lên máy chủ. Tổng số request của 3.2.3 lên máy chủ là nhiều hơn Round Robin,
 - Tổng thời gian chạy là 37361ms = 37.361 giây
+##### Gửi 100,000 data và sử dụng `linger.ms` bằng 0 , sleep 1ms lỗi lần gửi Record
+- Ví dụ này sẽ cho chúng ta thấy việc bị gửi nhiều request liên tục khi `linger.ms` bằng 0
+```java
+        props.setProperty(ProducerConfig.LINGER_MS_CONFIG, "0");
+
+        for (int i = 0; i < numberSend; i++) {
+             producer.send(messageProducerRecord, (metadata, exception) -> countDownLatch.countDown());
+             Thread.sleep(1);
+        }
+```
+- Tổng 99978 request gửi lên máy chủ, tức mỗi gần như mỗi Record sẽ gửi một request đến Broker. (Vì tốc độ 1s vẫn rất gần nên có thể đôi khi cpu chưa kịp xử lý xong thì đã thêm 1 bản ghi vào batch)
+- Tốn 140908ms = 2.3484666667 phút
 ### Kafka Producer Partitioning (phiên bản 3.3.0 trở lên):
 - Phiên bản sử dụng : kafka-clients-3.8.0
 - Tổng thời gian chạy là 175633ms = 2.9272166667 phút
