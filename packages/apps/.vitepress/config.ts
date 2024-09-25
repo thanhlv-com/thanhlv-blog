@@ -250,6 +250,7 @@ export default defineConfigWithTheme<ThemeConfig>({
       md.use(headerPlugin)
       // .use(textAdPlugin)
     },
+    lineNumbers: true,
     toc: {
       level: [2, 3, 4, 5, 6, 7, 8, 9]
     },
