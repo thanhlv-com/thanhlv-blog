@@ -535,8 +535,8 @@ Nhìn có vẻ phức tạp nhưng bạn có thể hiểu đơn giản như này
 Vì vậy ít nhất mỗi Record sẽ có size bytes được tăng thêm là 85
 
 #### Logic tính toán cumulativeFrequencyTable
-- cumulativeFrequencyTable là một table sử dụng để thống kê tải(load) partition cho từng topic, nó được sử dụng để xác định partition mới khi thực hiện xác định lại partition.
-- cumulativeFrequencyTable sẽ giúp chúng ta lựa chọn partition mới để chia tải gần như cân bằng giữa các partition.
+- `cumulativeFrequencyTable` là một table sử dụng để thống kê tải (load) partition cho từng topic, nó được sử dụng để xác định partition mới khi thực hiện xác định lại partition.
+- `cumulativeFrequencyTable` sẽ giúp chúng ta lựa chọn partition mới để chia tải gần như cân bằng giữa các partition.
 ```java
 
 public class CalPartitionLoad {
@@ -589,16 +589,16 @@ public class CalPartitionLoad {
   }
 }
 ```
-#### Các cấu hình mới:
-- `partitioner.adaptive.partitioning.enable` Mặc định là `true`, nếu là `true` thì sẽ sử dụng bộ cân bằng tải thì sử dụng bộ cân bằng tải đeể điều chỉnh phù hợp theo hiệu suất của các Node (Gửi ít Record đến Node slower)
-  - Nếu là false thì các partition sẽ chọn ngẫu nhiên và
-- `partitioner.availability.timeout.ms` mặc định là 0. Nếu giá trị lớn hớn 0 và `partitioner.adaptive.partitioning.enable=true` và Produce không thể gửi reuqest send data đến partition trong `ms` thì sẽ đánh dấu bỏ qua partition đó.
-- `partitioner.ignore.keys` mặc định là `false` nếu là `false` và có `key` thì sẽ sử dụng `key` để tính toán partition. Nếu là `true` thì sẽ bỏ qua logic sử dụng `key` để tính toán partition và sử dụng logic `Strictly Uniform Sticky Partitioner`
+#### Các cấu hình mới
+- `partitioner.adaptive.partitioning.enable` mặc định là `true`. Nếu là `true`, thì sẽ sử dụng bộ cân bằng tải để điều chỉnh phù hợp theo hiệu suất của các node, gửi ít record đến node chậm hơn
+  - Nếu là `false`, các partition sẽ được chọn ngẫu nhiên.
+- `partitioner.availability.timeout.ms` mặc định là `0`. Nếu giá trị lớn hơn `0` và `partitioner.adaptive.partitioning.enable` là `true`, và producer không thể gửi request đến partition trong khoảng thời gian `ms` định trước, thì partition đó sẽ được đánh dấu là bỏ qua.
+- `partitioner.ignore.keys` mặc định là `false`. Nếu là `false` và `có key`, thì sẽ sử dụng key để tính toán partition. Nếu là `true` và `có key`, thì sẽ bỏ qua logic sử dụng key để tính toán partition và sử dụng logic của Strictly Uniform Sticky Partitioner.
 ## Thử nghiệm các trường hợp tạo ra vấn đề
 Thông tin thử nghiệm:
 - 4 node
 - 10 partition
-- image docker confluentinc/cp-kafka:7.4.4 , kafka server version: 3.5.0
+- image docker `confluentinc/cp-kafka:7.4.4` ( kafka server version: 3.5.0 )
 - Hardware Overview:
 ```
   Model Name:	MacBook Pro
@@ -628,14 +628,6 @@ Node 3:
 Node 4: 
 - 3 cpu
 - max 3g RAM
-```
-- Lệnh count số lần gửi request push Batch lên máy chủ
-```
-grep -o "Sending PRODUC" kafka_client.log | wc -l
-```
-- Lệnh tìm kiếm log để xem tổng thời gian xử lý hoàn thành
-```
-tail -r kafka_client.log| grep 'ms and end - start'
 ```
 - Lệnh xem log số lượng Record được gửi thành công lên server cho 1 request gửi (Tương ứng với Số lượng record trong batch sử dụng để gửi)
 ```
