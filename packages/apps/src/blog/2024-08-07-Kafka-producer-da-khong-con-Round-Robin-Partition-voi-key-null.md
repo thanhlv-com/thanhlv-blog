@@ -11,11 +11,11 @@ draft: true
 # Kafka producer đã không còn Round Robin Partition với key null.
 Chào mọi người,
 
-Sau nhiều ngày được anh Lâm (Leader tại LINE) khuyến khích và động viên viết blog về công nghệ và mình nhận thấy có khá nhiều bạn đã hiểu sai về Kafka trên phiên bản mới nhất. Điều này dẫn đến việc cấu hình partition và consumer bị sai khi sử dụng Kafka.
+Sau nhiều ngày được anh Lâm (Leader tại LINE) khuyến khích và động viên viết blog về công nghệ và tôi nhận thấy có khá nhiều bạn đã hiểu sai về Kafka trên phiên bản mới nhất. Điều này dẫn đến việc cấu hình partition và consumer bị sai khi sử dụng Kafka.
 
-Vì vậy, bài viết này mình sẽ thực hiện để đạt được hai mục tiêu:
-1. Viết một bài chia sẻ về công nghệ trên blog của LINE (Tuy nhiên, do thói quen viết blog, mình vẫn sẽ đăng trên blog cá nhân trước).
-2. Giải thích rõ ràng về tiêu đề bài viết `Kafka producer đã không còn Round Robin Partition` và cách Kafka hiện tại đang hoạt động.
+Vì vậy, bài viết này tôi sẽ thực hiện để đạt được hai mục tiêu:
+1. Viết một bài chia sẻ về công nghệ trên blog của LINE (Tuy nhiên, do thói quen viết blog, tôi vẫn sẽ đăng trên blog cá nhân trước).
+2. Giải thích rõ ràng về chủ đề của bài viết `Kafka producer đã không còn Round Robin Partition` và cách Kafka hiện tại đang hoạt động.
 [[TOC]]
 ## Giá trị cấu hình `linger.ms` ảnh hưởng thế nào đến Latency(Độ trễ) và Throughput.
 - `linger.ms` sẽ giúp chúng ta lựa chọn tối ưu Latency hoặc Throughput.
@@ -23,9 +23,9 @@ Vì vậy, bài viết này mình sẽ thực hiện để đạt được hai m
 - Cài đặt `linger.ms` nhỏ (0-10ms) thì Producer sẽ gửi Record gần như ngay lập tức, tuy nhiên throughput sẽ không cao vì không có nhiều Record được gộp vào 1 batch.
 - `linger.ms` nhỏ sẽ làm tăng nhiều request đến máy chủ Kafka.
 ### Throughput cao (Gửi nhiều message cùng lúc):
--  Cài đặt `linger.ms` lớn ( 100s -> N) điều này cho phép Producer đợi lâu hơn để gộp các Record thành một Batch để gửi, sẽ cải thiệt hiệu suất nhưng tăng độ trễ
+-  Cài đặt `linger.ms` lớn ( 100ms -> N) điều này cho phép Producer đợi lâu hơn để gộp các Record thành một Batch để gửi, sẽ cải thiện hiệu suất nhưng tăng độ trễ
 - `linger.ms` sẽ giảm request gửi đến máy chủ Kafka
-## Từ phiên bản <=2.3.1 Kafka producer Round Robin Partition
+## Từ phiên bản nhỏ hơn hoặc bằng v2.3.1 mặc định Kafka producer sẽ Round Robin Partition
 Từ những phiên bản đầu tiên khi Kafka được Open Source đến phiên bản 2.3.1, mặc định Kafka producer khi gửi các Record có key là null sẽ thực hiện Round Robin Partition
 
 Dưới đây là đoạn code ở phiên bản 2.3.1 trên java, phiên bản cuối cùng Kafka Producer mặc định Round Robin Partition
@@ -103,18 +103,18 @@ public class DefaultPartitioner implements Partitioner {
 }
 
 ```
-Và tất nhiên danh sách ở trong `availablePartitions` không được sort từ 0-N vì vậy đôi khi bạn thấy Record 1 đến Partition 1 nhưng Record 2 đến partition 3, nhưng yên tâm nó vẫn là `Round Robin Partition`
+Và tất nhiên danh sách ở trong `availablePartitions` không được sort từ `0 - N` vì vậy đôi khi bạn thấy Record 1 đến Partition 1 nhưng Record 2 đến Partition 3. Tuy nhiên, bạn có thể yên tâm rằng nó vẫn là `Round Robin Partition`
 ![img](images/2024-08-07-Kafka-producer-da-khong-con-Round-Robin-Partition-voi-key-null/list-availablePartitions.png)
 
 
 ## 2.4.0 đến 3.2.3 Kafka producer stickyPartition
 
-### Nói lại 1 chút về Kafka producer Round Robin Partition và vấn đề gặp phải
-- Round Robin Partition là một tính năng rất hay và hữu ích, nó giúp chia tải cân bằng giữa các partition để các comsumer có thể chia tải xử lý.
-- Tuy nhiên tron trường hợp `linger.ms` được bật, throughput thấp sẽ làm tăng độ trễ push dữ liệu lên Kafka, bởi vì không có đủ Record để lấp đầy Batch theo config `batch.size` vì vậy cần chờ đủ `linger.ms` để gửi data.
-- `producer Round Robin Partition` giúp trải rộng các Record đến các partition nhưng nó cũng làm tăng nhiều Batch có size nhỏ và khi throughput thấp sẽ tạo ra vấn đề.
-  -  Bởi vì các Record cùng 1 partition sẽ được cho vào cùng 1 batch để gửi. Vì là `Round Robin` nên Record sẽ trải đều các partition nên nếu throughput thấp thường sẽ cần chờ đủ `linger.ms` để gửi data.
-- Nói đơn giản, Khi cấu hình `linger.ms` Round Robin Partition nên sẽ tạo ra nhiều Batch nhỏ và nếu throughput thấp sẽ không làm đầy `batch.size`vì vậy làm tăng độ trễ.
+### Nói lại một chút về Kafka producer Round Robin Partition và vấn đề gặp phải
+- `Round Robin Partition` là một tính năng rất hay và hữu ích, giúp chia tải cân bằng giữa các Partition để các Consumer có thể chia sẻ tải và xử lý dữ liệu
+- Tuy nhiên, trong trường hợp `linger.ms` được bật, `throughput thấp` sẽ làm tăng độ trễ khi push dữ liệu lên Kafka, bởi vì không có đủ Record để lấp đầy Batch theo cấu hình `batch.size`
+- `producer Round Robin Partition` giúp phân phối các Record đều giữa các partition, nhưng nó cũng dẫn đến việc tạo ra nhiều Batch có kích thước nhỏ, đặc biệt khi throughput thấp.
+  -  Điều này gây ra vấn đề vì các Record cùng một partition sẽ được đưa vào cùng một batch để gửi. Do đó, khi throughput thấp, cần chờ đến khi đạt giá trị `linger.ms` để gửi dữ liệu.
+- Nói một cách đơn giản, khi cấu hình `linger.ms`, `Round Robin Partition` sẽ tạo ra nhiều Batch nhỏ. Nếu throughput thấp, các batch sẽ không được làm đầy theo cấu hình `batch.size`, dẫn đến việc tăng độ trễ.
 ```
 Giả sử bạn có 3 partitions (P0, P1, P2) và bạn gửi 9 records sau mỗi 5ms (R1, R2, ..., R9) mà không chỉ định partition hoặc key. Default partitioner sẽ phân phối các records theo vòng tròn (round-robin):
 
@@ -162,7 +162,7 @@ Với linger.ms=0, mỗi record sẽ được gửi ngay lập tức với tổn
   
   Tổng cộng 3 batch, mỗi batch chứa một 3 record nhưng sau 50ms(Tính từ khi tạo batch) thì mới bắt đầu gửi dữ liệu lên Kafka
   ```
-  - Nếu throughput thấp(Ít data cần gửi lên) thì sẽ gây ra độ trễ vì không có đủ `BatchSize` để bắt đầu gửi lên Broker nên sẽ cần chờ đủ `linger.ms` để gửi. Ví dụ `linger.ms=50`
+  - Nếu throughput thấp(Ít dữ liệu cần gửi lên) thì sẽ gây ra độ trễ vì không có đủ `batch.size` để bắt đầu gửi lên `Broker` nên sẽ cần chờ đủ `linger.ms` để gửi. Ví dụ `linger.ms=50`
    ```
   5ms : R1 -> P0  -> Batch 1
   10ms : R2 -> P1 -> Batch 2
@@ -182,13 +182,13 @@ Với linger.ms=0, mỗi record sẽ được gửi ngay lập tức với tổn
 ###  Kafka producer stickyPartition(2.4.0 >= N <=3.2.3)
 - https://issues.apache.org/jira/browse/KAFKA-8601
 - PR : https://github.com/apache/kafka/pull/6997/files , https://github.com/apache/kafka/pull/7199/files
-Từ phiên bản 2.4.0 đến 3.2.3 (2.4.0 >= N <=3.2.3) Kafka Producer thay vì mặc định Round Robin Partition khi key null thì sẽ chuyển sang thuật toán stickyPartition khi key null.
+Từ phiên bản 2.4.0 đến 3.2.3 (2.4.0 >= N <=3.2.3) Kafka Producer thay vì mặc định Round Robin Partition khi key null thì sẽ chuyển sang thuật toán `stickyPartition` khi key null.
 
-Với `sticky Partition Cache` thì partition sẽ được tính theo `BATCH`, tất cả các `Record` có `key == null` thì tất cả các Record trong cùng `BATCH của cùng 1 topic` được gửi lên cùng nhau sẽ trên cùng một `partition`.
-Với sticky sẽ làm tăng tỉ lệ lấp đầy BatchSize.
+Với `sticky Partition Cache` thì partition sẽ được tính theo `Batch`, tất cả các `Record` có `key == null`  trong cùng `BATCH của cùng 1 topic` sẽ được gửi lên cùng nhau sẽ trên cùng một `partition`.
+Với sticky sẽ làm tăng tỉ lệ lấp đầy `batch.size`.
 
-Ví dụ với `linger.ms=50` và BatchSize đủ cho khoảng 3 Record.
-Khi tạo `Batch` mới thì Kafka Producer sẽ random ngẫu nhiên partition.
+Ví dụ với `linger.ms=50` và batch.size đủ cho khoảng 3 Record.
+Khi tạo `Batch` mới thì Kafka Producer sẽ ngẫu nhiên partition.
 ```
   5ms : R1  -> Tạo Batch 1 và random partition -> P0 
   10ms : R2 -> Batch 1
@@ -196,7 +196,7 @@ Khi tạo `Batch` mới thì Kafka Producer sẽ random ngẫu nhiên partition.
   16ms -> bắt đầu gửi data Batch 1
   Batch 1: R1 (P0), R2 (P0), R3 (P0),
   
-  Tổng cộng 1 batch chứa một 3 record nhưng sau khi lấp đầy BatchSize
+  Tổng cộng 1 batch chứa một 3 record nhưng sau khi lấp đầy batch.size
   ```
 ```java
 package org.apache.kafka.clients.producer.internals;
@@ -304,12 +304,12 @@ Nhìn vào đoạn code ở phía trên bạn có thể thấy, Mỗi khi bắt 
 
 ### REF: https://cwiki.apache.org/confluence/display/KAFKA/KIP-480%3A+Sticky+Partitioner
 
-## 3.3.0 đến mới nhất(3.8.0 là phiên bản hiện tại viết Block này ) Strictly Uniform Sticky Partitioner'
+## 3.3.0 đến mới nhất(3.8.0 là phiên bản hiện tại viết bài này ) Strictly Uniform Sticky Partitioner'
 - REF: https://cwiki.apache.org/confluence/display/KAFKA/KIP-794%3A+Strictly+Uniform+Sticky+Partitioner
   - 
 ### Các vấn đề gặp phải của Kafka producer stickyPartition(2.4.0 >= N <=3.2.3)
-- Vấn đề của stickyPartition sẽ phân phối nhiều Record đến các máy chủ Kafka slow. Nếu có 1 máy chủ Kafka chậm sẽ khiến Batch gửi đến partition trên máy chủ đó sẽ lớn hơn, vì nó chậm nên lưu lâu hơn vì vậy nó làm chậm toàn hệ thống.
-- Vấn đề này xảy ra vì `stickyPartition` được điều khiển bởi việc tạo batch mới, tuy nhiên `drain` các Batch cho máy chủ chậm sẽ lâu hơn vì máy chủ chưa sẵn sàng nhận cà Request mới, vì vậy Recored tiếp tục được push vào batch đang chờ gửi.
+- Vấn đề của stickyPartition sẽ phân phối nhiều Record đến các máy chủ Kafka slow(Chậm). Nếu có 1 máy chủ Kafka chậm sẽ khiến Batch gửi đến Partition trên máy chủ đó sẽ lớn hơn, vì nó chậm nên lưu lâu hơn vì vậy nó ảnh hướng đến hiệu suất hệ thống.
+- Vấn đề này xảy ra vì `stickyPartition` được điều khiển bởi việc tạo batch mới, tuy nhiên `drain` các Batch cho máy chủ chậm sẽ lâu hơn vì máy chủ chưa sẵn sàng nhận các Request mới, vì vậy Record tiếp tục được push vào batch đang chờ gửi.
 ```java
 package org.apache.kafka.clients.producer.internals;
 ...
@@ -363,7 +363,7 @@ public class Sender implements Runnable {
 - Mỗi khi thêm một Record mới, kafka sẽ tính toán Record tốn bao nhiêu byte( Metadata +data ) sau đó cộng vào một biến count, 
   - Sau đó thay vì ở phiên bản `2.4.0 đến 3.2.3` sẽ ngẫu nhiên lựa chọn lại partition mỗi lần tạo batch thì từ `phiên bản 3.3.0` sẽ thực kiểm tra khi biến count lớn hơn `batch.size` sẽ bắt đầu thực hiện chọn lại partition.
 
-Code lib Kafka, thực tế trong `BuiltInPartitioner` sẽ có nhiều method khác nữa, mình đã bỏ các method khác đi để chỉ tập trung vào `nextPartition` và `updatePartitionInfo` 
+Code lib Kafka, thực tế trong `BuiltInPartitioner` sẽ có nhiều method khác nữa, tôi đã bỏ các method khác đi để chỉ tập trung vào `nextPartition` và `updatePartitionInfo` 
 ```java
 package org.apache.kafka.clients.producer.internals;
 
@@ -372,22 +372,22 @@ import ....
 public class BuiltInPartitioner {
     private final Logger log;
     private final String topic;
-    private final int stickyBatchSize;
+    private final int stickybatch.size;
     private volatile PartitionLoadStats partitionLoadStats = null;
     private final AtomicReference<StickyPartitionInfo> stickyPartitionInfo 
       = new AtomicReference();
     public static volatile Supplier<Integer> mockRandom = null;
 
-    public BuiltInPartitioner(LogContext logContext, String topic, int stickyBatchSize) {
+    public BuiltInPartitioner(LogContext logContext, String topic, int stickybatch.size) {
         this.log = logContext.logger(BuiltInPartitioner.class);
         this.topic = topic;
-        if (stickyBatchSize < 1) {
-            throw new IllegalArgumentException("stickyBatchSize must be >= 1 but got " + stickyBatchSize);
+        if (stickybatch.size < 1) {
+            throw new IllegalArgumentException("stickybatch.size must be >= 1 but got " + stickybatch.size);
         } else {
             // được config bởi "batch.size".
             // Giá trị mặc định của "batch.size" là 16384 
             // (https://github.com/apache/kafka/blob/4a485ddb71c844acc8bf241feda1fcbffc5ce9be/clients/src/main/java/org/apache/kafka/clients/producer/ProducerConfig.java#L384)
-            this.stickyBatchSize = stickyBatchSize;
+            this.stickybatch.size = stickybatch.size;
         }
     }
 
@@ -439,12 +439,12 @@ public class BuiltInPartitioner {
             assert partitionInfo == this.stickyPartitionInfo.get();
 
             int producedBytes = partitionInfo.producedBytes.addAndGet(appendedBytes);
-            if (producedBytes >= this.stickyBatchSize * 2) {
-                this.log.trace("Produced {} bytes, exceeding twice the batch size of {} bytes, with switching set to {}", new Object[]{producedBytes, this.stickyBatchSize, enableSwitch});
+            if (producedBytes >= this.stickybatch.size * 2) {
+                this.log.trace("Produced {} bytes, exceeding twice the batch size of {} bytes, with switching set to {}", new Object[]{producedBytes, this.stickybatch.size, enableSwitch});
             }
 
-            if (producedBytes >= this.stickyBatchSize && enableSwitch || producedBytes >= this.stickyBatchSize * 2) {
-                // Nếu tổng số producedBytes hiện tại lớn hớn config stickyBatchSize và enableSwitch = true hoặc producedBytes lớn hơn gấp 2 lần stickyBatchSize thì sẽ force update 
+            if (producedBytes >= this.stickybatch.size && enableSwitch || producedBytes >= this.stickybatch.size * 2) {
+                // Nếu tổng số producedBytes hiện tại lớn hớn config stickybatch.size và enableSwitch = true hoặc producedBytes lớn hơn gấp 2 lần stickybatch.size thì sẽ force update 
                 StickyPartitionInfo newPartitionInfo = new StickyPartitionInfo(this.nextPartition(cluster));
                 this.stickyPartitionInfo.set(newPartitionInfo);
             }
@@ -470,16 +470,16 @@ public class BuiltInPartitioner {
 
 ```
 ### Các thành phần khác
-Nhìn đoạn code ở phía trên cũng đã rất phức tạp :D Tuy nhiên chúng ta còn rất nhiều logic khác nữa, mình sẽ kể ra 1 số logic đặc biệt cần lưu ý cho mọi người.
+Nhìn đoạn code ở phía trên cũng đã rất phức tạp :D Tuy nhiên chúng ta còn rất nhiều logic khác nữa, tôi sẽ kể ra 1 số logic đặc biệt cần lưu ý cho mọi người.
 
 #### Logic tính toán số lượng Bytes cho mỗi Record
-- Method static thực hiện điều này chính là `DefaultRecordBatch.estimateBatchSizeUpperBound(key, value, headers);`
+- Method static thực hiện điều này chính là `DefaultRecordBatch.estimatebatch.sizeUpperBound(key, value, headers);`
 ```java
 
 
-  static int estimateBatchSizeUpperBound(ByteBuffer key, ByteBuffer value, Header[] headers) {
-         //  return RECORD_BATCH_OVERHEAD = 61 ;
-         return RECORD_BATCH_OVERHEAD + DefaultRecord.recordSizeUpperBound(key, value, headers);
+  static int estimatebatch.sizeUpperBound(ByteBuffer key, ByteBuffer value, Header[] headers) {
+    // RECORD_BATCH_OVERHEAD = 61 ;
+    return RECORD_BATCH_OVERHEAD + DefaultRecord.recordSizeUpperBound(key, value, headers);
   }
 
   static int recordSizeUpperBound(ByteBuffer key, ByteBuffer value, Header[] headers) {
@@ -492,37 +492,35 @@ Nhìn đoạn code ở phía trên cũng đã rất phức tạp :D Tuy nhiên c
   private static int sizeOf(int keySize, int valueSize, Header[] headers) {
     int size = 0;
     if (keySize < 0)
-    size += NULL_VARINT_SIZE_BYTES;
+        size += NULL_VARINT_SIZE_BYTES;
     else
-    size += ByteUtils.sizeOfVarint(keySize) + keySize;
+        size += ByteUtils.sizeOfVarint(keySize) + keySize;
 
     if (valueSize < 0)
-    size += NULL_VARINT_SIZE_BYTES;
+        size += NULL_VARINT_SIZE_BYTES;
     else
-    size += ByteUtils.sizeOfVarint(valueSize) + valueSize;
+        size += ByteUtils.sizeOfVarint(valueSize) + valueSize;
 
     if (headers == null)
-    throw new IllegalArgumentException("Headers cannot be null");
+        throw new IllegalArgumentException("Headers cannot be null");
 
     size += ByteUtils.sizeOfVarint(headers.length);
     for (Header header : headers) {
-    String headerKey = header.key();
-    if (headerKey == null)
-    throw new IllegalArgumentException("Invalid null header key found in headers");
-
-    int headerKeySize = Utils.utf8Length(headerKey);
-    size += ByteUtils.sizeOfVarint(headerKeySize) + headerKeySize;
-
-    byte[] headerValue = header.value();
-    if (headerValue == null) {
-    size += NULL_VARINT_SIZE_BYTES;
-    } else {
-    size += ByteUtils.sizeOfVarint(headerValue.length) + headerValue.length;
-    }
-    }
+      String headerKey = header.key();
+      if (headerKey == null)
+        throw new IllegalArgumentException("Invalid null header key found in headers");
+        int headerKeySize = Utils.utf8Length(headerKey);
+        size += ByteUtils.sizeOfVarint(headerKeySize) + headerKeySize;
+  
+        byte[] headerValue = header.value();
+        if (headerValue == null) {
+            size += NULL_VARINT_SIZE_BYTES;
+        } else {
+            size += ByteUtils.sizeOfVarint(headerValue.length) + headerValue.length;
+        }
+      }
     return size;
-    }
-    
+   }
 ```
 Nhìn có vẻ phức tạp nhưng bạn có thể hiểu đơn giản như này.
  ```
@@ -591,12 +589,12 @@ public class CalPartitionLoad {
   }
 }
 ```
-#### Các config mới:
+#### Các cấu hình mới:
 - `partitioner.adaptive.partitioning.enable` Mặc định là `true`, nếu là `true` thì sẽ sử dụng bộ cân bằng tải thì sử dụng bộ cân bằng tải đeể điều chỉnh phù hợp theo hiệu suất của các Node (Gửi ít Record đến Node slower)
   - Nếu là false thì các partition sẽ chọn ngẫu nhiên và
 - `partitioner.availability.timeout.ms` mặc định là 0. Nếu giá trị lớn hớn 0 và `partitioner.adaptive.partitioning.enable=true` và Produce không thể gửi reuqest send data đến partition trong `ms` thì sẽ đánh dấu bỏ qua partition đó.
 - `partitioner.ignore.keys` mặc định là `false` nếu là `false` và có `key` thì sẽ sử dụng `key` để tính toán partition. Nếu là `true` thì sẽ bỏ qua logic sử dụng `key` để tính toán partition và sử dụng logic `Strictly Uniform Sticky Partitioner`
-## Thử nghiệm
+## Thử nghiệm các trường hợp tạo ra vấn đề
 Thông tin thử nghiệm:
 - 4 node
 - 10 partition
@@ -645,7 +643,7 @@ grep -n "Set last ack'd sequence number for topic-partition topic-rep-1-partitio
 ```
 ### Kafka Producer Partitioning (phiên bản <= 2.3.1):
 - Phiên bản sử dụng : kafka-clients-2.3.1
-#### 1. Case test: Tái hiện Latency cao vì throughput thấp
+#### 1. Case test: Tái hiện Latency cao do throughput thấp
 - Code chạy
 ```java {11,13,22}
 @Slf4j
@@ -681,8 +679,8 @@ public class KeyNullLoopDelay {
 }
 ```
 - Giải thích cách code hoạt động:
-  - Sẽ gửi 113 Record lến Kafka server, đối với `BATCH_SIZE_CONFIG = 5000` nếu push vào 1 Batch duy nhất sẽ đầy BatchSize và gửi lên Kafka server. Tuy nhiên bởi vì Round Robin trên 10 Partition nên có 10 Batch và mỗi Batch có 11 đến 12 Record nên chưa đủ BatchSize.
-  - Bởi vì chưa chưa đủ BatchSize nên cần chờ đến thời gian của `LINGER_MS_CONFIG` mới bắt đầu gửi Batch vì vậy nó tạo ra Latency cao vì throughput thấp
+  - Sẽ gửi 113 Record lến Kafka server, đối với `BATCH_SIZE_CONFIG = 5000` nếu push vào 1 Batch duy nhất sẽ đầy batch.size và gửi lên Kafka server. Tuy nhiên bởi vì Round Robin trên 10 Partition nên có 10 Batch và mỗi Batch có 11 đến 12 Record nên chưa đủ batch.size.
+  - Bởi vì chưa chưa đủ batch.size nên cần chờ đến thời gian của `LINGER_MS_CONFIG` mới bắt đầu gửi Batch vì vậy nó tạo ra Latency cao vì throughput thấp
     <video controls="controls" src="/blog/2024-08-07-Kafka-producer-da-khong-con-Round-Robin-Partition-voi-key-null/KIP-480.mov" />
 ### Kafka Producer Sticky Partitioning (phiên bản 2.4.0 đến 3.2.3):
 - Phiên bản sử dụng : kafka-clients-3.2.3
@@ -807,9 +805,11 @@ public class KeyNull {
 
 [//]: # (```)
 
-#### Ví dụ về custom logic Partition của riêng
-- Trong ví dụ này tôi sẽ viết môi logic custom, logic sẽ luôn luôn chọn ngẫu nhiên partition bất kể lý do gì.
-- 
+[//]: # (#### Ví dụ về custom logic Partition của riêng)
+
+[//]: # (- Trong ví dụ này tôi sẽ viết môi logic custom, logic sẽ luôn luôn chọn ngẫu nhiên partition bất kể lý do gì.)
+
+[//]: # (- )
 ## tổng kết
 ### Kafka Producer Partitioning (phiên bản <= 2.3.1):
 Trước phiên bản 2.3.1, khi key null, Kafka producer sử dụng thuật toán "Round Robin Partition" để chọn phân vùng. Các record sẽ được phân phối lần lượt giữa các partition.
