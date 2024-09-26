@@ -109,7 +109,7 @@ Và tất nhiên danh sách ở trong `availablePartitions` không được sort
 
 ## 2.4.0 đến 3.2.3 Kafka producer stickyPartition
 
-### Nói lại 1 chút về  Kafka producer Round Robin Partition và vấn đề gặp phải
+### Nói lại 1 chút về Kafka producer Round Robin Partition và vấn đề gặp phải
 - Round Robin Partition là một tính năng rất hay và hữu ích, nó giúp chia tải cân bằng giữa các partition để các comsumer có thể chia tải xử lý.
 - Tuy nhiên tron trường hợp `linger.ms` được bật, throughput thấp sẽ làm tăng độ trễ push dữ liệu lên Kafka, bởi vì không có đủ Record để lấp đầy Batch theo config `batch.size` vì vậy cần chờ đủ `linger.ms` để gửi data.
 - `producer Round Robin Partition` giúp trải rộng các Record đến các partition nhưng nó cũng làm tăng nhiều Batch có size nhỏ và khi throughput thấp sẽ tạo ra vấn đề.
@@ -736,10 +736,80 @@ public class KeyNull {
 
 ### Kafka Producer Partitioning (phiên bản 3.3.0 trở lên):
 - Phiên bản sử dụng : kafka-clients-3.8.0
-- Code và dâata tương tự ví dụ `Case test: Tái hiện việc phân phối nhiều Record vào Node Slower`
+- Code và data tương tự ví dụ `Case test: Tái hiện việc phân phối nhiều Record vào Node Slower`
 - Kết quả
   - Khi nhìn vào kết quả ở log, bạn sẽ thấy các Partition của Node 1 và 3 sẽ cón ít record Record hơn. (1,3,5,7,8)
     <video controls="controls" src="/blog/2024-08-07-Kafka-producer-da-khong-con-Round-Robin-Partition-voi-key-null/3.3.0.mov" />
+
+[//]: # ()
+[//]: # (### Làm cách nào để sử dụng lại producer Round Robin Partition hoặc Custom logic Partition của riêng mình?)
+
+[//]: # (- Thực tế bạn có thể ghi đè logic xác định Producer partition thông qua cấu hình `partitioner.class`)
+
+[//]: # (- Tính đến hiện tại phiên bản `kafka-clients-3.8.0` có hỗ trọ tính năng này, trong quá khứ cũng đã hỗ trợ nhưng ở 1 số phiên bản đã xóa bỏ vì vậy hãy kiểm tra các phiên bản và test kỹ trước khi sử dụng.)
+
+[//]: # (#### Ví dụ sử dụng producer Round Robin Partition)
+
+[//]: # (```java)
+
+[//]: # (@Slf4j)
+
+[//]: # (public class KeyNull {)
+
+[//]: # (  @SneakyThrows)
+
+[//]: # (  public static void main&#40;String[] args&#41; throws IOException {)
+
+[//]: # (    System.setProperty&#40;"org.slf4j.simpleLogger.defaultLogLevel", "ALL"&#41;;)
+
+[//]: # (    final var props = new Properties&#40;&#41;;)
+
+[//]: # (    props.setProperty&#40;ProducerConfig.CLIENT_ID_CONFIG, "java-producer-producerRecordPartition-KeyNotNull"&#41;;)
+
+[//]: # (    props.setProperty&#40;ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:29091,localhost:29092,localhost:29093,localhost:29094"&#41;;)
+
+[//]: # (    props.setProperty&#40;ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName&#40;&#41;&#41;;)
+
+[//]: # (    props.setProperty&#40;ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName&#40;&#41;&#41;;)
+
+[//]: # (    props.setProperty&#40;ProducerConfig.BATCH_SIZE_CONFIG, "5000"&#41;;)
+
+[//]: # (    // ghi đề logic xác định partition. Data là class path đến class RoundRobinPartitioner)
+
+[//]: # (    props.setProperty&#40;ProducerConfig.PARTITIONER_CLASS_CONFIG, "org.apache.kafka.clients.producer.RoundRobinPartitioner"&#41;;)
+
+[//]: # ()
+[//]: # (    try &#40;var producer = new KafkaProducer<Object, String>&#40;props&#41;&#41; {)
+
+[//]: # (      final var messageProducerRecord = new ProducerRecord<>&#40;)
+
+[//]: # (        "topic-rep-1-partition-10",     //topic name)
+
+[//]: # (        // 36 byte)
+
+[//]: # (        UUID.randomUUID&#40;&#41;.toString&#40;&#41;        // value)
+
+[//]: # (      &#41;;)
+
+[//]: # (      Integer numberSend = 1_000_000;)
+
+[//]: # (      for &#40;int i = 1; i <= numberSend; i++&#41; {)
+
+[//]: # (        producer.send&#40;messageProducerRecord&#41;;)
+
+[//]: # (      })
+
+[//]: # (    })
+
+[//]: # (  })
+
+[//]: # (})
+
+[//]: # (```)
+
+#### Ví dụ về custom logic Partition của riêng
+- Trong ví dụ này tôi sẽ viết môi logic custom, logic sẽ luôn luôn chọn ngẫu nhiên partition bất kể lý do gì.
+- 
 ## tổng kết
 ### Kafka Producer Partitioning (phiên bản <= 2.3.1):
 Trước phiên bản 2.3.1, khi key null, Kafka producer sử dụng thuật toán "Round Robin Partition" để chọn phân vùng. Các record sẽ được phân phối lần lượt giữa các partition.
