@@ -5,7 +5,7 @@ description: Kafka producer đã không còn Round Robin Partition với key nul
 authors: [ lethanh ]
 date: 2024-07-16
 outline: deep
-draft: true
+draft: false
 ---
 
 # Kafka producer đã không còn Round Robin Partition với key null.
@@ -302,7 +302,7 @@ public class StickyPartitionCache {
 ```
 Nhìn vào đoạn code ở phía trên bạn có thể thấy, Mỗi khi bắt đầu một batch mới cho topic thì Kafka sẽ tính toán ngẫu nhiên lại Partition cho key null.
 
-### REF: https://cwiki.apache.org/confluence/display/KAFKA/KIP-480%3A+Sticky+Partitioner
+### REF: https://cwiki.apache.org/confluence/display/KAFKA/KIP-480%3A+Sticky+Partitioner , https://issues.apache.org/jira/browse/KAFKA-14156
 
 ## 3.3.0 đến mới nhất(3.8.0 là phiên bản hiện tại viết bài này ) Strictly Uniform Sticky Partitioner'
 - REF: https://cwiki.apache.org/confluence/display/KAFKA/KIP-794%3A+Strictly+Uniform+Sticky+Partitioner
@@ -804,26 +804,26 @@ public class KeyNull {
 [//]: # (- )
 ## tổng kết
 ### Kafka Producer Partitioning (phiên bản <= 2.3.1):
-Trước phiên bản 2.3.1, khi key null, Kafka producer sử dụng thuật toán "Round Robin Partition" để chọn phân vùng. Các record sẽ được phân phối lần lượt giữa các partition.
-- Bởi vì mỗi lần gửi một record sẽ cần tính toán next partition nên khi tải cao việc tính toán gây tốn nhiều chi phí.
+Phiên bản <= 2.3.1: Kafka Producer sử dụng Round Robin Partitioning, chia đều record giữa các partition. 
+Tuy nhiên, linger.ms lớn có thể tạo ra nhiều batch nhỏ, gây ra độ trễ khi throughput thấp.
 ### Kafka Producer Sticky Partitioning (phiên bản 2.4.0 đến 3.2.3):
-Từ phiên bản 2.4.0, thuật toán "Sticky Partition" được áp dụng khi key null. Các record trong cùng một batch sẽ được gửi tới cùng một partition.
-Partition mới sẽ được chọn ngẫu nhiên mỗi khi một batch mới được tạo.
+Phiên bản 2.4.0 - 3.2.3: Chuyển từ Round Robin sang stickyPartition. Các record trong một batch có key null sẽ được gửi cùng một partition, giúp lấp đầy batch.size tốt hơn.
+Tuy nhiên, trong Sticky Partitionin nếu có các node chậm thì các record sẽ được gửi đến các node chậm nhiều hơn, gây ra vấn đề về hiệu suất cho toàn Cluster khi có node hoạt động chậm
 
-### Kafka Producer Partitioning (phiên bản 3.3.0 trở lên):
+### Kafka Producer Strictly Uniform Sticky Partitioner (phiên bản 3.3.0 trở lên):
 
-Từ phiên bản 3.3.0, Kafka vẫn chọn partition ngẫu nhiên, nhưng thời điểm chọn lại partition thay đổi dựa trên batch.size.
-Có một biến lưu trữ số lượng size record đã gửi, nếu  vượt qua giá trị batch.size, Kafka sẽ chọn lại partition.
+Phiên bản >= 3.3.0: Sử dụng Strictly Uniform Sticky Partitioner, điều chỉnh phân phối partition dựa trên `batch.size` và tránh gửi quá nhiều record đến các node chậm, giúp tối ưu hiệu suất hệ thống.
 
-#### 1. Lựa chọn ngẫu nhiên
+#### 2 logic với 2 trường hợp khi tải cao hoặc thấp.
+
+##### 1. Lựa chọn ngẫu nhiên
 Trong trường hợp tải không cao, partition thiếp theo sẽ được chọn ngẫu nhiên.
 
-#### 2. Chọn partition dựa theo Cumulative Frequency Table:
-Trong trường hợp tải cao kafka sẽ dựa vào Cumulative Frequency Table để xác định partiton tiếp theo để có thể cân bằng tải tốt nhất trên các partition.
+##### 2. Chọn partition dựa theo Cumulative Frequency Table:
+
 Đây là bảng thống kê tải của partition, giúp cân bằng việc phân phối các record vào partition dựa trên trọng số của từng partition.
-#### Kích thước tối thiểu mỗi record
+##### Kích thước tối thiểu mỗi record
 Kích thước mỗi record tối thiểu là 85 bytes, bao gồm metadata, key, value và headers.
 Các phiên bản mới hơn của Kafka cải thiện hiệu quả việc chọn partition bằng cách điều chỉnh khi nào partition được chọn lại dựa trên tải và kích thước batch.
 
-- REF: https://issues.apache.org/jira/browse/KAFKA-14156
 
