@@ -1,7 +1,7 @@
 ---
 footer: true
 title: Kafka producer đã không còn Round Robin Partition với key null 
-description: Kafka producer đã không còn Round Robin Partition với key null.
+description: Từ những phiên bản đầu tiên khi Kafka được Open Source đến phiên bản 2.3.1, mặc định Kafka producer khi gửi các Record có key là null sẽ thực hiện Round Robin Partition
 authors: [ lethanh ]
 date: 2024-07-16
 outline: deep
