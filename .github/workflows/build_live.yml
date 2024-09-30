@@ -22,10 +22,10 @@ jobs:
       - name: Install pnpm
         run: npm i -g pnpm
 
-      - name: Check if last commit contains 'build_cot_cache'
+      - name: Check if last commit contains 'no_cache:'
         id: check-commit
         run: |
-          if git log -1 --pretty=%B | grep -q 'build_cot_cache'; then
+          if git log -1 --pretty=%B | grep -q 'no_cache:'; then
           echo "SKIP_CACHE=true" >> $GITHUB_ENV
           else
           echo "SKIP_CACHE=false" >> $GITHUB_ENV
@@ -50,7 +50,9 @@ jobs:
           git config --local user.email "thanhlv@thanhlv.com"
       - name: Build
         run: npm run build_github
-      - name: deploy -gh-pages
-        run: npm run deploy-gh-pages
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./build
+          publish_branch: gh-pages
