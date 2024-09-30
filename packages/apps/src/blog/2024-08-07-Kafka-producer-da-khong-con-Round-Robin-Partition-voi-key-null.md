@@ -120,6 +120,7 @@ Và tất nhiên danh sách ở trong `availablePartitions` không được sort
 - `producer Round Robin Partition` giúp phân phối các Record đều giữa các partition, nhưng nó cũng dẫn đến việc tạo ra nhiều Batch có kích thước nhỏ, đặc biệt khi throughput thấp.
   -  Điều này gây ra vấn đề vì các Record cùng một partition sẽ được đưa vào cùng một batch để gửi. Do đó, khi throughput thấp, cần chờ đến khi đạt giá trị `linger.ms` để gửi dữ liệu.
 - Nói một cách đơn giản, khi cấu hình `linger.ms`, `Round Robin Partition` sẽ tạo ra nhiều Batch nhỏ. Nếu throughput thấp, các batch sẽ không được làm đầy theo cấu hình `batch.size`, dẫn đến việc tăng độ trễ.
+
 ```
 Giả sử bạn có 3 partitions (P0, P1, P2) và bạn gửi 9 records sau mỗi 5ms (R1, R2, ..., R9) mà không chỉ định partition hoặc key. Default partitioner sẽ phân phối các records theo vòng tròn (round-robin):
 
@@ -191,6 +192,7 @@ Từ phiên bản 2.4.0 đến 3.2.3 (2.4.0 >= N <=3.2.3) Kafka Producer thay v�
 
 Với `sticky Partition Cache` thì partition sẽ được tính theo `Batch`, tất cả các `Record` có `key == null`  trong cùng `BATCH của cùng 1 topic` sẽ được gửi lên cùng nhau sẽ trên cùng một `partition`.
 Với sticky sẽ làm tăng tỉ lệ lấp đầy `batch.size`.
+![img](images/2024-08-07-Kafka-producer-da-khong-con-Round-Robin-Partition-voi-key-null/sticky-partitioner-strategy.png)
 
 ![img](images/2024-08-07-Kafka-producer-da-khong-con-Round-Robin-Partition-voi-key-null/Sticky_Partitioner_Batching__1_.webp)
 
