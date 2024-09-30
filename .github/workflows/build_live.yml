@@ -6,8 +6,9 @@ on:
     branches:
       - main
 
+# tạo concurrency để có 1 job duy nhất chạy và nếu có job mới cùng group sẽ cancel
 concurrency:
-  group: build-and-deploy
+  group: build-and-deploy-live
   cancel-in-progress: true  # Hủy job đang chạy cùng group
 
 jobs:
