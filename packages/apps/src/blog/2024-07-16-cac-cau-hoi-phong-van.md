@@ -6,7 +6,7 @@ authors: [ lethanh ]
 date: 2024-07-16
 outline: deep
 #image: /assets/1.tgNQEE1P.jpg
-draft: false
+draft: true
 ---
 # Các câu hỏi phỏng vấn
 
