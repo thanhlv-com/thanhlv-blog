@@ -25,6 +25,16 @@ jobs:
       - name: Install pnpm
         run: npm i -g pnpm
 
+      - name: Cache Node.js modules
+        uses: actions/cache@v2
+        with:
+          path: |
+            ~/.npm
+            node_modules
+          key: ${{ runner.os }}-node-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
       - name: Install deps
         run: pnpm install
       - name: Push code to main
