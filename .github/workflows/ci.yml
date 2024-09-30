@@ -31,7 +31,9 @@ jobs:
         run: |
           git config --local user.name "github-actions"
           git config --local user.email "thanhlv@thanhlv.com"
-      - name: Build and deploy
-        run: npm run deploy
+      - name: Build
+        run: npm run build_github
+      - name: deploy
+        run: npm run deploy-gh-pages
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
