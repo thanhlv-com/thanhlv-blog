@@ -19,7 +19,6 @@
     "dynamics.js": "^1.1.5",
     "gsap": "^3.9.0",
     "vitepress": "1.0.0-rc.33",
-    "@thanhlv.com/vitepress-export-pdf": "1.0.2",
     "vue": "^3.4.0"
   },
   "devDependencies": {
@@ -27,6 +26,7 @@
     "@types/node": "^20.10.1",
     "gray-matter": "^4.0.3",
     "puppeteer": "21.10.0",
-    "terser": "^5.14.2"
+    "terser": "^5.14.2",
+    "@thanhlv.com/vitepress-export-pdf": "1.0.2"
   }
 }
