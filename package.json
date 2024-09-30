@@ -10,8 +10,7 @@
   },
   "devDependencies": {
     "blog": "workspace:*",
-    "@vue/theme": "workspace:*",
-    "gh-pages": "6.1.1"
+    "@vue/theme": "workspace:*"
   },
   "pnpm": {
     "overrides": {
