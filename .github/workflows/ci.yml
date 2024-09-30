@@ -27,7 +27,10 @@ jobs:
 
       - name: Install deps
         run: pnpm install
-
+      - name: Push code to main
+        run: |
+          git config --local user.name "github-actions"
+          git config --local user.email "thanhlv@thanhlv.com"
       - name: Build and deploy
         run: npm run deploy
         env:
