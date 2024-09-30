@@ -5,6 +5,7 @@ description: Kafka producer đã không còn Round Robin Partition với key nul
 authors: [ lethanh ]
 date: 2024-07-16
 outline: deep
+image: /assets/KafkaProducer12.qYn0oVGH.png
 draft: false
 ---
 
