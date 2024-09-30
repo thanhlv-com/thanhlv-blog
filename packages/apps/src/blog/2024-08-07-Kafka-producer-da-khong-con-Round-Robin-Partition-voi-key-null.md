@@ -199,7 +199,7 @@ Khi tạo `Batch` mới thì Kafka Producer sẽ ngẫu nhiên partition.
   16ms -> bắt đầu gửi data Batch 1
   Batch 1: R1 (P0), R2 (P0), R3 (P0),
   
-  Tổng cộng 1 batch chứa 3 record nhưng sau khi lấp đầy batch.size
+  Tổng cộng  batch 1 chứa 3 record và được gửi ngay sau khi đầy batch.size
   ```
 ```java
 package org.apache.kafka.clients.producer.internals;
