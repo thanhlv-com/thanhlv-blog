@@ -22,7 +22,7 @@ jobs:
       - name: Install pnpm
         run: npm i -g pnpm
 
-      - name: Check if last commit contains 'build_cot_cache'
+      - name: Check if last commit contains 'no_cache:'
         id: check-commit
         run: |
           if git log -1 --pretty=%B | grep -q 'build_cot_cache'; then
