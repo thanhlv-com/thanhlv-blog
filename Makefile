@@ -1,7 +1,5 @@
 dev:
 	yarn run dev
-deploy:
-	yarn run deploy
 ci:
 	yarn run ci
 build-app:
