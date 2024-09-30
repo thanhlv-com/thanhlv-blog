@@ -11,12 +11,12 @@ concurrency:
   group: build-and-deploy-live
   cancel-in-progress: true  # Hủy job đang chạy cùng group
 
-run-name: Build live - ${{ github.event.head_commit.message }}
+run-name: Build live
 
 jobs:
   build:
     runs-on: ubuntu-latest
-    name:  Build live - ${{ github.event.head_commit.message }}
+    name:  Build live
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
@@ -59,6 +59,7 @@ jobs:
         run: npm run build_github
   deploy:
     runs-on: ubuntu-latest
+    name:  Deploy dist to branch gh-pages
     needs: build  # Chờ job build hoàn thành
     steps:
       - name: Deploy to GitHub Pages
