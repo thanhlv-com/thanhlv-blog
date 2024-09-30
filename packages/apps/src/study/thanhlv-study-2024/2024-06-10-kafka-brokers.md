@@ -106,7 +106,7 @@ Có một topic với  partition và có 10 Record.
 
 Partition 1 và 2 sẽ có thứ tự offset tăng dần.
 :::
- 
+
 Consumer sử dụng `offset` để xác định vị trí của Record họ đã sử dụng, bằng cách này Consumer sẽ tìm các Record có `offset` cao hơn đã được Consumer đọc.
 ![kafka-offset-2.png](2024-06-10-kafka-brokers/kafka-offset-2.png)
 
