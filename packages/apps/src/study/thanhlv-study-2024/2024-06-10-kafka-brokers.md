@@ -152,6 +152,26 @@ kafka-topics --create --if-not-exists --topic first-topic\ #1
 - Chúng ta cũng có 1 config nữa đó là `segment.ms`, đây là thời gian nếu `segment` chưa đến ngưỡng giới hạn dung lượng thì kafka cũng sẽ close segment và tạo ra một segment mới. Default là 1 tuần.
 - Lưu ý : `segment.ms` và `segment.bytes` là config của từng topic
 - [Danh sách biến topic config](https://kafka.apache.org/30/generated/topic_config.html)
+### Data retention
+- Khi có Record vẫn tiếp tục được gửi từ Producer đến Broker, Broker sẽ cần xóa các Record cũ hơn để giải phóng dung lượng trên hệ thống.
+- Broker quản lý Record cũ thông qua cơ chế `Retention policy(Chính sách lưu trữ)`
+
+Một số Retention policy kafka cung cấp để xóa Record cũ.
+
+#### Retention Time-Based Policy (Chính sách dựa trên thời gian lưu trữ)
+- Kafka cho phép chúng ta cấu hình thời gian lưu trữ Record(`(retention time`) thông qua cấu hình `retention.ms`
+- Khi dữ liệu (Record) đã được lưu trong Kafka vượt quá thời gian quy định, nó sẽ được xóa trong quá trình dọn dẹp dữ liệu (log cleanup).
+  Ví dụ:
+```properties
+retention.ms=604800000 # 7 ngày (đơn vị ms) ==> Sau 7 ngày, Kafka sẽ xóa các record cũ.
+```
+#### Retention Size-Based Policy (Chính sách dựa trên kích thước dữ liệu)
+- Kafka cho phép chúng ta cấu hình Kafka để xóa các record cũ khi tổng kích thước của log segment vượt quá một ngưỡng nhất định.
+- Cấu hình `retention.bytes` quy định dung lượng tối đa mà Kafka lưu trữ cho mỗi partition.
+```properties
+retention.bytes=1073741824 # 1 GB ==> Nếu partition vượt quá 1 GB, Kafka sẽ xóa các record cũ.
+
+```
 ## Một số lưu ý về Kafka Brokers
 - Nếu tạo một Cluster kafka thì độ trễ của network nên ở mức dưới 15ms, vì việc liên lạc giữa các Kafka brokers là rất nhiều (Cả zookeeper nếu sử dụng zookeeper )
 
