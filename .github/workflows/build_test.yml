@@ -44,6 +44,14 @@ jobs:
 
       - name: Install deps
         run: pnpm install
+      - name: Check if Puppeteer needs to be installed
+        run: |
+          if [ ! -d "node_modules/puppeteer/.local-chromium" ]; then
+          echo "Installing Puppeteer"
+          pnpm add puppeteer
+          else
+          echo "Puppeteer is already installed"
+          fi
       - name: Push code to main
         run: |
           git config --local user.name "github-actions"
