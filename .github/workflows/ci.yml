@@ -25,7 +25,17 @@ jobs:
       - name: Install pnpm
         run: npm i -g pnpm
 
+      - name: Check if last commit contains 'build_cot_cache'
+        id: check-commit
+        run: |
+          if git log -1 --pretty=%B | grep -q 'build_cot_cache'; then
+          echo "SKIP_CACHE=true" >> $GITHUB_ENV
+          else
+          echo "SKIP_CACHE=false" >> $GITHUB_ENV
+          fi
+
       - name: Cache Node.js modules
+        if: env.SKIP_CACHE == 'false'
         uses: actions/cache@v2
         with:
           path: |
