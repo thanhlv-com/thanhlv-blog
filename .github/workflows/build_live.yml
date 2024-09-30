@@ -11,6 +11,8 @@ concurrency:
   group: build-and-deploy-live
   cancel-in-progress: true  # Hủy job đang chạy cùng group
 
+run-name: Build live - ${{ github.event.head_commit.message }}
+
 jobs:
   build:
     runs-on: ubuntu-latest
