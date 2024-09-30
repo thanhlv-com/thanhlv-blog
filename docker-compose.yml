@@ -1,0 +1,20 @@
+version: '3'
+
+services:
+  thanhlv-blog-build-service:
+    build: .
+    image: thanhlv-blog-build-image
+    container_name: thanhlv-blog-build-container
+    deploy:
+      resources:
+        limits:
+          cpus: "2"
+          memory: 3200m
+        reservations:
+          cpus: "2"
+          memory: 2000m
+    volumes:
+      - ./:/data/
+      - /data/node_modules
+      - /data/packages/libs/theme/node_modules
+      - /data/packages/apps/node_modules
