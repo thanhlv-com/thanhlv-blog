@@ -16,7 +16,6 @@
     "overrides": {
       "@vitejs/plugin-vue": "5.0.0-beta.1",
       "blog": "workspace:*"
-
     },
     "peerDependencyRules": {
       "ignoreMissing": [
