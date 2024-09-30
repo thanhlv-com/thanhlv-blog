@@ -2,9 +2,10 @@ version: '3'
 
 services:
   thanhlv-blog-build-service:
-    build: .
-    image: thanhlv-blog-build-image
+    image: nginx:latest
     container_name: thanhlv-blog-build-container
+    ports:
+      - "80:80"
     deploy:
       resources:
         limits:
@@ -14,7 +15,4 @@ services:
           cpus: "2"
           memory: 2000m
     volumes:
-      - ./:/data/
-      - /data/node_modules
-      - /data/packages/libs/theme/node_modules
-      - /data/packages/apps/node_modules
+      - ./build:/usr/share/nginx/html
