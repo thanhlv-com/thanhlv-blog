@@ -44,15 +44,13 @@ jobs:
 
       - name: Install deps
         run: pnpm install
-      - name: Check if Puppeteer needs to be installed
-        run: |
-          if [ ! -d "node_modules/puppeteer/.local-chromium" ]; then
-          echo "Installing Puppeteer"
-          pnpm add puppeteer
-          else
-          echo "Puppeteer is already installed"
-          fi
       - name: Push code to main
         run: |
           git config --local user.name "github-actions"
           git config --local user.email "thanhlv@thanhlv.com"
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./
+          publish_branch: gh-pages  # Thay đổi tên branch ở đây (ví dụ: gh-pages)
