@@ -1,20 +1,12 @@
-name: CI
-permissions:
-  contents: write  # Cho phép token có quyền ghi vào repository
+name: Build
 on:
-  push:
+  pull_request:
     branches:
       - main
-
-# tạo concurrency để có 1 job duy nhất chạy và nếu có job mới cùng group sẽ cancel
-concurrency:
-  group: build-and-deploy-live
-  cancel-in-progress: true  # Hủy job đang chạy cùng group
-
 jobs:
   build:
     runs-on: ubuntu-latest
-    name:  Build live - ${{ github.event.head_commit.message }}
+    name: Check Build and Test - ${{ github.event.head_commit.message }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
@@ -55,13 +47,3 @@ jobs:
           git config --local user.email "thanhlv@thanhlv.com"
       - name: Build
         run: npm run build_github
-  deploy:
-    runs-on: ubuntu-latest
-    needs: build  # Chờ job build hoàn thành
-    steps:
-      - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./dist
-          publish_branch: gh-pages  # Thay đổi nếu cần
