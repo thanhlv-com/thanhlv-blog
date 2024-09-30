@@ -57,11 +57,6 @@ jobs:
           git config --local user.email "thanhlv@thanhlv.com"
       - name: Build
         run: npm run build_github
-  deploy:
-    runs-on: ubuntu-latest
-    name:  Deploy dist to branch gh-pages
-    needs: build  # Chờ job build hoàn thành
-    steps:
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
