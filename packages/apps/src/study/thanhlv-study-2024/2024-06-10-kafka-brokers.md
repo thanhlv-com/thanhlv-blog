@@ -139,12 +139,11 @@ kafka-topics --create --if-not-exists --topic first-topic\ #1
   - Nếu không có parma này, default sẽ được lấy ở config trong Broker `default.replication.factor`
 - `#4` với `--partitions 1` là số lượng partition cho topic này. Với số lượng cần lớn hơn `0`
   - Nếu không có parm này thì default sẽ được lấy trong `num.partitions`
-
 ### Segments
 - Như chúng ta đã biết Broker sẽ thêm các Record vào các partition. Tuy nhiên Broker sẽ không thêm vào một tập partition duy nhất, nếu làm vậy tệp partition này sẽ khổng lồ.
 - Broker sẽ chia thành các tệp nhỏ thành các phần riêng biệt và được gọi là segments.
-![kafka-partition-log-segments.png](2024-06-10-kafka-brokers/kafka-partition-log-segments.png)
-![kafka-partition-log-segments-file.png](2024-06-10-kafka-brokers/kafka-partition-log-segments-file.png)
+  ![kafka-partition-log-segments.png](2024-06-10-kafka-brokers/kafka-partition-log-segments.png)
+  ![kafka-partition-log-segments-file.png](2024-06-10-kafka-brokers/kafka-partition-log-segments-file.png)
 - Việc sử dụng Segments sẽ giúp thực hiện push Record mới và thực hiện truy suất bản ghi bằng offset trở lên dễ dàng hơn.
 - Mặc định kafka Broker sẽ để mỗi segment là một [1G](https://docs.confluent.io/platform/current/installation/configuration/topic-configs.html#segment-bytes) hoặc chúng ta có thể chỉ định ở `segment.bytes`. Khi đến ngưỡng segment sẽ được close và một segment mới được tạo.
   - Kích thước segment nhỏ hơn có nghĩa là các tệp phải được đóng và phân bổ thường xuyên hơn, điều này làm giảm hiệu quả chung của việc ghi đĩa.
@@ -152,6 +151,48 @@ kafka-topics --create --if-not-exists --topic first-topic\ #1
 - Chúng ta cũng có 1 config nữa đó là `segment.ms`, đây là thời gian nếu `segment` chưa đến ngưỡng giới hạn dung lượng thì kafka cũng sẽ close segment và tạo ra một segment mới. Default là 1 tuần.
 - Lưu ý : `segment.ms` và `segment.bytes` là config của từng topic
 - [Danh sách biến topic config](https://kafka.apache.org/30/generated/topic_config.html)
+#### Ví dụ về segments của một partition index.
+```
+topic-rep-1-partition-10-7
+├── 00000000000000000000.index
+├── 00000000000000000000.log
+├── 00000000000000000000.timeindex
+├── 00000000000000023576.index
+├── 00000000000000023576.log
+├── 00000000000000023576.snapshot
+├── 00000000000000023576.timeindex
+├── 00000000000000046988.index
+├── 00000000000000046988.log
+├── 00000000000000046988.snapshot
+├── 00000000000000046988.timeindex
+├── leader-epoch-checkpoint
+└── partition.metadata
+```
+###### Các file Segment
+- Nhìn vào ví dụ trên chúng ta có thể thấy đây là Segment cho partition index `7` của topic `topic-rep-1-partition-10`.
+- Hiện có 3 Segment, `Segment 1` bắt đầu từ `0`, `Segment 2` bắt đầu từ `23576` và `Segment 3` bắt đầu từ `46988`.
+###### File leader-epoch-checkpoint
+- File `leader-epoch-checkpoint` sẽ lưu lại lịch sử chuyển đổi leader của một partition.
+- Ví dụ:
+```
+1 0
+2 150
+3 300
+```
+Có 2 giá trị mỗi Line.
+  - Giá trị đầu tiên là "leader epoch" tương ứng với một khoảng thời gian mà một broker giữ vai trò leader của phân vùng.
+  - Giá trị thứ 2 là `start-offset` cho biết offset bắt đầu cho leader mới quản lý dữ liệu trong partition
+###### File partition.metadata
+- File `partition.metadata` sẽ lưu lại một số thông tin của partition
+- Ví dụ:
+```
+version: 0
+topic_id: X6KL_lg2R4a7JkuZYScQxg
+```
+##### Segments position index
+- Kafka cho phép chúng ta tìm kiếm theo 2 cách: `offset` và `timestamp` tương ứng dụng file `.index` và `.timeindex`
+  - File `.index` phục vụ cho tìm kiếm nhanh chóng Record bằng `offset` trong file `.log` của Segment.
+  - File `.timeindex` phục vụ cho tìm kiếm nhanh chóng Record bằng `timestamp` trong file `.log` của Segment.
 ### Data retention
 - Khi có Record vẫn tiếp tục được gửi từ Producer đến Broker, Broker sẽ cần xóa các Record cũ hơn để giải phóng dung lượng trên hệ thống.
 - Broker quản lý Record cũ thông qua cơ chế `Retention policy(Chính sách lưu trữ)`
@@ -181,8 +222,9 @@ retention.bytes=1073741824 # 1 GB ==> Nếu partition vượt quá 1 GB, Kafka s
 
 ![retention-policy.png](2024-06-10-kafka-brokers/retention-policy.webp)
 
-## Lưu trữ dữ liệu mãi mãi.
+### Lưu trữ dữ liệu mãi mãi.
 - Nếu bạn muốn dữ liệu kafka được lưu mãi mãi bạn có thể cấu hình giá trị `-1` cho `retention.ms` và `retention.bytes`.
+
 ## Một số lưu ý về Kafka Brokers
 - Nếu tạo một Cluster kafka thì độ trễ của network nên ở mức dưới 15ms, vì việc liên lạc giữa các Kafka brokers là rất nhiều (Cả zookeeper nếu sử dụng zookeeper )
 
