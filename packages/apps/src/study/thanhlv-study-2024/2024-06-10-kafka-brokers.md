@@ -165,13 +165,24 @@ Một số Retention policy kafka cung cấp để xóa Record cũ.
 ```properties
 retention.ms=604800000 # 7 ngày (đơn vị ms) ==> Sau 7 ngày, Kafka sẽ xóa các record cũ.
 ```
+- Default giá trị `retention.ms` là `retention.ms` = 168 giờ.
+
 #### Retention Size-Based Policy (Chính sách dựa trên kích thước dữ liệu)
 - Kafka cho phép chúng ta cấu hình Kafka để xóa các record cũ khi tổng kích thước của log segment vượt quá một ngưỡng nhất định.
 - Cấu hình `retention.bytes` quy định dung lượng tối đa mà Kafka lưu trữ cho mỗi partition.
 ```properties
 retention.bytes=1073741824 # 1 GB ==> Nếu partition vượt quá 1 GB, Kafka sẽ xóa các record cũ.
-
 ```
+- Default giá trị `retention.bytes` là `-1` tức không có giới hạn dung lượng, chỉ có giới hạn thời gian.
+
+### Kết hợp cả Time-Based Policy và Size-Based Policy
+- Chúng ta có thể kết hợp cả `Time-Based Policy và Size-Based Policy` để đảm bảo Record có thể xóa bởi cả 2 Policy.
+- Kết hợp cả `Time-Based Policy và Size-Based Policy` đảm bảo Record cũ sau một khoảng thời gian nhất định hoặc khi đến ngưỡng dung lượng sẽ bị xóa.
+
+![retention-policy.png](2024-06-10-kafka-brokers/retention-policy.webp)
+
+## Lưu trữ dữ liệu mãi mãi.
+- Nếu bạn muốn dữ liệu kafka được lưu mãi mãi bạn có thể cấu hình giá trị `-1` cho `retention.ms` và `retention.bytes`.
 ## Một số lưu ý về Kafka Brokers
 - Nếu tạo một Cluster kafka thì độ trễ của network nên ở mức dưới 15ms, vì việc liên lạc giữa các Kafka brokers là rất nhiều (Cả zookeeper nếu sử dụng zookeeper )
 
