@@ -144,7 +144,7 @@ kafka-topics --create --if-not-exists --topic first-topic\ #1
 - Broker sẽ chia thành các tệp nhỏ thành các phần riêng biệt và được gọi là segments.
   ![kafka-partition-log-segments.png](2024-06-10-kafka-brokers/kafka-partition-log-segments.png)
   ![kafka-partition-log-segments-file.png](2024-06-10-kafka-brokers/kafka-partition-log-segments-file.png)
-- Việc sử dụng Segments sẽ giúp thực hiện push Record mới và thực hiện truy suất bản ghi bằng offset trở lên dễ dàng hơn.
+- Việc sử dụng Segments sẽ giúp thực hiện push Record mới và thực hiện truy suất Record bằng offset trở lên dễ dàng hơn.
 - Mặc định kafka Broker sẽ để mỗi segment là một [1G](https://docs.confluent.io/platform/current/installation/configuration/topic-configs.html#segment-bytes) hoặc chúng ta có thể chỉ định ở `segment.bytes`. Khi đến ngưỡng segment sẽ được close và một segment mới được tạo.
   - Kích thước segment nhỏ hơn có nghĩa là các tệp phải được đóng và phân bổ thường xuyên hơn, điều này làm giảm hiệu quả chung của việc ghi đĩa.
 - Khi một segment bị close nó có thể được coi là expire(Hết hạn, bởi vì dữ liệu đã tồn tại quá lâu), việc điều chỉnh kích thước của các segment cũng rất quan trọng.
@@ -153,6 +153,8 @@ kafka-topics --create --if-not-exists --topic first-topic\ #1
 - [Danh sách biến topic config](https://kafka.apache.org/30/generated/topic_config.html)
 #### Ví dụ về segments của một partition index.
 ```
+- kafka-topics --bootstrap-server kafka1:19091 --create --if-not-exists --topic topicName --replication-factor 1 --partitions 4  --config segment.bytes=1048576 # 1MB
+
 topic-rep-1-partition-10-7
 ├── 00000000000000000000.index
 ├── 00000000000000000000.log
@@ -193,13 +195,59 @@ topic_id: X6KL_lg2R4a7JkuZYScQxg
 - Kafka cho phép chúng ta tìm kiếm theo 2 cách: `offset` và `timestamp` tương ứng dụng file `.index` và `.timeindex`
   - File `.index` phục vụ cho tìm kiếm nhanh chóng Record bằng `offset` trong file `.log` của Segment.
   - File `.timeindex` phục vụ cho tìm kiếm nhanh chóng Record bằng `timestamp` trong file `.log` của Segment.
-### Data retention
-- Khi có Record vẫn tiếp tục được gửi từ Producer đến Broker, Broker sẽ cần xóa các Record cũ hơn để giải phóng dung lượng trên hệ thống.
-- Broker quản lý Record cũ thông qua cơ chế `Retention policy(Chính sách lưu trữ)`
 
-Một số Retention policy kafka cung cấp để xóa Record cũ.
-
-#### Retention Time-Based Policy (Chính sách dựa trên thời gian lưu trữ)
+### Cấu hình `cleanup.policy`
+- Khi có Record mới, Producer vẫn tiếp tục được gửi đến Broker, Broker sẽ cần xóa các Record cũ hơn để giải phóng dung lượng trên hệ thống.
+- `cleanup.policy` là cấu hình cách thức Kafka quản lý và dọn dẹp các Record cũ của topic sau khi đã được ghi vào. 
+- Cấu hình này ảnh hưởng trực tiếp đến cách Kafka xử lý việc lưu trữ và duy trì các Record trong các partition.
+#### Các giá trị của `cleanup.policy`
+- `cleanup.policy=delete`: Đây là giá trị mặc định nếu không cấu hình.
+  - Cấu hình này được thiết lập, Kafka sẽ xóa các Record khỏi log sau khi chúng vượt qua giới hạn thời gian lưu trữ hoặc dung lượng lưu trữ được quy định bởi các cấu hình như `retention.ms (thời gian lưu trữ)` hoặc `retention.bytes (kích thước lưu trữ)`.
+  - `cleanup.policy=delete` phù hợp với các topic cần giữ dữ liệu tạm thời hoặc chỉ trong một khoảng thời gian nhất định.
+    ::: details ví dụ thực tế
+    Record ghi lại hành động của người dùng. Hành động của người dùng là data quá khứ và nó có thể lưu ở các hệ thống Big data chứ không cần lưu mãi mãi trên Kafka.
+    :::
+- `cleanup.policy=compact`
+  - Cấu hình này Kafka sẽ xóa các dữ liệu cũ bằng cách nén(`compact`) các Record, chỉ các Record có giá trị mới nhất cho mỗi key. Những Record cũ hơn có cùng Key sẽ bị loại bỏ.
+  - Hiểu đơn giản chỉ giữ lại các Record cuối cùng của các Key.
+  - `compact` rất hữu ích với các Topic có dữ liệu dạng Key/Value với yêu cầu chỉ giữ lại Record cuối cùng cho mỗi Key.
+  - Các Record không có key sẽ không được nén, vì vậy nếu sử dụng `compact` thì các Record không có Key sẽ được lưu vĩnh viễn.
+    ::: details ví dụ thực tế
+    Record update thông tin người dùng. Mỗi người dùng có định danh duy nhất bởi `user_id`.
+    Kafka sẽ giữ lại Record mới nhất cho mõi `user_id` vì đây là dữ liệu mới nhất, các Record cũ sẽ bị xóa.
+    :::
+- Kết hợp cả `compact` và `delete` bằng cách `cleanup.policy=compact,delete`.
+  - Khi cấu hình cả `compact` và `delete`. Kafka sẽ thực hiện cả 2 quá trình : Nén Record dựa trên key và xóa các Record cũ sau một khoảng thời gian nhất định(`Time-Based Policy`) hoặc đạt Size-Based Policy.
+  - Đây là sự kết hợp giữa việc giữ lại Record mới nhất theo Key và xóa các Record không cần thiết sau khi chúng vượt quá giới hạn lưu trữ.
+    ::: details ví dụ thực tế Kết hợp cả compact và delete
+    - Ví dụ: `Một hệ thống quản lý state của người dùng` và `cần lưu trữ state mới nhất của mỗi user`(Dựa trên user_id) là key. Đồng thời để tiết kiệm dung lượng ổ cứng chúng ta sẽ xóa các Record sau 1 khoảng thời gian nhất định.
+    - Kịch bản:
+      - Mỗi lần người dùng thực hiện 1 action thay đổi state, hệ thoống sẽ ghi một Record vào kafka với `user_id` là key và state mới là giá trị.
+      - Khi cần truy vấn thông tin người dùng, luôn lấy được trạng thái mới nhất của người dùng(`user_id`) nên cần giữ state mới nhất của user.(sử dụng cơ chế compaction)
+      - Tuy nhiên, cũng muốn giới hạn dung lượng log Kafka và xóa những Record không có key hoặc không cần thiết sau một khoảng thời gian nhất định (sử dụng cơ chế delete).
+    - Cấu hình `cleanup.policy=compact,delete`
+      ```
+      kafka-topics.sh --create --topic user-status --bootstrap-server localhost:9092 \
+        --config cleanup.policy=compact,delete \
+        --config retention.ms=604800000 \ # 7 ngày
+        --config retention.bytes=1073741824 \ # 1GB
+        --config min.cleanable.dirty.ratio=0.5
+      ```
+    - Giải thích cấu hình:
+      - `cleanup.policy=compact,delete`: Kết hợp cả hai chính sách.
+         - `compact`: Kafka sẽ nén log, giữ lại Record mới nhất cho mỗi user_id.
+         - `delete`: Kafka sẽ xóa các Record cũ khi chúng vượt quá thời gian lưu trữ (7 ngày) hoặc khi dung lượng log đạt đến 1GB.
+      - `retention.ms=604800000`: Các Record sẽ được giữ trong 7 ngày, sau đó Kafka sẽ xóa chúng.
+      - `retention.bytes=1073741824`: Khi kích thước của log đạt 1GB, Kafka sẽ bắt đầu xóa các Record cũ để giải phóng không gian lưu trữ.
+      - `min.cleanable.dirty.ratio=0.5`: Kafka sẽ bắt đầu quá trình compaction khi log bẩn (dirty) chiếm ít nhất 50% dung lượng log.
+    - Lợi ích của việc kết hợp `compact và delete:`
+      - `Nén log (compaction)`: Kafka sẽ chỉ giữ lại Record mới nhất cho mỗi `user_id`, giúp tiết kiệm dung lượng log và dễ dàng lấy được trạng thái mới nhất của người dùng.
+      - `Xóa log (delete)`: Những Record không có key, hoặc các Record cũ hơn 7 ngày hoặc vượt quá dung lượng 1GB sẽ bị xóa, giúp giảm thiểu việc tiêu tốn dung lượng lưu trữ không cần thiết.
+      - Điều này đảm bảo Kafka không lưu trữ những dữ liệu cũ hoặc không cần thiết quá lâu, nhưng vẫn duy trì tính toàn vẹn của dữ liệu trạng thái mới nhất qua cơ chế compaction.
+    :::
+#### 2 cách thức quản lý Record `cleanup.policy=delete`
+- Với cách này trong kafka sẽ gọi chung là `Retention` bởi vì Kafka quản lý điều này thông qua cơ chế `Retention policy(Chính sách lưu trữ)`
+##### Retention Time-Based Policy (Chính sách dựa trên thời gian lưu trữ)
 - Kafka cho phép chúng ta cấu hình thời gian lưu trữ Record(`(retention time`) thông qua cấu hình `retention.ms`
 - Khi dữ liệu (Record) đã được lưu trong Kafka vượt quá thời gian quy định, nó sẽ được xóa trong quá trình dọn dẹp dữ liệu (log cleanup).
   Ví dụ:
@@ -208,7 +256,7 @@ retention.ms=604800000 # 7 ngày (đơn vị ms) ==> Sau 7 ngày, Kafka sẽ xó
 ```
 - Default giá trị `retention.ms` là `retention.ms` = 168 giờ.
 
-#### Retention Size-Based Policy (Chính sách dựa trên kích thước dữ liệu)
+##### Retention Size-Based Policy (Chính sách dựa trên kích thước dữ liệu)
 - Kafka cho phép chúng ta cấu hình Kafka để xóa các record cũ khi tổng kích thước của log segment vượt quá một ngưỡng nhất định.
 - Cấu hình `retention.bytes` quy định dung lượng tối đa mà Kafka lưu trữ cho mỗi partition.
 ```properties
@@ -216,13 +264,13 @@ retention.bytes=1073741824 # 1 GB ==> Nếu partition vượt quá 1 GB, Kafka s
 ```
 - Default giá trị `retention.bytes` là `-1` tức không có giới hạn dung lượng, chỉ có giới hạn thời gian.
 
-### Kết hợp cả Time-Based Policy và Size-Based Policy
+##### Kết hợp cả Time-Based Policy và Size-Based Policy
 - Chúng ta có thể kết hợp cả `Time-Based Policy và Size-Based Policy` để đảm bảo Record có thể xóa bởi cả 2 Policy.
 - Kết hợp cả `Time-Based Policy và Size-Based Policy` đảm bảo Record cũ sau một khoảng thời gian nhất định hoặc khi đến ngưỡng dung lượng sẽ bị xóa.
 
 ![retention-policy.png](2024-06-10-kafka-brokers/retention-policy.webp)
 
-### Lưu trữ dữ liệu mãi mãi.
+##### Lưu trữ dữ liệu mãi mãi.
 - Nếu bạn muốn dữ liệu kafka được lưu mãi mãi bạn có thể cấu hình giá trị `-1` cho `retention.ms` và `retention.bytes`.
 
 ## Một số lưu ý về Kafka Brokers
