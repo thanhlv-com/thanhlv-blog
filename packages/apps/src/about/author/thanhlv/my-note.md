@@ -2,6 +2,8 @@
 footer: true
 title: My note
 outline: deep
+lastUpdated : false
+disableGenerateSidebar : true
 date: 2024-01-08
 ---
 

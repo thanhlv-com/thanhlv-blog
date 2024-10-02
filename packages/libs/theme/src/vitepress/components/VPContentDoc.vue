@@ -48,7 +48,7 @@ const pageClass = computed(() => {
           <slot name="aside-bottom" />
         </div>
       </div>
-      <div class="content">
+      <div class="content"  :class="{ 'not-outline': frontmatter.outline === false }">
         <slot name="content-top" />
         <main>
           <div  class="author"  v-if="frontmatter.authors && frontmatter.authors.length > 0">
@@ -175,6 +175,9 @@ const pageClass = computed(() => {
     min-width: 688px;
     margin: 0;
     order: 1;
+  }
+  .not-outline {
+    max-width: max-content;
   }
   .VPContentDoc:not(.has-aside) .content {
     min-width: 688px;
