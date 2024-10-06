@@ -32,7 +32,7 @@ date: 2024-01-08
 **Facebook:** [www.facebook.com/lethanh9398](https://www.facebook.com/lethanh9398)  
 **Website:** [thanhlv.com](https://thanhlv.com)  
 
-## Mục Tiêu Nghề Nghiệp
+## Mục Tiêu Nghề Nghiệp.
 
 1. Là một lập trình viên full-stack đầy nhiệt huyết và có kinh nghiệm 6 năm trong việc phát triển các ứng dụng web đa dạng, sử dụng nhiều công nghệ khác nhau. 
 2. Có nền tảng vững chắc trong việc hợp tác chặt chẽ với các bộ phận kinh doanh, từng đảm nhận nhiều vai trò quan trọng trong việc phát triển hệ thống phần mềm cho doanh nghiệp. 
@@ -43,7 +43,7 @@ date: 2024-01-08
 1. Nâng cao kỹ năng thiết kế hệ thống.
 2. Nâng cao kỹ năng phát triển phần mềm, tối ưu hiệu suất ứng dụng.
 
-## Kinh nghiệm làm việc
+## Kinh nghiệm làm việc.
 Với 6 năm kinh nghiệm phong phú, tôi đã thu thập được một kho tàng kiến thức sâu rộng thông qua việc làm việc trên một loạt các dự án thuộc nhiều lĩnh vực khác nhau.
 ### [Line Technology VietNam](https://vietnamdevcenter.linecorp.com/en) & [LINE NEXT Inc](https://www.linkedin.com/company/line-us-corporation/mycompany/) | Senior Software Engineer
 ![img](images/thanhlv/line-center-vn.png)
