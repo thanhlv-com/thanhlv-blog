@@ -5,7 +5,6 @@ outline: deep
 date: 2024-01-08
 ---
 
-
 # Lê Văn Thành
 
 <p class="actions print-hide">
