@@ -47,7 +47,7 @@ jobs:
             node_modules
           key: ${{ runner.os }}-node-${{ hashFiles('**/pnpm-lock.yaml') }}-${{ hashFiles('**/packages/apps/src/about/author/thanhlv-vi.md') }}
           restore-keys: |
-            ${{ runner.os }}-node-
+            key: ${{ runner.os }}-node-${{ hashFiles('**/pnpm-lock.yaml') }}-${{ hashFiles('**/packages/apps/src/about/author/thanhlv-vi.md') }}
 
       - name: Install deps
         run: pnpm install
