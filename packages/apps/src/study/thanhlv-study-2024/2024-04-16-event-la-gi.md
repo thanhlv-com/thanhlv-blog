@@ -21,7 +21,7 @@ Ví dụ:
 - Thông thường **Event** sẽ được tạo sau khi một **Message** kết thúc, tùy nhiên điều đó không bắt buộc. (Có thể từ một Event khác, hệ thống tự phát ra, từ kết quả của một tính toán định kỳ(Định kỳ 10s đo thân nhiệt).....)
   ![Image](2024-04-16-event-la-gi/1.jpg)
 
-### 3 thành phần chính của Event
+### 3 thành phần chính của Event.
 - **Key** : Định danh của sự kiện.
   - **Key** là định danh duy nhất của sự kiện, ví dụ key **"Tăng nhịp tim"** hoặc **"Chớp mắt"**
 - **Value** : Data của sự kiện
