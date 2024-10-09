@@ -3,9 +3,11 @@ name: Wait for Deploy
 on:
   workflow_run:
     workflows:
-      - CI-thanhlv
+      - pages-build-deployment
     types:
       - completed
+      - requested
+      - in_progress
 
 jobs:
   test-job:
