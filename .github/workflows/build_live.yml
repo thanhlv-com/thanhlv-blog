@@ -14,13 +14,37 @@ concurrency:
 run-name: Build live
 
 jobs:
-  build:
+  check_changes:
     runs-on: ubuntu-latest
     name:  Build live
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
 
+      - name: Check for changes in folders packages
+        id: check_folders
+        run: |
+          FOLDER="./packages"
+
+          # Kiểm tra xem có sự thay đổi nào trong folder A
+          git diff --quiet HEAD~1 -- "$FOLDER"
+          FOLDER_CHANGED=$?
+          
+          # Kiểm tra xem có sự thay đổi nào không
+          if [[ $FOLDER_CHANGED -ne 0]]; then
+            echo "At least one of the folders has changes."
+            echo "changed=true" >> $GITHUB_ENV
+          else
+            echo "Neither of the folders has changes."
+            echo "changed=false" >> $GITHUB_ENV
+          fi
+
+  run_steps_if_changed:
+    runs-on: ubuntu-latest
+    name:  Build live
+    needs: check_changes
+    if: env.changed == 'true'
+    steps:
       - name: Set up Node.js
         uses: actions/setup-node@v2
         with:
