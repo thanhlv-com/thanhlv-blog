@@ -16,6 +16,7 @@ run-name: Build live
 jobs:
   build:
     runs-on: ubuntu-latest
+    environment: prod
     name:  Build live
     steps:
       - name: Checkout code
@@ -59,3 +60,10 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./build
           publish_branch: gh-pages  # Thay đổi nếu cần
+      - name: Send Telegram Message
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: -1002300511836
+        run: |
+          curl -s --data "chat_id=$TELEGRAM_CHAT_ID&text=🚀 Deployment completed successfully!" \
+          "https://api.telegram.org/bot$TELEGRAM_BOT_TOKEN/sendMessage"
