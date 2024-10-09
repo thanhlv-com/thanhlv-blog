@@ -16,7 +16,6 @@ run-name: Build live
 jobs:
   build:
     runs-on: ubuntu-latest
-    environment: prod
     name:  Build live
     steps:
       - name: Checkout code
