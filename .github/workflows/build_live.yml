@@ -33,7 +33,7 @@ jobs:
           CHANGED_FILES=$(git diff --name-only HEAD~1..HEAD -- "$FOLDER")
           
           # Kiểm tra xem có sự thay đổi nào không
-          if [[ $FOLDER_CHANGED -ne 0]]; then
+             if [ -z "$CHANGED_FILES" ]; then
             echo "At least one of the folders has changes."
             echo "changed=true" >> $GITHUB_ENV
           else
