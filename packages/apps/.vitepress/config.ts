@@ -1,9 +1,9 @@
 import fs from 'fs'
 import path from 'path'
-import { defineConfigWithTheme, HeadConfig } from 'vitepress'
-import type { Config as ThemeConfig } from '@vue/theme'
+import {defineConfigWithTheme, HeadConfig} from 'vitepress'
+import type {Config as ThemeConfig} from '@vue/theme'
 import baseConfig from '@vue/theme/config'
-import { headerPlugin } from './headerMdPlugin'
+import {headerPlugin} from './headerMdPlugin'
 import blogsSidebar from './cache/sidebar/blogs-sidebar.json'
 import thanhlvStudy2024Sidebar from './cache/sidebar/study/thanhlv-study-2024-sidebar.json'
 
@@ -27,7 +27,7 @@ const nav: ThemeConfig['nav'] = [
     text: 'About',
     activeMatch: `^/about/`,
     items: [
-      { text: 'Thanhlv', link: '/about/author/thanhlv-vi' }
+      {text: 'Thanhlv', link: '/about/author/thanhlv-vi'}
     ]
   }
 ]
@@ -37,7 +37,7 @@ export const sidebar: ThemeConfig['sidebar'] = {
     {
       text: '',
       items: [
-        { text: 'Giới thiệu', link: '/blog/gioi-thieu' },
+        {text: 'Giới thiệu', link: '/blog/gioi-thieu'},
         ...blogsSidebar
       ]
     }
@@ -92,25 +92,50 @@ export default defineConfigWithTheme<ThemeConfig>({
       name: 'viewport',
       content: 'viewport-fit=contain, width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=10.0, user-scalable=yes'
     }],
-    ['meta', { name: 'apple-mobile-web-app-capable', content: 'yes' }],
-    ['meta', { name: 'theme-color', content: '#3c8772' }],
-    ['meta', { property: 'og:url', content: 'https://thanhlv.com/' }],
-    ['meta', { property: 'og:type', content: 'website' }],
-    ['meta', { property: 'og:title', content: 'Thanhlv - Yêu công nghệ' }],
+    ['meta', {name: 'apple-mobile-web-app-capable', content: 'yes'}],
+    ['meta', {name: 'theme-color', content: '#3c8772'}],
+    ['meta', {property: 'og:url', content: 'https://thanhlv.com/'}],
+    ['meta', {property: 'og:type', content: 'website'}],
+    ['meta', {property: 'og:title', content: 'Thanhlv - Yêu công nghệ'}],
     [
       'meta',
       {
         property: 'og:image',
-        content: 'https://thanhlv.com/images/logo.png'
+        content: '/images/favicon/favicon.ico'
       }
     ],
-    ['meta', { name: 'twitter:site', content: '@thanhlv' }],
-    ['meta', { name: 'twitter:card', content: 'summary' }],
+    ['meta', {name: 'twitter:site', content: '@thanhlv'}],
+    ['meta', {name: 'twitter:card', content: 'summary'}],
+    [
+      'link',
+      {
+        rel: 'icon',
+        sizes: '16x16',
+        href: '/images/favicon/favicon-16x16.png'
+      }
+    ],
+    [
+      'link',
+      {
+        rel: 'icon',
+        sizes: '32x32',
+        href: '/images/favicon/favicon-32x32.png'
+      }
+    ],
     [
       'link',
       {
         rel: 'apple-touch-icon',
-        href: 'https://thanhlv.com/images/logo.png'
+        sizes: "180x180",
+        href: '/images/favicon/apple-touch-icon.png'
+      }
+    ],
+    [
+      'link',
+      {
+        rel: 'manifest',
+        sizes: "180x180",
+        href: '/images/favicon/site.webmanifest'
       }
     ],
     [
