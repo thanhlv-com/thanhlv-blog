@@ -2,12 +2,13 @@ name: Wait for Deploy
 
 on:
   workflow_run:
-    workflows: [CI,deploy-thanhlv.com]  # Tên của workflow chính bạn muốn chờ
+    workflows:
+      - CI-thanhlv
     types:
       - completed
 
 jobs:
-  wait:
+  test-job:
     runs-on: ubuntu-latest
     steps:
       - name: Check if deployment was successful

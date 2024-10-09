@@ -1,4 +1,4 @@
-name: CI
+name: CI-thanhlv
 permissions:
   contents: write
 on:
@@ -9,8 +9,6 @@ on:
 concurrency:
   group: build-and-deploy-live
   cancel-in-progress: true  # Hủy job đang chạy cùng group
-
-run-name: Build live
 
 jobs:
   build:
