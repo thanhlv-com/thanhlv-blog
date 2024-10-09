@@ -1,0 +1,24 @@
+name: Wait for Deploy
+
+on:
+  workflow_run:
+    workflows: ["Build live"]  # Tên của workflow chính bạn muốn chờ
+    types:
+      - completed
+
+jobs:
+  wait:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check if deployment was successful
+        run: |
+          echo "Deployment completed with conclusion: ${{ github.event.workflow_run.conclusion }}"
+          if [[ "${{ github.event.workflow_run.conclusion }}" != "success" ]]; then
+            echo "Deployment failed! Exiting."
+            exit 1  # Kết thúc workflow nếu deployment không thành công
+          fi
+
+      - name: Perform additional actions
+        run: |
+          echo "Deployment was successful! Proceeding with additional actions."
+          # Thêm các hành động bạn muốn thực hiện ở đây.
