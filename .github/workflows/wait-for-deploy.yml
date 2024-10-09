@@ -6,22 +6,15 @@ on:
       - pages-build-deployment
     types:
       - completed
-      - requested
-      - in_progress
 
 jobs:
   test-job:
     runs-on: ubuntu-latest
     steps:
-      - name: Check if deployment was successful
+      - name: Send Telegram Message
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: -1002300511836
         run: |
-          echo "Deployment completed with conclusion: ${{ github.event.workflow_run.conclusion }}"
-          if [[ "${{ github.event.workflow_run.conclusion }}" != "success" ]]; then
-            echo "Deployment failed! Exiting."
-            exit 1  # Kết thúc workflow nếu deployment không thành công
-          fi
-
-      - name: Perform additional actions
-        run: |
-          echo "Deployment was successful! Proceeding with additional actions."
-          # Thêm các hành động bạn muốn thực hiện ở đây.
+          curl -s --data "chat_id=$TELEGRAM_CHAT_ID&text=🚀 Deploy to thanhlv.com completed successfully!" \
+          "https://api.telegram.org/bot$TELEGRAM_BOT_TOKEN/sendMessage"
