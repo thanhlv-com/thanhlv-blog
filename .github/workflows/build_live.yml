@@ -65,5 +65,5 @@ jobs:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: -1002300511836
         run: |
-          curl -s --data "chat_id=$TELEGRAM_CHAT_ID&text=🚀 Deployment completed successfully!" \
+          curl -s --data "chat_id=$TELEGRAM_CHAT_ID&text=🚀 Build and push to branch gh-pages completed successfully!" \
           "https://api.telegram.org/bot$TELEGRAM_BOT_TOKEN/sendMessage"
