@@ -44,7 +44,6 @@ jobs:
             echo "changed=false" >> $GITHUB_ENV
             fi
           fi
-
   run_steps_if_changed:
     runs-on: ubuntu-latest
     name:  Build live
