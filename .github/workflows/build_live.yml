@@ -17,6 +17,8 @@ jobs:
   check_changes:
     runs-on: ubuntu-latest
     name:  Build live
+    outputs:
+      changed: ${{ steps.check_folders.outputs.changed }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
@@ -43,7 +45,7 @@ jobs:
     runs-on: ubuntu-latest
     name:  Build live
     needs: check_changes
-    if: env.changed == 'true'
+    if: needs.check_changes.outputs.changed == 'true'
     steps:
       - name: Set up Node.js
         uses: actions/setup-node@v2
