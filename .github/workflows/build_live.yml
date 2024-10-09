@@ -22,7 +22,8 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-
+        with:
+          fetch-depth: 10  # Lấy ít nhất 10 commit gần nhất
       - name: Check for changes in folders packages
         id: check_folders
         run: |
