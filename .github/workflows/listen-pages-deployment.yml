@@ -1,0 +1,24 @@
+name: Listen to Pages Build and Deployment
+
+on:
+  workflow_run:
+    workflows: ["pages build and deployment"]  # Tên của workflow mà bạn muốn lắng nghe
+    types:
+      - completed
+
+jobs:
+  notify:
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}  # Chỉ chạy nếu workflow đã thành công
+    runs-on: ubuntu-latest
+    steps:
+      - name: Notify Success
+        run: |
+          echo "The 'pages build and deployment' workflow completed successfully!"
+          # Bạn có thể thực hiện các hành động khác ở đây như gửi thông báo hoặc thực hiện một bước khác.
+      - name: Send Telegram Message
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: -1002300511836
+        run: |
+          curl -s --data "chat_id=$TELEGRAM_CHAT_ID&text=🚀 Deploy completed successfully to thanhlv.com!" \
+          "https://api.telegram.org/bot$TELEGRAM_BOT_TOKEN/sendMessage"
