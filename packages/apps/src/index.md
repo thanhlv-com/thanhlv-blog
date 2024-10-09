@@ -1,7 +1,7 @@
 ---
 page: true
-title: ThanhLv - Yêu công nghệ
-description: Hãy tiếp tục bước đi, bởi vì khi dừng lại bạn có thể sẽ dừng lại mãi mãi.
+title: Yêu công nghệ - Khám Phá Công Nghệ - Thanhlv.com
+description: Thanhlv.com - Nơi chia sẻ kiến thức yêu công nghệ và học hỏi công nghệ. Cập nhật những bài viết, hướng dẫn chi tiết về lập trình, công nghệ thông tin và những công nghệ mới nhất.
 outline : false
 ---
 
