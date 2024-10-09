@@ -93,7 +93,7 @@ export default defineConfigWithTheme<ThemeConfig>({
       content: 'viewport-fit=contain, width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=10.0, user-scalable=yes'
     }],
     ['meta', {name: 'apple-mobile-web-app-capable', content: 'yes'}],
-    ['meta', {name: 'theme-color', content: '#3c8772'}],
+    ['meta', {name: 'theme-color', content: '#a78a3f'}],
     ['meta', {property: 'og:url', content: 'https://thanhlv.com/'}],
     ['meta', {property: 'og:type', content: 'website'}],
     ['meta', {property: 'og:title', content: 'Thanhlv - Yêu công nghệ'}],
