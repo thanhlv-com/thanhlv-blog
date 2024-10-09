@@ -2,7 +2,7 @@ name: Wait for Deploy
 
 on:
   workflow_run:
-    workflows: ["Build app"]  # Tên của workflow chính bạn muốn chờ
+    workflows: [CI,deploy-thanhlv.com]  # Tên của workflow chính bạn muốn chờ
     types:
       - completed
 
