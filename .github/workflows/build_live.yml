@@ -27,11 +27,10 @@ jobs:
       - name: Check for changes in folders packages
         id: check_folders
         run: |
-          FOLDER="./packages"
+          FOLDER="./packages/"
 
           # Kiểm tra xem có sự thay đổi nào trong folder A
-          git diff --quiet HEAD~1 -- "$FOLDER"
-          FOLDER_CHANGED=$?
+          CHANGED_FILES=$(git diff --name-only HEAD~1..HEAD -- "$FOLDER")
           
           # Kiểm tra xem có sự thay đổi nào không
           if [[ $FOLDER_CHANGED -ne 0]]; then
