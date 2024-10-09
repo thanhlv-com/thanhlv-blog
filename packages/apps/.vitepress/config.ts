@@ -79,8 +79,8 @@ export default defineConfigWithTheme<ThemeConfig>({
   extends: baseConfig,
   lastUpdated: true,
   lang: 'en-US',
-  title: 'Thanhlv',
-  description: 'Thanhlv - Yêu công nghệ',
+  title: 'Yêu công nghệ - Khám Phá Công Nghệ - Thanhlv.com',
+  description: 'Thanhlv.com - Nơi chia sẻ kiến thức yêu công nghệ và học hỏi công nghệ. Cập nhật những bài viết, hướng dẫn chi tiết về lập trình, công nghệ thông tin và những công nghệ mới nhất.',
   srcDir: 'src',
   srcExclude: ['tutorial/**/description.md'],
   sitemap: {
