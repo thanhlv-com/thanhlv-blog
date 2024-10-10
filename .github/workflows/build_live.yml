@@ -59,6 +59,7 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: workspace
+          path: .
       - name: Set up Node.js
         uses: actions/setup-node@v2
         with:
