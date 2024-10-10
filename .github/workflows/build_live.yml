@@ -17,8 +17,6 @@ jobs:
   build_app:
     runs-on: ubuntu-latest
     name:  Build live
-    outputs:
-      changed: ${{ env.changed }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
