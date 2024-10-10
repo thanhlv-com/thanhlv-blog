@@ -96,6 +96,7 @@ Thực tế việc xác định partition sẽ được lầm ở bên Client.
 
 ### Offsets
 - Khi broker thêm một Record nó sẽ thêm một `id` được gọi là `offset`. Một `offset` sẽ bắt đầu từ `0` và là number, nó sẽ tặng lên 1 mỗi khi thêm một Record.
+- Hiểu đơn giản Offset là một giá trị số nguyên dùng để đánh dấu vị trí của một bản ghi (Record) trong một partition của một topic.
   ![kafka-offset.png](2024-06-10-kafka-brokers/kafka-offset.png)
 - Vì các Record mới luôn được thêm ở cuối của file, nên nó được sắp xếp theo offset.
 - Kafka đảm bảo Record order được sẵp xếp theo thứ tự trên cùng một partition chứ không phải trên các partition khác.
@@ -109,7 +110,9 @@ Partition 1 và 2 sẽ có thứ tự offset tăng dần.
 
 Consumer sử dụng `offset` để xác định vị trí của Record họ đã sử dụng, bằng cách này Consumer sẽ tìm các Record có `offset` cao hơn đã được Consumer đọc.
 ![kafka-offset-2.png](2024-06-10-kafka-brokers/kafka-offset-2.png)
-
+### Position
+- Position là khái niệm liên quan đến consumer group. Nó thể hiện vị trí hiện tại của một consumer trong một partition, tức là bản ghi gần(Record) nhất đã được consumer. Kafka lưu trữ thông tin vị trí này trong Kafka internal topic (ví dụ: __consumer_offsets), cho phép consumer biết từ đâu tiếp tục khi chúng khởi động lại.
+- Ví dụ: Nếu consumer của bạn đã tiêu thụ các Record từ partition 0 với offset từ 0 đến 99, thì vị trí tiếp theo mà nó sẽ bắt đầu tiêu thụ là tại offset 100
 ### Xác định số lượng partition sử dụng
 - Việc chọn số lượng partition khi tạo một topic là một điều khó khắn, nó là cả một nghệ thuật.
 - Một trong nhưng cân nhắc quan trọng là đầu tiên là **lượng dữ liệu chạy chảy vào topic đó**. Nhiều data thì chúng ta có thể có nhiều partition hơn để throughput(Thông lượng) cao hơn, tuy nhiên nhiều partition chúng ta cũng sẽ có những đánh đổi nhất định.
