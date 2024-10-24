@@ -6,7 +6,7 @@ import baseConfig from '@vue/theme/config'
 import {headerPlugin} from './headerMdPlugin'
 import blogsSidebar from './cache/sidebar/blogs-sidebar.json'
 import thanhlvStudy2024Sidebar from './cache/sidebar/study/thanhlv-study-2024-sidebar.json'
-
+import MarkdownItDiagrams from 'markdown-it-diagram'
 const nav: ThemeConfig['nav'] = [
   {
     text: 'Blog',
@@ -273,7 +273,11 @@ export default defineConfigWithTheme<ThemeConfig>({
   markdown: {
     config(md) {
       md.use(headerPlugin)
-      // .use(textAdPlugin)
+      md.use(MarkdownItDiagrams, {
+        showController: false,
+       imageFormat: 'svg',
+        server: 'https://www.plantuml.com/plantuml',
+      })
     },
     lineNumbers: true,
     toc: {

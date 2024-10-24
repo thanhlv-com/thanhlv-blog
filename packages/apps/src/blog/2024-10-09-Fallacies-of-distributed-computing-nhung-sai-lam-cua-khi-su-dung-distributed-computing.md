@@ -19,6 +19,41 @@ Rất nhiều lập trình viên tin rằng các kết nối mạng đến node 
 
 Hệ thống cần có một cơ chế linh loạt bao gồm đầy đủ các tính năng dự phòng khi mất kết nối đến các hệ thống khác.
 
+```plantuml
+@startuml
+skinparam backgroundColor #EEEBDC
+skinparam shadowing false
+skinparam arrowColor #000000
+skinparam actorStyle awesome
+
+title The Network is Reliable Fallacy
+
+actor User as U
+actor Developer as D
+
+U -> System: Send Request
+System -> Network: Transmit Data
+alt Network Failure
+    Network -> System: Connection Lost
+    System -> U: Error Message
+else Network Success
+    Network -> Server: Forward Data
+    Server -> Network: Send Response
+    Network -> System: Deliver Response
+    System -> U: Return Data
+end
+
+note right of System
+    Issues causing network unreliability:
+    - Network congestion
+    - Hardware failures
+    - Permission issues
+    - Intermittent connectivity
+end note
+
+@enduml
+```
+
 #### Hệ thống của chúng ta Nên làm gì để đảm bảo `The network is reliable`.
 Sẽ có rất nhiều cách để đảm bảo hệ thống của chúng ta là `network is reliable` khi chúng ta là phụ thuộc của các hệ thống khác, dưới đây là một số ví dụ.
 
@@ -40,10 +75,59 @@ Hệ thống cần có các cơ chế để phòng ngừa tình trạng các h�
 ![img](images/2024-10-09-Fallacies-of-distributed-computing-nhung-sai-lam-cua-khi-su-dung-distributed-computing/network-latency.png)
 
 #### Hệ thống của chúng ta Nên làm gì để đảm bảo `Latency is zero`.
+
+::: details Chi tiết
+
 Sẽ có rất nhiều cách để đảm bảo hệ thống của chúng ta là `Latency is zero` khi chúng ta là phụ thuộc của các hệ thống khác, dưới đây là một số ví dụ.
 - Cung cấp load balance để phân tải hệ thống, phòng ngừa quá nhiều yêu cầu gây chậm chạp hệ thống.
 - Auto scale để mở rộng quy mô tự động.
 - Tư duy luôn luôn nhớ rằng gọi đến một phụ thuộc khác thì luôn luôn có độ trễ, và nó có thể tính bằng phút.
+
+```plantuml
+@startuml
+skinparam backgroundColor #EEEBDC
+skinparam shadowing false
+skinparam arrowColor #000000
+skinparam actorStyle awesome
+
+title Latency is Zero
+
+actor User as U
+actor Developer as D
+
+U -> System: Send Request
+System -> LoadBalancer: Distribute Load
+LoadBalancer -> CDN: Serve Static Content
+CDN -> U: Return Cached Content
+
+System -> Cache: Check Cache
+alt Cache Hit
+    Cache -> U: Return Cached Data
+else Cache Miss
+    System -> Server: Fetch Data
+    Server -> Cache: Store Data
+    Server -> U: Return Data
+end
+
+System -> AutoScaler: Scale Infrastructure
+System -> QoS: Prioritize Traffic
+System -> AsynchronousProcessing: Handle Non-Critical Tasks
+
+note right of System
+    Strategies to ensure
+    "Latency is zero":
+    - Load Balancing
+    - CDN
+    - Caching
+    - Auto-scaling
+    - QoS
+    - Asynchronous Processing
+end note
+
+@enduml
+```
+
+:::
 
 ### Bandwidth is infinite
 Có lẽ bạn chưa biết, các VPS hoặc cloud ở Việt Nam thường có Bandwidth tối đa là 100 Mb/s. Nếu ứng dụng chúng ta sử dụng Bandwidth vượt quá giới hạn ứng dụng của chúng ta có thể bị tắc nghẽn.
@@ -55,6 +139,8 @@ Và tất nhiên chính thiết bị phần cứng của chúng ta cũng có gi�
 - Lạm dụng băng thông có thể làm tăng nguy cơ bị tấn công từ chối dịch vụ (DDoS), làm giảm khả năng bảo mật của hệ thống.
 - Khi băng thông bị giới hạn, khả năng mở rộng của hệ thống cũng bị ảnh hưởng, làm giảm khả năng phục vụ số lượng lớn người dùng cùng lúc.
 #### Hệ thống của chúng ta Nên làm gì để đảm bảo `Bandwidth is infinite`.
+::: details Chi tiết
+
 - Cung cấp load balance để phân tải hệ thống.
 - Sử dụng CDN để cung cấp tốc độ liên lạc nhanh nhất từ người dùng đến hệ thống.
 - Sử dụng CDN cho các file tĩnh như hình ảnh, video, css, js...
@@ -66,5 +152,48 @@ Và tất nhiên chính thiết bị phần cứng của chúng ta cũng có gi�
 - Người thiết kế hệ thống và người phát triển phần mềm cần phải có tư duy về việc giới hạn băng thông và tối ưu hóa băng thông.
 
 
-## Network is secure
+```plantuml
+skinparam backgroundColor #EEEBDC
+skinparam shadowing false
+skinparam arrowColor #000000
+skinparam actorStyle awesome
 
+title Bandwidth is Infinite
+
+actor User as U
+actor Developer as D
+
+U -> System: Send Request
+System -> LoadBalancer: Distribute Load
+LoadBalancer -> CDN: Serve Static Content
+CDN -> U: Return Cached Content
+
+System -> Cache: Check Cache
+alt Cache Hit
+    Cache -> U: Return Cached Data
+else Cache Miss
+    System -> Server: Fetch Data
+    Server -> Cache: Store Data
+    Server -> U: Return Data
+end
+
+System -> QoS: Prioritize Traffic
+System -> AutoScaler: Scale Infrastructure
+System -> Compression: Compress Data
+System -> RateLimiter: Limit User Requests
+
+note right of System
+    Strategies to ensure
+    "Bandwidth is infinite":
+    - Load Balancing
+    - CDN
+    - Caching
+    - QoS
+    - Auto-scaling
+    - Compression
+    - Rate Limiting
+end note
+```
+:::
+
+## Network is secure
