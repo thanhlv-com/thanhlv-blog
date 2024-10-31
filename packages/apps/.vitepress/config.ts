@@ -5,6 +5,7 @@ import type {Config as ThemeConfig} from '@vue/theme'
 import baseConfig from '@vue/theme/config'
 import {headerPlugin} from './headerMdPlugin'
 import blogsSidebar from './cache/sidebar/blogs-sidebar.json'
+import shortBlogsSidebar from './cache/sidebar/short-blog-sidebar.json'
 import thanhlvStudy2024Sidebar from './cache/sidebar/study/thanhlv-study-2024-sidebar.json'
 import MarkdownItDiagrams from 'markdown-it-diagram'
 const nav: ThemeConfig['nav'] = [
@@ -12,6 +13,11 @@ const nav: ThemeConfig['nav'] = [
     text: 'Blog',
     activeMatch: `^/blog/`,
     link: '/blog/gioi-thieu'
+  },
+  {
+    text: 'Short Blog',
+    activeMatch: `^/short-blog/`,
+    link: '/short-blog/gioi-thieu'
   },
   {
     text: 'Study',
@@ -39,6 +45,15 @@ export const sidebar: ThemeConfig['sidebar'] = {
       items: [
         {text: 'Giới thiệu', link: '/blog/gioi-thieu'},
         ...blogsSidebar
+      ]
+    }
+  ],
+  '/short-blog/': [
+    {
+      text: '',
+      items: [
+        {text: 'Giới thiệu', link: '/short-blog/gioi-thieu'},
+        ...shortBlogsSidebar
       ]
     }
   ],
