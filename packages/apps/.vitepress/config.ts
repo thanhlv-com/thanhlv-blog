@@ -270,12 +270,12 @@ export default defineConfigWithTheme<ThemeConfig>({
       search: 'Tìm kiếm',
       returnToTop: 'Cuộn lên đầu trang'
     },
-
-    editLink: {
-      repo: 'thanhlv-it/thanhlv-blog',
-      appFolder: 'packages/apps',
-      text: 'Chỉnh sửa trang này trên GitHub'
-    },
+    //
+    // editLink: {
+    //   repo: 'thanhlv-it/thanhlv-blog',
+    //   appFolder: 'packages/apps',
+    //   text: 'Chỉnh sửa trang này trên GitHub'
+    // },
     footer: {
       license: {
         text: 'MIT License',
