@@ -91,4 +91,4 @@ Hacker đã truyền các domain khác vào header `Origin` để tìm lỗ hổ
 
 
 ## Giải pháp khắc phục.
-Chúng tôi đã đưa và đang đánh giá các giải pháp khắc phục. sẽ chia sẻ sau khi chốt và áp dụng nó cho các bạn.
+Chúng tôi đã đưa và đang đánh giá các giải pháp khắc phục. sẽ chia sẻ sau khi chốt và áp dụng nó.
