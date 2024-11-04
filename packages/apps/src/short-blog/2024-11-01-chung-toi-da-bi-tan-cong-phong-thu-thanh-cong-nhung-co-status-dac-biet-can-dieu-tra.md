@@ -29,7 +29,7 @@ Trong quá trình giám sát chúng tôi, chúng tôi đã xác định nhóm ha
 
 ## Phòng thủ
 
-Với tư duy `Không phải hệ thống của chúng ta có bị tấn công hay không, mà là khi nào hệ thống của chúng ta bị tấn công`. Chúng tôi đã chuẩn bị rất nhiều kế hoạch phòng thủ cho trường hợp này.
+Với tư duy **Không phải hệ thống của chúng ta có bị tấn công hay không, mà là khi nào hệ thống của chúng ta bị tấn công**. Chúng tôi đã chuẩn bị rất nhiều kế hoạch phòng thủ cho trường hợp này.
 
 Bởi vì là một dịch vụ lớn nên không thể bị gián đoạn khi bị tấn công, vì vậy ngay từ đầu các đoạn code từ team đã được viết tối ưu nhất để đảo bảo hiệu suất. Các đoạn code đều được viết với tư duy `Security by design` và `Security by default`.
 
