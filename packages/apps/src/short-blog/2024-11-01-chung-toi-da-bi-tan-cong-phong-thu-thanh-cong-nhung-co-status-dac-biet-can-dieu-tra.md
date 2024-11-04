@@ -6,6 +6,7 @@ authors: [ lethanh ]
 date: 2024-11-01
 outline: deep
 draft: false
+image: /assets/image_1.lziUo4B7.png
 ---
 
 Xin chào mọi người, đây là bài đầu tiên của Short Blog. Thực tế sau sự kiện này xảy ra thì tôi đã nghĩ đến ý tưởng viết Short blog :v.
