@@ -34,6 +34,8 @@ Ví dụ, nếu bạn sử dụng thuật toán AES, bạn cần sử dụng key
 
 Tuy nhiên, nếu phiên bản java là java 8 và thấp hơn [8u161](https://www.oracle.com/java/technologies/javase/8u161-relnotes.html), mặc định Java chỉ hỗ trợ key size 128 bits cho AES. Nếu bạn sử dụng key size lớn hơn 128 bits, bạn sẽ gặp phải lỗi `Illegal key size`.
 
+https://bugs.java.com/bugdatabase/view_bug.do?bug_id=8170157
+
 ## Bảng dưới đấy cho thấy các phiên bản mặc định hỗ trợ key size lớn hơn 128 bits và link download chính sách JCE cho phiên bản thấp hơn.
 
 | Phiên bản Java      | Phiên bản bắt đầu hỗ trợ                                  |
