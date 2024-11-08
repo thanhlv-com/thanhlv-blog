@@ -342,7 +342,58 @@ end note
   - Ví dụ: Môi trường dev có thể không cần thiết phải cấu hình tường lửa, nhưng môi trường production cần phải cấu hình tường lửa để bảo vệ hệ thống.
 - Nhiều service mới được triển khai, nhiều service cũ bị xóa bỏ, nhiều service bị thay đổi cấu hình.
 
-Việt liên kết mạng giữa các ứng dụng thay đổi thường nằm ngoài tầm kiểm soát của chúng ta, bởi vì có nhiều lý do cho điều này
+Việc liên kết mạng giữa các ứng dụng thay đổi thường nằm ngoài tầm kiểm soát của chúng ta, bởi vì có nhiều lý do cho điều này. Các máy chủ có thể được thêm mới hoặc gỡ bỏ. Các service có thể được di chuuyển, nâng cấp hoặc không còn được sử dụng nữa.
+
+#### Solutions
+
+Do việc liên kết mạng là không ổn định, nên có một số giải pháp để giảm thiểu vấn đề này.
+
+1. Abstract network specifics(Trừ tượng về thông tin mạng):
+  - Tránh sử dụng trực tiếp từ IP address, thay vào đó hãy sử dụng DNS hostname
+  - Cân nhắc sử dụng [service discovery pattern](https://microservices.io/patterns/server-side-discovery.html) cho Microservice architectures.
+2. Design for failure( Thiết kế cho thất bại)
+  - Thiết kế ứng dụng của chúng ta để phòng ngừa tình trạng không thể thay thế. Khi có lỗi chúng ta sẽ có cách để thay thế hoặc sử lý lỗi.
+  - Kiểm tra hỗn loạn ([chaos engineering](https://en.wikipedia.org/wiki/Chaos_engineering)), kiểm tra hành vi của hệ thống trong các lỗi về cơ sở hạ tầng, mạng, application
+
+```plantuml
+@startuml
+skinparam backgroundColor #EEEBDC
+skinparam shadowing false
+skinparam arrowColor #000000
+skinparam actorStyle awesome
+
+title Topology Doesn't Change Fallacy
+
+actor Developer as D
+
+D -> System: Deploy Application
+System -> Network: Establish Connections
+alt Topology Change
+    Network -> System: Connection Lost
+    System -> D: Error Message
+else Topology Stable
+    Network -> System: Maintain Connections
+    System -> D: Success Message
+end
+
+note right of System
+    Issues causing topology changes:
+    - Firewall rule changes
+    - New or removed servers
+    - Service configuration changes
+end note
+
+note right of System
+    Strategies to handle topology changes:
+    - Use DNS hostnames instead of IP addresses
+    - Implement service discovery
+    - Design for failure
+    - Perform chaos engineering tests
+end note
+
+@enduml
+```
+
 
 # REF
 - https://dereklawless.ie/fallacies-of-distributed-computing-1-the-network-is-reliable/
