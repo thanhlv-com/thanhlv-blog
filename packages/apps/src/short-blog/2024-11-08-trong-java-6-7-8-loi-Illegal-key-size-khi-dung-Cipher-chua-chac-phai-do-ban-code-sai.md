@@ -43,10 +43,6 @@ Tuy nhiên, nếu phiên bản java là java 8 và thấp hơn [8u161](https://w
 | Java 8              | 8u161                                                     |
 | Java 9 hoặc mới hơn | 9 hoặc mới hơn bắt đầu hỗ trợ ngay bản đầu tiên phát hành |
 
-Nếu bạn đang sử dụng các phiên bản 6 7 8 và đang trong các phiên bản chưa hỗ trợ thì có thể vào link dưới đây để tải `Java Cryptography Extension (JCE) Unlimited Strength Jurisdiction Policy`
-
-https://www.oracle.com/java/technologies/javase-jce-all-downloads.html
-
 Một điều hạnh phúc là từ bản Java 9 mặc định đã hỗ trợ key size lớn hơn 128 bits cho AES vì vậy không cần lo lắng về điều này.
 
 ## Java Cryptography Extension (JCE) Unlimited Strength Jurisdiction Policy Files là gì ?
@@ -66,6 +62,11 @@ Các điểm chính trong chính sách:
 - **Giới hạn độ dài khóa mã hóa**: Ban đầu, Hoa Kỳ chỉ cho phép xuất khẩu các sản phẩm mã hóa có độ dài khóa tối đa là 56-bit (thường là đối với DES). Các sản phẩm với độ dài khóa mạnh hơn (như AES-128, AES-192, AES-256) bị hạn chế xuất khẩu.
 - **Mã hóa mạnh (Strong Encryption)**: Các thuật toán mã hóa với khóa dài hơn (như AES-256) hoặc những sản phẩm sử dụng mã hóa mạnh bị coi là có tiềm năng được sử dụng cho mục đích quân sự hoặc có thể bị lạm dụng trong các hoạt động gián điệp. Điều này khiến các công ty phải tuân thủ các quy định chặt chẽ để xuất khẩu phần mềm hoặc phần cứng mã hóa ra nước ngoài.
 - **Giấy phép xuất khẩu**: Các công ty muốn xuất khẩu công nghệ mã hóa mạnh phải xin giấy phép từ chính phủ Hoa Kỳ. Quá trình này thường rất phức tạp và yêu cầu kiểm tra chi tiết về công nghệ và các quốc gia mục tiêu.
+
+## Tôi vẫn muốn sử dụng java 6 7 8 ở phiên bản chưa hỗ trợ, làm thế nào để khắc phục lỗi `Illegal key size` ?
+Nếu bạn đang sử dụng các phiên bản 6 7 8 và đang trong các phiên bản chưa hỗ trợ thì có thể vào link dưới đây để tải `Java Cryptography Extension (JCE) Unlimited Strength Jurisdiction Policy`
+
+https://www.oracle.com/java/technologies/javase-jce-all-downloads.html
 
 ## Tóm tắt
 - Lỗi Illegal key size xảy ra khi sử dụng key size lớn hơn 128 bits trong Java 8 và các phiên bản thấp hơn.
