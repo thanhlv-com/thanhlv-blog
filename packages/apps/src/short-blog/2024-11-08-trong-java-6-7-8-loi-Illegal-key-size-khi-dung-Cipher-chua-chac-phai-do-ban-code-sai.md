@@ -66,7 +66,12 @@ Các điểm chính trong chính sách:
 ## Tôi vẫn muốn sử dụng java 6 7 8 ở phiên bản chưa hỗ trợ, làm thế nào để khắc phục lỗi `Illegal key size` ?
 Nếu bạn đang sử dụng các phiên bản 6 7 8 và đang trong các phiên bản chưa hỗ trợ thì có thể vào link dưới đây để tải `Java Cryptography Extension (JCE) Unlimited Strength Jurisdiction Policy`
 
-https://www.oracle.com/java/technologies/javase-jce-all-downloads.html
+
+| Phiên bản Java      | Link tải JCE |
+|---------------------|--------------|
+| Java 6              | https://www.oracle.com/java/technologies/jce-6-download.html        |
+| Java 7              | https://www.oracle.com/java/technologies/javase-jce7-downloads.html        |
+| Java 8              | https://www.oracle.com/java/technologies/javase-jce8-downloads.html        |
 
 ## Tóm tắt
 - Lỗi Illegal key size xảy ra khi sử dụng key size lớn hơn 128 bits trong Java 8 và các phiên bản thấp hơn.
