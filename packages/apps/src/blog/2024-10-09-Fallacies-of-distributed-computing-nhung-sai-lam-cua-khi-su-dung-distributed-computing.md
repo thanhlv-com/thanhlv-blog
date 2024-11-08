@@ -268,9 +268,12 @@ end note
 
 Ngày nay(2024) các lập trình viên ở Việt Nam chú trọng nhiều vào việc phát triển chức năng, tối ưu hóa hệ thống, tối ưu hóa tốc độ, tối ưu hóa bộ nhớ, tối ưu hóa cơ sở dữ liệu... nhưng ít chú trọng vào việc bảo mật hệ thống.
 
-Dù lập trình viên có chú ý bảo mật hệ thống trong code của mình rất tốt nhưng khi dữ liệu đi qua mạng thì không được mã hóa thì hệ thống của chúng ta vẫn không an toàn.
+Dù lập trình viên có chú ý bảo mật hệ thống trong code của mình rất tốt nhưng khi dữ liệu đi qua mạng thì không bao giờ an toàn.
 
 Hiện tại khi dữ liệu đi qua mạng thì có rất nhiều cách để hacker hoặc các hệ thống trung gian đứng giữa đánh cắp dữ liệu hoặc thay đổi dữ liệu gây ra vấn đề giả mạo yêu cầu hoặc truy cập trái phép.
+
+Ngày này HTTPS đã trở thành chuẩn mực để bảo mật dữ liệu truyền tải giữa người dùng và hệ thống. Tuy nhiên vẫn có rất nhiều cách để tấn công dữ liệu truyền tải giữa các hệ thống.
+Ví dụ: Năm 2014 chính bản thân tiêu chuẩn SSL đã có lỗ hổng [Heartbleed](https://heartbleed.com/), một lỗ hổng nghiêm trọng trong mã nguồn mở OpenSSL.
 
 Một trong những khái niệm phổ biến về kiểu tấn công này là man-in-the-middle attack.
 
@@ -287,10 +290,10 @@ Vấn đề không phải là dữ liệu của bạn có bị đánh cắp hay 
 - Sử dụng HTTPS để mã hóa dữ liệu truyền tải giữa người dùng và hệ thống.
 - Sử dụng VPN để mã hóa dữ liệu truyền tải giữa các hệ thống.
 - Sử dụng SSH để truy cập an toàn vào hệ thống.
-- Sử dụng Rate Limiting để giới hạn tốc độ truy cập của người dùng.
+- Sử dụng Rate Limiting để giới hạn tốc độ truy cập của người dùng. Phòng trường hợp hack dò lỗi bảo mật.
 - Sử dụng Encryption để mã hóa dữ liệu truyền tải giữa các hệ thống hoặc giữa người dùng và hệ thống.
 - Sử dụng Multi-Factor Authentication để bảo vệ tài khoản người dùng.
-- Người thiết kế hệ thống và người phát triển phần mềm cần phải có tư duy về việc bảo mật dữ liệu khi gửi qua mạng.
+- Luôn kiểm tra các rủi do bảo mật hàng đầu hiện tại : https://owasp.org/
 - ...etc...
 
 ```plantuml
@@ -333,9 +336,13 @@ end note
 
  :::
 
-### Topology doesn't change
-- 
+### Topology doesn't change(Các liên kết không thay đổi)
+- Các môi trường có thể có các yêu cầu mạng khác nhau, môi trường dev thường yêu cầu start nhanh, môi trường production thường yêu cầu tính sẵn sàng cao, khả năng phục hồi và dự phòng.
+- các quy tắc về tường lửa có thể thay đổi để đáp ứng các yêu cầu về bảo mật.
+  - Ví dụ: Môi trường dev có thể không cần thiết phải cấu hình tường lửa, nhưng môi trường production cần phải cấu hình tường lửa để bảo vệ hệ thống.
+- Nhiều service mới được triển khai, nhiều service cũ bị xóa bỏ, nhiều service bị thay đổi cấu hình.
 
+Việt liên kết mạng giữa các ứng dụng thay đổi thường nằm ngoài tầm kiểm soát của chúng ta, bởi vì có nhiều lý do cho điều này
 
 # REF
 - https://dereklawless.ie/fallacies-of-distributed-computing-1-the-network-is-reliable/
