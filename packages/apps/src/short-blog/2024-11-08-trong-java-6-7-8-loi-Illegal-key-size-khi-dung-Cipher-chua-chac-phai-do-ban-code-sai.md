@@ -6,7 +6,7 @@ authors: [ lethanh ]
 date: 2024-11-08
 outline: deep
 #image: /assets/KafkaProducer12.qYn0oVGH.png
-draft: true
+draft: false
 ---
 
 # Trong java 8 lỗi Illegal key size khi dùng Cipher chưa chắc phải do bạn code sai mà là do Java Policy JCE.
