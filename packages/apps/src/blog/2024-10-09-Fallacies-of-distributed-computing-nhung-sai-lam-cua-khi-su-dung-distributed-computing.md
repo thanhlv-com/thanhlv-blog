@@ -349,11 +349,11 @@ Việc liên kết mạng giữa các ứng dụng thay đổi thường nằm n
 Do việc liên kết mạng là không ổn định, nên có một số giải pháp để giảm thiểu vấn đề này.
 
 1. Abstract network specifics(Trừ tượng về thông tin mạng):
-  - Tránh sử dụng trực tiếp từ IP address, thay vào đó hãy sử dụng DNS hostname
-  - Cân nhắc sử dụng [service discovery pattern](https://microservices.io/patterns/server-side-discovery.html) cho Microservice architectures.
+   - Tránh sử dụng trực tiếp từ IP address, thay vào đó hãy sử dụng DNS hostname
+   - Cân nhắc sử dụng [service discovery pattern](https://microservices.io/patterns/server-side-discovery.html) cho Microservice architectures.
 2. Design for failure( Thiết kế cho thất bại)
-  - Thiết kế ứng dụng của chúng ta để phòng ngừa tình trạng không thể thay thế. Khi có lỗi chúng ta sẽ có cách để thay thế hoặc sử lý lỗi.
-  - Kiểm tra hỗn loạn ([chaos engineering](https://en.wikipedia.org/wiki/Chaos_engineering)), kiểm tra hành vi của hệ thống trong các lỗi về cơ sở hạ tầng, mạng, application
+   - Thiết kế ứng dụng của chúng ta để phòng ngừa tình trạng không thể thay thế. Khi có lỗi chúng ta sẽ có cách để thay thế hoặc sử lý lỗi.
+   - Kiểm tra hỗn loạn ([chaos engineering](https://en.wikipedia.org/wiki/Chaos_engineering)), kiểm tra hành vi của hệ thống trong các lỗi về cơ sở hạ tầng, mạng, application
 
 ```plantuml
 @startuml
@@ -393,6 +393,38 @@ end note
 
 @enduml
 ```
+### There is one administrator
+Nếu hệ thống của chúng ta độc lập và được triển khai trong môi trường do chúng ta kiểm soát, hê thống do chúng ta quản lý thì khi đó chỉ có 1 administrator.
+
+Tuy nhiên 99.999% các hệ thống không phải là như vậy, hệ thống của chúng ta sẽ phụ thuộc vào nhiều hệ thống khác, nhiều dịch vụ khác, mỗi hệ thống khác sẽ có một admin khác nhau.
+
+- Ví dụ: 
+  - Bạn là CODE OWNERS của project, trong project của bạn có sử dụng dịch vụ của AWS, bạn không phải là admin của AWS, bạn chỉ là người quản lý project của mình.
+  - Project của bạn là project nội bộ, được triển khai bởi nhóm devops trên hạ tầng k8s do devops quản lý. Bạn không phải là admin của hạ tầng k8s, bạn chỉ là người quản lý project của mình.
+
+Nhiều nhóm nội bộ hoặc bên ngoài có thể tham gia để triển khai và hỗ trợ hệ thống. Các nhóm đó sẽ hoạt động bên ngoài quy trình của chúng ta, họ có thể thay đổi cấu hình, cài đặt, triển khai, nâng cấp hệ thống của chúng ta.
+
+
+#### Solutions
+
+##### Infrastructure as Code(IAC)
+Nếu có thể chúng ta có thể tự động hóa việc cung cấp các cấu hình nơi các môi trường được triển khai ứng dụng.
+
+Infrastructure as Code là thành phần CORE của Devops, với cơ sở hạ tầng được mô hình hóa như code và được quản lý như quy trình quản lý code.
+
+![IAC](images/2024-10-09-Fallacies-of-distributed-computing-nhung-sai-lam-cua-khi-su-dung-distributed-computing/iac.png)
+##### Logging and monitoring
+
+Việc chuẩn đoán lỗi chưa bao giờ là dễ dàng, đặc biệt là với các hệ thống phân tán hoặc microservices.
+
+Để có khả năng nhìn rõ hơn về hành vi của ứng dụng thì centralised logging, metrics, và tracing ([The Three Pillars of Observability](https://www.oreilly.com/library/view/distributed-systems-observability/9781492033431/ch04.html)) được coi là các key chính cần có trong thiết kế hệ thống.
+![observability](images/2024-10-09-Fallacies-of-distributed-computing-nhung-sai-lam-cua-khi-su-dung-distributed-computing/observability.png)
+
+##### Decoupling(Tách rời)
+- Đảo bảo khả năng Decouplin giữa cách thành phần trong hệ thống giúp chúng ta dễ dàng thay đổi, nâng cấp, thêm mới, xóa bỏ các thành phần mà không ảnh hưởng đến các thành phần khác. Điều này sẽ giúp khi có một component bị lỗi thì hệ thống có thể chuyển nhanh sang một component khác.
+
+### Transport cost is zero
+Chúng ta đã nói đến [latency is zero](#latency-is-zero) ở phía trước liên quan đến thời gian cần để giữ liệu gửi qua mạng. Thì `Transport cost is zero` chính là những thứ cần thiết để thực hiện các điều đó.
 
 
 # REF
