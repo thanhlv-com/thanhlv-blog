@@ -5,8 +5,8 @@ description: Từ những phiên bản đầu tiên khi Kafka được Open Sour
 authors: [ lethanh ]
 date: 2024-10-09
 outline: deep
-image: /assets/KafkaProducer12.qYn0oVGH.png
-draft: true
+# image: /assets/KafkaProducer12.qYn0oVGH.png
+draft: false
 ---
 
 Fallacies of distributed computing là một tập hợp các khẳng định được tập hợp bởi [L. Peter Deutsch](https://en.wikipedia.org/wiki/L._Peter_Deutsch) và một số người tại [Sun Microsystems](https://en.wikipedia.org/wiki/Sun_Microsystems) mô tả về những giả định sai lầm của các lập tình viên đanng làm việc với ứng dụng phân tán.
