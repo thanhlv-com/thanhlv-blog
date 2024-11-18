@@ -1,7 +1,7 @@
 ---
 footer: true
 title: Fallacies of distributed computing - Những sai lầm khi sử dụng distributed computing
-description: Từ những phiên bản đầu tiên khi Kafka được Open Source đến phiên bản 2.3.1, mặc định Kafka producer khi gửi các Record có key là null sẽ thực hiện Round Robin Partition
+description: Fallacies of distributed computing là một tập hợp các khẳng định được tập hợp bởi L. Peter Deutsch và một số người tại Sun Microsystems mô tả về những giả định sai lầm của các lập tình viên đanng làm việc với ứng dụng phân tán.
 authors: [ lethanh ]
 date: 2024-10-09
 outline: deep

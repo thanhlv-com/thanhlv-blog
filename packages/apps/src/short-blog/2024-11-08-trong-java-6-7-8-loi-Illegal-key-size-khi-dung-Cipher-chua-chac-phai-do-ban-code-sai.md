@@ -1,7 +1,7 @@
 ---
 footer: true
 title: Trong java 6 7 8 lỗi Illegal key size khi dùng Cipher chưa chắc phải do bạn code sai mà là do Java Policy JCE.
-description: Từ những phiên bản đầu tiên khi Kafka được Open Source đến phiên bản 2.3.1, mặc định Kafka producer khi gửi các Record có key là null sẽ thực hiện Round Robin Partition
+description: Khi bạn sử dụng Cipher để mã hóa dữ liệu trong Java, bạn có thể gặp phải lỗi `Illegal key size`. Lỗi này thường xảy ra khi bạn sử dụng một key size lớn hơn 128 bits. Trong bài viết này, chúng ta sẽ tìm hiểu về lỗi này và cách khắc phục nó.
 authors: [ lethanh ]
 date: 2024-11-08
 outline: deep
