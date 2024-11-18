@@ -15,6 +15,9 @@ Tuy nhiên trong bài viết này mình sẽ dựa vào khái niệm Fallacies o
 
 Điều này sẽ giúp các bạn có cái nhìn tổng quan về những sai lầm mà các lập trình viên hay gặp phải khi phát triển và triển khai ứng dụng của mình lên cho người dùng sử dụng.
 
+![img](images/2024-10-09-Fallacies-of-distributed-computing-nhung-sai-lam-cua-khi-su-dung-distributed-computing/img.png)
+
+
 ## Những sai lầm.
 ### The network is reliable
 **The network is reliable**: Dịch tiếng việt là `Mạng lưới đáng tin cậy`. Đây là 1 sai lầm nghiêm trọng nhưng cũng hay xảy ra bởi các lập trình viên mới.
@@ -86,7 +89,60 @@ Sẽ có rất nhiều cách để đảm bảo hệ thống của chúng ta là
 
 Trong thuật ngữ mạng đó là thời gian để di chuyển data từ vị trí A đến vị trí khác thông qua mạng.
 Trong thuật ngữ phần mềm đó là thời gian để xử lý một yêu cầu từ người dùng và trả về kết quả cho người dùng.
-....
+
+Độ trễ có thể gần bằng 0 khi chúng ta chạy ứng dụng ở local và không đáng kể nếu sử dụng trong local area  network(LAN). Tuy nhiên khi chúng ta sử dụng ứng dụng ở global network thì độ trễ sẽ tăng lên.
+Bởi vì trong mạng lưới global, dữ liệu phải di chuyển qua nhiều node và đường truyền mạng khác nhau, điều này tạo ra độ trễ.
+
+Ví dụ từ local của tôi truy cập đến Thanhlv.com sử dụng Tracer để kiểm tra các node mà dữ liệu phải đi qua.
+
+```
+C:\Users\thanhlv>tracert thanhlv.com
+
+Tracing route to thanhlv.com [185.199.110.153]
+over a maximum of 30 hops:
+
+  1    <1 ms    <1 ms    <1 ms  192.168.0.1
+  2     1 ms    <1 ms    <1 ms  192.168.1.1
+  3     2 ms     5 ms     2 ms  static.vnpt-hanoi.com.vn [203.210.148.37]
+  4     4 ms     3 ms     2 ms  static.vnpt.vn [123.29.14.193]
+  5     3 ms     3 ms     2 ms  static.vnpt.vn [123.29.14.77]
+  6     3 ms     4 ms     3 ms  static.vnpt.vn [113.171.31.92]
+  7     3 ms     3 ms     3 ms  static.vnpt.vn [123.29.4.29]
+  8     *        *        *     Request timed out.
+  9     4 ms     3 ms    23 ms  static.vnpt.vn [113.171.35.83]
+ 10    21 ms    21 ms    20 ms  static.vnpt.vn [113.171.37.91]
+ 11    38 ms    38 ms    38 ms  167.82.128.88
+ 12    22 ms    23 ms    22 ms  cdn-185-199-110-153.github.com [185.199.110.153]
+```
+
+```plantuml
+
+@startuml
+skinparam backgroundColor #EEEBDC
+skinparam shadowing false
+skinparam arrowColor #000000
+skinparam actorStyle awesome
+
+actor User as U
+
+U -> Router1: 192.168.0.1
+Router1 -> Router2: 192.168.1.1
+Router2 -> Router3: static.vnpt-hanoi.com.vn [203.210.148.37]
+Router3 -> Router4: static.vnpt.vn [123.29.14.193]
+Router4 -> Router5: static.vnpt.vn [123.29.14.77]
+Router5 -> Router6: static.vnpt.vn [113.171.31.92]
+Router6 -> Router7: static.vnpt.vn [123.29.4.29]
+Router7 -> Router8: Request timed out
+Router8 -> Router9: static.vnpt.vn [113.171.35.83]
+Router9 -> Router10: static.vnpt.vn [113.171.37.91]
+Router10 -> Router11: 167.82.128.88
+Router11 -> Destination: cdn-185-199-110-153.github.com [185.199.110.153]
+
+@enduml
+
+```
+Để truy cập website thanhlv.com từ local của tôi, dữ liệu phải đi qua 11 node và mỗi node sẽ tạo ra độ trễ.
+
 
 Tất cả hành động đều có độ trễ, không có hành động nào có độ trễ là 0. Dù bản thân con người cũng có độ trễ, nhưng nó đủ nhanh để không cảm nhận được độ trễ nhưng nó vẫn tồn tại.
 
@@ -146,7 +202,7 @@ Một ví dụ điển trình của điều này chính là ORM. Khi sử dụng
      @enduml
   ```
 - Hạn chế sử dụng các remote call(Call database, rest, rpc...etc..) thừa thãi.
-- Về mặt vật lý, nếu dữ liệu hoặc máy chủ ở gần khách hàng thì độ trễ sẽ giảm.
+- Về mặt vật lý, nếu dữ liệu hoặc máy chủ ở gần khách hàng thì độ trễ sẽ giảm vì dữ liệu không cần phải di chuyển xa, qua nhiều node.
 ```plantuml
 @startuml
 skinparam backgroundColor #EEEBDC
@@ -426,6 +482,49 @@ Việc chuẩn đoán lỗi chưa bao giờ là dễ dàng, đặc biệt là v�
 ### Transport cost is zero
 Chúng ta đã nói đến [latency is zero](#latency-is-zero) ở phía trước liên quan đến thời gian cần để giữ liệu gửi qua mạng. Thì `Transport cost is zero` chính là những thứ cần thiết để thực hiện các điều đó.
 
+#### Marshalling
+Marshalling là quá trình trong việc sắp xếp dữ liệu và chuyển dữ liệu từ từ layer Application(Layer 7) sang layer Transport(Layer4) trong `OSI Reference Model` để gửi dữ liệu qua mạng.
+
+#### Infrastructure
+
+Chi phí hạ tầng luôn là một trong những chi phí tốn rất nhiều của các công ty công nghệ.
+
+Đối với private cloud, công ty phải chi trả cho việc mua máy chủ, lưu trữ, mạng, bảo mật, điện, môi trường làm việc, nhân sự quản lý hệ thống.
+
+Đối với public cloud, mặc dù chi phí phần cứng vật lý tất nhiên không phải là yếu tố đáng lo ngại nhưng công ty phải chi trả cho việc sử dụng dịch vụ của public cloud, chi phí này có thể tăng lên nếu công ty sử dụng nhiều dịch vụ của public cloud.
+
+#### Solutions
+Thực tế các chi phí này nằm ngoài tầm kiểm soát của chúng ta, nhưng chúng ta có thể tối ưu hóa việc sử dụng hạ tầng của mình.
+
+Ví dụ chúng ta có thể giảm bớt chi phí bằng các tối ưu hóa data gửi qua mạng bằng cách tận dụng định dạng dữ liệu được tối ưu hóa như `Protocol Buffers` thay vì `JSON`, `XML`.
+
+### The network is homogeneous
+The network is homogeneous: Dịch tiếng việt là mạng đồng nhất.
+
+Mạng thường phải hỗ trợ nhiều loại máy khách được kết nối — từ máy tính để bàn đến thiết bị di động và thiết bị IoT.
+
+Mỗi loại máy khách có thể sử dụng các giao thức mạng khác nhau, có thể sử dụng các phiên bản giao thức khác nhau, có thể sử dụng các cấu hình mạng khác nhau.
+
+#### Solutions
+
+Khả năng tương tác là chìa khóa để giải quyết vấn đề này.
+
+Nếu có thể, hãy tránh các ứng dụng sử dụng các giao thức mạng cũ hoặc không an toàn, các giao thức độc quyền.
+
+Ưu tiên các giao thức mạng tiêu chuẩn, an toàn và phổ biến như HTTP, HTTPS, TCP, UDP.
+
+Ví dụ sử dụng JSON và RESTfull để tương tác giữa các ứng dụng. Điều này sẽ rất hữu ích để cho các bên thứ 3 có thể tương tác với hệ thống của chúng ta.
+
+## Tổng kết
+Những sai lầm này không phải là những lỗi cụ thể mà chúng ta có thể sửa ngay lập tức, mà chúng ta cần phải nhớ rằng chúng tồn tại và cần phải xử lý chúng khi phát triển ứng dụng.
+
+Vì vậy khi phát triển ứng dụng, chúng ta cần phải nhớ rằng mọi hành động đều có độ trễ, băng thông không phải là vô hạn, mạng không phải là an toàn, mạng không phải là đồng nhất, mạng không phải là ổn định, và không phải chỉ có một admin.
+
+Một điều quan trọng nhất là chúng ta cần phải nhớ rằng mọi hệ thống đều có thể bị lỗi, và chúng ta cần phải thiết kế hệ thống của mình để phòng tránh lỗi và xử lý lỗi một cách hiệu quả.
+
+Cảm ơn ban đã đọc bài viết này, hy vọng nó sẽ giúp ích cho bạn trong việc phát triển của mình.
 
 # REF
 - https://dereklawless.ie/fallacies-of-distributed-computing-1-the-network-is-reliable/
+- https://blogs.oracle.com/developers/post/fallacies-of-distributed-systems
+- https://medium.com/geekculture/the-eight-fallacies-of-distributed-computing-44d766345ddb
