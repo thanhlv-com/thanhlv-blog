@@ -5,7 +5,7 @@ description: Từ những phiên bản đầu tiên khi Kafka được Open Sour
 authors: [ lethanh ]
 date: 2024-10-09
 outline: deep
-# image: /assets/KafkaProducer12.qYn0oVGH.png
+image: /assets/img.8MakEgbE.png
 draft: false
 ---
 
