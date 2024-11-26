@@ -320,7 +320,7 @@ end note
 - Tự động mở rộng hạ tầng dựa trên nhu cầu lưu lượng để xử lý các tải khác nhau một cách hiệu quả.
 :::
 
-## Network is secure
+### Network is secure
 
 Ngày nay(2024) các lập trình viên ở Việt Nam chú trọng nhiều vào việc phát triển chức năng, tối ưu hóa hệ thống, tối ưu hóa tốc độ, tối ưu hóa bộ nhớ, tối ưu hóa cơ sở dữ liệu... nhưng ít chú trọng vào việc bảo mật hệ thống.
 
@@ -341,7 +341,7 @@ Vấn đề không phải là dữ liệu của bạn có bị đánh cắp hay 
 - Vì vậy hệ thống cần có các cơ chế bảo mật ở tầng mạng để đảm bảo dữ liệu của chúng ta không bị đánh cắp hoặc thay đổi.
 :::
 
-### Hệ thống của chúng ta Nên làm gì để đảm bảo `Network is secure`.
+#### Hệ thống của chúng ta Nên làm gì để đảm bảo `Network is secure`.
  ::: details Chi tiết
 - Sử dụng HTTPS để mã hóa dữ liệu truyền tải giữa người dùng và hệ thống.
 - Sử dụng VPN để mã hóa dữ liệu truyền tải giữa các hệ thống.
