@@ -273,6 +273,62 @@ retention.bytes=1073741824 # 1 GB ==> Nếu partition vượt quá 1 GB, Kafka s
 ##### Lưu trữ dữ liệu mãi mãi.
 - Nếu bạn muốn dữ liệu kafka được lưu mãi mãi bạn có thể cấu hình giá trị `-1` cho `retention.ms` và `retention.bytes`.
 
+## [Tiered storage](https://cwiki.apache.org/confluence/display/KAFKA/KIP-405%3A+Kafka+Tiered+Storage)
+Mặc định Kafka sẽ lưu trữ dữ liệu trên ổ cứng, điều này giúp kafka nhanh chóng và hiệu quả trong việc ghi và đọc dữ liệu. Tuy nhiên, việc lưu trữ dữ liệu trên ổ cứng cũng tạo ra một số vấn đề như dung lượng lưu trữ, chi phí lưu trữ, v.v.
+
+`Tiered storage` là một cơ chế cho phép Kafka lưu trữ dữ liệu trên remote storage như Amazon S3, HDFS. Giúp dữ liệu của Kafka có thể lưu trữ lâu dài hơn.
+
+Thực tế Kafka thường đọc dữ liệu ở cuối log segment([Tail reads](https://en.wikipedia.org/wiki/Page_cache)), hiếm khi chúng ta thực hiện đọc lại dữ liệu ở giữa hoặc đầu log segment. Ngoại trừ trường hợp có lỗi xảy ra và cần phải đọc lại dữ liệu.
+
+Tail reads sẽ tận dụng tốt được sự hỗ trợ của OS bằng việc co thể đọc từ cache thay vì từ DISK. Dữ liệu cũ hơn sẽ được đọc ở DISK.
+
+Tiered storage sẽ giúp Kafka lưu trữ dữ liệu ở 2 tires, local và remote.
+- Local tier: Dữ liệu mới nhất và chưa được sử dụng sẽ được lưu trữ ở local tier, giúp Kafka đọc và ghi dữ liệu nhanh chóng.
+- Remote tier: Dữ liệu cũ hơn và đã được sử dụng sẽ được lưu trữ ở remote tier, giúp giảm chi phí lưu trữ và dung lượng ổ cứng.
+
+Khi bật tiered storage, retention policy sẽ được áp dụng riêng cho local và remote tier.
+Ví dụ ở local thời gian lưu trữ là 7 ngày, còn ở remote tier thời gian lưu trữ là 90 ngày.
+
+## Cluster Metadata
+KAFKA là một hệ thống phân tán, mọi hoạt động và state trong cluster đều yêu cầu metadata, Kafka sử dụng Zookeeper để lưu trữ metadata và các phiên bản mới hơn hỗ trợ thêm KR (Kafka Raft) để lưu trữ metadata.
+
+Zookeeper hoặc Kafka Raft sẽ cho phép các Broker Kafka cùng tham gia vào một cluster, để  cùng quản lý các topic, partition, offset, v.v.
+
+Các metadata trong một cluster Kafka có thể bao gồm:
+- Cluster Membership: Tham gia vào cluster và duy trì tư cách thành viên trong cluster. Nếu một broker không khả dụng(unavailable) Zookeeper hoặc Kafka Raft sẽ xóa broker đó khỏi thành viên trong cluster.
+
+
+## Leaders and followers
+
+Thực tế các partition không nằm trên một broker, Partition sẽ được chải ra trên các broker khác nhau trong cluster. Mỗi partition sẽ có một broker đóng vai trò là leader và các broker khác sẽ đóng vai trò là follower. (replication)
+
+![Leaders-and-followers.png](2024-06-10-kafka-brokers/Leaders-and-followers.png)
+
+Partition leader sẽ sử lý tất cả các yêu cầu ghi và đọc từ client, các follower sẽ sao chép dữ liệu từ leader. Kafk sử dụng cơ chế `Leader-based Replication` để sao chép dữ liệu từ leader đến follower để đảm bảo tính toàn vẹn và đồng bộ dữ liệu.
+
+Hãy nhớ rằng, một Topic sẽ có nhiều partition và mỗi partition sẽ có một leader và một số follower. Một Kafka Broker có thể đóng vai trò là leader cho một partition và follower cho partition khác.(Cùng hoặc khác topic)
+
+Và một điều quan trọng là các Leader và Follower sẽ được chuyển đổi khi Leader không khả dụng hoặc cấu hình thủ công chuyển đổi.
+
+## Replication
+
+Kafka sử dụng cơ chế `Leader-based Replication` để sao chép dữ liệu từ leader đến follower để đảm bảo tính toàn vẹn và đồng bộ dữ liệu.
+
+Khi một Record được ghi vào leader, leader sẽ gửi Record đó đến tất cả các follower. Khi tất cả các follower đã xác nhận đã nhận được Record, leader sẽ gửi ACK cho producer.
+
+Khi một Broker Leader không khả dụng, Kafka sẽ chuyển đổi một follower khác trở thành leader, bởi vì các follower đều có dữ liệu đồng bộ với leader nên việc chuyển đổi sẽ không ảnh hưởng đến tính toàn vẹn dữ liệu
+
+![Replication.png](2024-06-10-kafka-brokers/Replication.png)
+
+Tuy nhiên việc đồng bộ luôn sẽ có độ trễ. Nhìn minh họa dưới đây.
+
+![Replication-lag.png](2024-06-10-kafka-brokers/Replication-lag.png)
+
+Trong thực tế, một độ chễ nhỏ khoảng vài bản khi không phải là vấn đề, nhưng nếu độ chễ quá lớn có thể dẫn đến mất dữ liệu.=========
+
+Khi dữ liệu ở followers bắt kịp với Leaders thì nó được coi là ISR [(In-Sync Replicas) ](https://www.geeksforgeeks.org/understanding-in-sync-replicas-isr-in-apache-kafka/). Hiểu đơn giản ISR là các follower đã đồng bộ đầy đủ dữ liệu với leader.
+
+
 ## Một số lưu ý về Kafka Brokers
 - Nếu tạo một Cluster kafka thì độ trễ của network nên ở mức dưới 15ms, vì việc liên lạc giữa các Kafka brokers là rất nhiều (Cả zookeeper nếu sử dụng zookeeper )
 
