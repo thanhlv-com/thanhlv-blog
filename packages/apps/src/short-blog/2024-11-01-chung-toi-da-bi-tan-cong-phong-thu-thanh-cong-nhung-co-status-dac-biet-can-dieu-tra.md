@@ -92,4 +92,36 @@ Hacker đã truyền các domain khác vào header `Origin` để tìm lỗ hổ
 
 
 ## Giải pháp khắc phục.
-Chúng tôi đã đưa và đang đánh giá các giải pháp khắc phục. sẽ chia sẻ sau khi chốt và áp dụng nó.
+
+Đây là những giải chúng tôi đã thực hiện áp dụng để khắc phục vấn đề ở trong dự án của chúng tôi. Nó có thể không phải là giải pháp tốt nhất nhưng nó là các giải pháp đơn giản và hiệu quả.
+
+### Khắc phục status 403
+Bởi vì cơ chế kiểm tra `Origin` giúp phòng ngừa CORS, nên trả aề 403 là chính xác. Hacker sẽ không thể sử dụng lỗ hổng này để tấn công hệ thống của chúng tôi.
+
+### Khắc phục status 404
+Một giải pháp đơn giản là đúng tôi sử dụng whitelist domain. Bởi vì hệ thống của chúng tôi hỗ trợ khoảng 10 domain, vì vậy chúng tôi sẽ whitelist các domain mà chúng tôi hỗ trợ.
+
+Domain lấy từ `request.getServerName()` nếu không khớp với một trong các domain trong whitelist thì sẽ trả về 404.
+
+### Thêm giới hạn request trên mỗi IP
+Để vào đến hệ thống của chúng tôi sẽ cần đi qua một tầng Load Balancer, vì vậy chúng tôi sẽ thêm giới hạn request trên mỗi IP để phòng trường hợp bị tấn công DDoS.
+
+Load Balancer chúng tôi đang sử dụng của Nginx, chúng tôi cấu hình giới hạn 20 request/s trên mỗi IP.
+
+Nếu một IP gửi quá 20 request/s thì sẽ trả về http status 429.
+
+### Thêm cache response cho nginx
+
+Chúng tôi đã thêm cache response cho nginx để giảm số lần request vào hệ thống của chúng tôi.
+
+Các request sử dụng Method GET và status 200 sẽ được cache trong 10 phút.
+
+Các request sử dụng Method GET và status 403 404 sẽ được cache trong 1 phút.
+
+## Tông kết
+
+1. Hệ thống bị tấn công DDoS và khai thác bảo mật, sử dụng SQL Injection và chỉnh sửa các header như x-forwarded-host.
+2. Phòng thủ thành công nhờ code tối ưu, giám sát log, và biểu đồ hiệu suất, giữ hệ thống không bị gián đoạn.
+3. Vấn đề 404: Hacker thay đổi x-forwarded-host, làm giá trị request.getServerName() sai, dẫn đến không dùng cache.
+4. Vấn đề 403: Tấn công qua header Origin, hệ thống trả về 403 để ngăn chặn truy cập bất hợp pháp.
+5. Khắc phục: Dùng whitelist domain, giới hạn request/s, và thêm cache response tại Nginx để giảm tải.
