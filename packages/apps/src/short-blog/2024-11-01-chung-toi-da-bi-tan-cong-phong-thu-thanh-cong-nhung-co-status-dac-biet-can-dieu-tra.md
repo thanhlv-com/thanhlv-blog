@@ -96,7 +96,7 @@ Hacker đã truyền các domain khác vào header `Origin` để tìm lỗ hổ
 Đây là những giải chúng tôi đã thực hiện áp dụng để khắc phục vấn đề ở trong dự án của chúng tôi. Nó có thể không phải là giải pháp tốt nhất nhưng nó là các giải pháp đơn giản và hiệu quả.
 
 ### Khắc phục status 403
-Bởi vì cơ chế kiểm tra `Origin` giúp phòng ngừa CORS, nên trả aề 403 là chính xác. Hacker sẽ không thể sử dụng lỗ hổng này để tấn công hệ thống của chúng tôi.
+Bởi vì cơ chế kiểm tra `Origin` giúp phòng ngừa CORS, nên trả về 403 là chính xác. Hacker sẽ không thể sử dụng lỗ hổng này để tấn công hệ thống của chúng tôi.
 
 ### Khắc phục status 404
 Một giải pháp đơn giản là đúng tôi sử dụng whitelist domain. Bởi vì hệ thống của chúng tôi hỗ trợ khoảng 10 domain, vì vậy chúng tôi sẽ whitelist các domain mà chúng tôi hỗ trợ.
