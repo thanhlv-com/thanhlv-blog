@@ -88,7 +88,8 @@ Sẽ có rất nhiều cách để đảm bảo hệ thống của chúng ta là
 - Ví dụ: Khi bạn buồn ngủ, bạn uống cafe và sau 5 phút bạn không còn buồn ngủ. Cafe là kích thích, và việc bạn không còn buồn ngủ là phản ứng tương ứng với kích thích đó và 5 phút là độ trễ.
 
 Trong thuật ngữ mạng đó là thời gian để di chuyển data từ vị trí A đến vị trí khác thông qua mạng.
-Trong thuật ngữ phần mềm đó là thời gian để xử lý một yêu cầu từ người dùng và trả về kết quả cho người dùng.
+Trong thuật ngữ phần mềm đó là thời gian để thực hiện một hành động từ khi bắt đầu đến khi kết thúc.
+- Việc hoàn thành một hành động có thể sẽ cần phải gọi đến rất nhiều hệ thống khác nhau, mỗi hệ thống sẽ tạo ra độ trễ.
 
 Độ trễ có thể gần bằng 0 khi chúng ta chạy ứng dụng ở local và không đáng kể nếu sử dụng trong local area  network(LAN). Tuy nhiên khi chúng ta sử dụng ứng dụng ở global network thì độ trễ sẽ tăng lên.
 Bởi vì trong mạng lưới global, dữ liệu phải di chuyển qua nhiều node và đường truyền mạng khác nhau, điều này tạo ra độ trễ.
@@ -143,6 +144,7 @@ Router11 -> Destination: cdn-185-199-110-153.github.com [185.199.110.153]
 ```
 Để truy cập website thanhlv.com từ local của tôi, dữ liệu phải đi qua 11 node và mỗi node sẽ tạo ra độ trễ.
 
+Tương tự với ứng dụng của chúng ta, mỗi hành động sẽ tạo ra độ trễ, mỗi hành động sẽ gọi đến nhiều hệ thống khác nhau, mỗi hệ thống sẽ tạo ra độ trễ.
 
 Tất cả hành động đều có độ trễ, không có hành động nào có độ trễ là 0. Dù bản thân con người cũng có độ trễ, nhưng nó đủ nhanh để không cảm nhận được độ trễ nhưng nó vẫn tồn tại.
 
@@ -345,6 +347,7 @@ Vấn đề không phải là dữ liệu của bạn có bị đánh cắp hay 
  ::: details Chi tiết
 - Sử dụng HTTPS để mã hóa dữ liệu truyền tải giữa người dùng và hệ thống.
 - Sử dụng VPN để mã hóa dữ liệu truyền tải giữa các hệ thống.
+  - Tại sao ử ? Vì dữ liệu truyền tải giữa các hệ thống không an toàn, nếu không mã hóa dữ liệu thì dữ liệu có thể bị đánh cắp hoặc thay đổi khi hacker có truy cập vào mạng và đứng giữa.
 - Sử dụng SSH để truy cập an toàn vào hệ thống.
 - Sử dụng Rate Limiting để giới hạn tốc độ truy cập của người dùng. Phòng trường hợp hack dò lỗi bảo mật.
 - Sử dụng Encryption để mã hóa dữ liệu truyền tải giữa các hệ thống hoặc giữa người dùng và hệ thống.
