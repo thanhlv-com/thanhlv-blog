@@ -31,8 +31,8 @@ Có lẽ, chúng ta nên có 2 bài viết để nói về RESTful API và gRPC.
 | Load balancer                    | Dễ dàng tích hợp Load balancer                            | Cần phải xây dựng 1 cơ chế proxy để có thể Load balancer                                                  |
 | Các loại request                 | GET, POST, PUT, DELETE,...                                | Unary, Server-streaming, Client-streaming, Bi-directional streaming                                       |
 | Hỗ trợ nhiều định dạng response  | Có thể hỗ trợ nhiều định dạng response.                   | Chỉ hỗ trợ 1 định dạng cố định nào đó                                                                     |
-| Contract request                 | Thường dựa trên tài liệu wiki                             | Dựa trên nội dung file Protobuf hoặc tài liệu wiki                                                        |
-| Contract response                | Thường dựa trên tài liệu wiki                             | Dựa trên nội dung file Protobuf hoặc tài liệu wiki                                                        |
+| Contract request                 | Thường dựa trên tài liệu wiki hoặc swagger                | Dựa trên nội dung file Protobuf hoặc tài liệu wiki                                                        |
+| Contract response                | Thường dựa trên tài liệu wiki hoặc swagger                | Dựa trên nội dung file Protobuf hoặc tài liệu wiki                                                        |
 | Định danh tài nguyên             | Dựa trên URL/URI                                          | Dựa trên service impl với các method                                                                      |
 | Hỗ trợ truy cập từ trình duyệt   | Có, rất đơn giản                                          | Không, nếu muốn truy cập qua trình duyệt sẽ cần xây dựng một proxy                                        |
 | Hỗ trợ truy cập app to app       | Có, nhưng một số thư viện chỉ hỗ trợ http/1 nên cần lưu ý | Có và đây là cách dùng chủ yếu của gRPC                                                                   |
