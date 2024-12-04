@@ -5,7 +5,7 @@ description: Về lựa chọn RESTful API hay gRPC chúng ta sẽ cần xem xé
 authors: [ lethanh ]
 date: 2024-12-04
 outline: deep
-#image: /assets/img.8MakEgbE.png
+image: /assets/gRPC-vs-REST.zQiSJpLn.jpg
 draft: false
 ---
 
