@@ -4,19 +4,20 @@ import {
   defineComponent,
   h,
   inject,
-  InjectionKey,
+  InjectionKey, nextTick, onMounted,
   provide,
-  Ref
+  Ref, watch
 } from 'vue'
-import { useData } from 'vitepress'
+import {useData, useRoute} from 'vitepress'
 import {
   Config,
   MultiSidebarConfig,
   SidebarConfig,
   SidebarGroup
 } from '../config'
-import { MenuItem, MenuItemChild } from '../../core'
-import { normalizeLink } from '../support/utils'
+import {MenuItem, MenuItemChild} from '../../core'
+import {normalizeLink} from '../support/utils'
+import mediumZoom from 'medium-zoom';
 
 const configSymbol: InjectionKey<Ref<Config>> = Symbol('config')
 
@@ -32,6 +33,20 @@ export function withConfigProvider(App: Component) {
       const { theme } = useData()
       const config = computed(() => resolveConfig(theme.value))
       provide(configSymbol, config)
+      const route = useRoute();
+      const initZoom = () => {
+        // @ts-ignore
+        new mediumZoom('img', {background: '11'}); // Should there be a new?
+      };
+      onMounted(() => {
+        initZoom();
+      });
+      watch(
+        () => route.path,
+        () => nextTick(() => {
+          initZoom()
+        })
+      );
       return () => h(App, null, slots)
     }
   })

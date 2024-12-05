@@ -172,3 +172,12 @@
     font-size: 36px;
   }
 }
+
+.medium-zoom-image--opened {
+  z-index: 999;
+}
+.medium-zoom-overlay{
+  background-color: rgba(0, 0, 0, 0.9);
+  z-index: 999;
+  opacity: 0.6 !important;
+}
