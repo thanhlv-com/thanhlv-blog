@@ -382,5 +382,252 @@ note left of C: Server responds with the selected representation in English
 ```
 
 ### 301 Moved Permanently
-HTTP Status code này thông báo rằng request của client đã được chuyển hướng vĩnh viễn đến một URL khác. 
+HTTP Status code này thông báo rằng request của client đã được chuyển hướng vĩnh viễn đến một URL khác. Các công cụ tìm kiếm sẽ cập nhật URL cũ thành URL mới trong index của chúng.
 Hiện tại HTTP Status code này vẫn được sử dụng rất nhiều, nó thường phục vụ cho việc một URL bị thay đổi hoặc một trang web bị chuyển địa chỉ.
+
+Khi trình duyệt nhận được status code này, nó sẽ đọc header `Location` và chuyển hướng đến URL mới.
+
+```plantuml
+@startuml
+
+title HTTP 301 Moved Permanently
+
+participant "Client" as C
+participant "Server" as S
+
+C -> S: GET /old-url HTTP/1.1\nHost: example.com
+note right of S: Client requests a resource that has been permanently moved
+
+S --> C: HTTP/1.1 301 Moved Permanently\nLocation: /new-url
+note left of C: Server responds with a 301 status code and the new location URL
+
+C -> S: GET /new-url HTTP/1.1\nHost: example.com
+note right of S: Client follows the redirect and requests the new URL
+
+S --> C: HTTP/1.1 200 OK\nContent-Type: text/html\n<html>New page content</html>
+note left of C: Server responds with the content of the new URL
+
+@enduml
+```
+
+### 302 Found (Trước đây là Moved Temporarily)
+HTTP Status code này thông báo rằng request của client đã được chuyển hướng tạm thời đến một URL khác, nhưng bạn dự định sẽ phục hồi URL ban đầu sau một thời gian. Các công cụ tìm kiếm sẽ không thay đổi URL trong index.
+Thực tế  302 sẽ tương tự như 301, tuy nhiên 302 sẽ nói rằng đây chỉ là tạm thời chứ không phải vĩnh viễn.
+
+```plantuml
+@startuml
+
+title HTTP 302 Found
+
+participant "Client" as C
+participant "Server" as S
+
+C -> S: POST /old-url HTTP/1.1\nHost: example.com
+note right of S: Client requests a resource that has temporarily moved
+
+S --> C: HTTP/1.1 302 Found\nLocation: /temporary-url
+note left of C: Server responds with a 302 status code and the temporary location URL
+
+C -> S: GET /temporary-url HTTP/1.1\nHost: example.com
+note right of S: Client follows the redirect and requests the temporary URL
+
+S --> C: HTTP/1.1 200 OK\nContent-Type: text/html\n<html>Temporary page content</html>
+note left of C: Server responds with the content of the temporary URL
+
+@enduml
+```
+
+Thực tế HTTP Status này sẽ hỗ trợ tốt với SEO, 302 sẽ cho các công cụ tìm kiếm biết rằng đây là chuyển hướng tạm thời và không cần cập nhật lại index.
+
+Nếu bạn muốn chuyển hướng vĩnh viễn thì nên sử dụng 301.
+
+### 303 See Other
+HTTP Status này thông báo cho client biết rằng tài nguyên mà client yêu cầu đã được tạo và nằm ở một URL khác. Client cần gửi một request mới đến URL mới để lấy thông tin.
+Ví dụ sau khi submit một form thành công, chuyển hướng người dùng đến web page `cảm ơn`.
+
+```plantuml
+@startuml
+
+title HTTP 303 See Other
+
+participant "Client" as C
+participant "Server" as S
+
+C -> S: POST /submit-form HTTP/1.1\nHost: example.com\nContent-Type: application/x-www-form-urlencoded\nData: form_data
+note right of S: Client submits a form via POST request
+
+S --> C: HTTP/1.1 303 See Other\nLocation: /confirmation
+note left of C: Server responds with a 303 status code, indicating the client should make a GET request to the new URL
+
+C -> S: GET /confirmation HTTP/1.1\nHost: example.com
+note right of S: Client follows the redirect and performs a GET request on the new URL
+
+S --> C: HTTP/1.1 200 OK\nContent-Type: text/html\n<html>Confirmation page content</html>
+note left of C: Server responds with the content of the confirmation page
+
+@enduml
+```
+
+Thực tế, status code này ít được sử dụng.
+
+### 304 Not Modified
+
+HTTP Status code này thông báo rằng tài nguyên mà client yêu cầu không thay đổi từ lần cuối cùng client yêu cầu. Server sẽ trả về status code này và không trả về dữ liệu của tài nguyên. Client sẽ sử dụng cache để hiển thị dữ liệu.
+
+Status code này thường được sử dụng khi client yêu cầu một tài nguyên mà đã được cache và không thay đổi từ lần cuối cùng client yêu cầu.
+
+Thường sẽ kèm theo một số header để biểu thị hash hoặc thời gian thay đổi lần cuối của tài nguyên.
+
+```plantuml
+@startuml
+
+title HTTP 200 OK and 304 Not Modified with Cache
+
+participant "Client" as C
+participant "Server" as S
+
+C -> S: GET /resource HTTP/1.1\nHost: example.com
+note right of S: Client requests the resource for the first time
+
+S --> C: HTTP/1.1 200 OK\nContent-Type: application/json\n{"data": "Resource content"}
+note left of C: Server responds with the resource content
+note right of C: Client stores the resource in its cache
+
+C -> S: GET /resource HTTP/1.1\nHost: example.com\nIf-Modified-Since: <last-modified-date>
+note right of S: Client sends a request with the `If-Modified-Since` header to check if the resource has changed
+
+S --> C: HTTP/1.1 304 Not Modified
+note left of C: Server responds with a 304 status, indicating no modification
+note right of C: Client retrieves the resource from its cache
+
+@enduml
+```
+
+### 305 Use Proxy
+HTTP Status code này thông báo rằng client cần sử dụng proxy để truy cập tài nguyên. Thường được sử dụng trong trường hợp client không thể truy cập trực tiếp tài nguyên mà cần thông qua proxy.
+
+HTTP code này cần được trả về từ chính Origin Server, không được trả về từ Proxy. Và khi trả về sẽ kèm theo url của proxy thông qua header `Location`.
+
+```plantuml
+@startuml
+
+title HTTP 305 Use Proxy
+
+participant "Client" as C
+participant "Server" as S
+participant "Proxy" as P
+
+C -> S: GET /resource HTTP/1.1\nHost: example.com
+note right of S: Client requests the resource, and server indicates the use of a proxy
+
+S --> C: HTTP/1.1 305 Use Proxy\nLocation: http://proxy.example.com
+note left of C: Server responds with 305 status and the URL of the proxy
+
+C -> P: GET /resource HTTP/1.1\nHost: proxy.example.com
+note right of P: Client sends the request to the specified proxy server
+
+P --> C: HTTP/1.1 200 OK\nContent-Type: application/json\n{"data": "Resource content"}
+note left of C: Proxy responds with the content of the resource
+
+@enduml
+```
+
+Thực tế, status code này ít được sử dụng.
+
+### 306 Switch Proxy
+Thực tế status code này không được sử dụng nữa, nó chỉ tồn tại trong HTTP/1.1 draft.
+
+### 307 Temporary Redirect
+Tuong tự như 302, status code này thông báo rằng request của client đã được chuyển hướng tạm thời đến một URL khác. 
+Client cần gửi một request mới đến URL mới để lấy thông tin.
+
+Tuy nhiên, khác với 302, client sẽ không thay đổi phương thức request, nghĩa là nếu client gửi request POST thì sẽ vẫn gửi POST.
+
+Nguyên nhân dẫn đến vấn đề này là ở phiên bản HTTP/1, HTTP STATUS 302 cũng mô tả giữ nguyên method, nhưng nhiều trinh trình duyệt chuyển hướng request POST thành GET.
+
+Vì vậy ở phiên bản HTTP/1.1, 307 được tạo ra để giữ nguyên method của request và phân biên rõ ràng với 302.
+
+```plantuml
+@startuml
+
+title HTTP 307 Temporary Redirect
+
+participant "Client" as C
+participant "Server" as S
+
+C -> S: POST /old-url HTTP/1.1\nHost: example.com
+note right of S: Client requests a resource that has been temporarily redirected
+
+S --> C: HTTP/1.1 307 Temporary Redirect\nLocation: /new-url
+note left of C: Server responds with a 307 status code and the temporary location URL
+
+C -> S: POST /new-url HTTP/1.1\nHost: example.com
+note right of S: Client follows the redirect and sends the same HTTP method (GET) to the new URL
+
+S --> C: HTTP/1.1 200 OK\nContent-Type: text/html\n<html>New page content</html>
+note left of C: Server responds with the content of the new URL
+
+@enduml
+```
+
+### 308 Permanent Redirect
+Tương tự vấn đề của 302 và 307, 308 được tạo ra để giữ nguyên method của request và phân biên rõ ràng với 301.
+
+HTTP Status code này thông báo rằng request của client đã được chuyển hướng vĩnh viễn đến một URL khác giống với 301 nhưng giữ nguyên method của request khi chuyển hướng.
+
+
+
+```plantuml
+@startuml
+
+title HTTP 308 Permanent Redirect
+
+participant "Client" as C
+participant "Server" as S
+
+C -> S: POST /old-url HTTP/1.1\nHost: example.com
+note right of S: Client requests a resource that has been permanently redirected
+
+S --> C: HTTP/1.1 308 Permanent Redirect\nLocation: /new-url
+note left of C: Server responds with a 308 status code and the permanent location URL
+
+C -> S: POST /new-url HTTP/1.1\nHost: example.com
+note right of S: Client follows the redirect and sends the same HTTP method (GET) to the new URL
+
+S --> C: HTTP/1.1 200 OK\nContent-Type: text/html\n<html>New page content</html>
+note left of C: Server responds with the content of the new URL
+
+@enduml
+```
+
+## HTTP Status Code 4xx: Client Error
+Status code 4xx là nhóm status code thông báo cho client rằng request của client không hợp lệ hoặc không thể xử lý.
+Nguyên nhân có thể là do client gửi request không hợp lệ(Thiếu dữ liệu...etc...), không có quyền truy cập tài nguyên hoặc tài nguyên không tồn tại.
+
+### 400 Bad Request
+HTTP Status code này thông báo rằng request của client không hợp lệ. Thường được sử dụng khi client gửi request không đúng cú pháp, thiếu dữ liệu.
+Ví dụ: Client gửi request POST nhưng không có body nhưng server yêu cầu body.
+```plantuml
+@startuml
+
+title HTTP 400 Bad Request - Missing Required Parameter
+
+participant "Client" as C
+participant "Server" as S
+
+C -> S: GET /resource HTTP/1.1\nHost: example.com
+note right of S: The client sends a request without the required query parameter "userId"
+
+note left of S: The server requires "userId" parameter to process the request
+
+S --> C: HTTP/1.1 400 Bad Request\nContent-Type: text/html\n<html>Missing required parameter: userId</html>
+note left of C: The server responds with a 400 status code, indicating the missing "userId" parameter
+
+C -> S: GET /resource?userId=123 HTTP/1.1\nHost: example.com
+note right of S: The client resends the request with the required parameter "userId"
+
+S --> C: HTTP/1.1 200 OK\nContent-Type: application/json\n{"data": "Resource content"}
+note left of C: The server responds with the requested resource since the correct parameter was provided
+
+@enduml
+```
