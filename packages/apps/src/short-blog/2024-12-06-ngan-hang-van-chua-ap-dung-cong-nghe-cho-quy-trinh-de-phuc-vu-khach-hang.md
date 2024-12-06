@@ -5,7 +5,7 @@ description: Hôm nay 2024-12-06, mình có một trải nghiệm không vui khi
 authors: [ lethanh ]
 date: 2024-12-06
 outline: deep
-#image: /assets/image.YWT8j-6y.jpg
+image: /assets/ngan-hang.nYF7C9AG.webp
 draft: false
 ---
 
