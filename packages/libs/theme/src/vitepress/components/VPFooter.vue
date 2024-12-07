@@ -1,25 +1,29 @@
 <script lang="ts" setup>
-import { VTLink } from '../../core'
-import { useConfig } from '../composables/config'
+import {VTLink} from '../../core'
+import {useConfig} from '../composables/config'
 
-const { config } = useConfig()
+const {config} = useConfig()
 </script>
 
 <template>
   <div class="VPFooter">
     <p v-if="config.footer?.license" class="license">
-      {{ config.i18n?.footerLicense?.before ?? 'Released under the '
-      }}<VTLink class="link" :href="config.footer.license.link" no-icon>{{
-        config.footer.license.text
-      }}</VTLink
-      >{{ config.i18n?.footerLicense?.after ?? '.' }}
+      {{
+        config.i18n?.footerLicense?.before ?? 'Released under the '
+      }}
+      <VTLink class="link" :href="config.footer.license.link" no-icon>{{
+          config.footer.license.text
+        }}
+      </VTLink
+      >
+      {{ config.i18n?.footerLicense?.after ?? '.' }}
     </p>
 
     <p v-if="config.footer?.copyright" class="copyright">
       {{ config.footer.copyright }}
       <a href="//www.dmca.com/Protection/Status.aspx?ID=8febc2ec-f016-49e9-8483-8b1afed383d4"
          title="DMCA.com Protection Status" class="dmca-badge"> <img
-        src="https://images.dmca.com/Badges/dmca-badge-w250-5x1-10.png?ID=8febc2ec-f016-49e9-8483-8b1afed383d4"
+        src="https://images.dmca.com/Badges/dmca_protected_sml_120m.png?ID=8febc2ec-f016-49e9-8483-8b1afed383d4"
         alt="DMCA.com Protection Status" /></a>
       <script src="https://images.dmca.com/Badges/DMCABadgeHelper.min.js"></script>
     </p>
