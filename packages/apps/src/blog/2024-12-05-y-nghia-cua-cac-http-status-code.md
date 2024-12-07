@@ -990,26 +990,36 @@ Khi đó server sẽ trả về 409 Conflict.
 
 title HTTP 409 Conflict Example
 
-participant "Client" as C
-participant "Server" as S
+participant "Khách hàng 1" as C1
+participant "Khách hàng 2" as C2
+participant "Máy chủ" as S
 
-== Ví dụ: Xung đột yêu cầu ==
-C -> S: PUT /resource HTTP/1.1\nHost: example.com
-note right of S: Client gửi yêu cầu cập nhật tài nguyên.
+== Lần đầu lấy về trạng thái pending ==
+C1 -> S: GET /resource HTTP/1.1\nHost: example.com
+note right of S: Khách hàng 1 gửi yêu cầu để lấy thông tin tài nguyên.
 
-note left of S: Server nhận ra rằng yêu cầu này xung đột với trạng thái hiện tại của tài nguyên.
+note left of S: Máy chủ trả về tài nguyên với trạng thái là pending.
 
-S --> C: HTTP/1.1 409 Conflict\nContent-Type: text/html\n<html>Conflict: Resource state has been updated by another client.</html>
-note left of C: Server phản hồi với mã 409, thông báo rằng tài nguyên hiện tại đã được cập nhật bởi một client khác.
+S --> C1: HTTP/1.1 200 OK\nContent-Type: application/json\n{"status": "pending", "data": {...}}
+note left of C1: Khách hàng 1 nhận được tài nguyên với trạng thái "pending".
 
-== Ví dụ: Yêu cầu thành công ==
-C -> S: PUT /resource HTTP/1.1\nHost: example.com
-note right of S: 'Client gửi yêu cầu cập nhật tài nguyên.'
+== Khách hàng 2 cập nhật trạng thái thành approved ==
+C2 -> S: PUT /resource HTTP/1.1\nHost: example.com
+note right of S: Khách hàng 2 gửi yêu cầu để cập nhật trạng thái tài nguyên thành "approved".
 
-note left of S: Server xử lý yêu cầu mà không gặp xung đột.
+note left of S: Máy chủ nhận thấy trạng thái "pending" đã thay đổi thành "approved".
 
-S --> C: HTTP/1.1 200 OK\nContent-Type: application/json\n{"message": "Resource updated successfully"}
-note left of C: Server phản hồi với mã 200, thông báo rằng tài nguyên đã được cập nhật thành công.
+S --> C2: HTTP/1.1 200 OK\nContent-Type: application/json\n{"status": "approved", "message": "Resource updated successfully"}
+note left of C2: Khách hàng 2 nhận thông báo cập nhật thành công.
+
+== Khách hàng 1 cố gắng cập nhật lại thành reject ==
+C1 -> S: PUT /resource HTTP/1.1\nHost: example.com
+note right of S: Khách hàng 1 gửi yêu cầu để thay đổi trạng thái tài nguyên thành "reject".
+
+note left of S: Máy chủ nhận ra rằng trạng thái hiện tại của tài nguyên đã bị thay đổi bởi khách hàng khác và không cho phép thay đổi.
+
+S --> C1: HTTP/1.1 409 Conflict\nContent-Type: text/html\n<html>Conflict: The resource has already been updated by another client.</html>
+note left of C1: Máy chủ phản hồi với mã 409, thông báo rằng tài nguyên đã bị thay đổi bởi khách hàng khác.
 
 @enduml
 ```
