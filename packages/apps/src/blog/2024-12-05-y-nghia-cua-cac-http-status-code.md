@@ -678,3 +678,144 @@ note left of C: The server responds with the requested resource since the correc
 
 @enduml
 ```
+
+### 401 Unauthorized
+HTTP Status code này thông báo rằng client cần xác thực để truy cập tài nguyên. Thường được sử dụng khi client gửi request mà không có thông tin xác thực hoặc thông tin xác thực không hợp lệ.
+
+Ví dụ khi client gửi request mà không gửi token ở trong header, hoặc token không hợp lệ.
+
+```plantuml
+@startuml
+
+title HTTP 401 Unauthorized - No Authorization Header & Invalid Token
+
+participant "Client" as C
+participant "Server" as S
+
+== Case 1: Missing Authorization Header ==
+C -> S: GET /protected-resource HTTP/1.1\nHost: example.com
+note right of S: The client sends a request without an Authorization header.
+
+note left of S: The server requires an Authorization header to validate the request.
+
+S --> C: HTTP/1.1 401 Unauthorized\nContent-Type: text/html\n<html>Missing Authorization header</html>
+note left of C: The server responds with a 401 status code, indicating that the Authorization header is required.
+
+== Case 2: Invalid Authorization Header ==
+C -> S: GET /protected-resource HTTP/1.1\nHost: example.com\nAuthorization: Bearer invalid_token
+note right of S: The client sends a request with an invalid token.
+
+note left of S: The server checks the token and determines it is invalid.
+
+S --> C: HTTP/1.1 401 Unauthorized\nContent-Type: text/html\n<html>Invalid token</html>
+note left of C: The server responds with a 401 status code, indicating invalid credentials.
+
+== Successful Request ==
+C -> S: GET /protected-resource HTTP/1.1\nHost: example.com\nAuthorization: Bearer valid_token
+note right of S: The client sends a request with a valid token.
+
+note left of S: The server validates the token and grants access.
+
+S --> C: HTTP/1.1 200 OK\nContent-Type: application/json\n{"data": "Protected resource content"}
+note left of C: The server responds with the requested resource, as the client is authorized.
+
+@enduml
+```
+
+Như mô tả ở trên, khi API yêu cầu xác thực, client cần gửi thông tin xác thực lên cho server, nếu không gửi hoặc gửi thông tin không hợp lệ thì server sẽ trả về `401 Unauthorized`.
+
+### 402 Payment Required
+Code này không được sử dụng, nó được tạo ra để sử dụng trong tương lai và chưa được chuẩn hóa.
+
+### 403 Forbidden
+HTTP Status code này thông báo rằng client không có quyền truy cập tài nguyên. Thường được sử dụng khi client gửi request mà không có quyền truy cập tài nguyên.
+
+Ví dụ một tài khoản đã pass 401 nhưng khi kiểm tra quyền để truy cập tài nguyên thì không có, khi đó HTTP Status code 403 sẽ được trả về.
+
+```plantuml
+@startuml
+
+title HTTP 403 Forbidden - Authorization Passed but Insufficient Permissions
+
+participant "Client" as C
+participant "Server" as S
+
+== Case 1: Failed Authentication (401 Unauthorized) ==
+C -> S: GET /admin-resource HTTP/1.1\nHost: example.com
+note right of S: The client sends a request without an Authorization header or with invalid credentials.
+
+note left of S: The server requires authentication to verify the request.
+
+S --> C: HTTP/1.1 401 Unauthorized\nContent-Type: text/html\n<html>Unauthorized</html>
+note left of C: The server responds with 401, indicating authentication is required.
+
+== Case 2: Authentication Passed but Lacks Permissions (403 Forbidden) ==
+C -> S: GET /admin-resource HTTP/1.1\nHost: example.com\nAuthorization: Bearer valid_token
+note right of S: The client sends a valid token but does not have the required permissions for the requested resource.
+
+note left of S: The server validates the token but denies access due to insufficient privileges.
+
+S --> C: HTTP/1.1 403 Forbidden\nContent-Type: text/html\n<html>Access forbidden</html>
+note left of C: The server responds with 403, indicating the client is authenticated but not authorized to access the resource.
+
+== Successful Request (Admin Access) ==
+C -> S: GET /admin-resource HTTP/1.1\nHost: example.com\nAuthorization: Bearer admin_token
+note right of S: The client resends the request with credentials that grant admin permissions.
+
+note left of S: The server validates the token and checks that the client has sufficient permissions.
+
+S --> C: HTTP/1.1 200 OK\nContent-Type: application/json\n{"data": "Admin resource content"}
+note left of C: The server responds with the requested admin resource, as the client has the required permissions.
+
+@enduml
+```
+
+### 404 Not Found
+HTTP Status code này thông báo rằng server không tìm thấy tài nguyên mà client yêu cầu. Thường được sử dụng khi client yêu cầu một tài nguyên không tồn tại.
+
+```plantuml
+@startuml
+
+title HTTP 404 Not Found and Successful 200 OK Response
+
+participant "Client" as C
+participant "Server" as S
+
+== Case 1: Nonexistent Resource ==
+C -> S: GET /nonexistent-resource HTTP/1.1\nHost: example.com
+note right of S: The client requests a resource that does not exist on the server.
+
+note left of S: The server checks its routes and resource database but cannot find a match.
+
+S --> C: HTTP/1.1 404 Not Found\nContent-Type: text/html\n<html>Resource not found</html>
+note left of C: The server responds with 404, indicating the requested resource does not exist.
+
+== Case 2: Typo in URL ==
+C -> S: GET /ressource HTTP/1.1\nHost: example.com
+note right of S: The client makes a request to a misspelled endpoint.
+
+note left of S: The server fails to match the request to a valid route due to the typo.
+
+S --> C: HTTP/1.1 404 Not Found\nContent-Type: text/html\n<html>Invalid endpoint</html>
+note left of C: The client receives a 404 response due to the incorrect URL.
+
+== Case 3: Resource Previously Deleted ==
+C -> S: GET /deleted-resource HTTP/1.1\nHost: example.com
+note right of S: The client requests a resource that has been removed or archived.
+
+note left of S: The server confirms that the resource once existed but is no longer available.
+
+S --> C: HTTP/1.1 404 Not Found\nContent-Type: text/html\n<html>Resource deleted</html>
+note left of C: The server responds with 404, indicating the resource is no longer available.
+
+== Case 4: Resource Found ==
+C -> S: GET /existing-resource HTTP/1.1\nHost: example.com
+note right of S: The client requests a resource that exists on the server.
+
+note left of S: The server locates the requested resource and prepares it for delivery.
+
+S --> C: HTTP/1.1 200 OK\nContent-Type: application/json\n{"data": "Resource content"}
+note left of C: The server responds with 200, delivering the requested resource successfully.
+
+@enduml
+```
