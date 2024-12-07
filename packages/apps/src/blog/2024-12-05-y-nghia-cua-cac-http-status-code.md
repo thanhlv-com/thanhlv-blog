@@ -1079,3 +1079,5 @@ note left of C: Server phản hồi với mã 411, yêu cầu Client cung cấp 
 @enduml
 
 ```
+
+### 412 Precondition Failed
