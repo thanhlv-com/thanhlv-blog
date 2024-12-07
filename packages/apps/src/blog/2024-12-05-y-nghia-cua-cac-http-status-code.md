@@ -990,36 +990,92 @@ Khi đó server sẽ trả về 409 Conflict.
 
 title HTTP 409 Conflict Example
 
-participant "Khách hàng 1" as C1
-participant "Khách hàng 2" as C2
-participant "Máy chủ" as S
+participant "Client 1" as C1
+participant "Client 2" as C2
+participant "Server" as S
 
 == Lần đầu lấy về trạng thái pending ==
 C1 -> S: GET /resource HTTP/1.1\nHost: example.com
-note right of S: Khách hàng 1 gửi yêu cầu để lấy thông tin tài nguyên.
+note right of S: Client 1 gửi yêu cầu để lấy thông tin tài nguyên.
 
-note left of S: Máy chủ trả về tài nguyên với trạng thái là pending.
+note left of S: Server trả về tài nguyên với trạng thái là pending.
 
 S --> C1: HTTP/1.1 200 OK\nContent-Type: application/json\n{"status": "pending", "data": {...}}
-note left of C1: Khách hàng 1 nhận được tài nguyên với trạng thái "pending".
+note left of C1: Client 1 nhận được tài nguyên với trạng thái "pending".
 
-== Khách hàng 2 cập nhật trạng thái thành approved ==
+== Client 2 cập nhật trạng thái thành approved ==
 C2 -> S: PUT /resource HTTP/1.1\nHost: example.com
-note right of S: Khách hàng 2 gửi yêu cầu để cập nhật trạng thái tài nguyên thành "approved".
+note right of S: Client 2 gửi yêu cầu để cập nhật trạng thái tài nguyên thành "approved".
 
-note left of S: Máy chủ nhận thấy trạng thái "pending" đã thay đổi thành "approved".
+note left of S: Server nhận thấy trạng thái "pending" đã thay đổi thành "approved".
 
 S --> C2: HTTP/1.1 200 OK\nContent-Type: application/json\n{"status": "approved", "message": "Resource updated successfully"}
-note left of C2: Khách hàng 2 nhận thông báo cập nhật thành công.
+note left of C2: Client 2 nhận thông báo cập nhật thành công.
 
-== Khách hàng 1 cố gắng cập nhật lại thành reject ==
+== Client 1 cố gắng cập nhật lại thành reject ==
 C1 -> S: PUT /resource HTTP/1.1\nHost: example.com
-note right of S: Khách hàng 1 gửi yêu cầu để thay đổi trạng thái tài nguyên thành "reject".
+note right of S: Client 1 gửi yêu cầu để thay đổi trạng thái tài nguyên thành "reject".
 
-note left of S: Máy chủ nhận ra rằng trạng thái hiện tại của tài nguyên đã bị thay đổi bởi khách hàng khác và không cho phép thay đổi.
+note left of S: Server nhận ra rằng trạng thái hiện tại của tài nguyên đã bị thay đổi bởi Client khác và không cho phép thay đổi.
 
 S --> C1: HTTP/1.1 409 Conflict\nContent-Type: text/html\n<html>Conflict: The resource has already been updated by another client.</html>
-note left of C1: Máy chủ phản hồi với mã 409, thông báo rằng tài nguyên đã bị thay đổi bởi khách hàng khác.
+note left of C1: Server phản hồi với mã 409, thông báo rằng tài nguyên đã bị thay đổi bởi Client khác.
 
 @enduml
+```
+
+### 410 Gone
+HTTP Status code này thông báo rằng tài nguyên mà client yêu cầu đã không còn sẵn. Thường được sử dụng khi tài nguyên đã bị xóa và không thể phục hồi hoặc tồn tại lại trong tương lai bằng bất kỳ cách nào.
+
+
+Tuy nhiên hiện tại ít được sử dụng, thường sử dụng 404 Not Found thay thế.
+
+```plantuml
+@startuml
+
+title HTTP 410 Gone Example
+
+participant "Client" as C
+participant "Server" as S
+
+== Trường hợp tài nguyên bị xóa ==
+C -> S: GET /old-resource HTTP/1.1\nHost: example.com
+note right of S: Client gửi yêu cầu để truy cập tài nguyên.
+
+note left of S: Server kiểm tra và phát hiện tài nguyên đã bị xóa.
+
+S --> C: HTTP/1.1 410 Gone\nContent-Type: text/html\n<html>The requested resource is no longer available.</html>
+note left of C: Server phản hồi với mã 410, thông báo rằng tài nguyên đã bị xóa vĩnh viễn
+
+@enduml
+```
+
+Hiện tại ít được sử dụng, thường sử dụng 404 Not Found thay thế. Và coi đó là một cách thông báo rằng tài nguyên không tồn tại.
+
+### 411 Length Required
+HTTP Status code này thông báo rằng server yêu cầu client cung cấp thông tin về độ dài của body trong request. 
+
+Thường được sử dụng khi client gửi request mà không có thông tin về độ dài của body.
+
+Server cần thông tin về độ dài để xác định có đủ khả năng xử lý request hay không.
+Ví dụ khi server xác định có thể xử lý thì trả về `100 Continue` để client tiếp tục gửi body.
+
+```plantuml
+@startuml
+
+title HTTP 411 Length Required
+
+participant "Client" as C
+participant "Server" as S
+
+C -> S: POST /data HTTP/1.1\nHost: example.com\nContent-Type: application/json
+note right of S: Client gửi yêu cầu POST mà không có thông tin về độ dài của body.
+
+note left of S: Server yêu cầu Client cung cấp thông tin về độ dài của body.
+
+S --> C: HTTP/1.1 411 Length Required\nContent-Type: text/html\n<html>Length Required: The server requires the Content-Length header.</html>
+note left of C: Server phản hồi với mã 411, yêu cầu Client cung cấp thông tin về độ dài của body trong request.
+
+@enduml
+
 ```
