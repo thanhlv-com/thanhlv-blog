@@ -27,7 +27,7 @@ jobs:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: -1002300511836
         run: |
-          curl -s --data "chat_id=$TELEGRAM_CHAT_ID&text=🚀 Start build thanhlv.com with build number: ${{github.run_number}}" \
+          curl -s --data "chat_id=$TELEGRAM_CHAT_ID&text=🚀 Build thanhlv.com with build number: ${{github.run_number}}, Start" \
           "https://api.telegram.org/bot$TELEGRAM_BOT_TOKEN/sendMessage"
       - name: Check for changes in folders packages
         id: check_folders
@@ -101,6 +101,7 @@ jobs:
           TELEGRAM_CHAT_ID: -1002300511836
         run: |
           curl -s --data "chat_id=$TELEGRAM_CHAT_ID&text=🚀 Build thanhlv.com with build number: ${{github.run_number}}, Deploy to thanhlv.com" \
+          "https://api.telegram.org/bot$TELEGRAM_BOT_TOKEN/sendMessage"
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
