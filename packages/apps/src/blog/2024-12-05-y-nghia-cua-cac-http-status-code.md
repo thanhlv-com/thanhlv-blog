@@ -819,3 +819,164 @@ note left of C: The server responds with 200, delivering the requested resource 
 
 @enduml
 ```
+
+Lưu ý: Có thể là không tồn tại, hoặc đã bị xóa cứng hoặc đã bị xóa mềm. 
+
+### 405 Method Not Allowed
+HTTP Status code này thông báo rằng phương thức request của client không được phép trên tài nguyên. Thường được sử dụng khi client gửi request với phương thức không được hỗ trợ.
+
+Ví dụ server chỉ hỗ trợ method GET cho endpoint `/resource` nhưng client gửi request với method POST thì server sẽ trả về 405 Method Not Allowed.
+
+```plantuml
+@startuml
+
+title HTTP 405 Method Not Allowed and Method Allowed Response
+
+participant "Client" as C
+participant "Server" as S
+
+== Example: Method Not Allowed ==
+C -> S: POST /resource HTTP/1.1\nHost: example.com
+note right of S: The client sends a POST request to an endpoint that only supports GET.
+
+note left of S: The server checks the allowed methods for the endpoint and finds that POST is not supported.
+
+S --> C: HTTP/1.1 405 Method Not Allowed\nContent-Type: text/html\n<html>Method Not Allowed</html>
+note left of C: The server responds with 405, indicating that the POST method is not allowed on the resource.
+
+== Example: Method Allowed ==
+C -> S: GET /resource HTTP/1.1\nHost: example.com
+note right of S: The client sends a GET request to an endpoint that supports GET.
+
+note left of S: The server checks the allowed methods for the endpoint and finds GET is supported.
+
+S --> C: HTTP/1.1 200 OK\nContent-Type: application/json\n{"data": "Resource content"}
+note left of C: The server responds with 200, delivering the requested resource successfully.
+
+@enduml
+```
+
+### 406 Not Acceptable
+HTTP Status code này thông báo rằng server không thể trả về dữ liệu theo định dạng mà client yêu cầu. Thường được sử dụng khi client yêu cầu dữ liệu ở một định dạng mà server không hỗ trợ.
+
+Khi gửi request, client cần gửi thông tin về định dạng mà nó muốn nhận dữ liệu thông qua header `Accept` và có thể thêm `Accept-Encoding` và `Accept-Language`.
+
+Đây là định nghĩa data type mà client muốn nhận dữ liệu từ server.
+
+Nếu server không hỗ trợ định dạng mà client yêu cầu thì server sẽ trả về 406 Not Acceptable.
+
+```plantuml
+@startuml
+
+title HTTP 406 Not Acceptable
+
+participant "Client" as C
+participant "Server" as S
+
+== Example: Unsupported Data Format ==
+C -> S: GET /resource HTTP/1.1\nHost: example.com\nAccept: application/xml
+note right of S: The client requests a resource in XML format.
+
+note left of S: The server checks its supported formats and finds it does not support XML.
+
+S --> C: HTTP/1.1 406 Not Acceptable\nContent-Type: text/html\n<html>Unsupported data format</html>
+note left of C: The server responds with 406, indicating it cannot return data in the requested format.
+
+== Example: Supported Data Format ==
+C -> S: GET /resource HTTP/1.1\nHost: example.com\nAccept: application/json
+note right of S: The client requests a resource in JSON format.
+
+note left of S: The server checks its supported formats and finds it supports JSON.
+
+S --> C: HTTP/1.1 200 OK\nContent-Type: application/json\n{"data": "Resource content"}
+note left of C: The server responds with 200, delivering the requested resource in the supported format.
+
+@enduml
+```
+
+### 407 Proxy Authentication Required
+Khi client sử dụng một proxy trung gian để truy câp tài nguyên đến server, và proxy yêu cầu client cần xác thực để truy cập tài nguyên.
+
+Client cần gửi kèm thông tin xác thực của proxy. Nếu client không gửi thông tin xác thực hoặc thông tin xác thực không hợp lệ thì server sẽ trả về 407 Proxy Authentication Required.
+
+```plantuml
+@startuml
+
+title HTTP 407 Proxy Authentication Required
+
+participant "Client" as C
+participant "Proxy Server" as PS
+participant "Server" as S
+
+== Example: Proxy Authentication Required (Client does not send credentials) ==
+C -> PS: GET /resource HTTP/1.1\nHost: example.com
+note right of PS: The client requests a resource through the proxy without sending authentication credentials.
+
+note left of PS: The proxy server receives the request and finds that no authentication information is provided.
+
+PS --> C: HTTP/1.1 407 Proxy Authentication Required\nContent-Type: text/html\n<html>Authentication Required</html>
+note left of C: The proxy server responds with 407, prompting the client to provide valid authentication credentials.
+
+== Example: Proxy Authentication Required (Invalid credentials) ==
+C -> PS: GET /resource HTTP/1.1\nHost: example.com\nProxy-Authorization: Basic InvalidCredentials
+note right of PS: The client requests a resource through the proxy, but provides invalid authentication credentials.
+
+note left of PS: The proxy server receives the request and checks the provided credentials. They are found to be invalid.
+
+PS --> C: HTTP/1.1 407 Proxy Authentication Required\nContent-Type: text/html\n<html>Invalid credentials</html>
+note left of C: The proxy server responds with 407 again, indicating that the provided credentials were invalid.
+
+== Example: Proxy Authentication Successful ==
+C -> PS: GET /resource HTTP/1.1\nHost: example.com\nProxy-Authorization: Basic QWxhZGRpbjpvcGVuIHNlc2FtZQ==
+note right of PS: The client sends a request through the proxy, providing valid authentication credentials.
+
+note left of PS: The proxy server forwards the request to the main server with the valid credentials.
+
+PS -> S: GET /resource HTTP/1.1\nHost: example.com
+note right of PS: The server receives the request with the valid proxy authentication credentials.
+
+note left of S: The server checks and verifies the credentials.
+
+S --> PS: HTTP/1.1 200 OK\nContent-Type: application/json\n{"data": "Resource content"}
+note left of PS: The server responds with 200 OK, allowing access to the requested resource.
+
+PS -> C: HTTP/1.1 200 OK\nContent-Type: application/json\n{"data": "Resource content"}
+note left of C: The proxy server forwards the successful response back to the client.
+
+@enduml
+```
+
+### 408 Request Timeout
+
+HTTP Status code này thông báo rằng server đã hết thời gian xử lý request của client. Thường được sử dụng khi server không thể xử lý request của client trong khoảng thời gian quy định.
+
+Ví dụ server sẽ xử lý request của client trong 30s, nếu server không xử lý xong trong 30s thì sẽ trả về 408 Request Timeout.
+
+```plantuml
+@startuml
+
+title HTTP 408 Request Timeout and Successful Response
+
+participant "Client" as C
+participant "Server" as S
+
+== Example: Request Timeout ==
+C -> S: GET /resource HTTP/1.1\nHost: example.com
+note right of S: The client sends a request for a resource.
+
+note left of S: The server starts processing the request but does not complete within the allowed time.
+
+S --> C: HTTP/1.1 408 Request Timeout\nContent-Type: text/html\n<html>Request Timeout</html>
+note left of C: The server responds with 408, indicating that the request took too long to process.
+
+== Example: Successful Request ==
+C -> S: GET /resource HTTP/1.1\nHost: example.com
+note right of S: The client sends a request for a resource.
+
+note left of S: The server processes the request within the allowed time.
+
+S --> C: HTTP/1.1 200 OK\nContent-Type: application/json\n{"data": "Resource content"}
+note left of C: The server responds with 200, successfully delivering the requested resource.
+
+@enduml
+```

@@ -31,7 +31,7 @@ onMounted(() => {
 
 <template>
   <p class="VPLastUpdated">
-    {{  'Last updated' }}:
+    {{  'Cập nhật lần cuối' }}:
     <time :datetime="isoDatetime">{{ datetime }}</time>
   </p>
 </template>
