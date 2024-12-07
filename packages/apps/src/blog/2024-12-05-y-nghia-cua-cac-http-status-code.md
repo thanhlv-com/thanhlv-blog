@@ -87,7 +87,7 @@ Expect: 100-continue
 ```
 Trong trường hợp này:
 
-Client đang thông báo rằng yêu cầu của nó có một body với kích thước (1024 bytes) và mong đợi phản hồi 100 Continue từ máy chủ trước khi gửi phần thân dữ liệu.
+Client đang thông báo rằng yêu cầu của nó có một body với kích thước (1024 bytes) và mong đợi phản hồi 100 Continue từ Server trước khi gửi phần thân dữ liệu.
 
 Server sẽ response :
 ```
@@ -156,13 +156,13 @@ participant "Client" as C
 participant "Server" as S
 
 C -> S: GET /chat HTTP/1.1\nHost: example.com\nUpgrade: websocket\nConnection: Upgrade\nSec-WebSocket-Key: abc123...\nSec-WebSocket-Version: 13
-note right of S: Máy khách gửi yêu cầu GET để nâng cấp lên WebSocket. Máy chủ nhận được yêu cầu và kiểm tra các tiêu đề.
+note right of S: Client gửi yêu cầu GET để nâng cấp lên WebSocket. Server nhận được yêu cầu và kiểm tra các tiêu đề.
 
 S --> C: HTTP/1.1 101 Switching Protocols\nUpgrade: websocket\nConnection: Upgrade\nSec-WebSocket-Accept: xyz456...
-note left of C: Máy chủ trả lời với mã trạng thái 101 Switching Protocols, xác nhận việc chuyển giao giao thức và các tiêu đề "Upgrade" và "Connection".
+note left of C: Server trả lời với mã trạng thái 101 Switching Protocols, xác nhận việc chuyển giao giao thức và các tiêu đề "Upgrade" và "Connection".
 
 C -> S: WebSocket message: "Hello, Server!"
-note right of S: Máy khách gửi tin nhắn WebSocket đến máy chủ.
+note right of S: Client gửi tin nhắn WebSocket đến Server.
 
 S --> C: WebSocket message: "Hello, Client!"
 @enduml
@@ -200,10 +200,10 @@ participant "Client" as C
 participant "Server" as S
 
 C -> S: GET /resource HTTP/1.1\nHost: example.com
-note right of S: Máy khách gửi yêu cầu GET đến máy chủ để truy cập tài nguyên. Máy chủ nhận và xử lý yêu cầu.
+note right of S: Client gửi yêu cầu GET đến Server để truy cập tài nguyên. Server nhận và xử lý yêu cầu.
 
 S --> C: HTTP/1.1 200 OK\nContent-Type: application/json\nContent-Length: 123 \n {"data": "example"}
-note left of C: Máy khách nhận được phản hồi từ máy chủ với dữ liệu yêu cầu.
+note left of C: Client nhận được phản hồi từ Server với dữ liệu yêu cầu.
 @enduml
 ```
 ### 201 Created
@@ -220,10 +220,10 @@ participant "Client" as C
 participant "Server" as S
 
 C -> S: POST /create HTTP/1.1\nHost: example.com\nContent-Type: application/json\n{"name": "New Resource"}
-note right of S: Máy khách gửi yêu cầu POST để tạo tài nguyên mới. Máy chủ nhận và xử lý yêu cầu tạo tài nguyên.
+note right of S: Client gửi yêu cầu POST để tạo tài nguyên mới. Server nhận và xử lý yêu cầu tạo tài nguyên.
 
 S --> C: HTTP/1.1 201 Created\nLocation: /resource/12345\nContent-Type: application/json\n{"status": "success", "id": 12345}
-note left of C: Máy khách nhận được phản hồi từ máy chủ với thông tin chi tiết về tài nguyên đã được tạo.
+note left of C: Client nhận được phản hồi từ Server với thông tin chi tiết về tài nguyên đã được tạo.
 @enduml
 ```
 
@@ -247,16 +247,16 @@ participant "Client" as C
 participant "Server" as S
 
 C -> S: POST /process HTTP/1.1\nHost: example.com\nContent-Type: application/json\n{"task": "Send email"}
-note right of S: Máy khách gửi yêu cầu POST để xử lý tác vụ. Máy chủ nhận và chấp nhận yêu cầu để xử lý sau.
+note right of S: Client gửi yêu cầu POST để xử lý tác vụ. Server nhận và chấp nhận yêu cầu để xử lý sau.
 
 S --> C: HTTP/1.1 202 Accepted\nContent-Type: application/json\n{"status": "accepted", "taskId": 98765}
-note left of C: Máy khách nhận được phản hồi từ máy chủ, cho biết yêu cầu đã được chấp nhận và sẽ được xử lý trong tương lai.
+note left of C: Client nhận được phản hồi từ Server, cho biết yêu cầu đã được chấp nhận và sẽ được xử lý trong tương lai.
 
 C -> S: GET /status/98765 HTTP/1.1\nHost: example.com
-note right of S: Máy khách có thể kiểm tra trạng thái của tác vụ sau.
+note right of S: Client có thể kiểm tra trạng thái của tác vụ sau.
 
 S --> C: HTTP/1.1 200 OK\nContent-Type: application/json\n{"status": "in progress", "taskId": 98765}
-note left of C: Máy khách nhận được cập nhật trạng thái của tác vụ.
+note left of C: Client nhận được cập nhật trạng thái của tác vụ.
 @enduml
 ```
 
@@ -276,16 +276,16 @@ participant "Proxy" as P
 participant "Server" as S
 
 C -> P: GET /data HTTP/1.1\nHost: example.com
-note right of P: Máy khách gửi yêu cầu GET tới Proxy để truy cập dữ liệu. Proxy kiểm tra xem nó có dữ liệu đã được lưu trữ hay không.
+note right of P: Client gửi yêu cầu GET tới Proxy để truy cập dữ liệu. Proxy kiểm tra xem nó có dữ liệu đã được lưu trữ hay không.
 
 P -> S: GET /data HTTP/1.1\nHost: example.com
-note right of S: Proxy chuyển tiếp yêu cầu đến máy chủ để xử lý và gửi dữ liệu.
+note right of S: Proxy chuyển tiếp yêu cầu đến Server để xử lý và gửi dữ liệu.
 
 S --> P: HTTP/1.1 200 OK\nContent-Type: application/json\n{"data": "Original data"}
-note left of P: Máy chủ xử lý yêu cầu và gửi phản hồi gốc.
+note left of P: Server xử lý yêu cầu và gửi phản hồi gốc.
 
 P --> C: HTTP/1.1 203 Non-Authoritative Information\nContent-Type: application/json\n{"data": "Cached data"}
-note left of C: Máy khách nhận được phản hồi từ Proxy với dữ liệu được lưu trữ, kèm theo cảnh báo thông tin không chính xác.
+note left of C: Client nhận được phản hồi từ Proxy với dữ liệu được lưu trữ, kèm theo cảnh báo thông tin không chính xác.
 @enduml
 ```
 
@@ -306,10 +306,10 @@ participant "Client" as C
 participant "Server" as S
 
 C -> S: DELETE /resource HTTP/1.1\nHost: example.com
-note right of S: Máy khách gửi yêu cầu DELETE để xóa tài nguyên. Máy chủ nhận và xử lý yêu cầu.
+note right of S: Client gửi yêu cầu DELETE để xóa tài nguyên. Server nhận và xử lý yêu cầu.
 
 S --> C: HTTP/1.1 204 No Content
-note left of C: Máy khách nhận được phản hồi từ máy chủ với không có nội dung, báo hiệu rằng tài nguyên đã được xóa thành công.
+note left of C: Client nhận được phản hồi từ Server với không có nội dung, báo hiệu rằng tài nguyên đã được xóa thành công.
 @enduml
 ```
 
@@ -326,10 +326,10 @@ participant "Client" as C
 participant "Server" as S
 
 C -> S: POST /submit-form HTTP/1.1\nHost: example.com\nContent-Type: application/x-www-form-urlencoded\n{"formData": "user input"}
-note right of S: Máy khách gửi yêu cầu POST để gửi dữ liệu từ biểu mẫu. Máy chủ nhận và xử lý dữ liệu.
+note right of S: Client gửi yêu cầu POST để gửi dữ liệu từ biểu mẫu. Server nhận và xử lý dữ liệu.
 
 S --> C: HTTP/1.1 205 Reset Content
-note left of C: Máy khách nhận được phản hồi từ máy chủ, yêu cầu reset lại biểu mẫu hoặc màn hình hiển thị.
+note left of C: Client nhận được phản hồi từ Server, yêu cầu reset lại biểu mẫu hoặc màn hình hiển thị.
 @enduml
 
 ```
@@ -386,10 +386,10 @@ participant "Client" as C
 participant "Server" as S
 
 C -> S: PROPFIND /collection HTTP/1.1\nHost: example.com
-note right of S: Máy khách yêu cầu các thuộc tính của nhiều tài nguyên trong một bộ sưu tập. 
+note right of S: Client yêu cầu các thuộc tính của nhiều tài nguyên trong một bộ sưu tập. 
 
 S --> C: HTTP/1.1 207 Multi-Status\nContent-Type: application/json\n{\n  "multiStatus": [\n    {\n      "href": "/resource1",\n      "status": "200 OK"\n    },\n    {\n      "href": "/resource2",\n      "status": "404 Not Found"\n    }\n  ]\n}
-note left of C: Máy chủ trả về phản hồi đa trạng thái, chứa mã trạng thái cho mỗi tài nguyên dưới định dạng JSON.
+note left of C: Server trả về phản hồi đa trạng thái, chứa mã trạng thái cho mỗi tài nguyên dưới định dạng JSON.
 @enduml
 
 ```
@@ -412,16 +412,16 @@ participant "Client" as C
 participant "Server" as S
 
 C -> S: GET /resource HTTP/1.1\nHost: example.com
-note right of S: Máy khách yêu cầu tài nguyên có nhiều biểu diễn có thể có.
+note right of S: Client yêu cầu tài nguyên có nhiều biểu diễn có thể có.
 
 S --> C: HTTP/1.1 300 Multiple Choices\nContent-Type: application/json\n{\n  "choices": [\n    {"url": "/resource/en", "language": "English"},\n    {"url": "/resource/fr", "language": "French"},\n    {"url": "/resource/es", "language": "Spanish"}\n  ]\n}
-note left of C: Máy chủ trả lời với danh sách các lựa chọn có sẵn cho tài nguyên dưới dạng JSON.
+note left of C: Server trả lời với danh sách các lựa chọn có sẵn cho tài nguyên dưới dạng JSON.
 
 C -> S: GET /resource/en HTTP/1.1\nHost: example.com
-note right of S: Máy khách chọn một trong các lựa chọn có sẵn.
+note right of S: Client chọn một trong các lựa chọn có sẵn.
 
 S --> C: HTTP/1.1 200 OK\nContent-Type: application/json\n{"content": "English content"}
-note left of C: Máy chủ trả lời với biểu diễn đã chọn trong tiếng Anh.
+note left of C: Server trả lời với biểu diễn đã chọn trong tiếng Anh.
 @enduml
 ```
 
@@ -468,16 +468,16 @@ participant "Client" as C
 participant "Server" as S
 
 C -> S: POST /old-url HTTP/1.1\nHost: example.com
-note right of S: Máy khách yêu cầu tài nguyên mà đã tạm thời di chuyển.
+note right of S: Client yêu cầu tài nguyên mà đã tạm thời di chuyển.
 
 S --> C: HTTP/1.1 302 Found\nLocation: /temporary-url
-note left of C: Máy chủ phản hồi với mã trạng thái 302 và URL tạm thời để chuyển hướng.
+note left of C: Server phản hồi với mã trạng thái 302 và URL tạm thời để chuyển hướng.
 
 C -> S: GET /temporary-url HTTP/1.1\nHost: example.com
-note right of S: Máy khách làm theo chuyển hướng và yêu cầu URL tạm thời.
+note right of S: Client làm theo chuyển hướng và yêu cầu URL tạm thời.
 
 S --> C: HTTP/1.1 200 OK\nContent-Type: text/html\n<html>Temporary page content</html>
-note left of C: Máy chủ phản hồi với nội dung của URL tạm thời.
+note left of C: Server phản hồi với nội dung của URL tạm thời.
 @enduml
 ```
 
@@ -498,16 +498,16 @@ participant "Client" as C
 participant "Server" as S
 
 C -> S: POST /submit-form HTTP/1.1\nHost: example.com\nContent-Type: application/x-www-form-urlencoded\nData: form_data
-note right of S: Máy khách gửi một yêu cầu `POST` để gửi dữ liệu từ biểu mẫu.
+note right of S: Client gửi một yêu cầu `POST` để gửi dữ liệu từ biểu mẫu.
 
 S --> C: HTTP/1.1 303 See Other\nLocation: /confirmation
-note left of C: Máy chủ phản hồi với mã trạng thái 303, chỉ ra rằng máy khách nên thực hiện một yêu cầu `GET` tới URL mới.
+note left of C: Server phản hồi với mã trạng thái 303, chỉ ra rằng Client nên thực hiện một yêu cầu `GET` tới URL mới.
 
 C -> S: GET /confirmation HTTP/1.1\nHost: example.com
-note right of S: Máy khách làm theo chuyển hướng và gửi yêu cầu `GET` tới URL mới.
+note right of S: Client làm theo chuyển hướng và gửi yêu cầu `GET` tới URL mới.
 
 S --> C: HTTP/1.1 200 OK\nContent-Type: text/html\n<html>Confirmation page content</html>
-note left of C: Máy chủ phản hồi với nội dung của trang xác nhận.
+note left of C: Server phản hồi với nội dung của trang xác nhận.
 @enduml
 ```
 
@@ -530,18 +530,18 @@ participant "Client" as C
 participant "Server" as S
 
 C -> S: GET /resource HTTP/1.1\nHost: example.com
-note right of S: Máy khách yêu cầu tài nguyên lần đầu tiên
+note right of S: Client yêu cầu tài nguyên lần đầu tiên
 
 S --> C: HTTP/1.1 200 OK\nContent-Type: application/json\n{"data": "Resource content"}
-note left of C: Máy chủ phản hồi với nội dung của tài nguyên
-note right of C: Máy khách lưu tài nguyên vào bộ nhớ đệm
+note left of C: Server phản hồi với nội dung của tài nguyên
+note right of C: Client lưu tài nguyên vào bộ nhớ đệm
 
 C -> S: GET /resource HTTP/1.1\nHost: example.com\nIf-Modified-Since: <last-modified-date>
-note right of S: Máy khách gửi yêu cầu với tiêu đề `If-Modified-Since` để kiểm tra xem tài nguyên đã thay đổi hay chưa
+note right of S: Client gửi yêu cầu với tiêu đề `If-Modified-Since` để kiểm tra xem tài nguyên đã thay đổi hay chưa
 
 S --> C: HTTP/1.1 304 Not Modified
-note left of C: Máy chủ phản hồi với mã trạng thái 304, chỉ ra rằng không có sự thay đổi
-note right of C: Máy khách lấy tài nguyên từ bộ nhớ đệm của mình
+note left of C: Server phản hồi với mã trạng thái 304, chỉ ra rằng không có sự thay đổi
+note right of C: Client lấy tài nguyên từ bộ nhớ đệm của mình
 
 @enduml
 
@@ -562,13 +562,13 @@ participant "Server" as S
 participant "Proxy" as P
 
 C -> S: GET /resource HTTP/1.1\nHost: example.com
-note right of S: Khách hàng yêu cầu tài nguyên, và server chỉ định sử dụng proxy
+note right of S: Client yêu cầu tài nguyên, và server chỉ định sử dụng proxy
 
 S --> C: HTTP/1.1 305 Sử dụng Proxy\nLocation: http://proxy.example.com
 note left of C: Server phản hồi với mã trạng thái 305 và URL của proxy
 
 C -> P: GET /resource HTTP/1.1\nHost: proxy.example.com
-note right of P: Khách hàng gửi yêu cầu đến máy chủ proxy đã chỉ định
+note right of P: Client gửi yêu cầu đến Server proxy đã chỉ định
 
 P --> C: HTTP/1.1 200 OK\nContent-Type: application/json\n{"data": "Nội dung tài nguyên"}
 note left of C: Proxy phản hồi với nội dung của tài nguyên
@@ -600,16 +600,16 @@ participant "Client" as C
 participant "Server" as S
 
 C -> S: POST /old-url HTTP/1.1\nHost: example.com
-note right of S: Máy khách yêu cầu tài nguyên mà đã tạm thời chuyển hướng
+note right of S: Client yêu cầu tài nguyên mà đã tạm thời chuyển hướng
 
 S --> C: HTTP/1.1 307 Temporary Redirect\nLocation: /new-url
-note left of C: Máy chủ phản hồi với mã trạng thái 307 và URL tạm thời
+note left of C: Server phản hồi với mã trạng thái 307 và URL tạm thời
 
 C -> S: POST /new-url HTTP/1.1\nHost: example.com
-note right of S: Máy khách làm theo chuyển hướng và gửi lại cùng phương thức HTTP (POST) đến URL mới
+note right of S: Client làm theo chuyển hướng và gửi lại cùng phương thức HTTP (POST) đến URL mới
 
 S --> C: HTTP/1.1 200 OK\nContent-Type: text/html\n<html>New page content</html>
-note left of C: Máy chủ phản hồi với nội dung của URL mới
+note left of C: Server phản hồi với nội dung của URL mới
 @enduml
 ```
 
@@ -629,16 +629,16 @@ participant "Client" as C
 participant "Server" as S
 
 C -> S: POST /old-url HTTP/1.1\nHost: example.com
-note right of S: Máy khách yêu cầu tài nguyên mà đã được chuyển hướng vĩnh viễn
+note right of S: Client yêu cầu tài nguyên mà đã được chuyển hướng vĩnh viễn
 
 S --> C: HTTP/1.1 308 Permanent Redirect\nLocation: /new-url
-note left of C: Máy chủ phản hồi với mã trạng thái 308 và URL vĩnh viễn
+note left of C: Server phản hồi với mã trạng thái 308 và URL vĩnh viễn
 
 C -> S: POST /new-url HTTP/1.1\nHost: example.com
-note right of S: Máy khách làm theo chuyển hướng và gửi lại cùng phương thức HTTP (POST) tới URL mới
+note right of S: Client làm theo chuyển hướng và gửi lại cùng phương thức HTTP (POST) tới URL mới
 
 S --> C: HTTP/1.1 200 OK\nContent-Type: text/html\n<html>New page content</html>
-note left of C: Máy chủ phản hồi với nội dung của URL mới
+note left of C: Server phản hồi với nội dung của URL mới
 @enduml
 ```
 
@@ -658,18 +658,18 @@ participant "Client" as C
 participant "Server" as S
 
 C -> S: GET /resource HTTP/1.1\nHost: example.com
-note right of S: Máy khách gửi yêu cầu mà không có tham số truy vấn bắt buộc "userId"
+note right of S: Client gửi yêu cầu mà không có tham số truy vấn bắt buộc "userId"
 
-note left of S: Máy chủ yêu cầu tham số "userId" để xử lý yêu cầu
+note left of S: Server yêu cầu tham số "userId" để xử lý yêu cầu
 
 S --> C: HTTP/1.1 400 Bad Request\nContent-Type: text/html\n<html>Missing required parameter: userId</html>
-note left of C: Máy chủ phản hồi với mã trạng thái 400, chỉ ra rằng thiếu tham số "userId"
+note left of C: Server phản hồi với mã trạng thái 400, chỉ ra rằng thiếu tham số "userId"
 
 C -> S: GET /resource?userId=123 HTTP/1.1\nHost: example.com
-note right of S: Máy khách gửi lại yêu cầu với tham số bắt buộc "userId"
+note right of S: Client gửi lại yêu cầu với tham số bắt buộc "userId"
 
 S --> C: HTTP/1.1 200 OK\nContent-Type: application/json\n{"data": "Resource content"}
-note left of C: Máy chủ phản hồi với tài nguyên đã yêu cầu sau khi tham số đúng được cung cấp
+note left of C: Server phản hồi với tài nguyên đã yêu cầu sau khi tham số đúng được cung cấp
 @enduml
 ```
 
@@ -688,30 +688,30 @@ participant "Server" as S
 
 == Case 1: Missing Authorization Header ==
 C -> S: GET /protected-resource HTTP/1.1\nHost: example.com
-note right of S: Máy khách gửi yêu cầu mà không có tiêu đề Authorization.
+note right of S: Client gửi yêu cầu mà không có tiêu đề Authorization.
 
-note left of S: Máy chủ yêu cầu tiêu đề Authorization để xác thực yêu cầu.
+note left of S: Server yêu cầu tiêu đề Authorization để xác thực yêu cầu.
 
 S --> C: HTTP/1.1 401 Unauthorized\nContent-Type: text/html\n<html>Missing Authorization header</html>
-note left of C: Máy chủ phản hồi với mã trạng thái 401, chỉ ra rằng tiêu đề Authorization là bắt buộc.
+note left of C: Server phản hồi với mã trạng thái 401, chỉ ra rằng tiêu đề Authorization là bắt buộc.
 
 == Case 2: Invalid Authorization Header ==
 C -> S: GET /protected-resource HTTP/1.1\nHost: example.com\nAuthorization: Bearer invalid_token
-note right of S: Máy khách gửi yêu cầu với một token không hợp lệ.
+note right of S: Client gửi yêu cầu với một token không hợp lệ.
 
-note left of S: Máy chủ kiểm tra token và xác định là không hợp lệ.
+note left of S: Server kiểm tra token và xác định là không hợp lệ.
 
 S --> C: HTTP/1.1 401 Unauthorized\nContent-Type: text/html\n<html>Invalid token</html>
-note left of C: Máy chủ phản hồi với mã trạng thái 401, chỉ ra rằng thông tin xác thực không hợp lệ.
+note left of C: Server phản hồi với mã trạng thái 401, chỉ ra rằng thông tin xác thực không hợp lệ.
 
 == Successful Request ==
 C -> S: GET /protected-resource HTTP/1.1\nHost: example.com\nAuthorization: Bearer valid_token
-note right of S: Máy khách gửi yêu cầu với một token hợp lệ.
+note right of S: Client gửi yêu cầu với một token hợp lệ.
 
-note left of S: Máy chủ xác thực token và cấp quyền truy cập.
+note left of S: Server xác thực token và cấp quyền truy cập.
 
 S --> C: HTTP/1.1 200 OK\nContent-Type: application/json\n{"data": "Protected resource content"}
-note left of C: Máy chủ phản hồi với tài nguyên đã yêu cầu, vì máy khách đã được xác thực.
+note left of C: Server phản hồi với tài nguyên đã yêu cầu, vì Client đã được xác thực.
 @enduml
 ```
 
@@ -735,30 +735,30 @@ participant "Server" as S
 
 == Case 1: Failed Authentication (401 Unauthorized) ==
 C -> S: GET /admin-resource HTTP/1.1\nHost: example.com
-note right of S: Máy khách gửi yêu cầu mà không có tiêu đề Authorization hoặc với thông tin xác thực không hợp lệ.
+note right of S: Client gửi yêu cầu mà không có tiêu đề Authorization hoặc với thông tin xác thực không hợp lệ.
 
-note left of S: Máy chủ yêu cầu phải xác thực để kiểm tra yêu cầu.
+note left of S: Server yêu cầu phải xác thực để kiểm tra yêu cầu.
 
 S --> C: HTTP/1.1 401 Unauthorized\nContent-Type: text/html\n<html>Unauthorized</html>
-note left of C: Máy chủ phản hồi với 401, chỉ ra rằng yêu cầu xác thực là cần thiết.
+note left of C: Server phản hồi với 401, chỉ ra rằng yêu cầu xác thực là cần thiết.
 
 == Case 2: Authentication Passed but Lacks Permissions (403 Forbidden) ==
 C -> S: GET /admin-resource HTTP/1.1\nHost: example.com\nAuthorization: Bearer valid_token
-note right of S: Máy khách gửi một token hợp lệ nhưng không có quyền truy cập yêu cầu cho tài nguyên đã yêu cầu.
+note right of S: Client gửi một token hợp lệ nhưng không có quyền truy cập yêu cầu cho tài nguyên đã yêu cầu.
 
-note left of S: Máy chủ kiểm tra token nhưng từ chối quyền truy cập do thiếu quyền.
+note left of S: Server kiểm tra token nhưng từ chối quyền truy cập do thiếu quyền.
 
 S --> C: HTTP/1.1 403 Forbidden\nContent-Type: text/html\n<html>Access forbidden</html>
-note left of C: Máy chủ phản hồi với 403, chỉ ra rằng máy khách đã được xác thực nhưng không có quyền truy cập vào tài nguyên.
+note left of C: Server phản hồi với 403, chỉ ra rằng Client đã được xác thực nhưng không có quyền truy cập vào tài nguyên.
 
 == Successful Request (Admin Access) ==
 C -> S: GET /admin-resource HTTP/1.1\nHost: example.com\nAuthorization: Bearer admin_token
-note right of S: Máy khách gửi lại yêu cầu với thông tin xác thực cho phép quyền admin.
+note right of S: Client gửi lại yêu cầu với thông tin xác thực cho phép quyền admin.
 
-note left of S: Máy chủ kiểm tra token và xác nhận rằng máy khách có đủ quyền.
+note left of S: Server kiểm tra token và xác nhận rằng Client có đủ quyền.
 
 S --> C: HTTP/1.1 200 OK\nContent-Type: application/json\n{"data": "Admin resource content"}
-note left of C: Máy chủ phản hồi với tài nguyên admin đã yêu cầu, vì máy khách có quyền truy cập cần thiết.
+note left of C: Server phản hồi với tài nguyên admin đã yêu cầu, vì Client có quyền truy cập cần thiết.
 
 @enduml
 ```
@@ -776,39 +776,39 @@ participant "Server" as S
 
 == Case 1: Nonexistent Resource ==
 C -> S: GET /nonexistent-resource HTTP/1.1\nHost: example.com
-note right of S: Khách hàng yêu cầu một tài nguyên mà không tồn tại trên máy chủ.
+note right of S: Client yêu cầu một tài nguyên mà không tồn tại trên Server.
 
-note left of S: Máy chủ kiểm tra các route và cơ sở dữ liệu tài nguyên của nó nhưng không tìm thấy bất kỳ sự khớp nào.
+note left of S: Server kiểm tra các route và cơ sở dữ liệu tài nguyên của nó nhưng không tìm thấy bất kỳ sự khớp nào.
 
 S --> C: HTTP/1.1 404 Not Found\nContent-Type: text/html\n<html>Resource not found</html>
-note left of C: Máy chủ phản hồi với mã 404, cho biết tài nguyên yêu cầu không tồn tại.
+note left of C: Server phản hồi với mã 404, cho biết tài nguyên yêu cầu không tồn tại.
 
 == Case 2: Typo in URL ==
 C -> S: GET /ressource HTTP/1.1\nHost: example.com
-note right of S: Khách hàng gửi yêu cầu đến một endpoint bị đánh vần sai.
+note right of S: Client gửi yêu cầu đến một endpoint bị đánh vần sai.
 
-note left of S: Máy chủ không thể khớp yêu cầu với một route hợp lệ do lỗi chính tả.
+note left of S: Server không thể khớp yêu cầu với một route hợp lệ do lỗi chính tả.
 
 S --> C: HTTP/1.1 404 Not Found\nContent-Type: text/html\n<html>Invalid endpoint</html>
-note left of C: Khách hàng nhận được phản hồi 404 do URL không đúng.
+note left of C: Client nhận được phản hồi 404 do URL không đúng.
 
 == Case 3: Resource Previously Deleted ==
 C -> S: GET /deleted-resource HTTP/1.1\nHost: example.com
-note right of S: Khách hàng yêu cầu một tài nguyên đã bị xóa
+note right of S: Client yêu cầu một tài nguyên đã bị xóa
 
-note left of S: Máy chủ xác nhận rằng tài nguyên từng tồn tại nhưng hiện không còn sẵn.
+note left of S: Server xác nhận rằng tài nguyên từng tồn tại nhưng hiện không còn sẵn.
 
 S --> C: HTTP/1.1 404 Not Found\nContent-Type: text/html\n<html>Resource deleted</html>
-note left of C: Máy chủ phản hồi với 404, cho biết tài nguyên không còn sẵn.
+note left of C: Server phản hồi với 404, cho biết tài nguyên không còn sẵn.
 
 == Case 4: Resource Found ==
 C -> S: GET /existing-resource HTTP/1.1\nHost: example.com
-note right of S: Khách hàng yêu cầu tài nguyên tồn tại trên máy chủ.
+note right of S: Client yêu cầu tài nguyên tồn tại trên Server.
 
-note left of S: Máy chủ tìm thấy tài nguyên yêu cầu và chuẩn bị để giao nó.
+note left of S: Server tìm thấy tài nguyên yêu cầu và chuẩn bị để giao nó.
 
 S --> C: HTTP/1.1 200 OK\nContent-Type: application/json\n{"data": "Resource content"}
-note left of C: Máy chủ phản hồi với 200, giao tài nguyên yêu cầu thành công.
+note left of C: Server phản hồi với 200, giao tài nguyên yêu cầu thành công.
 
 @enduml
 ```
@@ -830,21 +830,21 @@ participant "Server" as S
 
 == Example: Method Not Allowed ==
 C -> S: POST /resource HTTP/1.1\nHost: example.com
-note right of S: Khách hàng gửi yêu cầu POST đến một endpoint mà chỉ hỗ trợ GET.
+note right of S: Client gửi yêu cầu POST đến một endpoint mà chỉ hỗ trợ GET.
 
-note left of S: Máy chủ kiểm tra các phương thức được phép cho endpoint và phát hiện rằng POST không được hỗ trợ.
+note left of S: Server kiểm tra các phương thức được phép cho endpoint và phát hiện rằng POST không được hỗ trợ.
 
 S --> C: HTTP/1.1 405 Method Not Allowed\nContent-Type: text/html\n<html>Method Not Allowed</html>
-note left of C: Máy chủ phản hồi với mã 405, thông báo rằng phương thức POST không được phép trên tài nguyên.
+note left of C: Server phản hồi với mã 405, thông báo rằng phương thức POST không được phép trên tài nguyên.
 
 == Example: Method Allowed ==
 C -> S: GET /resource HTTP/1.1\nHost: example.com
-note right of S: Khách hàng gửi yêu cầu GET đến một endpoint hỗ trợ GET.
+note right of S: Client gửi yêu cầu GET đến một endpoint hỗ trợ GET.
 
-note left of S: Máy chủ kiểm tra các phương thức được phép cho endpoint và phát hiện rằng GET được hỗ trợ.
+note left of S: Server kiểm tra các phương thức được phép cho endpoint và phát hiện rằng GET được hỗ trợ.
 
 S --> C: HTTP/1.1 200 OK\nContent-Type: application/json\n{"data": "Resource content"}
-note left of C: Máy chủ phản hồi với 200, giao tài nguyên yêu cầu thành công.
+note left of C: Server phản hồi với 200, giao tài nguyên yêu cầu thành công.
 
 @enduml
 ```
@@ -868,21 +868,21 @@ participant "Server" as S
 
 == Example: Unsupported Data Format ==
 C -> S: GET /resource HTTP/1.1\nHost: example.com\nAccept: application/xml
-note right of S: Khách hàng yêu cầu tài nguyên dưới định dạng XML.
+note right of S: Client yêu cầu tài nguyên dưới định dạng XML.
 
-note left of S: Máy chủ kiểm tra các định dạng hỗ trợ của nó và nhận thấy không hỗ trợ XML.
+note left of S: Server kiểm tra các định dạng hỗ trợ của nó và nhận thấy không hỗ trợ XML.
 
 S --> C: HTTP/1.1 406 Not Acceptable\nContent-Type: text/html\n<html>Unsupported data format</html>
-note left of C: Máy chủ phản hồi với mã 406, thông báo không thể trả dữ liệu trong định dạng yêu cầu.
+note left of C: Server phản hồi với mã 406, thông báo không thể trả dữ liệu trong định dạng yêu cầu.
 
 == Example: Supported Data Format ==
 C -> S: GET /resource HTTP/1.1\nHost: example.com\nAccept: application/json
-note right of S: Khách hàng yêu cầu tài nguyên dưới định dạng JSON.
+note right of S: Client yêu cầu tài nguyên dưới định dạng JSON.
 
-note left of S: Máy chủ kiểm tra các định dạng hỗ trợ của nó và xác nhận rằng JSON được hỗ trợ.
+note left of S: Server kiểm tra các định dạng hỗ trợ của nó và xác nhận rằng JSON được hỗ trợ.
 
 S --> C: HTTP/1.1 200 OK\nContent-Type: application/json\n{"data": "Resource content"}
-note left of C: Máy chủ phản hồi với 200, giao tài nguyên yêu cầu dưới định dạng được hỗ trợ.
+note left of C: Server phản hồi với 200, giao tài nguyên yêu cầu dưới định dạng được hỗ trợ.
 
 @enduml
 ```
@@ -903,38 +903,38 @@ participant "Server" as S
 
 == Example: Proxy Authentication Required (Client does not send credentials) ==
 C -> PS: GET /resource HTTP/1.1\nHost: example.com
-note right of PS: Khách hàng yêu cầu tài nguyên thông qua proxy mà không gửi thông tin xác thực.
+note right of PS: Client yêu cầu tài nguyên thông qua proxy mà không gửi thông tin xác thực.
 
-note left of PS: Máy chủ proxy nhận được yêu cầu và nhận thấy không có thông tin xác thực được cung cấp.
+note left of PS: Server proxy nhận được yêu cầu và nhận thấy không có thông tin xác thực được cung cấp.
 
 PS --> C: HTTP/1.1 407 Proxy Authentication Required\nContent-Type: text/html\n<html>Authentication Required</html>
-note left of C: Máy chủ proxy phản hồi với mã 407, yêu cầu khách hàng cung cấp thông tin xác thực hợp lệ.
+note left of C: Server proxy phản hồi với mã 407, yêu cầu Client cung cấp thông tin xác thực hợp lệ.
 
 == Example: Proxy Authentication Required (Invalid credentials) ==
 C -> PS: GET /resource HTTP/1.1\nHost: example.com\nProxy-Authorization: Basic InvalidCredentials
-note right of PS: Khách hàng yêu cầu tài nguyên thông qua proxy, nhưng cung cấp thông tin xác thực không hợp lệ.
+note right of PS: Client yêu cầu tài nguyên thông qua proxy, nhưng cung cấp thông tin xác thực không hợp lệ.
 
-note left of PS: Máy chủ proxy nhận được yêu cầu và kiểm tra các thông tin xác thực. Chúng được phát hiện là không hợp lệ.
+note left of PS: Server proxy nhận được yêu cầu và kiểm tra các thông tin xác thực. Chúng được phát hiện là không hợp lệ.
 
 PS --> C: HTTP/1.1 407 Proxy Authentication Required\nContent-Type: text/html\n<html>Invalid credentials</html>
-note left of C: Máy chủ proxy phản hồi với mã 407 lần nữa, thông báo rằng các thông tin xác thực được cung cấp không hợp lệ.
+note left of C: Server proxy phản hồi với mã 407 lần nữa, thông báo rằng các thông tin xác thực được cung cấp không hợp lệ.
 
 == Example: Proxy Authentication Successful ==
 C -> PS: GET /resource HTTP/1.1\nHost: example.com\nProxy-Authorization: Basic QWxhZGRpbjpvcGVuIHNlc2FtZQ==
-note right of PS: Khách hàng gửi yêu cầu thông qua proxy, cung cấp thông tin xác thực hợp lệ.
+note right of PS: Client gửi yêu cầu thông qua proxy, cung cấp thông tin xác thực hợp lệ.
 
-note left of PS: Máy chủ proxy chuyển yêu cầu đến máy chủ chính với các thông tin xác thực hợp lệ.
+note left of PS: Server proxy chuyển yêu cầu đến Server chính với các thông tin xác thực hợp lệ.
 
 PS -> S: GET /resource HTTP/1.1\nHost: example.com
-note right of PS: Máy chủ nhận được yêu cầu với thông tin xác thực proxy hợp lệ.
+note right of PS: Server nhận được yêu cầu với thông tin xác thực proxy hợp lệ.
 
-note left of S: Máy chủ kiểm tra và xác minh các thông tin xác thực.
+note left of S: Server kiểm tra và xác minh các thông tin xác thực.
 
 S --> PS: HTTP/1.1 200 OK\nContent-Type: application/json\n{"data": "Resource content"}
-note left of PS: Máy chủ phản hồi với 200 OK, cho phép truy cập vào tài nguyên yêu cầu.
+note left of PS: Server phản hồi với 200 OK, cho phép truy cập vào tài nguyên yêu cầu.
 
 PS -> C: HTTP/1.1 200 OK\nContent-Type: application/json\n{"data": "Resource content"}
-note left of C: Máy chủ proxy chuyển tiếp phản hồi thành công lại cho khách hàng.
+note left of C: Server proxy chuyển tiếp phản hồi thành công lại cho Client.
 
 @enduml
 ```
@@ -955,21 +955,62 @@ participant "Server" as S
 
 == Example: Request Timeout ==
 C -> S: GET /resource HTTP/1.1\nHost: example.com
-note right of S: Khách hàng gửi yêu cầu tài nguyên.
+note right of S: Client gửi yêu cầu tài nguyên.
 
-note left of S: Máy chủ bắt đầu xử lý yêu cầu nhưng không hoàn thành trong thời gian cho phép.
+note left of S: Server bắt đầu xử lý yêu cầu nhưng không hoàn thành trong thời gian cho phép.
 
 S --> C: HTTP/1.1 408 Request Timeout\nContent-Type: text/html\n<html>Request Timeout</html>
-note left of C: Máy chủ phản hồi với mã 408, cho biết yêu cầu mất quá nhiều thời gian để xử lý.
+note left of C: Server phản hồi với mã 408, cho biết yêu cầu mất quá nhiều thời gian để xử lý.
 
 == Example: Successful Request ==
 C -> S: GET /resource HTTP/1.1\nHost: example.com
-note right of S: Khách hàng gửi yêu cầu tài nguyên.
+note right of S: Client gửi yêu cầu tài nguyên.
 
-note left of S: Máy chủ xử lý yêu cầu trong thời gian cho phép.
+note left of S: Server xử lý yêu cầu trong thời gian cho phép.
 
 S --> C: HTTP/1.1 200 OK\nContent-Type: application/json\n{"data": "Resource content"}
-note left of C: Máy chủ phản hồi với 200, giao tài nguyên yêu cầu thành công.
+note left of C: Server phản hồi với 200, giao tài nguyên yêu cầu thành công.
 
 @enduml
+```
+
+### 409 Conflict
+Như cái tên cũng đã mô tả, HTTP Status code này thông báo rằng request của client làm xung đột với trạng thái hiện tại của tài nguyên. 
+
+Thường được sử dụng khi client gửi request mà xung đột với trạng thái hiện tại của tài nguyên.
+
+Ví dụ: Khi client lấy về thông tin của tài nguyên và thông tin tài nguyên có trạng thái `pending`, sau đó client gửi request để cập nhật thông tin tài nguyên thành `reject` nhưng thông tin tài nguyên đã được cập nhật bởi một client khác và trạng thái của tài nguyên đã là `approved`.
+
+Khi đó server sẽ trả về 409 Conflict.
+
+Điều này để bảo vệ dữ liệu của tài nguyên khỏi việc bị ghi đè do nhầm lẫn.
+
+```plantuml
+@startuml
+
+title HTTP 409 Conflict Example
+
+participant "Client" as C
+participant "Server" as S
+
+== Ví dụ: Xung đột yêu cầu ==
+C -> S: PUT /resource HTTP/1.1\nHost: example.com
+note right of S: Client gửi yêu cầu cập nhật tài nguyên.
+
+note left of S: Server nhận ra rằng yêu cầu này xung đột với trạng thái hiện tại của tài nguyên.
+
+S --> C: HTTP/1.1 409 Conflict\nContent-Type: text/html\n<html>Conflict: Resource state has been updated by another client.</html>
+note left of C: Server phản hồi với mã 409, thông báo rằng tài nguyên hiện tại đã được cập nhật bởi một Client khác.
+
+== Ví dụ: Yêu cầu thành công ==
+C -> S: PUT /resource HTTP/1.1\nHost: example.com
+note right of S: Client gửi yêu cầu cập nhật tài nguyên.
+
+note left of S: Server xử lý yêu cầu mà không gặp xung đột.
+
+S --> C: HTTP/1.1 200 OK\nContent-Type: application/json\n{"message": "Resource updated successfully"}
+note left of C: Server phản hồi với mã 200, thông báo rằng tài nguyên đã được cập nhật thành công.
+
+@enduml
+
 ```
