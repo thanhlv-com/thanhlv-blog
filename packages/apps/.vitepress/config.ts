@@ -179,6 +179,13 @@ export default defineConfigWithTheme<ThemeConfig>({
     ],
     [
       'script',
+      {
+        src: 'https://images.dmca.com/Badges/DMCABadgeHelper.min.js',
+        async: ''
+      }
+    ],
+    [
+      'script',
       {},
       '  window.dataLayer = window.dataLayer || [];\n' +
       '  function gtag(){dataLayer.push(arguments);}\n' +

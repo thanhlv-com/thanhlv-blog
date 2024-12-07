@@ -7,6 +7,7 @@ import VPCarbonAds from './VPCarbonAds.vue'
 import { VTLink, VTIconEdit } from '../../core'
 import { useConfig } from '../composables/config'
 import VPDocFooterLastUpdated from './VPDocFooterLastUpdated.vue'
+import VPDmca from './VPDmca.vue'
 
 const { page, frontmatter } = useData()
 const { config } = useConfig()
@@ -64,6 +65,7 @@ const pageClass = computed(() => {
           </div>
         <div
         style='display: flex;'>
+          <VPDmca v-if="frontmatter.dmca == true || frontmatter.dmca == undefined" />
           <p
             class="edit-link"
             v-if="config.editLink && frontmatter.editLink !== false"

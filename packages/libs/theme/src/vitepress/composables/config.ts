@@ -36,7 +36,7 @@ export function withConfigProvider(App: Component) {
       const route = useRoute();
       const initZoom = () => {
         // @ts-ignore
-        new mediumZoom('img', {background: '11'}); // Should there be a new?
+        new mediumZoom('img:not(.no-zoom, .avatar-img)', {background: '11'}); // Should there be a new?
       };
       onMounted(() => {
         initZoom();
