@@ -7,7 +7,9 @@ import {headerPlugin} from './headerMdPlugin'
 import blogsSidebar from './cache/sidebar/blogs-sidebar.json'
 import shortBlogsSidebar from './cache/sidebar/short-blog-sidebar.json'
 import thanhlvStudy2024Sidebar from './cache/sidebar/study/thanhlv-study-2024-sidebar.json'
+// @ts-ignore
 import markdownItTextualUml from 'markdown-it-textual-uml'
+
 const nav: ThemeConfig['nav'] = [
   {
     text: 'Blog',
@@ -296,8 +298,7 @@ export default defineConfigWithTheme<ThemeConfig>({
     config(md) {
       md.use(headerPlugin)
       md.use(markdownItTextualUml, {
-        showController: false,
-       imageFormat: 'svg',
+        imageFormat: 'svg',
         server: 'https://www.plantuml.com/plantuml',
       })
     },
