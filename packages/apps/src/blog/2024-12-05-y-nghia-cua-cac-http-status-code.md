@@ -306,10 +306,10 @@ participant "Client" as C
 participant "Server" as S
 
 C -> S: DELETE /resource HTTP/1.1\nHost: example.com
-note right of S: Client gửi yêu cầu DELETE để xóa tài nguyên. Server nhận và xử lý yêu cầu.
+note right of S: 'Client gửi yêu cầu DELETE để xóa tài nguyên. Server nhận và xử lý yêu cầu.'
 
 S --> C: HTTP/1.1 204 No Content
-note left of C: Client nhận được phản hồi từ Server với không có nội dung, báo hiệu rằng tài nguyên đã được xóa thành công.
+note left of C: 'Client nhận được phản hồi từ Server với không có nội dung, \n báo hiệu rằng tài nguyên đã được xóa thành công.'
 @enduml
 ```
 
@@ -1000,11 +1000,11 @@ note right of S: Client gửi yêu cầu cập nhật tài nguyên.
 note left of S: Server nhận ra rằng yêu cầu này xung đột với trạng thái hiện tại của tài nguyên.
 
 S --> C: HTTP/1.1 409 Conflict\nContent-Type: text/html\n<html>Conflict: Resource state has been updated by another client.</html>
-note left of C: Server phản hồi với mã 409, thông báo rằng tài nguyên hiện tại đã được cập nhật bởi một Client khác.
+note left of C: Server phản hồi với mã 409, thông báo rằng tài nguyên hiện tại đã được cập nhật bởi một client khác.
 
 == Ví dụ: Yêu cầu thành công ==
 C -> S: PUT /resource HTTP/1.1\nHost: example.com
-note right of S: Client gửi yêu cầu cập nhật tài nguyên.
+note right of S: 'Client gửi yêu cầu cập nhật tài nguyên.'
 
 note left of S: Server xử lý yêu cầu mà không gặp xung đột.
 
@@ -1012,5 +1012,4 @@ S --> C: HTTP/1.1 200 OK\nContent-Type: application/json\n{"message": "Resource 
 note left of C: Server phản hồi với mã 200, thông báo rằng tài nguyên đã được cập nhật thành công.
 
 @enduml
-
 ```
