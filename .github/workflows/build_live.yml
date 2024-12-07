@@ -91,7 +91,8 @@ jobs:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: -1002300511836
         run: |
-          curl -s --data "chat_id=$TELEGRAM_CHAT_ID&text=🚀 Build thanhlv.com with build number: ${{github.run_number}}, Build app" \
+          curl -s --data "chat_id=$TELEGRAM_CHAT_ID&text=🚀 Build thanhlv.com with build number: ${{github.run_number}}, Build html" \
+          "https://api.telegram.org/bot$TELEGRAM_BOT_TOKEN/sendMessage"
       - name: Build app
         run: npm run build_github
       - name: Send Telegram Message
