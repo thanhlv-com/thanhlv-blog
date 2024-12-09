@@ -1081,3 +1081,181 @@ note left of C: Server phản hồi với mã 411, yêu cầu Client cung cấp 
 ```
 
 ### 412 Precondition Failed
+HTTP code này thông báo rằng một hoặc nhiều điều kiện tiên quyết để server xử lý request của client không được client gửi lên trên header hoặc không thỏa mãn.
+
+Một số condition có thể là `If-Match`, `If-None-Match`, `If-Modified-Since`, `If-Unmodified-Since`, `If-Range`, `If-None-Match`. Các preconditions này được sử dụng để xác minh rằng client chỉ thực hiện hành động nếu trạng thái tài nguyên đáp ứng các tiêu chí xác định, giúp tránh các xung đột hoặc lỗi không mong muốn.
+
+```plantuml
+@startuml
+
+title Avoiding Mid-Air Collisions with ETag and If-Match
+
+participant "Client" as C
+participant "Server" as S
+
+== Case: Precondition Not Satisfied ==
+
+C -> S: GET /wiki-page HTTP/1.1\nHost: example.com
+S --> C: HTTP/1.1 200 OK\nETag: "etag123"\nContent-Type: application/json\n{ "content": "Current page content" }
+note right of C: 'Client lưu giá trị ETag `etag123`.'
+
+... Some time passes, another user edits the page ...
+
+C -> S: POST /wiki-page HTTP/1.1\nHost: example.com\nIf-Match: "etag123"\nContent-Type: application/json\n{ "content": "Updated page content" }
+note right of S: 'Client gửi yêu cầu chỉnh sửa kèm `If-Match: "etag123"` để xác minh tài nguyên chưa thay đổi.'
+
+S -> S: Kiểm tra giá trị ETag của tài nguyên
+note left of S: 'ETag của tài nguyên đã thay đổi do chỉnh sửa trước đó.'
+
+S --> C: HTTP/1.1 412 Precondition Failed\nContent-Type: text/html\n<html>Precondition Failed</html>
+note left of C: 'Server từ chối chỉnh sửa vì tài nguyên đã thay đổi.'
+
+== Case: Precondition Satisfied ==
+
+C -> S: GET /wiki-page HTTP/1.1\nHost: example.com
+S --> C: HTTP/1.1 200 OK\nETag: "etag456"\nContent-Type: application/json\n{ "content": "Current page content" }
+note right of C: 'Client lưu giá trị ETag `etag456`.'
+
+C -> S: POST /wiki-page HTTP/1.1\nHost: example.com\nIf-Match: "etag456"\nContent-Type: application/json\n{ "content": "Updated page content" }
+note right of S: 'Client gửi yêu cầu chỉnh sửa kèm `If-Match: "etag456"`'.
+
+S -> S: 'Kiểm tra giá trị ETag của tài nguyên'
+note left of S: 'ETag khớp với giá trị hiện tại.'
+
+S --> C: HTTP/1.1 200 OK\nContent-Type: application/json\n{ "message": "Page updated successfully" }
+note left of C: 'Server xử lý yêu cầu và cập nhật tài nguyên thành công.'
+
+@enduml
+```
+
+### 413 Payload Too Large
+
+HTTP Status code này thông báo rằng server không thể xử lý request của client vì body của request quá lớn.
+
+Mô server sẽ có thể có các giới hạn kích thước về dữ liệu body của request, nếu client gửi request với body quá lớn và server không thể sử lý thì server sẽ trả về 413 Payload Too Large.
+
+```plantuml
+@startuml
+
+title HTTP 413 Content Too Large
+
+participant "Client" as C
+participant "Server" as S
+
+C -> S: POST /upload HTTP/1.1\nHost: example.com\nContent-Length: 10GB\nContent-Type: application/json\n{ "file": "Large file data..." }
+note right of S: Client gửi yêu cầu upload một tệp lớn với kích thước 10GB.
+
+S -> S: Kiểm tra kích thước nội dung
+note left of S: Kích thước nội dung vượt quá giới hạn mà Server cho phép (e.g., 5GB).
+
+S --> C: HTTP/1.1 413 Content Too Large\nContent-Type: text/html\n<html>Request Entity Too Large</html>
+note left of C: Server trả về lỗi 413 để thông báo rằng nội dung quá lớn.
+
+@enduml
+```
+
+### 414 URI Too Long
+HTTP Status code này thông báo rằng server không thể xử lý request của client vì URI của request quá dài.
+
+Một số server có thể có giới hạn về độ dài của URI, nếu client gửi request với URI quá dài thì server sẽ trả về 414 URI Too Long.
+
+```plantuml
+@startuml
+
+title HTTP 414 URI Too Long
+
+participant "Client" as C
+participant "Tomcat Server" as S
+
+C -> S: GET /search?q=ThisIsAnExtremelyLongQueryStringThatExceedsTheServerLimit... HTTP/1.1\nHost: example.com
+note right of S: Client gửi yêu cầu với URI có query string quá dài.
+
+S -> S: Kiểm tra độ dài URI
+note left of S: URI vượt quá giới hạn của Server (e.g., default 8KB cho Tomcat).
+
+S --> C: HTTP/1.1 414 URI Too Long\nContent-Type: text/html\n<html>Request URI Too Long</html>
+note left of C: Server trả về lỗi 414, thông báo rằng URI không hợp lệ do quá dài.
+
+@enduml
+```
+::: details ví dụ:
+``` shell
+curl 'https://thanhlv.com/?a=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'
+```
+Response : `Error: URI Too Long% `
+::: 
+
+### 415 Unsupported Media Type
+
+HTTP Status code này thông báo rằng server không hỗ trợ kiểu dữ liệu của request của client.
+Ví dụ client gửi request với Content-Type là XML nhưng server chỉ hỗ trợ JSON chỉ server sẽ trả về 415 Unsupported Media Type.
+
+```plantuml
+@startuml
+
+title HTTP 415 Unsupported Media Type - Error and Success Cases
+
+participant "Client" as C
+participant "Server" as S
+
+== Case: Error - Unsupported Media Type ==
+
+C -> S: POST /upload HTTP/1.1\nHost: example.com\nContent-Type: text/plain\n{ "data": "This is plain text" }
+note right of S: Client gửi yêu cầu với loại nội dung không hỗ trợ (text/plain).
+
+S -> S: Kiểm tra loại nội dung
+note left of S: Server nhận thấy rằng `Content-Type` không hỗ trợ.
+
+S --> C: HTTP/1.1 415 Unsupported Media Type\nContent-Type: text/html\n<html>Unsupported Media Type</html>
+note left of C: Server trả về mã lỗi 415 để thông báo rằng loại nội dung không được hỗ trợ.
+
+== Case: Success - Supported Media Type ==
+
+C -> S: POST /upload HTTP/1.1\nHost: example.com\nContent-Type: application/json\n{ "data": "This is JSON data" }
+note right of S: Client gửi yêu cầu với loại nội dung được hỗ trợ (application/json).
+
+S -> S: Kiểm tra loại nội dung
+note left of S: Server nhận thấy rằng `Content-Type` hỗ trợ.
+
+S --> C: HTTP/1.1 200 OK\nContent-Type: application/json\n{ "message": "Data uploaded successfully" }
+note left of C: Server xử lý yêu cầu và trả về phản hồi thành công.
+
+@enduml
+```
+
+### 416 Range Not Satisfiable
+HTTP Status code này thông báo rằng server không thể thực hiện yêu cầu của client vì giá trị của Range header không hợp lệ.
+Nguyên nhân có thể là giá trị của Range header không hợp lệ về format hoặc nằm ngoài phạm vi của tài nguyên.
+
+```plantuml
+@startuml
+
+title HTTP 416 Range Not Satisfiable - Video File Access
+
+participant "Client" as C
+participant "Server" as S
+
+== Case: Error - Range Not Satisfiable ==
+
+C -> S: GET /video.mp4 HTTP/1.1\nHost: example.com\nRange: bytes=5000000-6000000
+note right of S: Client yêu cầu một phạm vi vượt quá kích thước file video.
+
+S -> S: Kiểm tra phạm vi yêu cầu
+note left of S: File video có kích thước chỉ 4,000,000 bytes.
+
+S --> C: HTTP/1.1 416 Range Not Satisfiable\nContent-Range: */4000000
+note left of C: Server thông báo phạm vi không hợp lệ. Kích thước tối đa của file là 4,000,000 bytes.
+
+== Case: Success - Partial Content ==
+
+C -> S: GET /video.mp4 HTTP/1.1\nHost: example.com\nRange: bytes=0-999999
+note right of S: Client yêu cầu phạm vi hợp lệ (bytes 0-999999).
+
+S -> S: Kiểm tra phạm vi yêu cầu
+note left of S: Phạm vi yêu cầu hợp lệ, bắt đầu từ đầu file.
+
+S --> C: HTTP/1.1 206 Partial Content\nContent-Range: bytes 0-999999/4000000\n[ video data... ]
+note left of C: Server trả về đoạn video tương ứng với phạm vi được yêu cầu.
+
+@enduml
+```
