@@ -7,6 +7,7 @@ import {headerPlugin} from './headerMdPlugin'
 import blogsSidebar from './cache/sidebar/blogs-sidebar.json'
 import shortBlogsSidebar from './cache/sidebar/short-blog-sidebar.json'
 import thanhlvStudy2024Sidebar from './cache/sidebar/study/thanhlv-study-2024-sidebar.json'
+import tiengAnhSidebar from './cache/sidebar/study/tieng-anh-sidebar.json'
 // @ts-ignore
 import markdownItTextualUml from 'markdown-it-textual-uml'
 
@@ -28,6 +29,10 @@ const nav: ThemeConfig['nav'] = [
       {
         text: 'Học tập BE Thanhlv 2024',
         link: '/study/thanhlv-study-2024/gioi-thieu-ve-muc-tieu-hoc-tap-be-nam-2024-cua-thanh-lv'
+      },
+      {
+        text: 'Tiếng anh',
+        link: '/study/tieng-anh/gioi-thieu'
       }
     ]
   },
@@ -61,6 +66,14 @@ export const sidebar: ThemeConfig['sidebar'] = {
   ],
   '/study/thanhlv-study-2024': [
     ...thanhlvStudy2024Sidebar
+  ],
+  '/study/tieng-anh': [
+    {
+      text: '',
+      items: [
+        ...tiengAnhSidebar
+      ]
+    }
   ],
   '/about/author/thanhlv': [
     {
