@@ -5,7 +5,7 @@ authors: ["lethanh"]
 date: 2024-06-10
 outline: deep
 #image: /assets/event-and-message.UHUxhQ9h.jpeg
-draft: true
+draft: false
 group: 2.1 Kafka
 ---
 
