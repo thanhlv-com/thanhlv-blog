@@ -4,7 +4,7 @@ title: Kafka Brokers là gì ?
 authors: ["lethanh"]
 date: 2024-06-10
 outline: deep
-#image: /assets/event-and-message.UHUxhQ9h.jpeg
+image: /assets/kafka-architecture-view.B_rra7lS.png
 draft: false
 group: 2.1 Kafka
 ---
