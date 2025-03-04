@@ -348,6 +348,65 @@ Kafka hỗ trợ 3 cấp độ acknowledgments:
 ## Một số lưu ý về Kafka Brokers
 - Nếu tạo một Cluster kafka thì độ trễ của network nên ở mức dưới 15ms, vì việc liên lạc giữa các Kafka brokers là rất nhiều (Cả zookeeper nếu sử dụng zookeeper )
 
+## Summary
+- Kafka Broker là một Storage layer và cũng xử lý các yêu cu từ Producer(Viết thêm Record) và Consumer(Đọc Record)
+- Kafka Broker nhận Record từ Producer là các dữ liệu byte và lưu trữ trực tiếp các byte này vào disk chứ không thay đổi dữ liệu. Tất nhiên khi Kafka gửi dữ liệu cho Consumer thì cũng là byte được đọc trực tiếp từ disk.
+- Kafka Broker lưu trữ dữ liệu theo partition, mỗi partition sẽ có một leader và một số follower. Mỗi partition sẽ được chia thành các segment.
+- Kafka Broker sử dụng cơ chế `Leader-based Replication` để sao chép dữ liệu từ leader đến follower để đảm bảo tính toàn vẹn và đồng bộ dữ liệu.
+- Kafka Broker sử dụng Zookeeper hoặc Kafka Raft để lưu trữ metadata và quản lý cluster.
+- Kafka Broker sao chép dữ liệu giữa các broker để đảm bảo tính toàn vẹn và đồng bộ dữ liệu.
+
+
+# Câu hỏi và trả lời
+::: details Câu hỏi và trả lời
+- **Kafka Broker là gì?**
+  - Kafka Broker là một Kafka server đóng vai trò lưu trữ dữ liệu (storage layer) trong kiến trúc Kafka.
+  - Nó có thể chạy thành một cluster và mở rộng ra nhiều data centers. Kafka Brokers chịu trách nhiệm quản lý dữ liệu (lưu trữ, đọc, replication), quản lý topic và partition, và xử lý các request từ client.
+- **Vai trò của Kafka Brokers đối với Producers và Consumers là gì?**
+  - Với Producers: Kafka Brokers nhận các records từ Producers để lưu trữ.
+  - Với Consumers: Kafka Brokers cung cấp các records từ topic mà Consumers yêu cầu. Việc sử dụng Record sẽ không làm ảnh hưởng đến việc lưu dữ liệu hoặc việc sử dụng Record bởi các Consumer khác.
+- **Topic trong Kafka là gì?**
+  - Topic về mặt kiến trúc là tên của folder chứa các file Kafka, nơi các Record được thêm vào cuối file. Kafka Brokers nhận key-value message dưới dạng raw byte, lưu trữ và phục vụ các yêu cầu đọc với cùng định dạng.
+  - Topic về mặt logic là một cách để phân loại các Record, mỗi Record sẽ được gửi đến một topic cụ thể và mỗi topic sẽ được chia thành các partition.
+- **Partition trong Kafka là gì?**
+  - Các topic được chia nhỏ thành các partition, mỗi partition là một số nguyên bắt đầu từ 0. Kafka brokers gắn số partition vào đuôi của folder topic với định dạng {Topic name}-{partition number} 
+  - Các Record được Producer gửi đến sẽ được lưu vào partition, mỗi partition sẽ có một leader và một số follower.
+  - Partition giúp Kafka mở rộng dữ liệu trên nhiều broker và cung cấp khả năng chịu lỗi.
+  - Mỗi partition sẽ được chia thành các segment để quản lý dữ liệu.
+- **Offset trong Kafka là gì?**
+  - Khi broker thêm một Record, nó sẽ thêm một ID được gọi là offset. Offset bắt đầu từ 0 và tăng lên 1 mỗi khi thêm một Record. Consumer sử dụng offset để xác định vị trí của Record đã sử dụng và sử dụng để tìm kiếm Record bởi offset.
+- **Kafka lưu trữ dữ liệu như thế nào?**
+  - Kafka sử dụng file system để lưu trữ dữ liệu bằng cách nối thêm các Record vào cuối file trong một topic. Kafka Brokers nhận key-value message dưới dạng raw byte, lưu trữ và phục vụ các yêu cầu đọc với cùng định dạng (raw data).
+- **Segment trong Kafka là gì?**
+  - Broker sẽ chia partition thành các tệp nhỏ hơn gọi là segments. Việc sử dụng Segments giúp thực hiện push Record mới và truy xuất Record bằng offset dễ dàng hơn. Kafka Broker mặc định để mỗi segment là 1GB hoặc có thể chỉ định ở segment.bytes.
+- **cleanup.policy trong Kafka là gì và có những giá trị nào?**
+  - cleanup.policy là cấu hình cách thức Kafka quản lý và dọn dẹp các Record cũ của topic sau khi đã được ghi vào.
+    - Các giá trị bao gồm:
+      - delete: Kafka sẽ xóa các Record sau khi chúng vượt qua giới hạn thời gian lưu trữ hoặc dung lượng lưu trữ.
+      - compact: Kafka sẽ nén các Record, chỉ giữ lại Record có giá trị mới nhất cho mỗi key.
+      - compact,delete: Kết hợp cả hai chính sách trên.
+- **Các mức độ acknowledgments (acks) trong Kafka là gì?**
+  - acks=0: Producer không chờ ACK từ broker.
+  - acks=1: Producer chờ ACK từ leader.
+  - acks=all hoặc acks=-1: Producer chờ ACK từ tất cả các follower
+- **Replication trong Kafka là gì và tại sao nó quan trọng?**
+  - Replication là cơ chế sao chép dữ liệu từ leader sang follower để đảm bảo tính toàn vẹn và đồng bộ dữ liệu. Khi một Broker Leader không khả dụng, Kafka sẽ chuyển đổi một follower khác trở thành leader.
+- **Tiered storage trong Kafka là gì và lợi ích của nó?**
+  - Tiered storage là một cơ chế cho phép Kafka lưu trữ dữ liệu trên remote storage như Amazon S3, HDFS. Giúp dữ liệu của Kafka có thể lưu trữ lâu dài hơn, giảm chi phí lưu trữ và dung lượng ổ cứng
+- **Dùng Tiered storage có làm tăng độ trễ không ?**
+  - Với Tiered storage, dữ liệu mới nhất và sẽ được lưu trữ ở local tier, giúp Kafka đọc và ghi dữ liệu nhanh chóng. Dữ liệu cũ hơn sẽ được lưu trữ ở remote tier, giúp giảm chi phí lưu trữ và dung lượng ổ cứng.
+  - Nếu Comsumer cần đọc dữ liệu cũ hơn, Kafka sẽ đọc từ remote tier, điều này có thể làm tăng độ trễ.
+- **Khi nào Kafka chuyển log Segment lên tiered storage?**
+  - Kafka sẽ dựa theo cấu hình `log.segment.tier.upgrade.delay.ms` để chờ đẩy dữ liệu lên. Không có dữ liệu default, default Kafka sẽ không đẩy dữ liệu.
+  - Khi một segment đóng lại (Đầy hoặc quá thời gian), Kafka sẽ bắt đầu chờ `log.segment.tier.upgrade.delay.ms` trước khi đẩy dữ liệu lên tiered storage.
+- **Khi nào một log segment được đóng lại?**
+  - Khi chạm ngưỡng cấu hình size `segment.bytes (Default 1G)` hoặc hết thời gian của một segment `segment.ms (Default 7 ngày)`.
+- **Kafka sử dụng Zookeeper hoặc Kafka Raft (KR) để làm gì?**
+  - Kafka sử dụng Zookeeper hoặc Kafka Raft để lưu trữ metadata của cluster. Các metadata bao gồm: Cluster Membership, quản lý các topic, partition, offset
+-  **Leader và Follower trong Kafka là gì và vai trò của chúng**
+  - Mỗi partition sẽ có một broker đóng vai trò là leader và các broker khác sẽ đóng vai trò là follower. Partition leader sẽ xử lý tất cả các yêu cầu ghi và đọc từ client, các follower sẽ sao chép dữ liệu từ leader
+  - Khi node Kafka leader không khả dụng, Kafka sẽ chuyển đổi một follower khác trở thành leader.
+:::
 
 # REF:
 - https://ibm-cloud-architecture.github.io/refarch-eda/technology/kafka-overview/
