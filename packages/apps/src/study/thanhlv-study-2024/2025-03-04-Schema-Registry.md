@@ -42,6 +42,12 @@ Chúng ta sẽ nhanh chóng tìm hiểu cách hoạt động của Schema Regist
 ![kafka-architecture-view.png](2025-03-04-Schema-Registry/Cach-Schema-Registry-hoat-dong.png)
 
 1. Khi producer thực hiện serialize dữ liệu, nó sẽ truy suất schema từ Schema Registry(Thông quá HTTP) và lưu nó vào cache
+2. Producer thực hiện serialize dữ liệu Record bằng schema
+3. Producer gửi dữ liệu đã được serialize lên Kafka Broker (Byte)
+4. Consumer nhận dữ liệu từ Kafka Broker
+5. Consumer nhận thấy mình chưa có thông tin của schema, nó sẽ truy suất schema từ Schema Registry và lưu lại ở local của mình
+6. Sau khi nhận được schema, Consumer thực hiện deserialize dữ liệu bằng schema
+7. Dữ liệu schema thực tế sẽ lưu trữ trên Kafka Broker. Schema Registry chỉ là tầng quản lý và cache schema.
 
 # REF:
 - https://ibm-cloud-architecture.github.io/refarch-eda/technology/kafka-overview/
