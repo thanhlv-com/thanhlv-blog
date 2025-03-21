@@ -30,6 +30,7 @@ date: 2024-01-08
 |------------------------------------------------------|-----------------------------------------------------------------------------------|
 | Các tool trên Linux sử dụng để tấn công và phòng thủ | [Link](https://www.facebook.com/groups/GroupWhiteHat/permalink/3711403379187829/) |
 | sheet check list kiểm tra cho tấn công               | [Link](https://github.com/riramar/Web-Attack-Cheat-Sheet)                         |
+| Web check bảo mật website                            | [Link](https://web-check.xyz/)                                                    |
 
 :::
 
