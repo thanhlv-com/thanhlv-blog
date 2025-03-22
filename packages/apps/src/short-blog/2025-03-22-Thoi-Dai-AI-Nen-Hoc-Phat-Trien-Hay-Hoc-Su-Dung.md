@@ -16,7 +16,7 @@ Sự trỗi dậy mạnh mẽ của trí tuệ nhân tạo (AI) đang tạo ra n
 
 Trong bối cảnh công nghệ AI phát triển với tốc độ vũ bão, một câu hỏi đặt ra là liệu chúng ta nên tập trung vào việc học cách tạo ra AI (phát triển) hay học cách tận dụng sức mạnh của các công cụ AI hiện có (sử dụng)? Bài viết này sẽ cung cấp một cái nhìn tổng quan và so sánh chi tiết về cả hai hướng đi, từ đó giúp người đọc tự đánh giá và đưa ra quyết định phù hợp nhất với năng lực, sở thích và mục tiêu nghề nghiệp của bản thân.
 
-![Image](images/2025-03-22-Thoi-Dai-AI-Nen-Hoc-Phat-Trien-Hay-Hoc-Su-Dung/5-AI-Advancements-to-Expect-in-the-Next-10-Years-scaled-1.jpeg)
+![Image](https://static-cdn.thanhlv.com/short-blog/images/2025-03-22-Thoi-Dai-AI-Nen-Hoc-Phat-Trien-Hay-Hoc-Su-Dung/5-AI-Advancements-to-Expect-in-the-Next-10-Years-scaled-1.jpeg)
 
 ## Phát Triển AI: Hành Trình Trở Thành Nhà Kiến Tạo
 
