@@ -30,6 +30,7 @@ date: 2024-01-08
 |------------------------------------------------------|-----------------------------------------------------------------------------------|
 | Các tool trên Linux sử dụng để tấn công và phòng thủ | [Link](https://www.facebook.com/groups/GroupWhiteHat/permalink/3711403379187829/) |
 | sheet check list kiểm tra cho tấn công               | [Link](https://github.com/riramar/Web-Attack-Cheat-Sheet)                         |
+| Web check bảo mật website                            | [Link](https://web-check.xyz/)                                                    |
 
 :::
 
@@ -37,11 +38,12 @@ date: 2024-01-08
 
 ::: details Chi tiết
 
-| Mô tả                                                                                                                       | Link                              |
-|-----------------------------------------------------------------------------------------------------------------------------|-----------------------------------|
-| Tạo local https để dành cho test(Hiện chỉ dành cho MACOS)                                                                   | [Link](https://www.ophiuchi.dev/) |
-| Danh sách các phiên bản của các ứng dụng, thư viện trong lập trình(Ví dụ danh sách phiên bản mysql) và còn hỗ trợ hay không | [Link](https://endoflife.date/)   |
-| Hỗ trợ Crack jetbrains, tuy nhiên nếu có tiền thì nên mua bản quyền, bởi vì họ cũng mất chi phí duy trì   :relieved:        | [Link](https://3.jetbra.in/)      |
+| Mô tả                                                                                                                       | Link                                 |
+|-----------------------------------------------------------------------------------------------------------------------------|--------------------------------------|
+| Tạo local https để dành cho test(Hiện chỉ dành cho MACOS)                                                                   | [Link](https://www.ophiuchi.dev/)    |
+| Danh sách các phiên bản của các ứng dụng, thư viện trong lập trình(Ví dụ danh sách phiên bản mysql) và còn hỗ trợ hay không | [Link](https://endoflife.date/)      |
+| Hỗ trợ Crack jetbrains, tuy nhiên nếu có tiền thì nên mua bản quyền, bởi vì họ cũng mất chi phí duy trì   :relieved:        | [Link](https://3.jetbra.in/)         |
+| CSS Grid Generator 🥰                                                                                                       | [Link](https://cssgridgenerator.io/) |
 
 :::
 
