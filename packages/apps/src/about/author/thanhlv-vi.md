@@ -47,7 +47,7 @@ dmca: false
 
 ## Kinh nghiệm làm việc
 Với 6 năm kinh nghiệm phong phú, tôi đã thu thập được một kho tàng kiến thức sâu rộng thông qua việc làm việc trên một loạt các dự án thuộc nhiều lĩnh vực khác nhau.
-### [Line Technology VietNam](https://vietnamdevcenter.linecorp.com/en) & [LINE NEXT Inc](https://www.linkedin.com/company/line-us-corporation/mycompany/) | Senior Software Engineer
+### [LINE Technology Vietnam](https://vietnamdevcenter.linecorp.com/en) & [LINE NEXT Inc](https://www.linkedin.com/company/line-us-corporation/mycompany/) | Senior Software Engineer
 ![img](images/thanhlv/line-center-vn.png)
 
 #### **09-2021 – Hiện tại** | **[Line Explorer Blockchain](https://explorer.blockchain.line.me/finschia)**
