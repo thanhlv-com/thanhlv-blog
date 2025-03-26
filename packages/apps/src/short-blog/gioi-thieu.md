@@ -13,7 +13,7 @@ dmca: false
 
 Xin chào mọi người :)
 
-Tôi là Thành, một nhà phát triển phần mềm đang công tác tại [**Line Technology Viet Nam**](https://vietnamdevcenter.linecorp.com/en).
+Tôi là Thành, một nhà phát triển phần mềm đang công tác tại [**LINE Technology Vietnam**](https://vietnamdevcenter.linecorp.com/en).
 Hôm nay, tôi rất vui khi bạn lần đầu đến blog cá nhân của mình, nơi tôi không chỉ truyền đạt kiến thức về lập trình mà còn sử dụng như một nơi để ghi chú và học hỏi.
 
 Tôi đã tạo một mục [Blog](../blog/gioi-thieu) nơi tôi sẽ chia sẻ kiến thức về lập trình, công nghệ nhưng là ở dạng bài viết dài và chi tiết.
