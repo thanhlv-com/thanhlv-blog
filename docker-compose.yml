@@ -10,9 +10,9 @@ services:
       resources:
         limits:
           cpus: "2"
-          memory: 3200m
+          memory: 1000m
         reservations:
           cpus: "2"
-          memory: 2000m
+          memory: 1000m
     volumes:
       - ./build:/usr/share/nginx/html
