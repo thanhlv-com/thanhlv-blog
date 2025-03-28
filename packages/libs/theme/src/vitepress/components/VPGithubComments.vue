@@ -14,7 +14,7 @@ onMounted(() => {
 });
 
 const dynamicHref = computed(() => {
-  const scriptId = "custom-script"; // ID của script
+  const scriptId = "custom-script-giscus-client"; // ID của script
   const existingScript = document.getElementById(scriptId);
 
   if (existingScript) {
@@ -26,12 +26,24 @@ const dynamicHref = computed(() => {
    // Tạo script mới
    const script = document.createElement("script");
    script.id = scriptId;
-   script.src = "https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v21.0&appId=241308786939259"; // URL của script
+   script.src = "https://giscus.app/client.js"; // URL của script
    script.async = true;
+   script.setAttribute('data-repo', 'thanhlv-com/thanhlv-blog');
+   script.setAttribute('data-repo-id', 'R_kgDOLCoNuA');
+   script.setAttribute('data-category', 'General');
+   script.setAttribute('data-category-id', 'DIC_kwDOLCoNuM4Coi9r');
+   script.setAttribute('data-mapping', 'title');
+   script.setAttribute('data-strict', '0');
+   script.setAttribute('data-reactions-enabled', '1');
+   script.setAttribute('data-emit-metadata', '0');
+   script.setAttribute('data-input-position', 'top');
+   script.setAttribute('data-theme', 'light');
+   script.setAttribute('data-lang', 'vi');
+   script.setAttribute('data-loading', 'lazy');
+   script.setAttribute('crossorigin', 'anonymous');
 
    script.onload = () => {
      console.log("Script loaded!");
-     window.FB.XFBML.parse();
    };
 
    // Thêm script vào `head` hoặc `body`
@@ -42,10 +54,6 @@ const dynamicHref = computed(() => {
 });
 </script>
 <template>
-  <div style="border-top: 1px solid var(--vt-c-divider-light); padding-bottom: 20px"></div>
-  <div >
-    <div  style="padding-bottom: 20px" class="fb-comments" :data-href="dynamicHref" data-width="auto" data-numposts="5"></div>
-    <div id="fb-root"></div>
-  </div>
+  <div :data-href="dynamicHref" class="giscus"></div>
  </template>
 
