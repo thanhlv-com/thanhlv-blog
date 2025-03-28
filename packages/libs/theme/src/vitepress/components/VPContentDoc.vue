@@ -84,6 +84,8 @@ const pageClass = computed(() => {
         </main>
         <slot name="content-bottom" />
         <VPContentDocFooter v-if="frontmatter.footer !== false" />
+        <div class="giscus"></div>
+
       </div>
     </div>
   </div>
