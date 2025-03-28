@@ -84,7 +84,7 @@ Vì vậy đã tạo ra vấn đề khi sử dụng `request.getServerName()` s�
 
 Đây là 1 ví dụ puml luồng
 
-![](images/2024-11-01-chung-toi-da-bi-tan-cong-phong-thu-thanh-cong-nhung-co-status-dac-biet-can-dieu-tra/image_1.png)
+![](https://static-cdn.thanhlv.com/short-blog/images/2024-11-01-chung-toi-da-bi-tan-cong-phong-thu-thanh-cong-nhung-co-status-dac-biet-can-dieu-tra/image_1.png)
 
 ### Quá trình điều tra status 403
 Từ kinh nghiệm điều tra 404, việc điều tra 403 đã dễ dàng hơn rất nhiều. Chúng tôi đã thử các header và nhận ra rằng hacker đã sử dụng header `Origin` để tấn công.

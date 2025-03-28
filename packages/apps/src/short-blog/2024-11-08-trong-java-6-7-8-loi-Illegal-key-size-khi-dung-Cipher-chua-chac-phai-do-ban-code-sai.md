@@ -52,7 +52,7 @@ Java Cryptography Extension (JCE) Unlimited Strength Jurisdiction Policy Files l
 
 Trước Java 8u161, các phiên bản Java mặc định chỉ hỗ trợ mã hóa lên đến 128-bit vì [chính sách hạn chế xuất khẩu mật mã từ Hoa Kỳ](https://en.wikipedia.org/wiki/Export_of_cryptography_from_the_United_States#Current_status). Để sử dụng các thuật toán với độ dài khóa lớn hơn như 192-bit hoặc 256-bit (cần cho AES-192 và AES-256), người dùng phải tải và cài đặt các tệp chính sách JCE không giới hạn từ trang web của Oracle.
 
-![](images/2024-11-08-trong-java-6-7-8-loi-Illegal-key-size-khi-dung-Cipher-chua-chac-phai-do-ban-code-sai/image.jpg)
+![](https://static-cdn.thanhlv.com/short-blog/images/2024-11-08-trong-java-6-7-8-loi-Illegal-key-size-khi-dung-Cipher-chua-chac-phai-do-ban-code-sai/image.jpg)
 
 
 ## Chính sách hạn chế xuất khẩu mật mã từ Hoa Kỳ là gì ?

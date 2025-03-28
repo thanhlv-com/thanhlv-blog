@@ -23,9 +23,9 @@ Byte rất linh hoạt, nhưng nó cũng có nhược điểm, các nhà phát t
 
 Vì vậy chuyển đổi dữ liệu từ object sang byte array là một bước được xảy ra ở đâu đó trong luồng hoạt động. (serialize ở producer và deserialize ở consumer).
 
-![kafka-architecture-view.png](2025-03-04-Schema-Registry/The-conversion-of-objects-to-bytes-and-bytes-to-objects-happens-at-the-client-level.png)
+![kafka-architecture-view.png](https://static-cdn.thanhlv.com/study/thanhlv-study-2024/2025-03-04-Schema-Registry/The-conversion-of-objects-to-bytes-and-bytes-to-objects-happens-at-the-client-level.png)
 
-![kafka-architecture-view.png](2025-03-04-Schema-Registry/The-serializer-and-deserializer-are-agnostic-of-the-producer-and-consumer-and-perform-the-expected-action-when-the-serialize-and-deserialize-methods-are-called.png)
+![kafka-architecture-view.png](https://static-cdn.thanhlv.com/study/thanhlv-study-2024/2025-03-04-Schema-Registry/The-serializer-and-deserializer-are-agnostic-of-the-producer-and-consumer-and-perform-the-expected-action-when-the-serialize-and-deserialize-methods-are-called.png)
 
 
 
@@ -67,7 +67,7 @@ Schema Registry hỗ trợ serialization frameworks như AvRo, Protobuf, JSON, .
 ### Cách Schema Registry hoạt động
 
 Chúng ta sẽ nhanh chóng tìm hiểu cách hoạt động của Schema Registry thông qua ví dụ minh hoạ sau:
-![kafka-architecture-view.png](2025-03-04-Schema-Registry/Cach-Schema-Registry-hoat-dong.png)
+![kafka-architecture-view.png](https://static-cdn.thanhlv.com/study/thanhlv-study-2024/2025-03-04-Schema-Registry/Cach-Schema-Registry-hoat-dong.png)
 
 1. Khi producer thực hiện serialize dữ liệu, nó sẽ truy suất schema từ Schema Registry(Thông quá HTTP) và lưu nó vào cache
 2. Producer thực hiện serialize dữ liệu Record bằng schema

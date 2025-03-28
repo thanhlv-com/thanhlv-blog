@@ -13,7 +13,7 @@ Từ khi công nghệ phát triển bắt đầu từ năm 1990, RESTful API đ�
 
 Có lẽ, chúng ta nên có 2 bài viết để nói về RESTful API và gRPC. Tuy nhiên tôi sẽ viết 2 bài đó sau. Bài viết này sẽ so sánh giữa RESTful API và gRPC và khi nào nên sử dụng chúng.
 
-![gRPC-vs-REST](images/2024-12-04-so-sanh-restfull-api-va-grpc-khi-nao-su-dung/gRPC-vs-REST.jpg)
+![gRPC-vs-REST](https://static-cdn.thanhlv.com/blog/images/2024-12-04-so-sanh-restfull-api-va-grpc-khi-nao-su-dung/gRPC-vs-REST.jpg)
 
 ## So sánh RESTful API và gRPC
 

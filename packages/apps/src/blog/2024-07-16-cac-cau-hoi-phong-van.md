@@ -217,7 +217,7 @@ public class Main {
        ::: details Ví dụ 1
          - Ví dụ đầu tiên đơn giản trong Java đó là StringBuilder 
          - Cùng một method tên là `append` nhưng chấp nhận nhiều kiểu dữ liệu.
-        ![java-javacore-oop-overload.png](images/2024-07-16-cac-cau-hoi-phong-van/java-javacore-oop-overload.png)
+        ![java-javacore-oop-overload.png](https://static-cdn.thanhlv.com/blog/images/2024-07-16-cac-cau-hoi-phong-van/java-javacore-oop-overload.png)
        :::
        ::: details Ví dụ 2
        - Ví dụ thứ 2 là về tính tổng các số.

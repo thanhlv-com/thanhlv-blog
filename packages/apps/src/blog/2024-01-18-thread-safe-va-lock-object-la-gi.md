@@ -18,7 +18,7 @@ Nhờ có buổi seminar này, tôi đã hiểu rõ hơn nhiều về các khái
 Trong seminar, hai khái niệm được nhấn mạnh với mức độ quan trọng cao là Thread safety và Object locks. 
 <br/>
 Hãy cùng mình khám phá, tìm hiểu về Thread safety và Object locks nhé.
-![img](images/2024-01-18-thread-safe-va-lock-object-la-gi/img.png)
+![img](https://static-cdn.thanhlv.com/blog/images/2024-01-18-thread-safe-va-lock-object-la-gi/img.png)
 
 [[TOC]]
 
@@ -32,7 +32,7 @@ Khi nói đến **Thread Safe**, ta đang nói đến việc đảm bảo rằng
 
 Trong cơ chế Thread Safe, các thao tác này được thiết kế sao cho tuân theo đúng logic và các ý đồ của người lập trình, đề phòng hiện tượng ghi chồng lên nhau hoặc đọc dữ liệu sai lệch - những sự kiện có thể khiến ứng dụng trở nên không ổn định hoặc thậm chí là hỏng hóc.
 ### Ví dụ
-![img](images/2024-01-18-thread-safe-va-lock-object-la-gi/img2.png)
+![img](https://static-cdn.thanhlv.com/blog/images/2024-01-18-thread-safe-va-lock-object-la-gi/img2.png)
 
 Ảnh trên là một ví dụ điển hình về vấn đề không Thread Safe. 
 
@@ -88,7 +88,7 @@ Mỗi lần chạy cho ra một kết quả khác nhau, chủ yếu thấp hơn 
 ## Lock object là gì ?
 
 Lock Object hoạt động như một cơ chế bảo vệ hoặc chiếm quyền truy cập(Acquire the Lock), đảm bảo rằng một tài nguyên được sử dụng bởi một thread tại một thời điểm, và ngăn chặn các thread khác truy cập tài nguyên đó cho đến khi lock được giải phóng quyền truy cập(Release the Lock).
-![img](images/2024-01-18-thread-safe-va-lock-object-la-gi/img3.png)
+![img](https://static-cdn.thanhlv.com/blog/images/2024-01-18-thread-safe-va-lock-object-la-gi/img3.png)
 
 Để hiểu một cách đơn giản, hãy tưởng tượng Lock Object như là một chìa khóa cho một căn phòng chứa tài nguyên. 
 
@@ -115,7 +115,7 @@ Việc sử dụng quá nhiều locks có thể khiến chương trình khó sca
 
 ## Cách thức hoạt động của Lock object trong java
 
-![img](images/2024-01-18-thread-safe-va-lock-object-la-gi/img3.png)
+![img](https://static-cdn.thanhlv.com/blog/images/2024-01-18-thread-safe-va-lock-object-la-gi/img3.png)
 
 Hình ảnh phía trên là mình họa về Lock Object. Ở ảnh sẽ có 1 số Keywork mà bạn nên lưu ý.
 
@@ -260,7 +260,7 @@ Trong ví dụ này, thread1 bắt đầu thực thi và gọi phương thức i
 
 Khi thread1 nhận được thông báo này (sau khi thread2 giải phóng lock), nó có thể tiếp tục việc thực thi. Giá trị cuối cùng của count phụ thuộc vào việc đường dẫn của mã có xử lý đúng các hoạt động đồng thời hay không. Như đã đề cập trong ví dụ, nếu không có xung đột dữ liệu, kết quả dự kiến sẽ là 2, bởi vì mỗi thread đều tăng count một lần.
 
-![img](images/2024-01-18-thread-safe-va-lock-object-la-gi/img4.png)
+![img](https://static-cdn.thanhlv.com/blog/images/2024-01-18-thread-safe-va-lock-object-la-gi/img4.png)
 
 Khi **Set of waiting threads waiting to reacquire lock** không bao giờ Acquire thì một Dealock sẽ xảy ra, nó sẽ chờ mãi mãi.
 

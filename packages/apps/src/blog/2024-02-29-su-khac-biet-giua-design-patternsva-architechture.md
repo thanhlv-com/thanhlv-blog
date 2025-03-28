@@ -46,7 +46,7 @@ Trong bài viết nay mình sẽ thực hiện so sách sự khác biệt giữa
 ## So sánh sự khác biệt giữa Design Pattern và Software Architecture trong Level và Scope
 
 ### 1. Design Pattern
-![img](images/2024-02-29-su-khac-biet-giua-design-patternsva-architechture/1.jpg)
+![img](https://static-cdn.thanhlv.com/blog/images/2024-02-29-su-khac-biet-giua-design-patternsva-architechture/1.jpg)
 
 - [Design Pattern](2024-01-31-tim-hieu-ve-design-pattern.md) sẽ target `Function`, `Class` và `Project`. Với [Design Pattern](2024-01-31-tim-hieu-ve-design-pattern.md) sẽ thực hiện đi sâu vào chi tiết của một `Project`.
 
@@ -55,7 +55,7 @@ Trong bài viết nay mình sẽ thực hiện so sách sự khác biệt giữa
 - **Ở mức độ Project** [Design Pattern](2024-01-31-tim-hieu-ve-design-pattern.md) giúp định hình cách các class trong một dự án tương tác với nhau, nhưng không định nghĩa cấu trúc tổng thể của dự án.
 
 ### 2. Software Architecture
-![img](images/2024-02-29-su-khac-biet-giua-design-patternsva-architechture/2.png)
+![img](https://static-cdn.thanhlv.com/blog/images/2024-02-29-su-khac-biet-giua-design-patternsva-architechture/2.png)
 - [Software Architecture](2024-02-01-tim-hieu-ve-architecture.md) sẽ target `Project`, `Solution` và `System`.
 
 - **Ở mức độ Project trong [Software Architecture](2024-02-01-tim-hieu-ve-architecture.md)** sẽ định nghĩa cấu trúc tổng thể của một dự án cụ thể, bao gồm cách các class và modules được tổ chức và tương tác với nhau. Kiến trúc sư phần mềm sẽ quyết định sử dụng các mô hình như n-tier, clean architecture, hoặc các mô hình khác để đảm bảo rằng dự án có thể mở rộng, bảo trì và thử nghiệm dễ dàng.

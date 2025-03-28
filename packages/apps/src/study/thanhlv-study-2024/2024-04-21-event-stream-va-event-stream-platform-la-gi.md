@@ -25,7 +25,7 @@ Trong bài viết này, chúng ta sẽ cùng nhau khám phá về **Event Stream
 - Các Event này có thể là mọi thứ đã xảy ra như thao tác người dùng chạm vào button, thậm chí là từ các thiết bị IoT.
 - Event Stream tương tự như hệ thống dây thần kinh của chúng ta. Xử lý hàng triệu, tỉ sự kiện và gửi tín hiệu đến các bộ phận trên cơ thể chúng ta.
   - Một số tín hiệu được tạo ra bởi hành động của chúng ta (Lấy một quả táo) và cũng có các tín hiệu tạo ra một cách vô thức(Tăng nhịp tin khi bị mẹ mắng :D)
-![](2024-04-21-event-stream-va-event-stream-platform-la-gi/1png.png)
+![](https://static-cdn.thanhlv.com/study/thanhlv-study-2024/2024-04-21-event-stream-va-event-stream-platform-la-gi/1png.png)
 **Ví dụ**:
 - Người dùng nhấp vào nút mua hàng.
 - Các tương các của người dùng trên website.

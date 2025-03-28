@@ -11,7 +11,7 @@ draft: false
 
 Hôm nay 2024-12-06, mình có một trải nghiệm không vui khi đến ngân hàng của mẹ mình để yêu cầu cho phép đăng nhập ứng dụng ngân hàng trên thiết bị mới.
 
-![](images/2024-12-06-ngan-hang-van-chua-ap-dung-cong-nghe-cho-quy-trinh-de-phuc-vu-khach-hang/ngan-hang.webp)
+![](https://static-cdn.thanhlv.com/short-blog/images/2024-12-06-ngan-hang-van-chua-ap-dung-cong-nghe-cho-quy-trinh-de-phuc-vu-khach-hang/ngan-hang.webp)
 
 ## Tại sao mình phải đến ngân hàng ?
 Mẹ mình bị mất điện thoại, sau đó có mua máy mới và cài đặt lại ứng dụng ngân hàng. 

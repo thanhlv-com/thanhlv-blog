@@ -26,7 +26,7 @@ Trước tiên, hãy cùng nhau khám phá ý nghĩa và tầm quan trọng củ
 
 
 ## Design Patterns
-![img](images/2024-01-31-tim-hieu-ve-design-pattern/1.jpg)
+![img](https://static-cdn.thanhlv.com/blog/images/2024-01-31-tim-hieu-ve-design-pattern/1.jpg)
 
 ### **Design Patterns** là gì ?
 

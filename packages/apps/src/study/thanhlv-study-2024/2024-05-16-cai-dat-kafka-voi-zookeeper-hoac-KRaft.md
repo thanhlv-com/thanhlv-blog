@@ -26,11 +26,11 @@ Zookeeper hoặc Kraft đóng vai trò giúp quản lý, đồng bộ trạng th
   - Khi một brokers định kỳ không gửi trạng thái báo cáo đang hoạt động đến Zookeeper, Zookeeper coi broker đó là đã chết và thông báo cho các Brokers khác trong Cluster để cho các brokers khác biết và thực hiện các thao tác phục hồi cần thiết.
 - Rebalancing: Khi có sự thêm hoặc loại bỏ một brokers trong cluster, Zookeeper giúp điều phối quá trình rebalancing, đảm bảo dữ liệu được phân phối trên các Broker và các partition được sao chép.
 ## Zookeeper là gì ?
-![Zookeeper-Architecture](2024-05-16-cai-dat-kafka-voi-zookeeper-hoac-KRaft/Zookeeper-Architecture.png)
+![Zookeeper-Architecture](https://static-cdn.thanhlv.com/study/thanhlv-study-2024/2024-05-16-cai-dat-kafka-voi-zookeeper-hoac-KRaft/Zookeeper-Architecture.png)
 Zookeeper là một open source cho centralized service để duy trì thông tin cấu hình, đặt tên và cung cấp đồng bộ hóa cho các ứng dụng phân tán.
 
 Zookeeper Cho phép các process phân tán phối hợp với nhau thông qua một Share hierarchical namespace(Chia sẽ hệ thống tệp phân cấp), nó giống như một [File system](https://vi.wikipedia.org/wiki/H%E1%BB%87_th%E1%BB%91ng_t%E1%BA%ADp_tin)
-![what-is-file-system-1.png](2024-05-16-cai-dat-kafka-voi-zookeeper-hoac-KRaft/what-is-file-system-1.png)
+![what-is-file-system-1.png](https://static-cdn.thanhlv.com/study/thanhlv-study-2024/2024-05-16-cai-dat-kafka-voi-zookeeper-hoac-KRaft/what-is-file-system-1.png)
 Trong đó mỗi một folder trong Share hierarchical namespace được gọi là Znodes. Mỗi Znodes trong Zookeeper name space được xác định bởi một path. Và mọi Znodes đều có cha mẹ có đường dẫn là prefix của Znodes hiện tại. Ngoại lệ duy nhaast là Root("/") sẽ không có cha mẹ.
 
 ::: details Ví dụ về Znodes
@@ -64,7 +64,7 @@ https://cwiki.apache.org/confluence/display/ZOOKEEPER/ProjectDescription
   - Zookeeper đảm bảo tính nhất quán của dữ liệu thông qua một thuật toán tên là : Zab (ZooKeeper Atomic Broadcast) thuật toán này đảm bảo rằng tất cả các thay đổi đối với cấu trúc dữ liệu của Zookeeper được áp dụng một cách đồng bộ trên tất cả các Node trong cụm.
 - **Cơ chế Watchers**: Cơ chế này cho phép các client đăng ký nhận thông báo khi có sự thay đổi đối với dữ liệu mà họ quan tâm. Khi có dữ liệu tại một znode thay đổi, các client đăng ký watcher sẽ nhận đưược thông báo, điều này giúp các ứng dụng phản ứng nhanh chóng với các thay đổi trong cấu hình hoặc trạng thái của hệ thống
 
-![Zookeeper-Architecture](2024-05-16-cai-dat-kafka-voi-zookeeper-hoac-KRaft/Zookeeper-Architecture.png)
+![Zookeeper-Architecture](https://static-cdn.thanhlv.com/study/thanhlv-study-2024/2024-05-16-cai-dat-kafka-voi-zookeeper-hoac-KRaft/Zookeeper-Architecture.png)
 Zookeeper duy trì một cấu chúc dữ liệu phân cấp và lưu trữ các dữ liệu trong các Node gọi là Znodes. Mỗi Znodes có thể chứa dữ liệu và có thể có các Znode con. Zookeeper đảm bảo rằng tất cả các bản sao của cơ sở dữ liệu các nó trên các node(Node zookeeper) khác nhau đều được cập nhật với trạng thái nhất quán.
 
 ### Setup Kafka với Zookeeper.
@@ -131,7 +131,7 @@ docker-compose.yml
 
 Thực tế khi setup Cluster thì các Kafka không kết nối trực tiếp đến nhau, Để setup thành một Cluster thì có 2 cách sau.
 1. Tất cả Kafka node cùng kết nối đến một `zookeeper`.
-![apache-kafka-architecture.webp](2024-05-16-cai-dat-kafka-voi-zookeeper-hoac-KRaft/apache-kafka-architecture.webp)
+![apache-kafka-architecture.webp](https://static-cdn.thanhlv.com/study/thanhlv-study-2024/2024-05-16-cai-dat-kafka-voi-zookeeper-hoac-KRaft/apache-kafka-architecture.webp)
 2. Tạo các Cluster `zookeeper`. Khi Kafka kết nối đên Cluster bằng cách kết nối 1-N các Node ở zookeeper trong Cluster `zookeeper`.
   1. Thông thường Kafka sẽ kết nối đến tất cả các node `zookeeper` và số node `zookeeper` hiếm khi hay đổi.
 
@@ -354,7 +354,7 @@ networks:
     external: true
 ```
 - Các file config sẽ nằm ở trong folder `/etc/kafka/`
-![kafka-folder-config.png](2024-05-16-cai-dat-kafka-voi-zookeeper-hoac-KRaft/kafka-folder-config.png)
+![kafka-folder-config.png](https://static-cdn.thanhlv.com/study/thanhlv-study-2024/2024-05-16-cai-dat-kafka-voi-zookeeper-hoac-KRaft/kafka-folder-config.png)
 
 ##
 Trong bài viết này mình sẽ chỉ làm đơn giản về cách thứ setup Kafka, mình sẽ có một bài khác nói về chi tiết các cách thức cài đặt kafka cũng như ưu và nhược điểm.
