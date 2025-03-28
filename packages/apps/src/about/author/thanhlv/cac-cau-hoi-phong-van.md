@@ -12,7 +12,7 @@ comment: false
 
 ## Java
 ### Java core
-##### Nêu 4 tính chất của OOP
+###### Nêu 4 tính chất của OOP
 
 ::: details Câu trả lời
 **1. Kế thừa** :
@@ -613,3 +613,47 @@ comment: false
     :::
 :::
 
+##### String Pool là gì ?
+::: details Câu trả lời
+String Pool, hay còn gọi là String Constant Pool, là một vùng nhớ đặc biệt trong bộ nhớ Heap của Java Virtual Machine (JVM) được sử dụng để lưu trữ các chuỗi ký tự (String literals). Tạo String bằng tón tử `=`
+
+Mục đích chính của String Pool là để tối ưu hóa việc sử dụng bộ nhớ và tăng hiệu suất bằng cách tái sử dụng các đối tượng String giống nhau. Điều này giúp giảm việc tạo ra nhiều bản sao của cùng một chuỗi trong bộ nhớ.
+
+Dưới đây là một số điểm quan trọng về String Pool:
+
+ - Vị trí: String Pool nằm trong vùng nhớ Heap. Trước Java 7, nó nằm trong vùng nhớ PermGen (Permanent Generation), nhưng từ Java 7 trở đi, nó được chuyển vào vùng nhớ Heap chính.
+
+ - Chỉ chứa String literals: String Pool chỉ lưu trữ các chuỗi được tạo ra bằng cách sử dụng String literals (ví dụ: "hello") chứ không phải các đối tượng String được tạo bằng toán tử new (ví dụ: new String("hello")).
+ - Phương thức intern(): Đối với các đối tượng String được tạo bằng toán tử new, bạn có thể sử dụng phương thức intern() để đưa đối tượng đó vào String Pool (nếu nó chưa tồn tại) hoặc lấy tham chiếu đến đối tượng đã tồn tại trong Pool.
+  ```java
+public static void main(String[] args) {
+  // Ví dụ 1
+  String a = "Việt Nam Vô Địch";
+  a = "Việt Nam Vô Địch";
+  final String b = "Việt Nam Vô Địch";
+  final String c = new String("Việt Nam Vô Địch");
+  System.out.printf("a==b: %b\n", a == b);
+  System.out.printf("a==c: %b\n", a == c);
+  // Câu hỏi 1: Tạo ra mấy đối tượng String trong bộ nhớ ?
+  // Câu hỏi 2: Kết quả in ra là gì ?
+
+  // Ví dụ 2
+  Integer d = 1;
+  Integer e = 1;
+  System.out.printf("d==e: %b\n", d == e);
+  d = 500;
+  e = 500;
+  System.out.printf("d==e: %b\n", d == e);
+  // Câu hỏi 3: Tạo ra mấy đối tượng Integer trong bộ nhớ ?
+  // Câu hỏi 4: Kết quả in ra là gì ?
+
+  /**
+   * 1: Tạo ra 2 đối tượng String trong bộ nhớ
+   * 2: true và false
+   * 3: Không tạo thêm đối tượng, bởi vì mặc định Integer sẽ tạo ra 1 đối tượng trong cache từ -128 đến 127
+   * 4: true và false vì 500 không nằm trong cache nên sẽ tạo ra 2 đối tượng khác nhau
+   *  Vì sao ??: Vì Phạm vi từ -128 đến 127 là một phạm vi phổ biến trong khoa học máy tính, liên quan đến biểu diễn của số nguyên 8-bit có dấu. Phạm vi này thường bao gồm các giá trị được sử dụng thường xuyên nhất trong lập trình máy tính
+   */
+}
+  ```
+:::
