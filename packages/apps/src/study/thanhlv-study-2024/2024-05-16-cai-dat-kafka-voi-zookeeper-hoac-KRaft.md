@@ -4,7 +4,7 @@ title: Cài đặt Kafka với Zookeeper và Kraft
 authors: ["lethanh"]
 date: 2024-05-16
 outline: deep
-#image: /assets/event-and-message.UHUxhQ9h.jpeg
+image: https://static-cdn.thanhlv.com/study/thanhlv-study-2024/2024-05-16-cai-dat-kafka-voi-zookeeper-hoac-KRaft/apache-kafka-architecture.webp
 draft: false
 group: 2.1 Kafka
 ---

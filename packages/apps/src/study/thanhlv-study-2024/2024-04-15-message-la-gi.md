@@ -3,7 +3,7 @@ footer: true
 title: Message là gì ?
 authors: ["lethanh"]
 date: 2024-04-15
-image: /assets/1.1Jqj7e7N.jpg
+image: https://static-cdn.thanhlv.com/study/thanhlv-study-2024/2024-04-15-message-la-gi/1.jpg
 outline: deep
 draft: false
 group: 2. Message and event stream

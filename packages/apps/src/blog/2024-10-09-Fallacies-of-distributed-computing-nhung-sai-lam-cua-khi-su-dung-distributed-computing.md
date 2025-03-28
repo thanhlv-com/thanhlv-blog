@@ -5,7 +5,7 @@ description: Fallacies of distributed computing là một tập hợp các khẳ
 authors: [ lethanh ]
 date: 2024-10-09
 outline: deep
-image: /assets/img.8MakEgbE.png
+image: https://static-cdn.thanhlv.com/blog/images/2024-10-09-Fallacies-of-distributed-computing-nhung-sai-lam-cua-khi-su-dung-distributed-computing/img.png
 draft: false
 ---
 

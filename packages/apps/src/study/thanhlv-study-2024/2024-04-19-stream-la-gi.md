@@ -4,7 +4,7 @@ title: Stream là gì ?
 authors: ["lethanh"]
 date: 2024-04-19
 outline: deep
-image: /assets/1.2_1UtjTS.png
+image: https://static-cdn.thanhlv.com/study/thanhlv-study-2024/2024-04-19-stream-la-gi/1.png
 draft: false
 group: 2. Message and event stream
 ---

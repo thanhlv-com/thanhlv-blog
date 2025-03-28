@@ -5,7 +5,7 @@ description: Design Pattern tập trung vào giải pháp tái sử dụng cho c
 authors: [ lethanh ]
 date: 2024-02-29
 outline: deep
-image: /assets/1.tgNQEE1P.jpg
+image: https://static-cdn.thanhlv.com/blog/images/2024-02-29-su-khac-biet-giua-design-patternsva-architechture/1.jpg
 draft: false
 ---
 # Sự khác biệt giữa Design Pattern và Software Architecture.

@@ -4,7 +4,7 @@ title: Sự khác biệt giữa import wildcard và import một class trong jav
 description: Nên ưu tiên sử dụng **Import class**, **Import class** sẽ giúp người đọc file code dễ hiểu các import chúng ta đã sử dụng, làm gì và tránh các lỗi xung đột.
 authors: [ "lethanh" ]
 date: 2024-01-16
-image: /assets/image3.f0szhEGj.png
+image: https://static-cdn.thanhlv.com/blog/images/2024-01-16-su-khac-biet-giua-import-wildcard-va-import-mot-class-trong-java/image4.png
 outline: deep
 ---
 # Sự khác biệt giữa import wildcard và import một class trong java

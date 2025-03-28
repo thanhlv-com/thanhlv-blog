@@ -4,7 +4,7 @@ title: Thread safe, Lock object là gì ?
 description: Thread safety và lock objects là các thành phần quan trọng của lập trình đa luồng và giúp các ứng dụng hoạt động một cách ổn định và an toàn hơn trong môi trường đa luồng.
 authors: [ lethanh ]
 date: 2024-01-18
-image: /assets/img.Q7KTFxzs.png
+image: https://static-cdn.thanhlv.com/blog/images/2024-01-18-thread-safe-va-lock-object-la-gi/img.png
 outline: deep
 ---
 # Thread safe, Lock object là gì ?

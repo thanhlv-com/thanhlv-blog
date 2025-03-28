@@ -4,7 +4,7 @@ title: "Concurrency và parallelism. Giải thích Concurrency và parallelism c
 description: Về mặt lý thuyết, thuật toán và kiến trúc triển khai, có rất nhiều tài liệu trên sách và blog đã đề cập đến hai loại cấu trúc dữ liệu này
 authors: [ "lethanh" ]
 date: 2024-01-10
-image: /assets/concurrency_2.9Ib2ra_o.png
+image: https://static-cdn.thanhlv.com/blog/images/2024-01-10-concurrency-va-parallelism-giai-thich-concurrency-va-parallelism-cua-os-va-business-khac-gi-nhau/parallelism_1.png
 outline: deep
 ---
 # Concurrency và parallelism. Giải thích Concurrency và parallelism của OS và business khác gì nhau ? {#2024-01-10-concurrency-va-parallelism-giai-thich-concurrency-va-parallelism-cua-os-va-business-khac-gi-nhau}

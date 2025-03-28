@@ -4,7 +4,7 @@ title: Event stream và Event stream platform là gì ?
 authors: ["lethanh"]
 date: 2024-04-21
 outline: deep
-image: /assets/1png.s1tm4KaV.png
+image: https://static-cdn.thanhlv.com/study/thanhlv-study-2024/2024-04-21-event-stream-va-event-stream-platform-la-gi/1png.png
 draft: false
 group: 2. Message and event stream
 ---

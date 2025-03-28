@@ -4,7 +4,7 @@ title: Tìm hiểu về Design Pattern
 description: Design Pattern tập trung vào giải pháp tái sử dụng cho các vấn đề thiết kế cụ thể ở mức độ function, class và project.
 authors: [ lethanh ]
 date: 2024-01-31
-image: /assets/1.tgNQEE1P.jpg
+image: https://static-cdn.thanhlv.com/blog/images/2024-01-31-tim-hieu-ve-design-pattern/1.jpg
 outline: deep
 ---
 # Tìm hiểu về Design Pattern
