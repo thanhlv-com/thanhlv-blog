@@ -26,7 +26,7 @@ Thread ứng dụng, thường được biết đến như là thread ở cấp 
 
 Một ứng dụng có thể chia thành nhiều thread để thực hiện các nhiệm vụ khác nhau đồng thời. Mỗi thread có thể thể hiện một luồng thực thi độc lập trong một chương trình.
 
-![img](images/2024-01-26-thread-ung-dung-va-thread-hardware-cpu-khac-gi-nhau/1.png)
+![img](https://static-cdn.thanhlv.com/blog/images/2024-01-26-thread-ung-dung-va-thread-hardware-cpu-khac-gi-nhau/1.png)
 
 ### Đặc điểm của Thread ứng dụng (Software Threads)
 
@@ -46,7 +46,7 @@ Sự khác biệt giữa khái niệm thread trong ứng dụng phần mềm và
 
 Vì vậy, có thể kết luận rằng trong CPU, khái niệm *thread* có thật và đề cập đến khả năng của CPU để xử lý nhiều nhiệm vụ cùng một thời điểm ở cấp độ phần cứng. Nhưng nó chỉ có nếu CPU hỗ trợ core ảo tức SMT hoặc HT.
 
-![img](images/2024-01-26-thread-ung-dung-va-thread-hardware-cpu-khac-gi-nhau/2.jpg)
+![img](https://static-cdn.thanhlv.com/blog/images/2024-01-26-thread-ung-dung-va-thread-hardware-cpu-khac-gi-nhau/2.jpg)
 
 ### Đặc điểm của Thread trên CPU (Hardware Threads)
 

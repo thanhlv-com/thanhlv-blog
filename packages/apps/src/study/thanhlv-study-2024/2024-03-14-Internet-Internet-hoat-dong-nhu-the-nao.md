@@ -32,7 +32,7 @@ Trong số đó, việc hiểu rõ về cách thức hoạt động của Intern
   - Nếu 1 node gặp sự cố, Automatic Failover sẽ được bật, kết nối sẽ được chuyển đến Node khác.
 ### 2. Thời Kỳ Sơ Khai (1960s - 1974s)
 - 1960. Dự án [ARPANET](https://vi.wikipedia.org/wiki/ARPANET) (`Advanced Research Projects Agency Network`) của Cơ Quan Dự án Nghiên cứu Tiên Tiến Quốc Phòng Hoa Kỳ khởi xướng, đánh dấu bước đầu tiên của Internet.
-![Arpanet_logical_map_march_1977](2024-03-14-Internet-Internet-hoat-dong-nhu-the-nao/Arpanet_logical_map_march_1977.png)
+![Arpanet_logical_map_march_1977](https://static-cdn.thanhlv.com/study/thanhlv-study-2024/2024-03-14-Internet-Internet-hoat-dong-nhu-the-nao/Arpanet_logical_map_march_1977.png)
   - ARPANET đã tạo ra 2 giao thức và 1 cấu trúc mạng là nền tảng của Internet ở sau này.
   - 1. Giao thức chuyển mạch gói ([Packet Switching](https://vi.wikipedia.org/wiki/Chuy%E1%BB%83n_m%E1%BA%A1ch_g%C3%B3i)):
      - ARPANET sử dụng một kỹ thuật gọi là chuyển mạch gói ([packet switching](https://vi.wikipedia.org/wiki/Chuy%E1%BB%83n_m%E1%BA%A1ch_g%C3%B3i)), nơi thông tin được chia thành các đơn vị nhỏ gọi là gói (packets).
@@ -43,7 +43,7 @@ Trong số đó, việc hiểu rõ về cách thức hoạt động của Intern
     - Kết nối đầu tiên với [ARPANET](https://vi.wikipedia.org/wiki/ARPANET) được thực hiện vào ngày 29 tháng 10 năm 1969, giữa IMP tại UCLA và IMP tại SRI
 - 1972. Ray Tomlinson phát minh ra email.
 - 1973. Giao thức mạng TCP/IP được phát triển bởi Vint Cerf và Bob Kahn
-         ![SRI_First_Internetworked_Connection_diagram](2024-03-14-Internet-Internet-hoat-dong-nhu-the-nao/SRI_First_Internetworked_Connection_diagram.jpg)
+         ![SRI_First_Internetworked_Connection_diagram](https://static-cdn.thanhlv.com/study/thanhlv-study-2024/2024-03-14-Internet-Internet-hoat-dong-nhu-the-nao/SRI_First_Internetworked_Connection_diagram.jpg)
 ### 3. Phát Triển và Mở Rộng (1974 - 1989)
 - 1974. Thuật ngữ `Internet` được sử dụng lần đầu trong một bài báo của Vint Cerf và Bob Kahn
 - 1976. Phòng thí nghiệm của AT&T phát mình ra truyền tệp mạng FTP

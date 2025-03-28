@@ -18,7 +18,7 @@ Hôm nay chúng ta sẽ tiếp tục cùng nhau khám phá về ý nghĩa và t�
 
 
 ## Software Architecture
-![img](images/2024-02-01-tim-hieu-ve-architecture/1.png)
+![img](https://static-cdn.thanhlv.com/blog/images/2024-02-01-tim-hieu-ve-architecture/1.png)
 
 ### **Software Architecture(Kiến trúc phần mềm)** là gì ?
 Architecture, trong bối cảnh của phần mềm, đề cập đến **Architecture( Kiến trúc phần mềm )**, là một khung khái niệm chung chung cho cách thức tổ chức và xây dựng một hệ thống phần mềm. 
@@ -38,7 +38,7 @@ Các Software architecture thường tập trung giải quyết các vấn đề
 
 #### 1. **Xác định các thành phần và mô-đun(Module)**: 
 - **Software Architecture** giúp xác định các thành phần hoặc module của phần mềm, cũng như chức năng và giao diện của chúng.
-   ![img](images/2024-02-01-tim-hieu-ve-architecture/2.svg)
+   ![img](https://static-cdn.thanhlv.com/blog/images/2024-02-01-tim-hieu-ve-architecture/2.svg)
    - 1. **Thành phần(Component)**: Architecture giúp xác định các thành phần riêng lẻ như cơ sở dữ liệu, các dịch vụ web, và các lớp logic nghiệp vụ. Mỗi thành phần được thiết kế để thực hiện một nhóm chức năng cụ thể. Trong **Architecture( Kiến trúc phần mềm )**, thành phần (component) là một đơn vị cấu trúc tự chứa có thể bao gồm một hoặc nhiều mô-đun (module) và có những nhiệm vụ cụ thể.
       -  Đặc điểm của Component:
             - 1. Được định nghĩa bởi các chức năng mà nó cung cấp (thường thông qua một giao diện - interface).
@@ -80,7 +80,7 @@ Các Software architecture thường tập trung giải quyết các vấn đề
                 - 4. **Interface**: Các interface cho các module khác để tương tác, ví dụ thông qua một API gateway hoặc grpc...etc...
    - **Component và mô-đun(Module) thay thế cho nhau**: Tùy ngữ cảnh, một Module có thể là một Component hoặc một Component có thể được coi là một Module được sử dụng trong Component khác. Vì vậy khi thiết kế hệ thống, người thiết kế cần xác định rõ đâu là Module đâu là Component để có cùng một ý hiểu.
      - Có thể chia làm 3 level là Business systems, Component và Module.
-     ![img](images/2024-02-01-tim-hieu-ve-architecture/2.svg)
+     ![img](https://static-cdn.thanhlv.com/blog/images/2024-02-01-tim-hieu-ve-architecture/2.svg)
        - Trong đó Business systems là tất cả các chức năng mà business cung cấp cho người dùng.(Nó ở mức trừu tượng cao nhất)
        - Component là chức năng năng cung cấp cho người dùng.
        - Module là các mảnh ghép trong một Component để lắp ghép thành một chức năng hoạt động hoàn chỉnh.

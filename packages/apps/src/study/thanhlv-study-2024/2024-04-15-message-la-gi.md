@@ -69,7 +69,7 @@ Message là một trong các định nghĩa chung được nhiều bên, hệ th
 - **Thứ tư**, **Message** được mang ý nghĩa giả định người gửi sẽ gửi dữ liệu và sẽ có một người nhận. Từ dữ liệu của người gửi, người nhận có thể thực hiện các hành động tương ứng hoặc không làm gì cả, điều này phụ thuộc vào nghiệp vụ của người nhận.
   - Nếu nghiệp vụ của người nhận(B) có thực hiện một hành động nào đó khi nhận Message, nhưng hành động không được thực hiện tức là đã bị phạm một **business rule** nào đó của bên B.
     - Thông thường, đây là bước đầu tiên của một quá trình dẫn đến, A nhận được dữ liệu của B(HTML), B thay đổi dữ liệu....
-      ![Image](2024-04-15-message-la-gi/1.jpg)
+      ![Image](https://static-cdn.thanhlv.com/study/thanhlv-study-2024/2024-04-15-message-la-gi/1.jpg)
   
 ### **Tóm gọn Message là gì**
 - Message là một yêu cầu thường chứa một khối lượng dữ liệu được chuyển từ một hệ thống sang hệ thống khác để thực hiện các hành động xử lý hoặc trao đổi thông tin. 

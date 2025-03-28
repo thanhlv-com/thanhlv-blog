@@ -20,34 +20,34 @@ group: 2.1 Kafka
 
 ## Kafka Brokers là gì ?
 - Kafka Brokers hay có thể gọi là Kafka server trong Kafka architecture và nó sẽ đóng vai trò lưu trữ dữ liệu(Storage layer) và nó có thể chạy thành một cluster và nó có thể mở rộng ra nhiều data centers.
-![kafka-architecture-view.png](2024-06-10-kafka-brokers/kafka-architecture-view.png)
+![kafka-architecture-view.png](https://static-cdn.thanhlv.com/study/thanhlv-study-2024/2024-06-10-kafka-brokers/kafka-architecture-view.png)
 - Kafka Brokers chịu trách nghiệm quản lý dữ liệu( Bao gồm lưu trữ, đọc và replication(Tạo bản sao để sao lưu) ), quản lý topic và partition và quản lý offset.
 - Tất nhiên, Kafka Brokers cũng nhận và xử lý trực tiếp các request từ client.
-  ![kafka-handler-request.jpg](2024-06-10-kafka-brokers/kafka-handler-request.jpg)
+  ![kafka-handler-request.jpg](https://static-cdn.thanhlv.com/study/thanhlv-study-2024/2024-06-10-kafka-brokers/kafka-handler-request.jpg)
 
 ## Vai trò của Kafka Brokers với Produce khi Produce gửi record đến Brokers
 - Khi Produce muốn gửi Record đến Broker, Client Produce gửi records đến Broker đeer lưu trữ và consumer client có thể đọc các record đó sau.
-  ![kafka-produce.jpg](2024-06-10-kafka-brokers/kafka-produce.jpg)
+  ![kafka-produce.jpg](https://static-cdn.thanhlv.com/study/thanhlv-study-2024/2024-06-10-kafka-brokers/kafka-produce.jpg)
 Hình ảnh phía trên mô tả Produce gửi record đến Brokers, trong thực tế, nhiều Client Produce sẽ giao tiếp với 1 số các Brokers trong cụm.
 
 ## Vai trò của Kafka Brokers với Consumer khi Consumer nhận record từ Brokers
 Sau khi nói về yêu cầu của Produce chúng ta sẽ nói đến Consumer.
 - Consumer client đưa ra yêu cầu đến Broker để đọc(Sử dụng) các Record từ một topic được các Produce gửi trước đó đên Broker.
-  ![kafka-Consumer.jpg](2024-06-10-kafka-brokers/kafka-Consumer.jpg)
+  ![kafka-Consumer.jpg](https://static-cdn.thanhlv.com/study/thanhlv-study-2024/2024-06-10-kafka-brokers/kafka-Consumer.jpg)
 - Một điều quan trọng là sử dụng Record sẽ không làm ảnh hưởng đến việc lưu dữ liệu(Không bị mất sau khi đọc) hoặc việc sử dụng Record bởi các Consumer khác(Các consumer khác vẫn có thể đọc)
 
 ## Topics và partitions
 ### Topics
 - Kafka brokers sử dụng File system để lưu trữ bằng cách nối thêm các Record đến cuối cùng file trong một topic.
 - Một topic đại diện cho tên của Folder chưa tệp Kafka nối thêm các Record
-  ![kafka-topic-1.jpg](2024-06-10-kafka-brokers/kafka-topic-1.jpg)
+  ![kafka-topic-1.jpg](https://static-cdn.thanhlv.com/study/thanhlv-study-2024/2024-06-10-kafka-brokers/kafka-topic-1.jpg)
 - Kafka Brokers sẽ nhận key-value message dưới dạng raw byte, lưu trữ và phục vụ các yêu cầu đọc với cùng định dạng(Raw data).
   - Kafka Brokers không biết về data type của Record(Chỉ nhận được các byte), bằng cách làm việc với raw byte, Brokers không mất thời gian deserializing hoặc serializing dữ liệu nên mạng lại hiệu suất cao hơn.
 ### partitions
 - Các topic sẽ đươc partition, một Partition là một số nguyên(number) bắt đầu từ 0. Vì vậy nếu một topic có 3 partition thì sẽ có số partition là 0, 1, 2.
 - Kafka brokers gắn số partition và đuôi của folder topic với format `{Topic name}-{partition number}`.
   - Ví dụ một Topic tên `my-topic-2` có `5` partition thì tên sẽ như sau : `my-topic-2-0`, `my-topic-2-1`, `my-topic-2-2`, `my-topic-2-3`, , `my-topic-2-4`,
-    ![kafka-partition-number.jpg](2024-06-10-kafka-brokers/kafka-partition-number.jpg)
+    ![kafka-partition-number.jpg](https://static-cdn.thanhlv.com/study/thanhlv-study-2024/2024-06-10-kafka-brokers/kafka-partition-number.jpg)
 ```
 │   ....
 │   recovery-point-offset-checkpoint
@@ -96,7 +96,7 @@ Thực tế việc xác định partition sẽ được lầm ở bên Client.
 
 ### Offsets
 - Khi broker thêm một Record nó sẽ thêm một `id` được gọi là `offset`. Một `offset` sẽ bắt đầu từ `0` và là number, nó sẽ tặng lên 1 mỗi khi thêm một Record.
-  ![kafka-offset.png](2024-06-10-kafka-brokers/kafka-offset.png)
+  ![kafka-offset.png](https://static-cdn.thanhlv.com/study/thanhlv-study-2024/2024-06-10-kafka-brokers/kafka-offset.png)
 - Vì các Record mới luôn được thêm ở cuối của file, nên nó được sắp xếp theo offset.
 - Kafka đảm bảo Record order được sẵp xếp theo thứ tự trên cùng một partition chứ không phải trên các partition khác.
 ::: details Ví dụ
@@ -108,7 +108,7 @@ Partition 1 và 2 sẽ có thứ tự offset tăng dần.
 :::
 
 Consumer sử dụng `offset` để xác định vị trí của Record họ đã sử dụng, bằng cách này Consumer sẽ tìm các Record có `offset` cao hơn đã được Consumer đọc.
-![kafka-offset-2.png](2024-06-10-kafka-brokers/kafka-offset-2.png)
+![kafka-offset-2.png](https://static-cdn.thanhlv.com/study/thanhlv-study-2024/2024-06-10-kafka-brokers/kafka-offset-2.png)
 
 ### Xác định số lượng partition sử dụng
 - Việc chọn số lượng partition khi tạo một topic là một điều khó khắn, nó là cả một nghệ thuật.
@@ -142,8 +142,8 @@ kafka-topics --create --if-not-exists --topic first-topic\ #1
 ### Segments
 - Như chúng ta đã biết Broker sẽ thêm các Record vào các partition. Tuy nhiên Broker sẽ không thêm vào một tập partition duy nhất, nếu làm vậy tệp partition này sẽ khổng lồ.
 - Broker sẽ chia thành các tệp nhỏ thành các phần riêng biệt và được gọi là segments.
-  ![kafka-partition-log-segments.png](2024-06-10-kafka-brokers/kafka-partition-log-segments.png)
-  ![kafka-partition-log-segments-file.png](2024-06-10-kafka-brokers/kafka-partition-log-segments-file.png)
+  ![kafka-partition-log-segments.png](https://static-cdn.thanhlv.com/study/thanhlv-study-2024/2024-06-10-kafka-brokers/kafka-partition-log-segments.png)
+  ![kafka-partition-log-segments-file.png](https://static-cdn.thanhlv.com/study/thanhlv-study-2024/2024-06-10-kafka-brokers/kafka-partition-log-segments-file.png)
 - Việc sử dụng Segments sẽ giúp thực hiện push Record mới và thực hiện truy suất Record bằng offset trở lên dễ dàng hơn.
 - Mặc định kafka Broker sẽ để mỗi segment là một [1G](https://docs.confluent.io/platform/current/installation/configuration/topic-configs.html#segment-bytes) hoặc chúng ta có thể chỉ định ở `segment.bytes`. Khi đến ngưỡng segment sẽ được close và một segment mới được tạo.
   - Kích thước segment nhỏ hơn có nghĩa là các tệp phải được đóng và phân bổ thường xuyên hơn, điều này làm giảm hiệu quả chung của việc ghi đĩa.
@@ -268,7 +268,7 @@ retention.bytes=1073741824 # 1 GB ==> Nếu partition vượt quá 1 GB, Kafka s
 - Chúng ta có thể kết hợp cả `Time-Based Policy và Size-Based Policy` để đảm bảo Record có thể xóa bởi cả 2 Policy.
 - Kết hợp cả `Time-Based Policy và Size-Based Policy` đảm bảo Record cũ sau một khoảng thời gian nhất định hoặc khi đến ngưỡng dung lượng sẽ bị xóa.
 
-![retention-policy.png](2024-06-10-kafka-brokers/retention-policy.webp)
+![retention-policy.png](https://static-cdn.thanhlv.com/study/thanhlv-study-2024/2024-06-10-kafka-brokers/retention-policy.webp)
 
 ##### Lưu trữ dữ liệu mãi mãi.
 - Nếu bạn muốn dữ liệu kafka được lưu mãi mãi bạn có thể cấu hình giá trị `-1` cho `retention.ms` và `retention.bytes`.
@@ -302,7 +302,7 @@ Các metadata trong một cluster Kafka có thể bao gồm:
 
 Thực tế các partition không nằm trên một broker, Partition sẽ được chải ra trên các broker khác nhau trong cluster. Mỗi partition sẽ có một broker đóng vai trò là leader và các broker khác sẽ đóng vai trò là follower. (replication)
 
-![Leaders-and-followers.png](2024-06-10-kafka-brokers/Leaders-and-followers.png)
+![Leaders-and-followers.png](https://static-cdn.thanhlv.com/study/thanhlv-study-2024/2024-06-10-kafka-brokers/Leaders-and-followers.png)
 
 Partition leader sẽ sử lý tất cả các yêu cầu ghi và đọc từ client, các follower sẽ sao chép dữ liệu từ leader. Kafk sử dụng cơ chế `Leader-based Replication` để sao chép dữ liệu từ leader đến follower để đảm bảo tính toàn vẹn và đồng bộ dữ liệu.
 
@@ -318,11 +318,11 @@ Khi một Record được ghi vào leader, leader sẽ gửi Record đó đến 
 
 Khi một Broker Leader không khả dụng, Kafka sẽ chuyển đổi một follower khác trở thành leader, bởi vì các follower đều có dữ liệu đồng bộ với leader nên việc chuyển đổi sẽ không ảnh hưởng đến tính toàn vẹn dữ liệu
 
-![Replication.png](2024-06-10-kafka-brokers/Replication.png)
+![Replication.png](https://static-cdn.thanhlv.com/study/thanhlv-study-2024/2024-06-10-kafka-brokers/Replication.png)
 
 Tuy nhiên việc đồng bộ luôn sẽ có độ trễ. Nhìn minh họa dưới đây.
 
-![Replication-lag.png](2024-06-10-kafka-brokers/Replication-lag.png)
+![Replication-lag.png](https://static-cdn.thanhlv.com/study/thanhlv-study-2024/2024-06-10-kafka-brokers/Replication-lag.png)
 
 Trong thực tế, một độ chễ nhỏ khoảng vài bản khi không phải là vấn đề, nhưng nếu độ chễ quá lớn có thể dẫn đến mất dữ liệu.=========
 

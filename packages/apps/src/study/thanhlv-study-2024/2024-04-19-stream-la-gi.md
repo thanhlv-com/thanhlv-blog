@@ -30,7 +30,7 @@ Với cách hiểu của mình thì Stream đề cập đến việc truyền d�
 Các loại **Stream** thường được chia thành hai loại chính là **input stream (dữ liệu đầu vào)** và **output stream (dữ liệu đầu ra**). 
 
 Sử dụng stream giúp cho việc xử lý dữ liệu trở nên linh hoạt và hiệu quả, đặc biệt là khi làm việc với dữ liệu lớn hoặc khi cần xử lý dữ liệu một cách tuần tự.
-![Stream](2024-04-19-stream-la-gi/1.png)
+![Stream](https://static-cdn.thanhlv.com/study/thanhlv-study-2024/2024-04-19-stream-la-gi/1.png)
 
 ## Đặc điểm của event.
 1. **Truyền dữ liệu liên tục**: Stream cho phép truyền dữ liệu liên tục từ nguồn đến đích.

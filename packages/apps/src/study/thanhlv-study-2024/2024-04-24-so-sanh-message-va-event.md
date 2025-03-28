@@ -16,7 +16,7 @@ Có thể bạn vẫn còn thắc mắc về điểm giống và khác biệt gi
 
 [[TOC]]
 
-![event-and-message](2024-04-24-so-sanh-message-va-event/event-and-message.jpeg)
+![event-and-message](https://static-cdn.thanhlv.com/study/thanhlv-study-2024/2024-04-24-so-sanh-message-va-event/event-and-message.jpeg)
 ## Giống nhau giữa Message và Event
 Các điểm giống nhau này sẽ tùy thuộc vào bài toán và cách triển khai mà chúng sẽ giống hoặc không giống.
 
@@ -52,7 +52,7 @@ Tuy nhiên ở high level thì Message và Event đều có vẻ giống nhau v�
 - **Linh Hoạt trong Quy mô**: Dễ dàng điều triển quy mô của dịch vụ hoặc cả một hệ thống để đáp ứng nhu cầu.
 
 ## Khác nhau giữa Message và Event.
-![event-and-message](2024-04-24-so-sanh-message-va-event/event-and-message.jpeg)
+![event-and-message](https://static-cdn.thanhlv.com/study/thanhlv-study-2024/2024-04-24-so-sanh-message-va-event/event-and-message.jpeg)
 
 - **Định nghĩa mục đích**:
   - **Message**: 
@@ -97,7 +97,7 @@ Tuy nhiên ở high level thì Message và Event đều có vẻ giống nhau v�
         - **Many-to-Many**:  Nhiều nguồn có thể phát ra sự kiện giống nhau và có thể được lắng nghe và xử lý bởi 0 hoặc N thành phần.
           - Ví dụ: Các kênh bán hàng khác nhau(Web, ứng dụng di động, đối tác thứ 3, cò trực tiếp) có thể phát ra sự kiện **"Tạo đơn hàng mới"** (Nhiều nguồn cùng 1 sự kiện phát ra)
           - Các hệ thống như quản lý kho, xử lý thành toán, dịch vụ giao hàng sẽ đăng ký lắng nghe sự kiện **"Tạo đơn hàng mới"** để thực hiện các nghiệp vụ của mình
-          ![example event many to many](2024-04-24-so-sanh-message-va-event/example-event-many-to-many.svg)
+          ![example event many to many](https://static-cdn.thanhlv.com/study/thanhlv-study-2024/2024-04-24-so-sanh-message-va-event/example-event-many-to-many.svg)
   - **Tần suất gửi và kiểm soát gửi**.
     - **Message**:
       - **Tần suất**: Tần suất gửi message thường phụ thuộc vào nhu cầu giao tiếp cụ thể giữa người gửi và nhận tin nhắn. 
@@ -118,10 +118,10 @@ Tuy nhiên ở high level thì Message và Event đều có vẻ giống nhau v�
 
 ## Khác nhau về nhu cầu sử dụng
 Lựa chọn giữa Message và Event trong hệ thống phần mềm phụ thuộc vào nhiều yếu tố, kiến trúc, cách quản lý trạng thái, cách hệ thống tương tác với nhau,mức độ chặt chẽ...
-![event-and-message](2024-04-24-so-sanh-message-va-event/event-and-message.jpeg)
+![event-and-message](https://static-cdn.thanhlv.com/study/thanhlv-study-2024/2024-04-24-so-sanh-message-va-event/event-and-message.jpeg)
 
 ### Message
-![event-and-message 2](2024-04-24-so-sanh-message-va-event/message.png)
+![event-and-message 2](https://static-cdn.thanhlv.com/study/thanhlv-study-2024/2024-04-24-so-sanh-message-va-event/message.png)
 - **Giao tiếp request/response** : 
   - Khi cần một mô hình giao tiếp rõ ràng giữa người gửi và người nhận, nơi người gửi mong đợi một phản hồi cụ thể từ người nhận.
     - Ví dụ: Trong một hệ thống giao dịch, một yêu cầu thanh toán có thể được gửi dưới dạng message và người gửi mong đợi một phản hồi về việc thanh toán thành công hoặc thất bại.
@@ -136,11 +136,11 @@ Lựa chọn giữa Message và Event trong hệ thống phần mềm phụ thu�
 - **Quản lý trạng thái phức tạp**:
   - Khi có các nghiệp vụ phức tạp yêu cầu quản lý trạng thái một cách rõ ràng qua từng bước, Message cho phép theo dõi và đảm bảo nhất quán của dữ liệu ở các service khác nhau.
   - Ví dụ: Khi có một yêu cầu từ client và hệ thống cần call nhiều hệ thống và các hệ thống khác cũng call nhiều hệ thống khác. Các tin nhắn sẽ gửi tuần tự(Sequence) và duy trì trạng thái giữa các tin nhắn.
-    ![event-and-message 2](2024-04-24-so-sanh-message-va-event/event-and-message-2.jpg)
+    ![event-and-message 2](https://static-cdn.thanhlv.com/study/thanhlv-study-2024/2024-04-24-so-sanh-message-va-event/event-and-message-2.jpg)
 - **Tích hợp hệ thống bên thứ 3**:
   - Khi tích hợp với các hệ thống bên thứ 3, message cho phép định nghĩa cách thức giao tiếp chặt chẽ, đảm bảo dữ liệu được gửi chính xác giữa các hệ thống bên ngoài khác.
 ### Event
-![event-and-message 2](2024-04-24-so-sanh-message-va-event/event.png)
+![event-and-message 2](https://static-cdn.thanhlv.com/study/thanhlv-study-2024/2024-04-24-so-sanh-message-va-event/event.png)
 
 - **Thông báo về Sự kiện**: Khi muốn thông báo một sự kiện đã xảy ra và không yêu cầu một hành động cụ thể hoặc phản hồi từ người nhận hoặc không yêu cầu người nhận xử lý ngay lập tức khi phát sự kiện.
 - **Lập trình Hướng sự kiện (Event-driven):**: Việc sử dụng Event giúp giảm sự phụ thuộc giữa các thành phần, cho phép linh phản ứng linh hoạt với các thay đổi.
@@ -151,7 +151,7 @@ Lựa chọn giữa Message và Event trong hệ thống phần mềm phụ thu�
 - **Xử lý xong xong và hiệu suất**: Trong các hệ thống cần xử lý song song và tối ưu hiệu suất, event cho phép phân tán xử lý và giảm độ trễ bằng cách cho phép các thành phần xử lý độc lập và song song với nhau.
 
 ## Các tiêu chí đánh giá lựa chọn giữa việc sử dụng message và event trong hệ thống
-![event-and-message](2024-04-24-so-sanh-message-va-event/event-and-message.jpeg)
+![event-and-message](https://static-cdn.thanhlv.com/study/thanhlv-study-2024/2024-04-24-so-sanh-message-va-event/event-and-message.jpeg)
 
 1. **Mục Tiêu Giao Tiếp**
    - **Message**: Sử dụng khi cần giao tiếp mục đích cụ thể giữa các thành phần, đặc biệt là khi cần một phản hồi hoặc xử lý dữ liệu cụ thể.

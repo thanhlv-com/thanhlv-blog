@@ -29,10 +29,10 @@ Tuy nhiên, bởi vì hệ thống của chúng tôi cung cấp dịch vụ cho 
 Đỉnh điểm trong tháng 1-2025 hệ thống của chúng tôi nhận được lượng request lớn từ 2.000 request/s đến 5.000 request/s chỉ trong vòng 2 phút.
 
 Dưới đây là ảnh thống kê lượng request trong tháng 1-2025.
-![Image](images/2025-01-23-he-thong-cua-ban-da-san-sang-xu-ly-request-dot-ngot-tu-2000-den-5000-request-trong-2-phut-chua/trong_thang_1_2025.png)
+![Image](https://static-cdn.thanhlv.com/short-blog/images/2025-01-23-he-thong-cua-ban-da-san-sang-xu-ly-request-dot-ngot-tu-2000-den-5000-request-trong-2-phut-chua/trong_thang_1_2025.png)
 
 Còn dưới đây là ảnh thống kê lượng request trong ngày 23-01-2025.
-![Image](images/2025-01-23-he-thong-cua-ban-da-san-sang-xu-ly-request-dot-ngot-tu-2000-den-5000-request-trong-2-phut-chua/trong_ngay_23_01_2025.png)
+![Image](https://static-cdn.thanhlv.com/short-blog/images/2025-01-23-he-thong-cua-ban-da-san-sang-xu-ly-request-dot-ngot-tu-2000-den-5000-request-trong-2-phut-chua/trong_ngay_23_01_2025.png)
 
 Bạn có thể thấy các bước sóng tăng đột ngột một khoảng thời gian sau đó giảm dần trong khoảng 10h và 19h30.
 
@@ -48,7 +48,7 @@ Tất cả dữ liêu mà hệ thống đã tạo và được người dùng tr
 
 Chúng tôi chủ động cache dữ liệu mới khi được tạo và cache lại dữ liệu khi có request sử dụng. Điều này giúp gần như tất cả request đều được trả về từ cache và hệ thống truy cập dữ liệu trên database ít nhất có thể.
 
-![Image](images/2025-01-23-he-thong-cua-ban-da-san-sang-xu-ly-request-dot-ngot-tu-2000-den-5000-request-trong-2-phut-chua/cache_hit_mis_23-1.png)
+![Image](https://static-cdn.thanhlv.com/short-blog/images/2025-01-23-he-thong-cua-ban-da-san-sang-xu-ly-request-dot-ngot-tu-2000-den-5000-request-trong-2-phut-chua/cache_hit_mis_23-1.png)
 
 Nhìn vào ảnh biểu đồ trên, bạn có thể thấy lượng request đến hệ thống của chúng tôi vào ngày 23-01-2025 và lượng request trả về từ cache rất là nhiều và tỉ lê cache miss rất ít.
 
@@ -72,10 +72,10 @@ Chúng tôi đặt min số lượng instance là 8 và khi % CPU của các ins
 Chúng tôi luôn cố gắng giữ ổn định % CPU sử dụng dưới 20%. Điều này giúp chúng tôi đảm bảo hệ thống luôn sẵn sàng xử lý lượng request đột ngột cho bất kỳ hoàn cảnh nào.
 
 CPU trong ngày hôm nay viết blog 23-01-2025.
-![Image](images/2025-01-23-he-thong-cua-ban-da-san-sang-xu-ly-request-dot-ngot-tu-2000-den-5000-request-trong-2-phut-chua/thu_thuat_nho.png)
+![Image](https://static-cdn.thanhlv.com/short-blog/images/2025-01-23-he-thong-cua-ban-da-san-sang-xu-ly-request-dot-ngot-tu-2000-den-5000-request-trong-2-phut-chua/thu_thuat_nho.png)
 
 Đây là ảnh CPU trong tháng 1-2025. Bạn có thể thấy CPU luôn ổn định dưới 20%.
-![Image](images/2025-01-23-he-thong-cua-ban-da-san-sang-xu-ly-request-dot-ngot-tu-2000-den-5000-request-trong-2-phut-chua/thu_thuat_nho_thang_1-2025.png)
+![Image](https://static-cdn.thanhlv.com/short-blog/images/2025-01-23-he-thong-cua-ban-da-san-sang-xu-ly-request-dot-ngot-tu-2000-den-5000-request-trong-2-phut-chua/thu_thuat_nho_thang_1-2025.png)
 
 Tất nhiên điều này cũng phụ thuộc vào nhiều yếu tố khác như logic của hệ thống, dữ liệu, ...
 

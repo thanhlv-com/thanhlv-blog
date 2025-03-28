@@ -36,7 +36,7 @@ khác, người dùng phải tắt ứng dụng hiện tại và mở ứng dụ
 Khi mở các ứng dụng, chúng sẽ chạy trên một Core CPU (trong thời kỳ trước đây chỉ có một Core). Mỗi ứng dụng khi được mở
 sẽ được CPU xử lý các logic liên quan đến ứng dụng đó, và CPU sẽ tập trung chỉ vào việc xử lý cho ứng dụng đó mà thôi.
 
-![Concurrency](./images/2024-01-10-concurrency-va-parallelism-giai-thich-concurrency-va-parallelism-cua-os-va-business-khac-gi-nhau/concurrency.png)
+![Concurrency](https://static-cdn.thanhlv.com/blog/images/2024-01-10-concurrency-va-parallelism-giai-thich-concurrency-va-parallelism-cua-os-va-business-khac-gi-nhau/concurrency.png)
 
 Sau đó, với sự phát triển của công nghệ, tại một thời điểm chúng ta có khả năng chạy nhiều ứng dụng trên cùng một máy
 tính. 
@@ -48,7 +48,7 @@ Core đơn sẽ đảm nhận việc xử lý logic cho nhiều ứng dụng kh�
 
 Tính năng **Concurrency** giúp CPU thực hiện công việc này. Thay vì một Core của CPU chỉ xử lý một ứng dụng duy nhất, tính
 năng Concurrency cho phép Core chuyển đổi giữa việc xử lý các ứng dụng khác nhau liên tục.
-![Concurrency2](./images/2024-01-10-concurrency-va-parallelism-giai-thich-concurrency-va-parallelism-cua-os-va-business-khac-gi-nhau/concurrency_2.png)
+![Concurrency2](https://static-cdn.thanhlv.com/blog/images/2024-01-10-concurrency-va-parallelism-giai-thich-concurrency-va-parallelism-cua-os-va-business-khac-gi-nhau/concurrency_2.png)
 
 #### Ví dụ concurrency
 
@@ -79,7 +79,7 @@ Ví dụ minh họa trong thực tế:
 Thông tin ví dụ:
 
 Một cô thư ký giám đốc có nhiều nhiệm vụ, bao gồm việc nghe điện thoại cho giám đốc, kiểm tra các cuộc hẹn, nhắn tin cho khách hàng, và nhiều công việc khác.
-![Concurrency3](./images/2024-01-10-concurrency-va-parallelism-giai-thich-concurrency-va-parallelism-cua-os-va-business-khac-gi-nhau/concurrency_3.png)
+![Concurrency3](https://static-cdn.thanhlv.com/blog/images/2024-01-10-concurrency-va-parallelism-giai-thich-concurrency-va-parallelism-cua-os-va-business-khac-gi-nhau/concurrency_3.png)
 1. Giây thứ 1: Cô thư ký bắt đầu nghe điện thoại của khách hàng.
 2. Giây thứ 2: Cô thư ký tạm dừng nghe điện thoại để kiểm tra cuộc hẹn.
 3. Giây thứ 3: Cô thư ký dừng lại kiểm tra cuộc hẹn để nhắn tin cho khách hàng.
@@ -113,7 +113,7 @@ Với sự phát triển của công nghệ, người ta có khả năng tích h
 
 Thay vì một thread trong một core phải xử lý toàn bộ công việc, khi có nhiều thread trong một core hoặc nhiều core hơn, các công việc sẽ được phân chia và chia nhẹ ra cho các thread, core khác nhau để cùng xử lý.
 
-![Parallelism_1](./images/2024-01-10-concurrency-va-parallelism-giai-thich-concurrency-va-parallelism-cua-os-va-business-khac-gi-nhau/parallelism_1.png)
+![Parallelism_1](https://static-cdn.thanhlv.com/blog/images/2024-01-10-concurrency-va-parallelism-giai-thich-concurrency-va-parallelism-cua-os-va-business-khac-gi-nhau/parallelism_1.png)
 
 Như trong hình ảnh ở trên, khi chúng ta có 2 công việc, mỗi công việc sẽ được giao cho một thread hoặc core để xử lý. Điều này giúp chúng ta có khả năng xử lý hai công việc song song.
 
@@ -131,14 +131,14 @@ Parallelism đơn giản vậy thôi. Trước đây, chỉ có một thread tro
 
 ## Concurrency kết hợp với parallelism
 
-![Parallelism_1](./images/2024-01-10-concurrency-va-parallelism-giai-thich-concurrency-va-parallelism-cua-os-va-business-khac-gi-nhau/concurrency_combined_with_parallelism.png)
+![Parallelism_1](https://static-cdn.thanhlv.com/blog/images/2024-01-10-concurrency-va-parallelism-giai-thich-concurrency-va-parallelism-cua-os-va-business-khac-gi-nhau/concurrency_combined_with_parallelism.png)
 
 Sẽ trông giống như trên hình vậy. Trong các thread trong core hoặc trong các core, công việc vẫn được xử lý đồng thời và các nhiệm vụ sẽ được chia sẻ giữa các thread hoặc core khác nhau để cùng thực hiện.
 - Mỗi thư ký sẽ xử lý đồng thời nhiều công việc.
 - Nhiều cô thư ký để xử lý song song nhiều công việc khác nhau.
 
 #### Ví dụ về 2 cô thư ký:
-![Parallelism_1](./images/2024-01-10-concurrency-va-parallelism-giai-thich-concurrency-va-parallelism-cua-os-va-business-khac-gi-nhau/concurrency_combined_with_parallelism.png)
+![Parallelism_1](https://static-cdn.thanhlv.com/blog/images/2024-01-10-concurrency-va-parallelism-giai-thich-concurrency-va-parallelism-cua-os-va-business-khac-gi-nhau/concurrency_combined_with_parallelism.png)
 
 Có 2 cô thư ký và 4 công việc: Kiểm tra lịch hẹn, nghe điện thoại, nhắn tin cho khách hàng, và pha cafe cho sếp.
 

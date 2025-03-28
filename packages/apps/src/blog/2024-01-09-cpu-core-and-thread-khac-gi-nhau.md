@@ -21,7 +21,7 @@ Hãy cùng bắt đầu!
 ## CPU là gì ? {#cpu-la-gi}
 
 CPU là một thành phần chính được tích hợp trên mainboard của máy tính, cũng như trên các thiết bị khác như điện thoại, máy tính bảng, v.v.
-![CPU là gì](./images/2024-01-09-cpu-core-and-thread-khac-gi-nhau/cpu-la-gi.png)
+![CPU là gì](https://static-cdn.thanhlv.com/blog/images/2024-01-09-cpu-core-and-thread-khac-gi-nhau/cpu-la-gi.png)
 
 Nhiệm vụ chính của CPU là thực hiện hầu hết các xử lý bên trong máy tính, đóng vai trò quan trọng trong việc xử lý logic. Chẳng hạn, nó có thể thực hiện phép tính đơn giản như 1+1=2.
 
@@ -35,7 +35,7 @@ Trong một mainboard thông thường, thường chỉ có một CPU được g
 Core CPU được ra mắt vào ngày 1 tháng 5 năm 2006 và thường được gọi đơn giản là Core. Đây là một phần quan trọng của vi xử lý nằm trong bộ xử lý trung tâm của máy tính.
 
 Mỗi CPU có thể bao gồm nhiều core, ví dụ, CPU với 2 core được gọi là dual-core, 3 core được gọi là triple-core, và cứ như vậy...
-![Core trong CPU là gì](./images/2024-01-09-cpu-core-and-thread-khac-gi-nhau/core-trong-cpu-la-gi.png)
+![Core trong CPU là gì](https://static-cdn.thanhlv.com/blog/images/2024-01-09-cpu-core-and-thread-khac-gi-nhau/core-trong-cpu-la-gi.png)
 Trong hình ảnh trên, chúng ta thấy một CPU với tổng cộng 4 core phần cứng. 
 
 Mỗi core không chỉ thực hiện các thao tác đọc và ghi dữ liệu mà còn cung cấp hướng dẫn cho máy tính để thực hiện các quy trình logic độc lập.
@@ -43,7 +43,7 @@ Mỗi core không chỉ thực hiện các thao tác đọc và ghi dữ liệu 
 ## Thread trong CPU (Logical core) là gì ? {#thread-trong-cpu-logical-core-la-gi}
 
 Thực sự, bên trong CPU, thời trước không có khái niệm về thread. Mỗi core trong CPU chỉ có khả năng xử lý một luồng logic độc lập tại một thời điểm. Tuy nhiên, Intel đã đưa ra một công nghệ được gọi là [**Simultaneous Multithreading (SMT).**](https://en.wikipedia.org/wiki/Simultaneous_multithreading).
-![Thread trong CPU (Logical core) là gì](./images/2024-01-09-cpu-core-and-thread-khac-gi-nhau/thread-trong-cpu-logical-core-la-gi.png)
+![Thread trong CPU (Logical core) là gì](https://static-cdn.thanhlv.com/blog/images/2024-01-09-cpu-core-and-thread-khac-gi-nhau/thread-trong-cpu-logical-core-la-gi.png)
 
 Công nghệ [**SMT**](https://en.wikipedia.org/wiki/Simultaneous_multithreading) cho phép mỗi Core thực tế ([**physical core**](https://www.hivelocity.net/blog/what-is-cpu-cores-multithreading-vcpu/#:~:text=A%20Physical%20Core%20is%20a,brain%20to%20process%20commands%20with.)) có thể đóng vai trò như là 2 core ([**Core ảo hay Logical core**](https://www.quora.com/What-is-the-difference-between-a-physical-core-logical-core-and-thread-in-terms-of-processors)), thực hiện đồng thời 2 nhiệm vụ trong cùng một khoảng thời gian. Chính vì vậy mỗi Core ảo này được gọi là Logical Core.
 

@@ -21,7 +21,7 @@ Từ những đặc điểm đến những mục tiêu chiến lược mà Kafka
 - Apache Kafka là một [Event stream platform](2024-04-21-event-stream-va-event-stream-platform-la-gi) được phát triển bởi [LinkedIn](https://www.linkedin.com/) và quyên góp cho apache và phát hành thành mã nguồn mở (Open-source) vào năm 2011.
 - Apache Kafka được viết bằng `Scala` và `Java`. Dự án này nhằm mục đích cung cấp một nền tảng có khả năng xử lý dữ liệu với lượng thông tin lớn, độ trễ thấp, phù hợp cho việc xử lý dữ liệu `real-time`
 - Ở high level, Kafka là một hệ thống phân tán servers và clients. Servers được gọi là **brokers** và client được chia làm 2 là **record producers sending** và **consumer clients read records**
-  ![info-kafka](2024-04-25-tim-hieu-lich-su-va-muc-dich-cua-kafka/info-kafka.webp)
+  ![info-kafka](https://static-cdn.thanhlv.com/study/thanhlv-study-2024/2024-04-25-tim-hieu-lich-su-va-muc-dich-cua-kafka/info-kafka.webp)
 - Kafka cung cấp đầy đủ mọi thứ để chúng ta có thể triển khai event Streaming application một cách đầy đủ
 ## Vì sao là kafka ?
   - **Distributed System(Hệ thống phân tán)**: Apache Kafka là một hệ thống phân tán được thiết kế chạy trên nhiều máy chủ, đảm bảo tính sẵn sàng cao và khả năng chịu lỗi.
@@ -46,10 +46,10 @@ Từ những đặc điểm đến những mục tiêu chiến lược mà Kafka
 ## Kafka hoạt động như nào ?
 Kafka kết hợp cả hai Message model là Queue và publish-subscribe để cung cấp những lợi ích tốt nhất cho Consumers.
 ### Nói qua lại về Queue
-![product-page-diagram_Kafka_Queue.png](2024-04-25-tim-hieu-lich-su-va-muc-dich-cua-kafka/product-page-diagram_Kafka_Queue.png)
+![product-page-diagram_Kafka_Queue.png](https://static-cdn.thanhlv.com/study/thanhlv-study-2024/2024-04-25-tim-hieu-lich-su-va-muc-dich-cua-kafka/product-page-diagram_Kafka_Queue.png)
 Queue cho phép data có thể được xử lý bởi nhiều Consumer instance(Mỗi một data sẽ có thể sử lý bởi 1 trong các consumer). Làm nó dễ dàng mở rộng.
 ### Nói qua lại về Publish-subscribe
-![product-page-diagram_Kafka_PubSub.png](2024-04-25-tim-hieu-lich-su-va-muc-dich-cua-kafka/product-page-diagram_Kafka_PubSub.png)
+![product-page-diagram_Kafka_PubSub.png](https://static-cdn.thanhlv.com/study/thanhlv-study-2024/2024-04-25-tim-hieu-lich-su-va-muc-dich-cua-kafka/product-page-diagram_Kafka_PubSub.png)
 Publish subscribe cho phép data có thể được xử lý bởi nhiều Consumer khác nhau cho phép dễ dàng thêm logic xử lý mới.
 ### Cách kết hợp Queue và publish-subscribe của Kafka
 Queue rất tốt nhưng Queue không thể có nhiều người subscribe, Nhưng **Publish-subscribe** để mọi tin nhắn đều được gửi đến mọi người subscribe nhưng không thể sử dụng để phân phối các công việc cho nhiều worker như Queue.
@@ -60,7 +60,7 @@ Kafka sử dụng **Partitioned log model** để kết hợp cả Queue và pub
 
 Log là một chuỗi các record được sắp xếp theo thứ tự và các log này sẽ được kafka gộp thành các segment và được lưu trữ trong các partition.
 ::: details Segment là gì ?
-![kafka-partition-log-segments.png](2024-04-25-tim-hieu-lich-su-va-muc-dich-cua-kafka/kafka-partition-log-segments.png)
+![kafka-partition-log-segments.png](https://static-cdn.thanhlv.com/study/thanhlv-study-2024/2024-04-25-tim-hieu-lich-su-va-muc-dich-cua-kafka/kafka-partition-log-segments.png)
 Trong thực tế, mỗi partition không lưu trữ tất cả records trong một file duy nhất.
 
 Kafka sẽ chia log thành các log segments. Mỗi log segments sẽ có thể được giới hạn size(Ví dụ 1G) và có thể giới hạn thời gian tồn tại ví dụ 1 ngày hoặc vĩnh viễn.

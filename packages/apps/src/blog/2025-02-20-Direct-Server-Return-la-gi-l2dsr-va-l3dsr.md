@@ -21,11 +21,11 @@ L3DSR là một tiến bộ đáng chú ý trong lĩnh vực này, cho phép tí
 
 Hiểu đơn giản: **Direct Server Return (DSR)** là cấu hình mạng được sử dụng trong **load balancer** để chuyển tiếp các yêu cầu **đến máy chủ backend,** sau đó **gửi phản hồi của máy chủ trực tiếp trở lại client**.
 
-![layer4_dsr_data_flow.png](images/2025-02-20-Direct-Server-Return-la-gi-l2dsr-va-l3dsr/layer4_dsr_data_flow.png)
+![layer4_dsr_data_flow.png](https://static-cdn.thanhlv.com/blog/images/2025-02-20-Direct-Server-Return-la-gi-l2dsr-va-l3dsr/layer4_dsr_data_flow.png)
 
 ### Để hiểu sâu hơn về bài viêt này, bạn nên hiểu cơ bản về OSI model
 
-![OSI_Model_v1.svg.png](images/2025-02-20-Direct-Server-Return-la-gi-l2dsr-va-l3dsr/OSI_Model_v1.svg.png)
+![OSI_Model_v1.svg.png](https://static-cdn.thanhlv.com/blog/images/2025-02-20-Direct-Server-Return-la-gi-l2dsr-va-l3dsr/OSI_Model_v1.svg.png)
 
 GIải thích chi tiết về OSI model: https://vi.wikipedia.org/wiki/M%C3%B4_h%C3%ACnh_OSI
 

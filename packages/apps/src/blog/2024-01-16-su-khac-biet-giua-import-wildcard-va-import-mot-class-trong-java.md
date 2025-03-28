@@ -25,7 +25,7 @@ Hãy cùng bắt đầu tìm hiểu sự khác biệt của hai cách đó nhé!
 
 Dễ nhận diện nhất trong cách import wildcard là khi thấy ký hiệu **\*** ở cuối import. Ký hiệu này đại diện cho tất cả các class trong package, không bao gồm các sub folder.
 
-![Image](./images/2024-01-16-su-khac-biet-giua-import-wildcard-va-import-mot-class-trong-java/image1.png)
+![Image](https://static-cdn.thanhlv.com/blog/images/2024-01-16-su-khac-biet-giua-import-wildcard-va-import-mot-class-trong-java/image1.png)
 
 Ví dụ, nếu bạn sử dụng List, ListResourceBundle, Locale, Random, LongSummaryStatistics, và Map, tất cả đều thuộc package java.util.
 <br/>
@@ -36,7 +36,7 @@ import java.util.*
 
 Cách import này thường được gọi trong tài liệu là **Import wildcard**
 
-![Image](./images/2024-01-16-su-khac-biet-giua-import-wildcard-va-import-mot-class-trong-java/image2.png)
+![Image](https://static-cdn.thanhlv.com/blog/images/2024-01-16-su-khac-biet-giua-import-wildcard-va-import-mot-class-trong-java/image2.png)
 
 Sử dụng import wildcard sẽ giúp ngắn gọn và tránh tình trạng import dài và khó nhìn trên một class.
 <br/>
@@ -51,7 +51,7 @@ Lưu ý: Khi sử dụng import package, chỉ các class trong package đó m�
 Các import sẽ cần được chỉ định rõ ràng để xác định class nào cần được sử dụng.
 <br/>
 Kiểu Import trực tiếp một class thì dễ nhận biết nhất là không có ký hiệu * ở cuối. Chúng ta sẽ chỉ rõ trực tiếp đến class nào cần được import.
-![Image](./images/2024-01-16-su-khac-biet-giua-import-wildcard-va-import-mot-class-trong-java/image3.png)
+![Image](https://static-cdn.thanhlv.com/blog/images/2024-01-16-su-khac-biet-giua-import-wildcard-va-import-mot-class-trong-java/image3.png)
 
 Việc sử dụng import class giúp chúng ta dễ dàng nhận biết rằng chúng ta đang sử dụng những class nào từ bên ngoài để hỗ trợ cho class hiện tại của chúng ta.
 <br/>
@@ -94,7 +94,7 @@ Trong trường hợp này, tại thời điểm compiler java sẽ báo lỗi
 **Import class** với import class chúng ta có thể chỉ rõ class path sử dụng tại trong file code của chúng ta.
 <br/>
 Vì vậy trong trường hợp 2 hoặc nhiều package có cùng tên class thì cũng không có vấn đề gì cả.
-![Image](./images/2024-01-16-su-khac-biet-giua-import-wildcard-va-import-mot-class-trong-java/image4.png)
+![Image](https://static-cdn.thanhlv.com/blog/images/2024-01-16-su-khac-biet-giua-import-wildcard-va-import-mot-class-trong-java/image4.png)
 
 ## Tổng kết
 Vậy là mình đã giải thích cho các bạn ý nghĩa của 2 cách import trong java, mỗi một loại import đều sẽ có ưu và nhược điểm riêng của nó.
