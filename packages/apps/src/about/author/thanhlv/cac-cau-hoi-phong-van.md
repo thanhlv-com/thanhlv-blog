@@ -5,8 +5,8 @@ description: Các câu hỏi phỏng vấn
 authors: [ lethanh ]
 date: 2024-07-16
 outline: deep
-#image: /assets/1.tgNQEE1P.jpg
 draft: true
+comment: false
 ---
 # Các câu hỏi phỏng vấn
 
