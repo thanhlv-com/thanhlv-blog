@@ -66,7 +66,7 @@ const pageClass = computed(() => {
           </div>
         <div
         style='display: flex;'>
-          <VPDmca v-if="frontmatter.dmca == true || frontmatter.dmca == undefined" />
+          <VPDmca :class="pageClass" v-if="frontmatter.dmca == true || frontmatter.dmca == undefined" />
           <p
             class="edit-link"
             v-if="config.editLink && frontmatter.editLink !== false"
