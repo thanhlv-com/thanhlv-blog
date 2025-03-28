@@ -209,6 +209,25 @@ export default defineConfigWithTheme<ThemeConfig>({
     ],
     [
       'script',
+      {
+        src: 'https://giscus.app/client.js',
+        "data-repo": "thanhlv-com/thanhlv-blog",
+        "data-repo-id": "R_kgDOLCoNuA",
+        "data-category": "General",
+        "data-category-id": "DIC_kwDOLCoNuM4Coi9r",
+        "data-mapping": "title",
+        "data-strict": "0",
+        "data-reactions-enabled": "1",
+        "data-emit-metadata": "0",
+        "data-input-position": "top",
+        "data-theme": "light",
+        "data-lang": "vi",
+        "data-loading": "lazy",
+        "crossorigin": "anonymous"
+      }
+    ],
+    [
+      'script',
       {},
       '  window.dataLayer = window.dataLayer || [];\n' +
       '  function gtag(){dataLayer.push(arguments);}\n' +
@@ -287,11 +306,9 @@ export default defineConfigWithTheme<ThemeConfig>({
       }
     },
 
-    // socialLinks: [
-    //   { icon: 'github', link: 'https://github.com/vuejs/' },
-    //   { icon: 'twitter', link: 'https://twitter.com/vuejs' },
-    //   { icon: 'discord', link: 'https://discord.com/invite/HBherRA' }
-    // ],
+    socialLinks: [
+      {icon: 'github', link: 'https://github.com/thanhlv-com/thanhlv-blog'}
+    ],
 
     i18n: {
       toc: 'Trên trang này',
