@@ -223,7 +223,8 @@ export default defineConfigWithTheme<ThemeConfig>({
         "data-theme": "light",
         "data-lang": "vi",
         "data-loading": "lazy",
-        "crossorigin": "anonymous"
+        "crossorigin": "anonymous",
+         async: ''
       }
     ],
     [
