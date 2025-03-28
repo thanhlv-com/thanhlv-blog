@@ -8,7 +8,7 @@ import { VTLink, VTIconEdit } from '../../core'
 import { useConfig } from '../composables/config'
 import VPDocFooterLastUpdated from './VPDocFooterLastUpdated.vue'
 import VPDmca from './VPDmca.vue'
-import VPFacebookComments from "./VPFacebookComments.vue";
+import VPGithubComments from "./VPGithubComments.vue";
 
 const { page, frontmatter } = useData()
 const { config } = useConfig()
@@ -64,7 +64,6 @@ const pageClass = computed(() => {
               <slot name="author" />
             </div>
           </div>
-          <VPFacebookComments v-if="frontmatter.comment_fb == true" />
         <div
         style='display: flex;'>
           <VPDmca v-if="frontmatter.dmca == true || frontmatter.dmca == undefined" />
@@ -84,7 +83,7 @@ const pageClass = computed(() => {
         </main>
         <slot name="content-bottom" />
         <VPContentDocFooter v-if="frontmatter.footer !== false" />
-        <div class="giscus"></div>
+        <VPGithubComments :class="pageClass"  v-if="frontmatter.comment != false" />
 
       </div>
     </div>
