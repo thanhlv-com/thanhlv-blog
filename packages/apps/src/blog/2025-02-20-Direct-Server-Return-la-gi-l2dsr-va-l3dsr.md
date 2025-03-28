@@ -5,7 +5,7 @@ description: Direct Server Return (DSR) là một cách để load balancer đư
 authors: [ lethanh ]
 date: 2025-02-20
 outline: deep
-image: /assets/layer4_dsr_data_flow.diaGI635.png
+image: https://static-cdn.thanhlv.com/blog/images/2025-02-20-Direct-Server-Return-la-gi-l2dsr-va-l3dsr/layer4_dsr_data_flow.png
 draft: false
 ---
 # Direct Server Return là gì? Giải thích về L2DSR và L3DSR

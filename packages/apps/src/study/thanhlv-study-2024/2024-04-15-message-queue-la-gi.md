@@ -3,7 +3,7 @@ footer: true
 title: Message queue là gì ?
 authors: ["lethanh"]
 date: 2024-04-15
-image: /assets/message-queue-small-3.psV3COIL.webp
+image: https://static-cdn.thanhlv.com/study/thanhlv-study-2024/2024-04-15-message-queue-la-gi/message-queue-small.webp
 outline: deep
 draft: false
 group: 2. Message and event stream

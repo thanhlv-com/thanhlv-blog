@@ -4,7 +4,7 @@ title: World wide web là gì ?
 authors: ["lethanh"]
 date: 2024-03-18
 outline: deep
-image: /assets/img.ldf-rwrM.png
+image: https://static-cdn.thanhlv.com/study/thanhlv-study-2024/2024-03-18-world-wide-web-la-gi/img.png
 draft: false
 group: 1. Internet
 ---

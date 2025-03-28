@@ -3,7 +3,7 @@ footer: true
 title: Internet hoạt động như thế nào?
 authors: ["lethanh"]
 date: 2024-03-14
-image: /assets/Arpanet_logical_map_march_1977.OzmItf4z.png
+image: https://static-cdn.thanhlv.com/study/thanhlv-study-2024/2024-03-14-Internet-Internet-hoat-dong-nhu-the-nao/Arpanet_logical_map_march_1977.png
 outline: deep
 group: 1. Internet
 ---

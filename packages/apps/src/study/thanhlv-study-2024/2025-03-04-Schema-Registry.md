@@ -4,7 +4,7 @@ title: Schema Registry là gì ?
 authors: ["lethanh"]
 date: 2025-03-04
 outline: deep
-#image: /assets/event-and-message.UHUxhQ9h.jpeg
+image: https://static-cdn.thanhlv.com/study/thanhlv-study-2024/2025-03-04-Schema-Registry/Cach-Schema-Registry-hoat-dong.png
 draft: true
 group: 2.1 Kafka
 ---

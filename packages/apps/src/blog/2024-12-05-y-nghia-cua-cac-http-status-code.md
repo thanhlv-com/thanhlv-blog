@@ -5,7 +5,7 @@ description: HTTP Status Code được sử dụng để thông báo nhanh cho c
 authors: [ lethanh ]
 date: 2024-12-05
 outline: no
-image: /assets/class-of-http-status-code.cLzEV2w7.jpeg
+image: https://static-cdn.thanhlv.com/blog/images/2024-12-05-y-nghia-cua-cac-http-status-code/class-of-http-status-code.jpeg
 draft: false
 ---
 
