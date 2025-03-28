@@ -83,7 +83,9 @@ const pageClass = computed(() => {
         </main>
         <slot name="content-bottom" />
         <VPContentDocFooter v-if="frontmatter.footer !== false" />
-        <VPGithubComments :class="pageClass"  v-if="frontmatter.comment != false" />
+        <ClientOnly>
+          <VPGithubComments :class="pageClass"  v-if="frontmatter.comment != false" />
+        </ClientOnly>
 
       </div>
     </div>
