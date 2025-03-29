@@ -663,6 +663,42 @@ public static void main(String[] args) {
 String là bất biến (Immutable) có nghĩa là một khi một object String đã được tạo ra, nó không thể thay đổi giá trị của nó. Điều này có nghĩa là mỗi lần bạn thay đổi giá trị của một chuỗi, JVM sẽ tạo ra một object String mới trong bộ nhớ Heap thay vì thay đổi trực tiếp giá trị của object cũ.
 :::
 
+#### Có thể phá vỡ nguyên tắc Immutable của String dể thay đổi giá trị của một object String sau khi đã tạo không?
+::: details Câu trả lời
+ Có, có thể sử dụng kỹ thuật Reflection để thay đổi. 
+:::
+
+#### Nếu thay đổi một object String thì sẽ có nguy cơ gì xảy ra ?
+::: details Câu trả lời
+ - Có thể dẫn đến dữ liệu không chính xác, ví dụ bạn muốn giá trị là "hello" nhưng bạn lại nhận được giá trị khác. 
+ - Bởi vì khi gán lại giá trị java sẽ tìm trong cache trong String pool, khi đó giá trị đã bị sai.
+ - Ví dụ:
+```java
+public static void main(String[] args) throws Exception {
+    String originalString = "Hello";
+    System.out.println("Chuỗi ban đầu: " + originalString);
+
+    // Lấy trường 'value' (tên trường có thể thay đổi tùy thuộc vào phiên bản JVM)
+    Field valueField = String.class.getDeclaredField("value");
+    valueField.setAccessible(true);
+
+    // Tạo một mảng char mới với giá trị mong muốn
+    char[] newValue = {'W', 'o', 'r', 'l', 'd'};
+
+    // Thay đổi giá trị của trường 'value'
+    valueField.set(originalString, newValue);
+
+    // In lại chuỗi ==> Kết quả: "World"
+    System.out.println("Chuỗi sau khi thay đổi (bằng reflection): " + originalString);
+
+    // Thử in lại một tham chiếu khác đến cùng chuỗi (String pool)
+    String anotherString = "Hello";
+    // In chuỗi anotherString ==> Kết quả: "World", dữ liệu đã bị sai
+    System.out.println("Một tham chiếu khác đến 'Hello': " + anotherString);
+}
+```
+:::
+
 #### So sánh interface và abstract class
 ::: details Câu trả lời
  - Abstract class:
@@ -1034,4 +1070,285 @@ Trong Java, từ khóa `native` được sử dụng để khai báo một metho
   - Fail-safe iterator không ném ra `ConcurrentModificationException` nếu collection được sửa đổi trong quá trình duyệt.
   - Fail-safe iterator được sử dụng trong các collection đồng bộ như CopyOnWriteArrayList, ConcurrentHashMap.
   - Fail-safe iterator sử dụng một bản sao của collection để duyệt.
+:::
+
+#### Sự khác biệt giữa StringBuilder và StringBuffer trong Java?
+::: details Câu trả lời
+- **StringBuilder**:
+  - StringBuilder trong Java được sử dụng để tạo và xử lý chuỗi mà không tạo ra các đối tượng mới mỗi lần thay đổi.
+  - StringBuilder là một class mutable, nghĩa là bạn có thể thay đổi nội dung của chuỗi mà không tạo ra một đối tượng mới.
+  - StringBuilder là không đồng bộ (non-synchronized) nên nó nhanh hơn StringBuffer.
+  - StringBuilder là không đồng bộ (non-synchronized) nên nó nhanh hơn StringBuffer.
+  - StringBuilder không đảm bảo an toàn đa luồng.
+- **StringBuffer**:
+  - StringBuffer trong Java cũng được sử dụng để tạo và xử lý chuỗi mà không tạo ra các đối tượng mới mỗi lần thay đổi.
+  - StringBuffer là một class mutable, nghĩa là bạn có thể thay đổi nội dung của chuỗi mà không tạo ra một đối tượng mới.
+  - StringBuffer là đồng bộ (synchronized) nên nó an toàn đa luồng.
+  - StringBuffer là đồng bộ (synchronized) nên nó chậm hơn StringBuilder.
+:::
+
+#### Exception là gì trong Java?
+::: details Câu trả lời
+- Exception là một sự kiện xảy ra trong quá trình thực thi chương trình làm gián đoạn bình thường của chương trình.
+- Exception có thể là một lỗi hoặc một sự kiện đặc biệt mà chương trình cần phải xử lý.
+  :::
+
+#### Các kiểu exception trong Java?
+::: details Câu trả lời
+Trong Java, có 2 loại exception:
+ - **Checked exception (exception kiểm tra)**: Là các exception mà compiler buộc bạn phải xử lý bằng cách sử dụng try-catch hoặc throws tại thời điểm compile.
+ - **Unchecked exception (exception không kiểm tra)**: Là các exception mà compiler không buộc bạn phải xử lý.
+:::
+
+####  Error và Exception trong Java khác gì nhau ?
+::: details Câu trả lời
+- **Error**:
+  - Error là một sự kiện xảy ra trong quá trình thực thi chương trình làm gián đoạn nghiêm trọng của chương trình.
+  - Error không thể xử lý và không nên xử lý.
+  - Error thường xảy ra do các vấn đề nghiêm trọng như hết bộ nhớ, stack overflow, ...
+- **Exception**:
+  - Exception là một sự kiện xảy ra trong quá trình thực thi chương trình làm gián đoạn bình thường của chương trình.
+  - Exception có thể xử lý bằng cách sử dụng try-catch hoặc throws.
+  - Exception thường xảy ra do các vấn đề như nhập sai dữ liệu, mạng bị ngắt kết nối, ...
+:::
+
+### Java Advanced
+
+#### JIT Compiler là gì?
+::: details Câu trả lời
+- JIT (Just-In-Time) Compiler là một phần của JVM được sử dụng để cải thiện hiệu suất của chương trình Java.
+- JIT Compiler chuyển mã Java thành mã máy tại thời điểm chạy (runtime) thay vì tại thời điểm compile.
+- JIT Compiler sẽ chuyển mã Java thành mã máy và lưu trữ mã máy đó trong bộ nhớ cache để sử dụng lại.
+- JIT Compiler giúp cải thiện hiệu suất của chương trình Java bằng cách giảm thời gian khởi chạy và tăng tốc độ thực thi.
+- Khi một method được gọi JIT sẽ thực hiện biên dịch các đoạn code trong  method này. Lần sau nếu gọi lại thì sẽ sử dụng lại đoạn code đã biên dịch
+:::
+#### JIT có được kích hoạt mặc định không?
+::: details Câu trả lời
+- JIT Compiler được kích hoạt mặc định trong JVM.
+:::
+
+#### Classloader là gì?
+::: details Câu trả lời
+- Classloader là một phần của JVM được sử dụng để tải class vào bộ nhớ JRE. Các class có thể là thư viện ứng dụng sử dụng bên ngoài hoặc các thành phần core của java từ JDK được biết bằng java.
+- Classloader có thể load class từ file system hoặc mạng vào bộ nhớ.
+- Classloader sẽ tải class khi class được sử dụng đầu tiên.
+- Classloader sẽ tải class từ classpath.
+:::
+#### Các loại Classloader trong Java?
+::: details Câu trả lời
+Trong Java, có 3 loại Classloader:
+ - **Bootstrap Classloader**: Là classloader mặc định của JVM, nó tải các class core của Java từ JDK.
+ - **Extension Classloader**: Là classloader mở rộng của JVM, nó tải các class từ thư mục `jre/lib/ext`.
+- **System Classloader**: Là classloader của ứng dụng Java, nó tải các class từ classpath.
+:::
+
+#### Thứ tự việc load class của classloader trong Java?
+::: details Câu trả lời
+- Khi một class được yêu cầu, JVM sẽ gọi method `loadClass` của Classloader để load class.
+- https://github.com/solitarysp/Example_ClassLoader_From_ByteCode/blob/master/src/main/java/com/lethanh98/example/ExampleClassLoaderFromByteCode/ultils/CustomClassLoader.java
+:::
+
+#### Bộ nhớ stack và heap trong Java?
+::: details Câu trả lời
+- **Stack**: Là bộ nhớ được dùng để lưu các các biến local (Biến ở trong method) và thứ tự thực thị method.( bộ nhớ này có time sống ngắn )
+   - Khi chúng ta tạo một biến mới là object ở trọng một method. Nó sẽ tạo mội object mới trên heap và trỏ đến object đó. Bộ nhớ stack sẽ lưu trữ địa chỉ ref của object đó trên heap.
+   - Nếu chúng ta tạo biến truyên thủy trong method thì cả giá trị của biến cũng sẽ được lưu trong bộ nhớ stack
+   - Bộ  nhớ stack cũng lưu stack của việc gọi  method. Ví dụ A gọi b. Stack sẽ là từ a đến b và khi b trả về sẽ trả về a.
+   - Khi cạn bộ nhớ stack sẽ báo lỗi StackOverFlow
+- **Heap**: Là bộ nhớ được dùng để lưu trữ các object và array. (bộ nhớ này có time sống dài)
+   - Khi chúng ta tạo một object mới, nó sẽ được lưu trữ trên heap.
+   - Khi một object không còn được sử dụng nữa, garbage collector sẽ thu hồi bộ nhớ của object đó.
+   - Bộ nhớ heap được chia thành 3 phần: Young Generation, Old Generation, Permanent Generation.
+   - Khi cạn bộ nhớ heap sẽ báo lỗi OutOfMemoryError.
+:::  
+
+#### Default dung lượng của heap và stack trong Java?
+::: details Câu trả lời
+- **Heap**: Dung lượng mặc định của heap phụ thuộc vào hệ điều hành và JVM. Thông thường, dung lượng heap mặc định tối thiểu là 1/64 và tối đa là 1/4 dung lượng RAM của máy tính.
+  - `-Xms<size>`: Thiết lập kích thước heap ban đầu (ví dụ: -Xms256m cho 256 megabyte).
+  - `-Xmx<size>`: Thiết lập kích thước heap tối đa (ví dụ: -Xmx1g cho 1 gigabyte).
+- **Stack**: Dung lượng mặc định của stack phụ thuộc vào hệ điều hành và JVM. Thông thường, hệ thống 32-bit sẽ là từ 256kb đến 512kb. Hệ thống 64-bit sẽ là khoảng 1MB
+  - `-Xss<size>`: Thiết lập kích thước stack (ví dụ: -Xss1m cho 1 megabyte).
+:::
+
+#### Shallow và Deep copy trong Java?
+::: details Câu trả lời
+- **Shallow copy**: Shallow copy là một phép copy chỉ copy giá trị của các biến primitive và địa chỉ của các biến reference. Nghĩa là nếu bạn thay đổi giá trị của biến reference trong bản copy, thì giá trị của biến reference trong bản gốc cũng sẽ thay đổi.
+- **Deep copy**: Deep copy là một phép copy tạo ra một bản copy hoàn toàn mới của object. Nghĩa là nếu bạn thay đổi giá trị của biến reference trong bản copy, thì giá trị của biến reference trong bản gốc không thay đổi.
+:::
+
+#### Kỹ thuật Reflection trong Java là gì?
+::: details Câu trả lời
+- Reflection là một kỹ thuật cho phép bạn xem và thay đổi, call các field, method, constructor của một class tại thời điểm runtime.
+- Các thư viện và framework như Spring, Hibernate, JUnit sử dụng reflection để cung cấp các tính năng mạnh mẽ.
+:::
+
+
+#### Garbage Collection trong Java là gì ?
+::: details Câu trả lời
+- Garbage Collection là một quá trình tự động thu hồi bộ nhớ của các object không còn được sử dụng nữa.
+- Garbage Collector là một phần của JVM, nó sẽ quét bộ nhớ và thu hồi bộ nhớ của các object không còn được sử dụng.
+- Garbage Collector sẽ chạy khi JVM cảm thấy cần thiết, không cần phải chờ đến khi bộ nhớ cạn kiệt.
+- Chúng ta có thể chủ động yêu cầu Garbage Collector chạy bằng cách gọi method `System.gc()`.
+:::
+
+#### Cách hoạt động của Garbage Collection trong Java?
+::: details Câu trả lời
+ - Khi mới tạo một object, object sẽ được lưu trữ trên heap và lưu trên **Young Generation**. Đây là nơi lưu trữ các object mới và có thể có thời gian sống ngắn.
+   - Bên trong **Young Generation** có 2 phần: **Eden Space** và **Survivor Space**.
+     - Tất cả các object mới sẽ được lưu trữ trên **Eden Space**. Khi **Eden Space** đầy, Garbage Collector sẽ thực hiện GC trên Eden Space sau đó chuyển các object còn sống sang **Survivor Space**.
+     - Survivor Space chứa các object đã sống qua một số lần GC. Có 2 Survivor Space: **From Space** và **To Space**. Khi một lần GC được thực hiện, object còn sống sẽ được chuyển từ **Eden Space** hoặc **From Space** sang **To Space**.
+     - Mỗi lần chuyển thì sẽ có 1 bộ đếm của object được tăng. Khi bộ đếm đạt một giá trị nhất định thì object sẽ được chuyển sang **Old Generation**.
+ - Bố nhớ **Old Generation** chứa các object có thời gian sống dài. Khi bộ nhớ **Old Generation** đầy hoặc theo 1 số thuật toán, config, Garbage Collector sẽ thực hiện GC trên **Old Generation**.
+:::
+
+#### Cách phân bổ bộ nhớ giữa Young Generation và Old Generation trong Java?
+::: details Câu trả lời
+ - Sử dụng flag XX:NewRatio để cấu hình tỉ lệ phân bổ bộ nhớ giữa Young Generation và Old Generation.
+    - Giá trị này là tỉ lệ của Old Generation gấp bao nhiêu lần Young Generation.
+ - Ví dụ:
+   - Nếu bằng 1 tức 50% cho Young Generation và 50% cho Old Generation.
+   - Nếu bằng 2 thì 33% cho Young Generation và 66% cho Old Generation. Tức 1/3 cho Young Generation và 2/3 cho Old Generation.
+   - Nếu bằng 3 thì 25% cho Young Generation và 75% cho Old Generation. Tức 1/4 cho Young Generation và 3/4 cho Old Generation.
+:::
+
+#### Các loại Garbage Collector trong Java?
+::: details Câu trả lời
+Trong Java, có 5 loại Garbage Collector:
+ - **Serial Garbage Collector**: Sử dụng một luồng để thực hiện GC. Thích hợp cho các ứng dụng nhỏ hoặc không đòi hỏi hiệu suất cao.
+ - **Parallel Garbage Collector**: Sử dụng nhiều luồng để thực hiện GC. Thích hợp cho các ứng dụng đòi hỏi hiệu suất cao.
+ - **CMS (Concurrent Mark-Sweep) Garbage Collector**: Sử dụng nhiều luồng để thực hiện GC và thực hiện GC song song với ứng dụng. Thích hợp cho các ứng dụng đòi hỏi thời gian phản hồi ngắn.
+ - **G1 (Garbage First) Garbage Collector**: Sử dụng nhiều luồng để thực hiện GC và chia bộ nhớ heap thành nhiều vùng. Thích hợp cho các ứng dụng đòi hỏi hiệu suất cao và thời gian phản hồi ngắn.
+   - Giảm thời gian dừng của ứng dụng bằng cách chia bộ nhớ heap thành nhiều vùng và thực hiện GC trên từng vùng.
+ - **Z Garbage Collector**: Sử dụng nhiều luồng để thực hiện GC và thực hiện GC song song với ứng dụng. Thích hợp cho các ứng dụng đòi hỏi thời gian phản hồi ngắn.
+   - Với ZGC bạn sẽ tốn nhiều tài nguyên CPU hơn nhưng giảm thời gian dừng của ứng dụng.
+:::
+
+#### Sự khác biệt giữa Serial Garbage Collector và Parallel Garbage Collector?
+::: details Câu trả lời
+- **Serial Garbage Collector**:
+  - Serial Garbage Collector sử dụng một luồng để thực hiện GC.
+  - Serial Garbage Collector thích hợp cho các ứng dụng nhỏ hoặc không đòi hỏi hiệu suất cao.
+- **Parallel Garbage Collector**:
+  - Parallel Garbage Collector sử dụng nhiều luồng để thực hiện GC.
+  - Parallel Garbage Collector thích hợp cho các ứng dụng đòi hỏi hiệu suất cao.
+:::
+
+#### Thread là gì trong Java?
+::: details Câu trả lời
+- Thread là một luồng thực thi của chương trình Java. Mỗi chương trình Java đều chạy ít nhất một thread là main thread. Bạn có thể tạo thêm thread bằng cách kế thừa class Thread hoặc implement interface Runnable.
+- Thread giúp chương trình Java chạy đa luồng, nghĩa là chạy nhiều công việc cùng một lúc. Ví dụ: bạn có thể chạy một thread để tải dữ liệu từ mạng và một thread khác để hiển thị dữ liệu lên giao diện.
+- Thread giúp tận dụng tối đa CPU và giảm thời gian chờ đợi.
+:::
+
+#### Priority của Thread trong Java là gì?
+::: details Câu trả lời
+- Priority của Thread trong Java là mức độ ưu tiên của thread so với các thread khác. Mức độ ưu tiên của thread được xác định bởi một số nguyên từ 1 đến 10.
+- Thông thường Thread của java sẽ được đăng ký với OS và OS sẽ quyết định thread nào được chạy trước dựa trên priority. Bởi vì OS sử dụng swiching context và scheduling để quyết định thread nào được chạy trước.
+- Mặc định, mức độ ưu tiên của thread là 5. Mức độ ưu tiên cao nhất là 10 và thấp nhất là 1.
+- Các phiên bản Java mới có giới thiệu Virtual Threads (Project Loom.
+  - Virtual threads là các lightweight threads được quản lý bởi JVM (Java Virtual Machine) . Nhiều virtual threads cùng chia sẻ và chạy trên một số thread thực sự.
+  - JVM sẽ quản lý việc chuyển đổi giữa các virtual threads và các thread thực sự chạy.
+  - Việc quản lý các virtual threads giúp giảm overhead của việc tạo và quản lý thread trên OS.
+:::
+
+#### Sự khác biệt giữa start() và run() method trong Thread của java.
+::: details Câu trả lời
+- **start()**: start() method được sử dụng để bắt đầu một thread mới. Khi bạn gọi start() method, JVM sẽ tạo một thread mới và gọi run() method của thread đó.
+- **run()**: run() method chứa code của thread. Khi bạn gọi run() method, code trong run() method sẽ được thực thi trên thread hiện tại, không phải trên một thread mới.
+:::
+
+#### Sự khác biệt giữa wait() và sleep() method trong Java?
+::: details Câu trả lời
+- **wait()**: wait() method là một method của class Object, nó được sử dụng để đưa thread vào trạng thái chờ (waiting) cho đến khi một thread khác gọi notify() hoặc notifyAll() method.
+- **sleep()**: sleep() method là một static method của class Thread, nó được sử dụng để đưa thread vào trạng thái sleep (ngủ) trong một khoảng thời gian nhất định.
+:::
+
+#### Thread pool là gì trong Java?
+::: details Câu trả lời
+- Thread pool là một pool chứa một số lượng thread đã được tạo sẵn và sẵn sàng để thực thi các task.
+- Thread pool giúp tối ưu hóa việc tạo và quản lý thread, giảm thời gian tạo thread mới và giảm overhead của việc tạo thread.
+- Thread pool giúp giảm tải cho hệ thống và tăng hiệu suất của ứng dụng bằng cách tái sử dụng các thread đã được tạo sẵn.
+:::
+
+#### Sự khác biệt giữa Callable và Runnable trong Java?
+::: details Câu trả lời
+- **Runnable**:
+  - Runnable là một interface trong Java được sử dụng để tạo một thread mới.
+  - Runnable có một method là run() chứa code của thread.
+  - Runnable không trả về kết quả.
+-  **Callable**:
+  - Callable là một interface trong Java được sử dụng để tạo một thread mới.
+  - Callable có một method là call() chứa code của thread.
+  - Callable trả về kết quả.
+:::
+
+#### Sự khác biệt giữa synchronized và ReentrantLock trong Java?
+::: details Câu trả lời
+- **synchronized**:
+  - synchronized là một từ khóa trong Java được sử dụng để đồng bộ hóa các block code hoặc method.
+  - synchronized sử dụng monitor để đồng bộ hóa.
+  - synchronized không hỗ trợ thời gian chờ (timeout).
+  - synchronized không hỗ trợ thực hiện các thao tác khác như thời gian chờ, thực hiện thử và thời gian chờ.
+- **ReentrantLock**: 
+  - ReentrantLock là một class trong Java được sử dụng để đồng bộ hóa các block code hoặc method.
+  - ReentrantLock sử dụng lock để đồng bộ hóa.
+  - ReentrantLock hỗ trợ thời gian chờ (timeout).
+  - ReentrantLock hỗ trợ thực hiện các thao tác khác như thời gian chờ, thực hiện thử và thời gian chờ.
+:::
+
+#### Deadlock là gì ?
+::: details Câu trả lời
+ - Deadlock là một tình huống mà hai hoặc nhiều thread đang chờ đợi lẫn nhau để giải phóng lock và không thể tiếp tục thực thi. Cả 2 Thread sẽ bị chờ đợi mãi mãi.
+ - Deadlock xảy ra khi một thread giữ một lock và cố gắng lấy lock khác mà đã được giữ bởi một thread khác, trong khi thread đó cũng đang cố gắng lấy lock mà đã được giữ bởi thread đầu tiên.
+ - VD : Chúng ta cần lấy tài nguyên ở 2 file A và B
+   - Thread 1 chiếm tài nguyên A => Thread 2 chiến tài nguyên B => Thread 2 đợi tài nguyễn A giải phóng để đọc => Thread 1 đợi tài nguyên B giải phóng để đọc.
+   - Khi đó 2 thread này sẽ chờ nhau 1 cách vô hạn vì không ai nhường ai cả
+:::
+
+#### Làm thế nào để tránh Deadlock trong Java?
+::: details Câu trả lời
+- Để tránh Deadlock trong Java, bạn có thể thực hiện các cách sau:
+  - **Tránh sử dụng nhiều lock**: Sử dụng ít lock nhất có thể.
+  - **Tránh sử dụng nested lock**: Tránh sử dụng nested lock, nếu không thì sắp xếp lock theo thứ tự cố định.
+  - **Sử dụng timeout**: Sử dụng timeout khi lấy lock và giải phóng lock.
+  - **Sử dụng ReentrantLock**: Sử dụng ReentrantLock thay vì synchronized.
+  - **Sử dụng wait() và notify()**: Sử dụng wait() và notify() để giải phóng lock.
+:::
+
+#### Starvation là gì ?
+::: details Câu trả lời
+- Starvation là một tình huống mà một thread không thể thực thi vì không có đủ tài nguyên hoặc bị ưu tiên thấp hơn các thread khác.
+:::
+
+#### Làm thế nào để tránh Starvation trong Java?
+
+::: details Câu trả lời
+- Để tránh Starvation trong Java, bạn có thể thực hiện các cách sau:
+  - **Sử dụng Fairness**: Sử dụng ReentrantLock với fairness để đảm bảo rằng thread sẽ được chạy theo thứ tự.
+  - **Sử dụng Priority**: Sử dụng priority để ưu tiên các thread quan trọng hơn.
+  - **Sử dụng Timeout**: Sử dụng timeout để giải phóng tài nguyên.
+  - **Sử dụng Wait() và Notify()**: Sử dụng wait() và notify() để giải phóng tài nguyên.
+::: 
+
+#### Live lock là gì ?
+::: details Câu trả lời
+ - Live lock là một tình huống mà các thread không thể tiếp tục thực thi vì chúng đang chờ đợi lẫn nhau. Thực tế chúng không bị block nhưng chúng không thể tiếp tục logic để hoàn thành nghiệm vụ.
+ - Ví dụ: Hãy tưởng tượng hai người đang đi bộ trên một con đường hẹp và đối mặt với nhau. Cả hai đều muốn nhường đường cho người kia.
+     - Người thứ nhất bước sang trái.
+     - Người thứ hai thấy vậy cũng bước sang trái để nhường đường.
+     - Bây giờ họ lại đứng đối diện nhau.
+     - Người thứ nhất lại bước sang phải.
+     - Người thứ hai thấy vậy cũng bước sang phải.
+     - Họ lại đứng đối diện nhau.
+:::
+
+#### Concurrency và parallelism  là gì ?
+::: details Câu trả lời
+- **Concurrency**:
+  - Concurrency là khả năng của một hệ thống xử lý nhiều tác vụ dường như cùng một lúc.
+  - Trong concurrency, các tác vụ không nhất thiết phải được thực hiện đồng thời tại cùng một thời điểm. Thay vào đó, CPU sẽ chuyển đổi nhanh chóng giữa các tác vụ, tạo ra ảo giác rằng chúng đang chạy song song.
+- **Parallelism**:
+  - Parallelism là khả năng của một hệ thống thực hiện nhiều tác vụ cùng một lúc.
+  - Trong parallelism, các tác vụ được thực hiện đồng thời tại cùng một thời điểm.
 :::
