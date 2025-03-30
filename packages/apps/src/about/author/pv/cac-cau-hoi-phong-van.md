@@ -1,12 +1,11 @@
 ---
 footer: true
-title: Các câu hỏi phỏng vấn
-description: Các câu hỏi phỏng vấn
-authors: [ lethanh ]
-date: 2024-07-16
+title: Các câu hỏi phỏng vấn về Java
+authors: ["lethanh"]
+date: 2025-03-30
 outline: deep
-draft: true
 comment: false
+group: 2. Java
 ---
 # Các câu hỏi phỏng vấn
 
