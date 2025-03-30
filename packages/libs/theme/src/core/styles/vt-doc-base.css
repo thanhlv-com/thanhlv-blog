@@ -8,7 +8,13 @@
 .vt-doc h3,
 .vt-doc h4,
 .vt-doc h5,
-.vt-doc h6 {
+.vt-doc h6,
+.vt-doc h7,
+.vt-doc h8,
+.vt-doc h9,
+.vt-doc h10,
+.vt-doc h11
+{
   position: relative;
   font-weight: 600;
   line-height: 1.5;
@@ -17,17 +23,20 @@
 
 .vt-doc h1 {
   margin: 0 0 3rem;
-  font-size: 38px;
+  font-size: 40px;
+  font-weight: 900;
   line-height: 1.4;
   letter-spacing: -0.02em;
 }
 
 .vt-doc h2 {
   margin: 4rem 0 1.8rem;
+  font-weight: 850;
   border-top: 1px solid var(--vt-c-divider-light);
   padding-top: 1.8rem;
-  font-size: 24px;
+  font-size: 30px;
   letter-spacing: -0.02em;
+  opacity: 0.9;
 }
 
 @media (max-width: 768px) {
@@ -41,7 +50,9 @@
 }
 
 .vt-doc h3 {
-  font-size: 19px;
+  font-size: 25px;
+  font-weight: 800;
+  opacity: 0.8;
   letter-spacing: -0.01em;
   margin: 3rem 0 1.25rem;
 }
@@ -51,8 +62,41 @@
 }
 
 .vt-doc h4 {
-  font-size: 17px;
+  font-size: 22px;
+  font-weight: 750;
   margin: 1.8rem 0 1rem;
+  opacity: 0.7;
+}
+.vt-doc h5 {
+  opacity: 0.7;
+  font-size: 20px;
+  font-weight: 650;
+}
+.vt-doc h6 {
+  opacity: 0.7;
+  font-size: 18px;
+  font-weight: 650;
+}
+
+.vt-doc h7 {
+  opacity: 0.7;
+  font-size: 17px;
+  font-weight: 600;
+  display: block;
+}
+
+.vt-doc h8 {
+  opacity: 0.7;
+  font-size: 15px;
+  font-weight: 650;
+  display: block;
+}
+
+.vt-doc h9 {
+  opacity: 0.7;
+  font-size: 12px;
+  font-weight: 650;
+  display: block;
 }
 
 .vt-doc .header-anchor {

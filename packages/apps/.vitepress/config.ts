@@ -9,6 +9,8 @@ import shortBlogsSidebar from './cache/sidebar/short-blog-sidebar.json'
 import thanhlvStudy2024Sidebar from './cache/sidebar/study/thanhlv-study-2024-sidebar.json'
 import thanhlvStudy2025Sidebar from './cache/sidebar/study/thanhlv-study-2025-sidebar.json'
 import tiengAnhSidebar from './cache/sidebar/study/tieng-anh-sidebar.json'
+import aboutAuthorPvSidebar from './cache/sidebar/about/author/pv/about-author-pv-sidebar.json'
+
 // @ts-ignore
 import markdownItTextualUml from 'markdown-it-textual-uml'
 
@@ -106,6 +108,9 @@ export const sidebar: ThemeConfig['sidebar'] = {
         }
       ]
     }
+  ],
+  '/about/author/pv': [
+    ...aboutAuthorPvSidebar
   ]
 }
 
