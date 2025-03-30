@@ -4,6 +4,7 @@ import VTSwitch from './VTSwitch.vue'
 import VTIconSun from './icons/VTIconSun.vue'
 import VTIconMoon from './icons/VTIconMoon.vue'
 import { useConfig } from '../../vitepress/composables/config'
+import eventBus from "./eventBus";
 
 const { config } = useConfig()
 
@@ -39,6 +40,7 @@ function useAppearance() {
         ? 'light'
         : 'auto')
     )
+    eventBus.dispatchEvent(new CustomEvent('event-change-theme', { detail: 'change theme' }));
   }
 
   return { isDark, toggle }
