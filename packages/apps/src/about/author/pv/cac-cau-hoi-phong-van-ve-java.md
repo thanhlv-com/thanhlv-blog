@@ -1238,6 +1238,132 @@ Trong Java, có 5 loại Garbage Collector:
 - Thread là một luồng thực thi của chương trình Java. Mỗi chương trình Java đều chạy ít nhất một thread là main thread. Bạn có thể tạo thêm thread bằng cách kế thừa class Thread hoặc implement interface Runnable.
 - Thread giúp chương trình Java chạy đa luồng, nghĩa là chạy nhiều công việc cùng một lúc. Ví dụ: bạn có thể chạy một thread để tải dữ liệu từ mạng và một thread khác để hiển thị dữ liệu lên giao diện.
 - Thread giúp tận dụng tối đa CPU và giảm thời gian chờ đợi.
+- Khi tạo mới một Thread, JVM sẽ gửi yêu cầu tạo một thread mới trong OS và cấp phát bộ nhớ cho thread đó.
+:::
+
+#### Sự khác biệt giữa process và thread?
+::: details Câu trả lời
+- **Thread** là một luồng thực thi của chương trình, trong khi process là một chương trình đang chạy trong bộ nhớ.
+  - Một Process có thể chứa nhiều thread. Các thread trong cùng một process chia sẻ bộ nhớ và tài nguyên của process đó.
+  - Các thread trong cùng một process có thể giao tiếp với nhau thông qua shared memory.
+  - Một thread có thể tạo ra nhiều thread khác, nhưng không thể tạo ra process mới.
+  - Thread có chi phí tạo thấp hơn process, vì thread chia sẻ bộ nhớ và tài nguyên của process.
+  - Một Process sẽ có ít nhất một thread là main thread.
+- **Process** là một chương trình đang chạy trong bộ nhớ. Mỗi process có không gian bộ nhớ riêng và không thể chia sẻ bộ nhớ với các process khác.
+  - Mỗi khi bạn thực hiện chạy một trương trình, ít nhất sẽ tạo ra một process mới.
+  - Các process là đông lập với nhau, nghĩa là một process không thể ảnh hưởng đến các process khác.
+  - Khi tạo mới một process, hệ điều hành sẽ cấp phát bộ nhớ cho process đó và tạo một không gian bộ nhớ riêng cho process. Vì vậy chi phí tạo sẽ nhiều hơn tạo Thread.
+  - Các process có thể giao tiếp với nhau thông qua IPC (Inter-Process Communication) như socket, pipe, message queue, shared memory.
+```plantuml
+@startuml Process vs Thread
+
+skinparam backgroundColor #FEFEFE
+skinparam roundCorner 20
+skinparam componentStyle rectangle
+skinparam defaultTextAlignment center
+skinparam noteBackgroundColor #FFE552
+skinparam noteBorderColor #888888
+skinparam ArrowColor #2C3E50
+skinparam shadowing true
+
+' Định nghĩa màu sắc
+!$processColor = "#3498DB"
+!$threadColor = "#2ECC71"
+!$memoryColor = "#E74C3C"
+!$cpuColor = "#9B59B6"
+!$sharedColor = "#F39C12"
+!$privateColor = "#1ABC9C"
+
+' Tiêu đề
+title <color:#2C3E50><size:24><b>Process vs Thread: Kiến Trúc & Đặc Điểm</b></size></color>
+
+' Hệ điều hành
+rectangle "Hệ Điều Hành" as OS #F8F9F9 {
+  ' Process 1
+  rectangle "<color:$processColor><b>Process 1</b></color>" as P1 #E8F8FF {
+    rectangle "<color:$privateColor><b>[RAM] Không gian bộ nhớ riêng</b></color>" as M1 #E8F8FF
+    
+    rectangle "<color:$threadColor><b>Thread 1.1</b></color>" as T11 #E8FFE8 {
+      rectangle "<color:$privateColor><b>[STACK] Stack riêng</b></color>" as S11 #E8FFE8
+      rectangle "<color:$privateColor><b>[CPU] Registers riêng</b></color>" as R11 #E8FFE8
+    }
+    
+    rectangle "<color:$threadColor><b>Thread 1.2</b></color>" as T12 #E8FFE8 {
+      rectangle "<color:$privateColor><b>[STACK] Stack riêng</b></color>" as S12 #E8FFE8
+      rectangle "<color:$privateColor><b>[CPU] Registers riêng</b></color>" as R12 #E8FFE8
+    }
+    
+    rectangle "<color:$sharedColor><b>[HEAP] Heap (Shared)</b></color>" as H1 #FFF5E8
+    rectangle "<color:$sharedColor><b>[DATA] Data (Shared)</b></color>" as D1 #FFF5E8
+    rectangle "<color:$sharedColor><b>[CODE] Code (Shared)</b></color>" as C1 #FFF5E8
+  }
+  
+  ' Process 2
+  rectangle "<color:$processColor><b>Process 2</b></color>" as P2 #E8F8FF {
+    rectangle "<color:$privateColor><b>[RAM] Không gian bộ nhớ riêng</b></color>" as M2 #E8F8FF
+    
+    rectangle "<color:$threadColor><b>Thread 2.1</b></color>" as T21 #E8FFE8 {
+      rectangle "<color:$privateColor><b>[STACK] Stack riêng</b></color>" as S21 #E8FFE8
+      rectangle "<color:$privateColor><b>[CPU] Registers riêng</b></color>" as R21 #E8FFE8
+    }
+    
+    rectangle "<color:$sharedColor><b>[HEAP] Heap (Shared)</b></color>" as H2 #FFF5E8
+    rectangle "<color:$sharedColor><b>[DATA] Data (Shared)</b></color>" as D2 #FFF5E8
+    rectangle "<color:$sharedColor><b>[CODE] Code (Shared)</b></color>" as C2 #FFF5E8
+  }
+  
+  ' CPU
+  rectangle "<color:$cpuColor><b>[CPU] Central Processing Unit</b></color>" as CPU #F5E8FF
+}
+
+' Mối quan hệ
+T11 -[#green]-> CPU : "<color:green><b>1. Thực thi</b></color>"
+T12 -[#green]-> CPU : "<color:green><b>2. Thực thi</b></color>"
+T21 -[#green]-> CPU : "<color:green><b>3. Thực thi</b></color>"
+
+T11 -[#orange]-> H1 : "<color:orange><b>4. Truy cập</b></color>"
+T12 -[#orange]-> H1 : "<color:orange><b>5. Truy cập</b></color>"
+T21 -[#orange]-> H2 : "<color:orange><b>6. Truy cập</b></color>"
+
+' Ghi chú
+note right of P1
+  <color:#D35400><b>Process:</b></color>
+  1. Đơn vị cơ bản của tài nguyên hệ thống
+  2. Không gian địa chỉ riêng biệt
+  3. Tài nguyên riêng (file handles, sockets)
+  4. Cô lập với các process khác
+  5. Tốn nhiều tài nguyên khi tạo mới
+endnote
+
+note right of T11
+  <color:#27AE60><b>Thread:</b></color>
+  1. Đơn vị cơ bản của CPU execution
+  2. Chia sẻ không gian địa chỉ trong process
+  3. Chia sẻ tài nguyên của process
+  4. Dễ dàng giao tiếp trong cùng process
+  5. Nhẹ hơn, tạo nhanh hơn process
+endnote
+
+note bottom of OS
+  <color:#2C3E50><b>So sánh Process vs Thread:</b></color>
+  
+  <b>7. Giao tiếp:</b>
+  - <color:$processColor>Process</color>: IPC (pipes, sockets, shared memory) - phức tạp, chậm
+  - <color:$threadColor>Thread</color>: Truy cập trực tiếp vào bộ nhớ chung - đơn giản, nhanh
+  
+  <b>8. Lỗi & Ổn định:</b>
+  - <color:$processColor>Process</color>: Lỗi trong một process không ảnh hưởng đến process khác
+  - <color:$threadColor>Thread</color>: Lỗi trong một thread có thể làm sập toàn bộ process
+  
+  <b>9. Chuyển đổi ngữ cảnh:</b>
+  - <color:$processColor>Process</color>: Tốn kém hơn (thay đổi không gian địa chỉ, TLB flush)
+  - <color:$threadColor>Thread</color>: Nhanh hơn (giữ nguyên không gian địa chỉ)
+endnote
+
+@enduml
+```
+
+
 :::
 
 #### Priority của Thread trong Java là gì?
