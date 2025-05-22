@@ -9,7 +9,7 @@ image: https://static-cdn.thanhlv.com/blog/images/2024-08-07-Kafka-producer-da-k
 draft: false
 ---
 
-![img](images/2024-08-07-Kafka-producer-da-khong-con-Round-Robin-Partition-voi-key-null/KafkaProducer12.png)
+![img](https://static-cdn.thanhlv.com/blog/images/2024-08-07-Kafka-producer-da-khong-con-Round-Robin-Partition-voi-key-null/KafkaProducer12.png)
 
 # Kafka producer đã không còn Round Robin Partition với key null.
 Chào mọi người,
