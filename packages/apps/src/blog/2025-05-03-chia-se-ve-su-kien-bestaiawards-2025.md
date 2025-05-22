@@ -1,12 +1,12 @@
 ---
 footer: true
 title: Chia sẻ về sự kiện BestAIAwards 2025
-description: Trong bối cảnh công nghệ AI phát triển với tốc độ vũ bão, một câu hỏi đặt ra là liệu chúng ta nên tập trung vào việc học cách tạo ra AI (phát triển) hay học cách tận dụng sức mạnh của các công cụ AI hiện có (sử dụng)?
+description: Sự kiện trao giải thưởng BestAIAwards 2025 đã diễn ra vào ngày 3 tháng 5 năm 2025 tại Đài Bắc, Đài Loan. Đây là một sự kiện lớn trong ngành công nghiệp AI, quy tụ nhiều chuyên gia, nhà nghiên cứu và doanh nhân hàng đầu trong lĩnh vực này. Sự kiện không chỉ là nơi trao giải thưởng cho những sản phẩm và dịch vụ AI xuất sắc nhất mà còn là cơ hội để các chuyên gia chia sẻ kiến thức và kinh nghiệm của mình.
 authors: [ lethanh ]
 date: 2025-05-03
 outline: deep
-image: https://static-cdn.thanhlv.com/blog/images/2025-03-23-So-sanh-HTTP-1-0-va-HTTP-1-1-Nhung-thay-doi-va-ly-do-HTTP-1-1-tro-thanh-tieu-chuan-toi-thieu/1_hr47CCH4G0B6z24i0w-fsg.gif
-draft: true
+image: https://static-cdn.thanhlv.com/blog/images/2025-05-03-chia-se-ve-su-kien-bestaiawards-2025/bestAI2025.jpg
+draft: false
 ---
 
 # Chia sẻ về sự kiện BestAIAwards 2025
@@ -21,7 +21,7 @@ Tôi cũng muốn gửi lời cảm ơn đến tất cả những người đã 
 
 Hôm nay, tôi muốn chia sẻ về một số điều thú vị mà tôi đã học được từ sự kiện này. Một sự kiện lớn như BestAIAwards không chỉ là nơi để trao giải thưởng mà còn là nơi để học hỏi và chia sẻ kiến thức.
 
-![Image](images/2025-05-03-chia-se-ve-su-kien-bestaiawards-2025/bestAI2025.jpg)
+![Image](https://static-cdn.thanhlv.com/blog/images/2025-05-03-chia-se-ve-su-kien-bestaiawards-2025/bestAI2025.jpg)
 
 ## 1. Tại sao chúng tôi tham gia sự kiện này?
 
@@ -37,7 +37,7 @@ Tất cả các thông tin về sự kiện đều được đăng công khai tr
 1. Khoảng tháng 4, [có 1,253 đội ở 36 quốc gia tương đương 1,253](https://www.moea.gov.tw/Mns/doit_e/news/News_En.aspx?kind=6&menu_id=5673&news_id=119252) ý tưởng cùng tham gia vào sự kiện này. Tất cả các đội sẽ cùng chuẩn bị các tài liệu chi tiết của dự án và một video demo sản phẩm. Sau đó sẽ gửi đến ban tổ chức để đánh giá. 
 
 2. Ban tổ chức đánh giá và chọn ra 233 đội vào vòng chung kết. Các đội sẽ được thông báo qua email và sẽ được yêu cầu chuẩn bị một video demo sản phẩm và một bài thuyết trình về sản phẩm của mình.
-   ![Image](images/2025-05-03-chia-se-ve-su-kien-bestaiawards-2025/5090c410-d7cb-454b-b933-eeef5d897c59.jpg)
+   ![Image](https://static-cdn.thanhlv.com/blog/images/2025-05-03-chia-se-ve-su-kien-bestaiawards-2025/5090c410-d7cb-454b-b933-eeef5d897c59.jpg)
 
 3. Một người hỗ trợ sự kiện sẽ liên hệ với các đội để hướng dẫn và hỗ trợ các đội trong việc chuẩn bị cho sự kiện. Với tôi và Đạt, chúng tôi đã được hỗ trợ rất nhiệt tình từ ban tổ chức. Bởi vì chúng tôi là đội tuyển nước ngoài, vì vậy có rất nhiều điều mà chúng tôi không biết. Ban tổ chức đã hỗ trợ chúng tôi rất nhiều trong việc chuẩn bị cho sự kiện. Họ đã giúp chúng tôi tìm hiểu về các quy định của sự kiện, cách thức trình bày sản phẩm và cách thức thuyết trình. Họ cũng đã giúp chúng tôi chuẩn bị các tài liệu cần thiết cho sự kiện.
 
@@ -66,24 +66,24 @@ Tất cả các sản phẩm tham gia sự kiện đều rất chất lượng v
 
 ## 7. Một số bức ảnh trong sự kiện
 
-![Image](images/2025-05-03-chia-se-ve-su-kien-bestaiawards-2025/de771408-affb-47b1-99e5-3afc2cb8e9d8.jpg)
-![Image](images/2025-05-03-chia-se-ve-su-kien-bestaiawards-2025/e3259137-917d-4c1c-990d-c557e10095ef.jpg)
-![Image](images/2025-05-03-chia-se-ve-su-kien-bestaiawards-2025/6d1d25f8-b8b7-45b8-aaab-599a3a033f03.jpg)
-![Image](images/2025-05-03-chia-se-ve-su-kien-bestaiawards-2025/2243c580-50a4-43f9-aa29-e65213b4002e.jpg)
-![Image](images/2025-05-03-chia-se-ve-su-kien-bestaiawards-2025/89b97962-ee81-43a3-880d-57b70397eed0.jpg)
-![Image](images/2025-05-03-chia-se-ve-su-kien-bestaiawards-2025/1340901f-705f-4a97-abf3-e7a49b6e702e.jpg)
-![Image](images/2025-05-03-chia-se-ve-su-kien-bestaiawards-2025/86513332-0712-4090-952b-e39869bafb20.jpg)
-![Image](images/2025-05-03-chia-se-ve-su-kien-bestaiawards-2025/388d7b88-c3e4-41f0-9dae-60078727f760.jpg)
-![Image](images/2025-05-03-chia-se-ve-su-kien-bestaiawards-2025/c13cc082-f541-4b63-a40b-b05e104d90bd.jpg)
-![Image](images/2025-05-03-chia-se-ve-su-kien-bestaiawards-2025/c411a0ef-dab2-4cca-bbdc-ed2e99e7dbad.jpg)
-![Image](images/2025-05-03-chia-se-ve-su-kien-bestaiawards-2025/be6cfd1d-bd53-465c-8605-f47939846d5f.jpg)
-![Image](images/2025-05-03-chia-se-ve-su-kien-bestaiawards-2025/78a25f20-5841-4fb4-8dee-cd4ad8bb1af4.jpg)
-![Image](images/2025-05-03-chia-se-ve-su-kien-bestaiawards-2025/6b5dd0e1-83c6-411b-8729-9f73281b1154.jpg)
-![Image](images/2025-05-03-chia-se-ve-su-kien-bestaiawards-2025/6a801986-9ac2-43b6-909c-20236578fe4f.jpg)
-![Image](images/2025-05-03-chia-se-ve-su-kien-bestaiawards-2025/1d8ce756-15b7-43cc-b404-54fe1593f0a2.jpg)
-![Image](images/2025-05-03-chia-se-ve-su-kien-bestaiawards-2025/674eef63-b17a-4143-8b62-b823155811ac.jpg)
-![Image](images/2025-05-03-chia-se-ve-su-kien-bestaiawards-2025/1d6f4e2a-8621-4e11-afd8-f6a53ebd6541.jpg)
-![Image](images/2025-05-03-chia-se-ve-su-kien-bestaiawards-2025/7f1359d8-52d5-4c10-9781-8bc94ff40bcc.jpg)
+![Image](https://static-cdn.thanhlv.com/blog/images/2025-05-03-chia-se-ve-su-kien-bestaiawards-2025/de771408-affb-47b1-99e5-3afc2cb8e9d8.jpg)
+![Image](https://static-cdn.thanhlv.com/blog/images/2025-05-03-chia-se-ve-su-kien-bestaiawards-2025/e3259137-917d-4c1c-990d-c557e10095ef.jpg)
+![Image](https://static-cdn.thanhlv.com/blog/images/2025-05-03-chia-se-ve-su-kien-bestaiawards-2025/6d1d25f8-b8b7-45b8-aaab-599a3a033f03.jpg)
+![Image](https://static-cdn.thanhlv.com/blog/images/2025-05-03-chia-se-ve-su-kien-bestaiawards-2025/2243c580-50a4-43f9-aa29-e65213b4002e.jpg)
+![Image](https://static-cdn.thanhlv.com/blog/images/2025-05-03-chia-se-ve-su-kien-bestaiawards-2025/89b97962-ee81-43a3-880d-57b70397eed0.jpg)
+![Image](https://static-cdn.thanhlv.com/blog/images/2025-05-03-chia-se-ve-su-kien-bestaiawards-2025/1340901f-705f-4a97-abf3-e7a49b6e702e.jpg)
+![Image](https://static-cdn.thanhlv.com/blog/images/2025-05-03-chia-se-ve-su-kien-bestaiawards-2025/86513332-0712-4090-952b-e39869bafb20.jpg)
+![Image](https://static-cdn.thanhlv.com/blog/images/2025-05-03-chia-se-ve-su-kien-bestaiawards-2025/388d7b88-c3e4-41f0-9dae-60078727f760.jpg)
+![Image](https://static-cdn.thanhlv.com/blog/images/2025-05-03-chia-se-ve-su-kien-bestaiawards-2025/c13cc082-f541-4b63-a40b-b05e104d90bd.jpg)
+![Image](https://static-cdn.thanhlv.com/blog/images/2025-05-03-chia-se-ve-su-kien-bestaiawards-2025/c411a0ef-dab2-4cca-bbdc-ed2e99e7dbad.jpg)
+![Image](https://static-cdn.thanhlv.com/blog/images/2025-05-03-chia-se-ve-su-kien-bestaiawards-2025/be6cfd1d-bd53-465c-8605-f47939846d5f.jpg)
+![Image](https://static-cdn.thanhlv.com/blog/images/2025-05-03-chia-se-ve-su-kien-bestaiawards-2025/78a25f20-5841-4fb4-8dee-cd4ad8bb1af4.jpg)
+![Image](https://static-cdn.thanhlv.com/blog/images/2025-05-03-chia-se-ve-su-kien-bestaiawards-2025/6b5dd0e1-83c6-411b-8729-9f73281b1154.jpg)
+![Image](https://static-cdn.thanhlv.com/blog/images/2025-05-03-chia-se-ve-su-kien-bestaiawards-2025/6a801986-9ac2-43b6-909c-20236578fe4f.jpg)
+![Image](https://static-cdn.thanhlv.com/blog/images/2025-05-03-chia-se-ve-su-kien-bestaiawards-2025/1d8ce756-15b7-43cc-b404-54fe1593f0a2.jpg)
+![Image](https://static-cdn.thanhlv.com/blog/images/2025-05-03-chia-se-ve-su-kien-bestaiawards-2025/674eef63-b17a-4143-8b62-b823155811ac.jpg)
+![Image](https://static-cdn.thanhlv.com/blog/images/2025-05-03-chia-se-ve-su-kien-bestaiawards-2025/1d6f4e2a-8621-4e11-afd8-f6a53ebd6541.jpg)
+![Image](https://static-cdn.thanhlv.com/blog/images/2025-05-03-chia-se-ve-su-kien-bestaiawards-2025/7f1359d8-52d5-4c10-9781-8bc94ff40bcc.jpg)
 
 ## 8. Còn lại gì sau sự kiện ?
 1. Tôi đã có cơ hội gặp gỡ và trao đổi với nhiều chuyên gia trong ngành. Sự kiện đã mang lại cho tôi nhiều kiến thức bổ ích và cảm hứng và mở rộng mối quan hệ trong ngành công nghiệp AI.
