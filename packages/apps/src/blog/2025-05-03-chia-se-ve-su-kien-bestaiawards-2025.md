@@ -5,8 +5,8 @@ description: Trong bối cảnh công nghệ AI phát triển với tốc độ 
 authors: [ lethanh ]
 date: 2025-05-03
 outline: deep
-image: https://static-cdn.thanhlv.com/blog/images/2025-03-23-So-sanh-HTTP-1-0-va-HTTP-1-1-Nhung-thay-doi-va-ly-do-HTTP-1-1-tro-thanh-tieu-chuan-toi-thieu/1_hr47CCH4G0B6z24i0w-fsg.gif
-draft: true
+image: https://static-cdn.thanhlv.com/blog/images/2025-05-03-chia-se-ve-su-kien-bestaiawards-2025/bestAI2025.jpg
+draft: false
 ---
 
 # Chia sẻ về sự kiện BestAIAwards 2025
