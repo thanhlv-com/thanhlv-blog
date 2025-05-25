@@ -5,7 +5,7 @@ authors: [ "lethanh" ]
 date: 2025-03-26
 outline: deep
 image: /assets/kafka-architecture-view.B_rra7lS.png
-draft: true
+draft: false
 group: 1. Cassandra
 ---
 
