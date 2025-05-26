@@ -2,7 +2,7 @@
 footer: true
 title: Chạy Cassandra bằng docker
 authors: [ "lethanh" ]
-date: 2025-03-26
+date: 2025-05-25
 outline: deep
 image: https://static-cdn.thanhlv.com/study/thanhlv-study-2025/2025-05-25-chay-cassandra-bang-docker/image-2025-2-21_14-59-17.png
 draft: false
