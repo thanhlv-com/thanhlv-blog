@@ -623,7 +623,7 @@ Thông tin thử nghiệm:
 kafka-topics --bootstrap-server kafka1:19092 --create --if-not-exists --topic topic-rep-1-partition-10 --replication-factor 1 --partitions 10
 
 ```
-- Node Info ([Xem full tại đây](/blog/2024-08-07-Kafka-producer-da-khong-con-Round-Robin-Partition-voi-key-null/docker-compose-node-test.yml))
+- Node Info ([Xem full tại đây](http://static-cdn.thanhlv.com/blog/images/2024-08-07-Kafka-producer-da-khong-con-Round-Robin-Partition-voi-key-null/docker-compose-node-test.yml))
 ```
 Node 1: 
 - 3 cpu
@@ -682,11 +682,11 @@ public class KeyNullLoopDelay {
 - Giải thích cách code hoạt động:
   - Sẽ gửi 113 Record lến Kafka server, đối với `BATCH_SIZE_CONFIG = 5000` nếu push vào 1 Batch duy nhất sẽ đầy batch.size và gửi lên Kafka server. Tuy nhiên bởi vì Round Robin trên 10 Partition nên có 10 Batch và mỗi Batch có 11 đến 12 Record nên chưa đủ batch.size.
   - Bởi vì chưa chưa đủ batch.size nên cần chờ đến thời gian của `LINGER_MS_CONFIG` mới bắt đầu gửi Batch vì vậy nó tạo ra Latency cao vì throughput thấp
-    <video controls="controls" src="/blog/2024-08-07-Kafka-producer-da-khong-con-Round-Robin-Partition-voi-key-null/KIP-480.mov" />
+    <video controls="controls" src="http://static-cdn.thanhlv.com/blog/images/2024-08-07-Kafka-producer-da-khong-con-Round-Robin-Partition-voi-key-null/KIP-480.mov" />
 ### Kafka Producer Sticky Partitioning (phiên bản 2.4.0 đến 3.2.3):
 - Phiên bản sử dụng : kafka-clients-3.2.3
 #### 1. Case test: Tái hiện việc phân phối nhiều Record vào Node Slower
-- Node Info ([Xem full tại đây](/blog/2024-08-07-Kafka-producer-da-khong-con-Round-Robin-Partition-voi-key-null/docker-compose-node-slow-test.yml))
+- Node Info ([Xem full tại đây](http://static-cdn.thanhlv.com/blog/images/2024-08-07-Kafka-producer-da-khong-con-Round-Robin-Partition-voi-key-null/docker-compose-node-slow-test.yml))
 ```
 Node 1: 
 - 0.2 cpu
@@ -731,14 +731,14 @@ public class KeyNull {
 ```
 - Kết quả 
   - Khi nhìn vào kết quả ở log, bạn sẽ thấy các Partition của Node 1 và 3 sẽ luôn có nhiều Record hơn. (1,3,4,7,9) và sẽ có nhiều Batch của các partition đó được gửi cuối cùng
-   <video controls="controls" src="/blog/2024-08-07-Kafka-producer-da-khong-con-Round-Robin-Partition-voi-key-null/KIP-794.mov" />
+   <video controls="controls" src="http://static-cdn.thanhlv.com/blog/images/2024-08-07-Kafka-producer-da-khong-con-Round-Robin-Partition-voi-key-null/KIP-794.mov" />
 
 ### Kafka Producer Partitioning (phiên bản 3.3.0 trở lên):
 - Phiên bản sử dụng : kafka-clients-3.8.0
 - Code và data tương tự ví dụ `Case test: Tái hiện việc phân phối nhiều Record vào Node Slower`
 - Kết quả
   - Khi nhìn vào kết quả ở log, bạn sẽ thấy các Partition của Node 1 và 3 sẽ cón ít record Record hơn. (1,3,5,7,8)
-    <video controls="controls" src="/blog/2024-08-07-Kafka-producer-da-khong-con-Round-Robin-Partition-voi-key-null/3.3.0.mov" />
+    <video controls="controls" src="http://static-cdn.thanhlv.com/blog/images/2024-08-07-Kafka-producer-da-khong-con-Round-Robin-Partition-voi-key-null/3.3.0.mov" />
 
 [//]: # ()
 [//]: # (### Làm cách nào để sử dụng lại producer Round Robin Partition hoặc Custom logic Partition của riêng mình?)
