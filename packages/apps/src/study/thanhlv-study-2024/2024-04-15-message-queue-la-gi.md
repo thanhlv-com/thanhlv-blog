@@ -230,7 +230,7 @@ Một trong những ứng dụng phổ biến của chiến lược này là ph�
 Ví dụ: Cần gửi email cho 1 tỉ người, Một tỷ Message sẽ được push dần dần đến Queue và các Consumer sẽ nhận Message và thực hiện gửi email.
 
 <video controls>
-  <source src="/study/thanhlv-study-2024/2024-04-15-message-queue-la-gi/video_queue.mp4" type="video/mp4">
+  <source src="https://static-cdn.thanhlv.com/study/thanhlv-study-2024/2024-04-15-message-queue-la-gi/video_queue.mp4" type="video/mp4">
 Your browser does not support the video tag.
 </video>
 
@@ -253,7 +253,7 @@ Consumer đăng ký một topic, và khi có một Message mới. Message đó s
 Chiến lược này chúng ta có thể dễ ràng bổ xung thêm chức năng, ví dụ chúng ta có thể thêm một Consumer lưu trữ data để dành cho phân tích dữ liệu.
 
 <video controls>
-  <source src="/study/thanhlv-study-2024/2024-04-15-message-queue-la-gi/video_queue_topic.mp4" type="video/mp4">
+  <source src="https://static-cdn.thanhlv.com/study/thanhlv-study-2024/2024-04-15-message-queue-la-gi/video_queue_topic.mp4" type="video/mp4">
 Your browser does not support the video tag.
 </video>
 

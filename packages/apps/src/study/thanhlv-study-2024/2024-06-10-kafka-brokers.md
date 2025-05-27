@@ -410,4 +410,4 @@ Kafka hỗ trợ 3 cấp độ acknowledgments:
 
 # REF:
 - https://ibm-cloud-architecture.github.io/refarch-eda/technology/kafka-overview/
-- **Kafka book**: [Kafka Event Streaming Platform In Action.pdf](/study/thanhlv-study-2024/static/Kafka%20Event%20Streaming%20Platform%20In%20Action.pdf)
+- **Kafka book**: [Kafka Event Streaming Platform In Action.pdf](https://static-cdn.thanhlv.com/study/thanhlv-study-2024/Kafka%20Event%20Streaming%20Platform%20In%20Action.pdf)
