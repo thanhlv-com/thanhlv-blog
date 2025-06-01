@@ -114,3 +114,145 @@ Bởi vì khi đó, chúng ta đã tạo ra 1 bảng phụ có email là Partiti
   - Ví dụ: `PRIMARY KEY (email, user_id)` hoặc `PRIMARY KEY ((email, age), user_id) `
   
 Như vậy, về cơ bản `Materialized View` giống như một bảng thông thường và có cấu trúc (có Partition Key và Clustering Key), nhưng nó được tự động cập nhật dựa trên bảng gốc và không cho phép thao tác ghi trực tiếp.
+
+# Denormalization
+Trong `Cassandra`, do đặc điểm không hỗ trợ JOIN, denormalization là cách phổ biến để tối ưu query. Điều này có nghĩa là dữ liệu có thể được lặp lại trong nhiều bảng hoặc tạo 1 bảng mới chuyên dụng để phục vụ các truy vấn cụ thể.
+
+Ví dụ về denormalization trong Cassandra
+
+Giả sử ta có một hệ thống lưu trữ thông tin đơn hàng, với yêu cầu:
+
+- Truy vấn đơn hàng theo ID đơn hàng.
+- Truy vấn đơn hàng theo ID khách hàng.
+- Truy vấn đơn hàng theo ngày đặt hàng.
+
+###### Nếu sử dụng SQL thông thường chúng ta có thể có các table như sau:
+```sql
+CREATE TABLE Customers (
+    customer_id UUID PRIMARY KEY,
+    name TEXT
+);
+ 
+CREATE TABLE Orders (
+    order_id UUID PRIMARY KEY,
+    customer_id UUID,
+    order_date TIMESTAMP,
+    total_amount DECIMAL,
+    FOREIGN KEY (customer_id) REFERENCES Customers(customer_id)
+);
+```
+Thêm một dữ liệu với thông tin order mới:
+
+```sql
+INSERT INTO Customers (customer_id, name) VALUES
+    ('1111-aaaa', 'Alice'),
+    ('2222-bbbb', 'Bob');
+ 
+INSERT INTO Orders (order_id, customer_id, order_date, total_amount) VALUES
+    ('o-001', '1111-aaaa', '2025-03-10', 500),
+    ('o-002', '1111-aaaa', '2025-03-11', 1000),
+    ('o-003', '2222-bbbb', '2025-03-12', 750);
+```
+Ví dụ về câu query SQL sử dụng join
+```sql
+SELECT o.order_id, o.order_date, o.total_amount, c.name AS customer_name
+FROM Orders o
+JOIN Customers c ON o.customer_id = c.customer_id
+WHERE o.customer_id = '1111-aaaa';
+```
+Kết quả
+```code
+order_id | order_date | total_amount | customer_name
+---------|-----------|--------------|--------------
+o-001    | 2025-03-10 | 500          | Alice
+o-002    | 2025-03-11 | 1000         | Alice
+```
+
+Tuy nhiên Cassandra không hỗ trợ Join, vì vậy chúng ta cần sử dụng Denormalization trong Cassandra.
+
+Chúng ta sẽ tạo nhiều table khác nhau để phục vụ cho từng câu truy vấn cụ thể, ví dụ:
+
+```sql
+# Customer info
+CREATE TABLE Customers (
+    customer_id UUID PRIMARY KEY,
+    name TEXT
+);
+ 
+# find order by id
+CREATE TABLE orders_by_id (
+    order_id UUID PRIMARY KEY,
+    customer_id UUID,
+    customer_name TEXT,
+    order_date TIMESTAMP,
+    total_amount DECIMAL
+);
+ 
+# find order by customer id
+CREATE TABLE orders_by_customer (
+    customer_id UUID,
+    order_id UUID,
+    order_date TIMESTAMP,
+    total_amount DECIMAL,
+    PRIMARY KEY (customer_id, order_date)
+) WITH CLUSTERING ORDER BY (order_date DESC);
+ 
+# find order by date
+CREATE TABLE orders_by_date (
+    order_date TIMESTAMP,
+    order_id UUID,
+    customer_id UUID,
+    customer_name TEXT,
+    total_amount DECIMAL,
+    PRIMARY KEY (order_date, order_id)
+);
+```
+
+Chèn dữ liệu.
+```sql
+INSERT INTO orders_by_customer (customer_id, order_id, customer_name, order_date, total_amount)
+VALUES ('1111-aaaa', 'o-001', 'Alice', '2025-03-10', 500);
+ 
+INSERT INTO orders_by_customer (customer_id, order_id, customer_name, order_date, total_amount)
+VALUES ('1111-aaaa', 'o-002', 'Alice', '2025-03-11', 1000);
+
+```
+
+Tìm các order bởi customer id không cần sử dụng join
+
+```sql
+SELECT order_id, customer_name, order_date, total_amount
+FROM orders_by_customer
+WHERE customer_id = '1111-aaaa';
+```
+
+Kết quả:
+
+```code
+
+order_id | customer_name | order_date | total_amount
+---------|--------------|-----------|--------------
+o-002    | Alice        | 2025-03-11 | 1000
+o-001    | Alice        | 2025-03-10 | 500
+```
+
+
+### Sử dụng TTL khi Insert dữ liệu
+Sử dụng TTL khi Insert dữ liệu sẽ giúp hệ thống Casandra biết thời gian tồn tại của dữ liệu này.
+
+Ví dụ:
+
+```sql
+CREATE TABLE Customers (
+      customer_id UUID PRIMARY KEY,
+       name TEXT
+);
+ 
+INSERT INTO Customers (customer_id, name) VALUES
+                                              (uuid(), 'Alice');
+ 
+INSERT INTO Customers (customer_id, name) VALUES
+                                              (uuid(), 'Bob') USING TTL 60;
+```
+
+USING TTL 60 đặt thời gian sống cho bản ghi là 1 phút (60 giây). Sau thời gian này, bản ghi 'Bob' sẽ tự động bị xoá.
