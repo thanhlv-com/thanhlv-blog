@@ -21,4 +21,11 @@ Hiện tại năm 2025 mình sẽ chưa có mục tiêu rõ ràng, sẽ học đ
 ## 1. Cassandra
 Cassandra là một Nosql distributed database, được thiết kế để xử lý lượng dữ liệu lớn, phân tán trên nhiều node. Cú pháp schema và SQL của Cassandra khá giống với SQL nên việc tiếp cận với Cassandra khá dễ dàng.(Tất nhiên sẽ có sự khác biệt nhưng không quá lớn)
 
-1. What is Cassandra?
+1. [What is Apache Cassandra?](2025-03-26-what-is-apache-cassandra.md)
+2. [Chạy Cassandra bằng docker](2025-05-25-chay-cassandra-bang-docker.md)
+3. [Khái niệm cốt lõi và mô hình dữ liệu trong Cassandra](2025-05-26-khai-niem-cot-loi-va-mo-hinh-du-lieu.md)
+4. [Secondray Index trong Cassandra](2025-05-27-Secondary-indexing.md)
+5. [Materialized view và denormalization](2025-05-31-materialized-view-vs-denormalization.md)
+6. [Tuning và Monitoring trong Cassandra](2025-06-01-tuning-va-monitoring.md)
+7. [Chiến lược Backup và Phục hồi dữ liệu Cassandra](2025-06-09-Chien-luoc-backup-va-phuc-hoi-du-lieu-cassandra.md)
+8. [Mối quan hệ giữa Commit Log, Memtable và SSTable trong Cassandra](2025-06-15-moi-quan-he-giua-commit-log-memtable-va-sstable.md)
