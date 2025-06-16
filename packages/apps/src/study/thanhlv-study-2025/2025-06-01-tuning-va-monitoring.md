@@ -1,6 +1,7 @@
 ---
 footer: true
 title: Tuning và Monitoring trong Cassandra
+description: Tuning và Monitoring là hai khía cạnh quan trọng trong việc quản lý hiệu suất và độ tin cậy của hệ thống Cassandra. Bài viết này sẽ cung cấp cái nhìn tổng quan về cách tối ưu hóa hiệu suất và giám sát hệ thống Cassandra.
 authors: [ "lethanh" ]
 date: 2025-05-31
 outline: deep

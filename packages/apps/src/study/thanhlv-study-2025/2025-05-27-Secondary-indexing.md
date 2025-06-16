@@ -1,6 +1,7 @@
 ---
 footer: true
 title: Secondary Indexing 
+description: Secondary Indexing là một tính năng trong Apache Cassandra cho phép bạn tạo các chỉ mục phụ trên các cột không phải là khóa chính, giúp tăng tốc độ truy vấn dữ liệu. Bài viết này sẽ giải thích chi tiết về Secondary Indexing, cách sử dụng và những ưu điểm cũng như nhược điểm của nó.
 authors: [ "lethanh" ]
 date: 2025-05-27
 outline: deep

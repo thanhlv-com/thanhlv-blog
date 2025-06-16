@@ -1,6 +1,7 @@
 ---
 footer: true
 title: Chiến lược Backup và Phục hồi dữ liệu Cassandra
+description: Chiến lược Backup và Phục hồi dữ liệu trong Cassandra là rất quan trọng để đảm bảo tính sẵn sàng và bảo mật dữ liệu. Bài viết này sẽ trình bày các phương pháp backup và phục hồi dữ liệu trong Cassandra, bao gồm snapshot, incremental backups và các chiến lược lưu trữ.
 authors: [ "lethanh" ]
 date: 2025-06-09
 outline: deep

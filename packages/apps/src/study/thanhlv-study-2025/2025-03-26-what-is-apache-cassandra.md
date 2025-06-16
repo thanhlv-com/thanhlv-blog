@@ -1,6 +1,7 @@
 ---
 footer: true
 title: What is Apache Cassandra?
+Description: Apache Cassandra là một hệ thống quản lý cơ sở dữ liệu phân tán, mã nguồn mở, được thiết kế để xử lý lượng dữ liệu lớn và cung cấp khả năng mở rộng cao. Bài viết này sẽ giới thiệu về Cassandra, các tính năng chính và cách nó hoạt động.
 authors: [ "lethanh" ]
 date: 2025-03-26
 outline: deep
