@@ -1,6 +1,7 @@
 ---
 footer: true
 title: Materialized Views vs Denormalization
+description: Materialized Views và Denormalization là hai khái niệm quan trọng trong Apache Cassandra, giúp tối ưu hóa truy vấn dữ liệu. Bài viết này sẽ giải thích chi tiết về chúng, cùng với ưu điểm và nhược điểm của từng phương pháp.
 authors: [ "lethanh" ]
 date: 2025-05-31
 outline: deep

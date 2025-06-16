@@ -1,6 +1,7 @@
 ---
 footer: true
 title: Khái niệm cốt lõi và mô hình dữ liệu.
+description: Trong bài viết này, chúng ta sẽ tìm hiểu về các khái niệm cốt lõi trong Apache Cassandra và mô hình dữ liệu của nó.
 authors: [ "lethanh" ]
 date: 2025-05-26
 outline: deep

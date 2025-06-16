@@ -1,6 +1,7 @@
 ---
 footer: true
 title: Chạy Cassandra bằng docker
+description: Hướng dẫn cách chạy Apache Cassandra bằng Docker, bao gồm các bước cài đặt, cấu hình và khởi động Cassandra trong môi trường Docker.
 authors: [ "lethanh" ]
 date: 2025-05-25
 outline: deep
