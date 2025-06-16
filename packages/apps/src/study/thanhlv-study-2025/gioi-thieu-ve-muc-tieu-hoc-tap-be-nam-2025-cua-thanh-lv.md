@@ -29,3 +29,7 @@ Cassandra là một Nosql distributed database, được thiết kế để xử
 6. [Tuning và Monitoring trong Cassandra](2025-06-01-tuning-va-monitoring.md)
 7. [Chiến lược Backup và Phục hồi dữ liệu Cassandra](2025-06-09-Chien-luoc-backup-va-phuc-hoi-du-lieu-cassandra.md)
 8. [Mối quan hệ giữa Commit Log, Memtable và SSTable trong Cassandra](2025-06-15-moi-quan-he-giua-commit-log-memtable-va-sstable.md)
+
+## 2. K8s(Kubernetes)
+Kubernetes là một hệ thống mã nguồn mở để tự động hóa việc triển khai, mở rộng và quản lý các ứng dụng containerized. Nó cung cấp một nền tảng mạnh mẽ để quản lý các container Docker và các ứng dụng phức tạp.
+1. [Giới thiệu về Kubernetes](2025-06-16-gioi-thieu-ve-kubernetes.md)
