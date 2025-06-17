@@ -103,3 +103,44 @@ Hãy phân tích từng từ khóa trong định nghĩa này:
 Một điểm cực kỳ quan trọng làm nên sự thành công của Kubernetes là nó không thuộc sở hữu của bất kỳ công ty nào. 
 
 Mặc dù được Google khởi xướng vào năm 2014, nó đã nhanh chóng được trao tặng cho [Cloud Native Computing Foundation (CNCF)](https://www.cncf.io/), một tổ chức trung lập dưới sự bảo trợ của [The Linux Foundation](https://www.linuxfoundation.org/). Quyết định chiến lược này đã biến Kubernetes từ một dự án của Google thành một `sân chơi chung` cho toàn ngành công nghệ
+
+## 3. Phép ẩn dụ dễ hiểu hơn về Kubernetes
+Để hiểu rõ hơn về Kubernetes, chúng ta có thể sử dụng một phép ẩn dụ đơn giản: 
+
+Hã tưởng tưởng bạn là 1 chủ nhà hàng bán phở nổi tiếng ở Hà Nội, lúc nào cũng đông khách.
+
+Một ứng dụng hiện đại, đặc biệt là ứng dụng sử dụng kiên trúc microservices thì cũng giống như căn bếp của nhà hàng của bạn.
+
+Trong căn bếp này, không chỉ có 1 người duy nhất vận hành, mà là sự phối hợp nhịp nhàng của cả một đội ngũ bầu bếp, mỗi người phụ trách một công đoạn riêng biệt.
+
+- **Người thái thịt**, **người chuyên chần bánh phở**, **người chuyên pha nước dùng**, **người chuyên nấu nước lèo**, **người chuẩn bị rau thơm**, **người chuyên trang trí món ăn**, v.v.
+
+Tất cả mọi người sẽ cùng nhau làm việc để tạo ra một bát phở hoàn hảo cho khách hàng. Và chúng ta sẽ có 1 số thành phần chính trong căn bếp này:
+
+- **Bếp chính hay còn gọi là bếp trưởng (Cụ thể là Control Plane))**: 
+  - Vị bếp trưởng không trực tiếp đứng bếp nấu từng bát phở, nhưng là người điều phối toàn bộ hoạt động của căn bếp. Ông cầm trong tay thực đơn và các yêu cầu của khách hàng, biết chính xác khi nào cần thêm người thái thịt, khi nào cần tăng tốc chần bánh phở..
+  - Bếp trưởng đảm bảo mọi đầu bếp làm đúng việc, đúng lúc và đúng tiêu chuẩn.
+  - Tương tự như vậy, Control Plane trong Kubernetes là bộ não của hệ thống, quản lý và điều phối tất cả các thành phần trong cụm k8s mà không trực tiếp chạy ứng dụng phục vụ khách hàng.
+  - Control Plane quyết định container nào cần chạy, trên máy chủ nào, cần bao nhiêu tài nguyên, bao nhiêu bản sao, và khi nào cần khởi động lại hoặc thay thế một container.
+- Các đầu bếp phục vụ (Cụ thể là Worker Node):
+  - Các đầu bếp là những người trực tiếp thực hiện công việc nấu nướng, họ không cần biết đến thực đơn hay yêu cầu của khách hàng, họ chỉ cần làm đúng công việc của mình.
+  - Trong Kubernetes, các Worker Node là nơi chạy các container ứng dụng. Mỗi Worker Node có thể chạy nhiều container khác nhau, tương tự như một đầu bếp có thể nấu nhiều món ăn khác nhau cùng một lúc.
+  - Trong k8s, các Worker Node sẽ nhận lệnh từ Control Plane và thực hiện các tác vụ như khởi động, dừng hoặc thay thế container.
+  - Mỗi Worker Node có thể có nhiều đầu bếp (Container) khác nhau, mỗi người phụ trách một công việc cụ thể trong quá trình nấu nướng.
+  - Các container thường được đặt trong một đơn vị gọi là Pod, tương tự như một nhóm đầu bếp cùng làm việc trong một khu vực bếp nhất định.
+- Công thức nấu ăn & Yêu cầu từ quản lý ( chính là các file cấu hình YAM ):
+  - Công thức nấu ăn là những hướng dẫn chi tiết về cách nấu từng món ăn, bao gồm nguyên liệu, tỷ lệ, thời gian nấu, v.v..
+  - Bếp trưởng đọc công thức và chỉ đạo đội ngủ đầu bếp thực hiện.
+  - Tương tự các file cấu hình YAML trong Kubernetes định nghĩa cách thức triển khai ứng dụng, bao gồm thông tin về container, tài nguyên cần thiết,...vv..
+    - Ví dụ: Tôi muốn có 3 bản sao của web server đang chạy với phiên bản mới nhất, k8s đọc file cấu hình và tự động tạo ra 3 container web server trên các Worker Node.
+- Bản phở đến tay khách hàng (Người dùng cuối giao tiếp với ứng dụng):
+  - Khách hàng đến nhà hàng, gọi món và chờ đợi bát phở được phục vụ. Họ không cần biết ai là người thái thịt, ai là người chần bánh, và sự phức tạo ở trong phòng bếp họ chỉ cần biết rằng bát phở của họ sẽ được phục vụ đúng lúc, đúng yêu cầu và được ăn một bát phở ngon.
+  - TƯơng tự như người dùng cuối tương tức với ứng dụng của chúng ta, họ không cần biết ứng dụng được triển khai như thế nào, chỉ cần biết rằng nó hoạt động ổn định và đáp ứng đúng yêu cầu của họ.
+
+Sự phức tạp của các ứng dụng hiện đại đã đạt đến một ngưỡng mà việc `điều phối` (orchestration) không còn là một lựa chọn, mà đã trở thành một yêu cầu bắt buộc. 
+
+Một ứng dụng đơn khối (`monolithic`) ngày xưa giống như một quán ăn nhỏ chỉ có một đầu bếp duy nhất – dễ quản lý nhưng khó mở rộng khi khách đông. 
+
+Khi chúng ta chuyển sang kiến trúc microservices, chúng ta có một căn bếp lớn với nhiều tài năng chuyên biệt, mang lại sự linh hoạt và tốc độ phát triển nhanh hơn. 
+
+Tuy nhiên, điều này cũng tạo ra một thách thức khổng lồ về sự phối hợp. Nếu các đầu bếp (microservices) tự ý làm việc mà không có sự chỉ huy, kết quả sẽ là một mớ hỗn độn – tương đương với lỗi hệ thống, sập dịch vụ và trải nghiệm người dùng tồi tệ.
