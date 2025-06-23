@@ -122,17 +122,27 @@ Tất cả mọi người sẽ cùng nhau làm việc để tạo ra một bát 
   - Bếp trưởng đảm bảo mọi đầu bếp làm đúng việc, đúng lúc và đúng tiêu chuẩn.
   - Tương tự như vậy, Control Plane trong Kubernetes là bộ não của hệ thống, quản lý và điều phối tất cả các thành phần trong cụm k8s mà không trực tiếp chạy ứng dụng phục vụ khách hàng.
   - Control Plane quyết định container nào cần chạy, trên máy chủ nào, cần bao nhiêu tài nguyên, bao nhiêu bản sao, và khi nào cần khởi động lại hoặc thay thế một container.
-- Các đầu bếp phục vụ (Cụ thể là Worker Node):
+
+- Các căn phòng nấu ăn hoặc các khu vực bếp (Cụ thể là Node):
+  - Các căn phòng nấu ăn là nơi các đầu bếp làm việc, mỗi phòng có thể có nhiều đầu bếp khác nhau, nhưng tất cả đều phục vụ cho cùng một mục đích là nấu phở.
+  - Trong Kubernetes, các Node là các máy chủ vật lý hoặc ảo nơi chạy các container ứng dụng. Mỗi Node có thể chạy nhiều Pod khác nhau, tương tự như một căn phòng bếp có thể chứa nhiều đầu bếp.
+  - Các Node sẽ nhận lệnh từ Control Plane và thực hiện các tác vụ như khởi động, dừng hoặc thay thế container.
+
+- Các đầu bếp phục vụ (Cụ thể là pod và container):
   - Các đầu bếp là những người trực tiếp thực hiện công việc nấu nướng, họ không cần biết đến thực đơn hay yêu cầu của khách hàng, họ chỉ cần làm đúng công việc của mình.
-  - Trong Kubernetes, các Worker Node là nơi chạy các container ứng dụng. Mỗi Worker Node có thể chạy nhiều container khác nhau, tương tự như một đầu bếp có thể nấu nhiều món ăn khác nhau cùng một lúc.
-  - Trong k8s, các Worker Node sẽ nhận lệnh từ Control Plane và thực hiện các tác vụ như khởi động, dừng hoặc thay thế container.
-  - Mỗi Worker Node có thể có nhiều đầu bếp (Container) khác nhau, mỗi người phụ trách một công việc cụ thể trong quá trình nấu nướng.
   - Các container thường được đặt trong một đơn vị gọi là Pod, tương tự như một nhóm đầu bếp cùng làm việc trong một khu vực bếp nhất định.
+  - Mỗi Pod có thể chứa một hoặc nhiều container, và các container trong cùng một Pod chia sẻ cùng một địa chỉ IP và không gian lưu trữ.
+    - Ví dụ Pod A thực hiện công việc chần bánh phở gồm 3 container: 
+      - Container 1: Chuẩn bánh phở
+      - Container 2: Chuẩn bị nước chần bánh phở.
+      - Container 3: Thực hiện chần bánh phở.
+
 - Công thức nấu ăn & Yêu cầu từ quản lý ( chính là các file cấu hình YAM ):
   - Công thức nấu ăn là những hướng dẫn chi tiết về cách nấu từng món ăn, bao gồm nguyên liệu, tỷ lệ, thời gian nấu, v.v..
   - Bếp trưởng đọc công thức và chỉ đạo đội ngủ đầu bếp thực hiện.
   - Tương tự các file cấu hình YAML trong Kubernetes định nghĩa cách thức triển khai ứng dụng, bao gồm thông tin về container, tài nguyên cần thiết,...vv..
     - Ví dụ: Tôi muốn có 3 bản sao của web server đang chạy với phiên bản mới nhất, k8s đọc file cấu hình và tự động tạo ra 3 container web server trên các Worker Node.
+
 - Bản phở đến tay khách hàng (Người dùng cuối giao tiếp với ứng dụng):
   - Khách hàng đến nhà hàng, gọi món và chờ đợi bát phở được phục vụ. Họ không cần biết ai là người thái thịt, ai là người chần bánh, và sự phức tạo ở trong phòng bếp họ chỉ cần biết rằng bát phở của họ sẽ được phục vụ đúng lúc, đúng yêu cầu và được ăn một bát phở ngon.
   - TƯơng tự như người dùng cuối tương tức với ứng dụng của chúng ta, họ không cần biết ứng dụng được triển khai như thế nào, chỉ cần biết rằng nó hoạt động ổn định và đáp ứng đúng yêu cầu của họ.
