@@ -7,7 +7,7 @@ date: 2025-07-05
 group: All
 ---
 
-## E-learning là gì?
+# E-learning là gì?
 - **E-learning** là viết tắt của "Electronic Learning", nghĩa là học tập thông qua các phương tiện điện tử, thường là qua internet.
 ![](https://static-cdn.thanhlv.com/study/thanhlv-study-2025-ptit-hoc-online/2025-07-05-INT11176-nhap-mon-internet-va-elearning/bMz3aFhmjrzCjYaA.png)
 
@@ -100,3 +100,5 @@ group: All
 - **Tự động viên**: Biết cách tự động viên bản thân để duy trì động lực học tập, đặc biệt là khi học trực tuyến một mình.
 - **Tính tự giác**: Tự giác trong việc hoàn thành bài tập, tham gia các buổi học trực tuyến, và theo dõi tiến độ học tập của bản thân.
 - **Độc lập**: Biết cách làm việc độc lập, tự giải quyết các vấn đề khó khăn trong quá trình học tập mà không cần sự giúp đỡ của người khác.
+
+# Kỹ năng giao tiếp

@@ -7,7 +7,7 @@ const dataInject = process.argv.slice(2) // Input data from command-line argumen
 console.log('Injected Data:', dataInject)
 // Do something with the data
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
-const STUDY_NAME = 'thanhlv-study-2024';
+const STUDY_NAME = 'thanhlv-ptit-hoc-online';
 
 // Đường dẫn đến thư mục chứa các trang markdown trong dự án VitePress của bạn
 const PAGES_DIR = path.join(__dirname, '../../../src/study/' + STUDY_NAME)

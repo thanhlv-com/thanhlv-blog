@@ -9,6 +9,7 @@ import shortBlogsSidebar from './cache/sidebar/short-blog-sidebar.json'
 import thanhlvStudy2024Sidebar from './cache/sidebar/study/thanhlv-study-2024-sidebar.json'
 import thanhlvStudy2025Sidebar from './cache/sidebar/study/thanhlv-study-2025-sidebar.json'
 import tiengAnhSidebar from './cache/sidebar/study/tieng-anh-sidebar.json'
+import thanhPtitHocOnlineSidebar from './cache/sidebar/study/thanhlv-ptit-hoc-online-sidebar.json'
 import aboutAuthorPvSidebar from './cache/sidebar/about/author/pv/about-author-pv-sidebar.json'
 
 // @ts-ignore
@@ -29,6 +30,10 @@ const nav: ThemeConfig['nav'] = [
     text: 'Study',
     activeMatch: `^/study/`,
     items: [
+      {
+        text: 'Học online PTIT',
+        link: '/study/thanhlv-ptit-hoc-online/gioi-thieu-ve-hoc-ptit-online-cua-thanh-lv'
+      },
       {
         text: 'Học tập BE Thanhlv 2024',
         link: '/study/thanhlv-study-2024/gioi-thieu-ve-muc-tieu-hoc-tap-be-nam-2024-cua-thanh-lv'
@@ -73,6 +78,9 @@ export const sidebar: ThemeConfig['sidebar'] = {
   ],
   '/study/thanhlv-study-2024': [
     ...thanhlvStudy2024Sidebar
+  ],
+  '/study/thanhlv-ptit-hoc-online': [
+    ...thanhPtitHocOnlineSidebar
   ],
   '/study/thanhlv-study-2025': [
     ...thanhlvStudy2025Sidebar
