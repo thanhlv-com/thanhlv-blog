@@ -101,4 +101,99 @@ group: All
 - **Tính tự giác**: Tự giác trong việc hoàn thành bài tập, tham gia các buổi học trực tuyến, và theo dõi tiến độ học tập của bản thân.
 - **Độc lập**: Biết cách làm việc độc lập, tự giải quyết các vấn đề khó khăn trong quá trình học tập mà không cần sự giúp đỡ của người khác.
 
-# Kỹ năng giao tiếp
+# Tìm hiểu về Internet
+## Internet là gì?
+Internet là một mạng lưới toàn cầu kết nối hàng triệu máy tính và thiết bị, cho phép người dùng truy cập thông tin, giao tiếp, và chia sẻ dữ liệu với nhau.
+
+Hiểu 1 cách đơn giản hơn, bạn có 1 dây cáp mạng, bạn kết nối máy của bạn trực tiếp với máy của **Tuấn**, bạn có thể gửi và nhận dữ liệu từ máy của người khác thông qua dây cáp mạng đó.
+
+Khi đó, một mạng internet nhỏ đã được hình thành, mang internet này chỉ có máy của bạn và Tuấn kết nối với nhau.
+
+Mạng internet này có thể được mở rộng bằng cách kết nối thêm nhiều máy tính khác, tạo thành một mạng lưới lớn hơn.
+
+Đó chính là mang internet mà chúng ta đang sử dụng ngày nay. Các nhóm người, tổ chức, và công ty, quốc gia đã kết nối hàng triệu máy tính và thiết bị với nhau để tạo thành một mạng lưới toàn cầu.
+
+Thông thường, các máy tính, thiết bị di động, sử dụng một giao thức chung để giao tiếp với nhau, đó là **TCP/IP** (Transmission Control Protocol/Internet Protocol).
+
+## Ai là người sử dụng Internet?
+Internet và web đã ảnh hưởng đến sâu rộng đến cuộc sống của chúng ta hiện nay.
+- **Người dùng cá nhân**: Sử dụng Internet để truy cập thông tin, giao tiếp, giải trí, và học tập.
+- **Doanh nghiệp**: Sử dụng Internet để quảng bá sản phẩm, dịch vụ, và kết nối với khách hàng.
+- **Chính phủ**: Sử dụng Internet để cung cấp dịch vụ công, thông tin, và tương tác với công dân.
+- **Tổ chức phi lợi nhuận**: Sử dụng Internet để vận động, quyên góp, và kết nối với cộng đồng.
+- **Nhà nghiên cứu**: Sử dụng Internet để truy cập dữ liệu, công bố nghiên cứu, và hợp tác với các nhà nghiên cứu khác.
+- **Giáo dục**: Sử dụng Internet để cung cấp tài liệu học tập, giảng dạy trực tuyến, và kết nối với học sinh, sinh viên.
+- **Ngành công nghiệp giải trí**: Sử dụng Internet để phát hành phim, âm nhạc, trò chơi, và các nội dung giải trí khác.
+- **Ngành thương mại điện tử**: Sử dụng Internet để bán hàng trực tuyến, quản lý kho hàng, và giao hàng.
+- .... Và rất nhiều lĩnh vực khác.
+
+Bất cứ ai sử dụng internet thì đểu có thể nói là ngưới sử dụng internet.
+
+## Các dịch vụ Internet
+- Duyệt và tìm kiếm thông tin: Sử dụng các trình duyệt web như Chrome, Firefox, Safari để truy cập các trang web và tìm kiếm thông tin. Ví dụ như google, stackoverflow, wikipedia...
+- Giao tiếp: Sử dụng email, mạng xã hội, và các ứng dụng nhắn tin để giao tiếp với người khác. Ví dụ như Gmail, Facebook, Zalo, Telegram...
+- Giải trí: Xem video, nghe nhạc, chơi game trực tuyến, và đọc sách điện tử. Ví dụ như Youtube, Spotify, Netflix...
+- Tải lên và tải về các dữ liệu: Sử dụng các dịch vụ lưu trữ đám mây như Google Drive, Dropbox để lưu trữ và chia sẻ dữ liệu. Ví dụ như Google Drive, Dropbox, OneDrive...
+
+## WWW là gì?
+**WWW** (World Wide Web) là một hệ thống các trang web liên kết với nhau thông qua các liên kết (hyperlinks) và được truy cập thông qua trình duyệt web.
+
+Thường được gọi tắt là web, là một phần của Internet, nhưng không phải là toàn bộ Internet.
+
+WWW sử dụng Markup ngôn ngữ HTML (HyperText Markup Language) để định dạng nội dung và CSS (Cascading Style Sheets) để trình bày nội dung.
+
+WWW cũng sẽ cần sử dụng các máy chủ web để lưu trữ các trang web và các tài nguyên liên quan, khi người dùng truy cập vào một trang web, trình duyệt sẽ gửi yêu cầu đến máy chủ web để lấy nội dung của trang web đó.
+
+Trình duyệt là các công cụ hỗ trợ để người dùng thao trên trình duyệt
+
+## Cách dịch vụ phổ biến
+
+### Dịch vụ tìm kiếm thông tin
+
+Các tài nguyên cung cấp dưới dạng website, được lưu trữ trên các máy chủ web và có thể truy cập thông qua các trình duyệt web.
+
+Để dễ dàng tìm kiếm hơn, các ông lớn công nghệ đã tạo ra các dịch vụ hỗ trợ tìm kiếm thông tin trên web, giúp người dùng có thể tìm kiếm thông tin một cách nhanh chóng và dễ dàng.
+Ví dụ google, bing, yahoo... hoặc hiện tại có thêm là AI như chatgpt, gemini.
+
+### Email
+- **Email** là một dịch vụ cho phép người dùng gửi và nhận thư điện tử qua Internet. Nó giống như chúng ta gửi thư  qua bưu điện vậy.
+
+### Dịch vụ truyền tệp tin.
+- **FTP (File Transfer Protocol)**: Là một giao thức cho phép người dùng truyền tệp tin qua Internet. Nó cho phép người dùng tải lên và tải xuống các tệp tin từ máy chủ FTP.
+
+### Dịch vụ kinh doanh điện tử (E-business)
+- Giúp doanh nghiệp tương tác với khác hàng (B2C)
+- Doanh nghiệp tương tác với doanh nghiệp khác (B2B)
+- Doanh nghiệp tương tác với chính phủ (B2G)
+- Doanh nghiệp với nhân viên (B2E)
+- Người tiêu dùng với người tiêu dùng (C2C)
+
+## Lịch sử của Internet
+- **1960s**: Internet được phát triển ban đầu như một dự án nghiên cứu của Bộ Quốc phòng Hoa Kỳ, gọi là ARPANET (Advanced Research Projects Agency Network) để kết nối các máy tính của các trường đại học và viện nghiên cứu.
+- **1970s**: ARPANET trở thành mạng lưới đầu tiên sử dụng giao thức TCP/IP, cho phép các máy tính khác nhau giao tiếp với nhau.
+- **1980s**: Internet bắt đầu mở rộng ra ngoài các trường đại học và viện nghiên cứu, với sự ra đời của các dịch vụ như email và FTP.
+- **1985**: NSFNET (Network Solutions) được thành lập, cung cấp dịch vụ đăng ký tên miền và quản lý DNS. Cho phép thương mại hóa Internet. Vào năm 1995.
+- **1991**: World Wide Web (WWW) được phát minh bởi Tim Berners-Lee, cho phép người dùng truy cập các trang web thông qua trình duyệt web.
+
+## Nhà cung cấp dịch vụ Internet (ISP)
+- **ISP (Internet Service Provider)** là các công ty cung cấp dịch vụ kết nối Internet cho người dùng. Họ cung cấp các gói cước khác nhau để người dùng có thể truy cập Internet.
+- Các ISP cung cấp các dịch vụ như:
+  - Kết nối Internet qua cáp quang, ADSL, hoặc mạng di động.
+  - Cung cấp địa chỉ IP cho người dùng.
+  - Cung cấp các dịch vụ email, lưu trữ web, và các dịch vụ khác.
+- Mỗi một quốc gia sẽ có các nhà cung cấp dịch vụ Internet khác nhau, ví dụ như:
+  - Ở Việt Nam: FPT, Viettel, VNPT, MobiFone, VTC...
+  - Ở Mỹ: Comcast, AT&T, Verizon, CenturyLink...
+  - Ở Châu Âu: BT Group (Anh), Deutsche Telekom (Đức), Orange (Pháp)...
+- Khi chọn nhà cung cấp dịch vụ, tốc độ kết nối là một yếu tố quan trọng.  Tốc độ kết nối được tính toán dựa trên số các Bit có thể truyền đi trong 1 giây (Bits per second - bps). Tốc độ kết nối càng cao, người dùng càng có thể truy cập Internet nhanh chóng và hiệu quả hơn.
+
+## Các cách kết nối
+- Cáp ( Cable): Sử dụng cáp đồng trục hoặc cáp quang để kết nối Internet. Đây là phương pháp phổ biến nhất hiện nay, cung cấp tốc độ cao và ổn định.)
+- Đường dây điện thoại (DSL): Sử dụng đường dây điện thoại để kết nối Internet. Tốc độ kết nối thường thấp hơn so với cáp, nhưng vẫn đủ để sử dụng các dịch vụ cơ bản như email và duyệt web.
+- ĐƯờng dây thuê bao số bất đối xứng (ADSL): Là một phiên bản nâng cao của DSL, cho phép tốc độ tải xuống cao hơn so với tốc độ tải lên.
+- Wireless (Wi-Fi): Sử dụng sóng vô tuyến để kết nối Internet. Đây là phương pháp phổ biến cho các thiết bị di động như điện thoại, máy tính bảng, và laptop.
+  - Wireless Fidelity (Wi-Fi): Đây là công nghệ kết nối mạng.
+  - Hotspot: Là một điểm truy cập Wi-Fi công cộng, cho phép người dùng kết nối Internet miễn phí hoặc với một khoản phí nhỏ.
+  - Điểm truy cập không dây (Wireless Access Point - WAP): Là một thiết bị cho phép kết nối các thiết bị không dây với mạng Internet.
+- Truy cập mạng qua vệ tinh (Satellite): Sử dụng vệ tinh để kết nối Internet. Phương pháp này thường được sử dụng ở các khu vực xa xôi hoặc không có hạ tầng cáp quang.
+
