@@ -1,14 +1,16 @@
 import fs from 'fs'
 import path from 'path'
 import matter from 'gray-matter'
-import { fileURLToPath } from 'url'
+import {fileURLToPath} from 'url'
 // app.js
 const dataInject = process.argv.slice(2) // Input data from command-line arguments
 console.log('Injected Data:', dataInject)
 // Do something with the data
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
+const STUDY_NAME = 'thanhlv-study-2024';
+
 // Đường dẫn đến thư mục chứa các trang markdown trong dự án VitePress của bạn
-const PAGES_DIR = path.join(__dirname, '../../../src/study/thanhlv-study-2024')
+const PAGES_DIR = path.join(__dirname, '../../../src/study/' + STUDY_NAME)
 
 // Hàm này sẽ đọc tất cả các file .md trong thư mục và trả về một mảng chứa title và path
 function extractPagesData(dirPath) {
@@ -24,7 +26,7 @@ function extractPagesData(dirPath) {
       const fileContents = fs.readFileSync(fullPath, 'utf8')
 
       // Phân tích cú pháp frontmatter để lấy title
-      const { data } = matter(fileContents)
+      const {data} = matter(fileContents)
       if (!data.title) {
         return
       }
@@ -34,7 +36,7 @@ function extractPagesData(dirPath) {
         }
       }
       let link = fullPath.replace(PAGES_DIR, '').replace(/\.md$/, '.html')
-      link = '/study/thanhlv-study-2024' + link.replaceAll('\\', '/')
+      link = '/study/' + STUDY_NAME + link.replaceAll('\\', '/')
       link = link.replaceAll('//', '/')
 
       if (data.group) {
@@ -85,7 +87,7 @@ if (!fs.existsSync(folderPath)) {
   console.log(`Folder "${folderPath}" has been created.`)
 }
 // End tạo folder nếu chưa tồn tại
-const pathExport = path.join(folderPath, 'thanhlv-study-2024-sidebar.json')
+const pathExport = path.join(folderPath, STUDY_NAME + '-sidebar.json')
 exportPagesDataToFile(pagesData, pathExport)
 
 console.log(`Exported pages data to ${pathExport}`)
