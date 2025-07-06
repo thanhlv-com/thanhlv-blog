@@ -89,9 +89,8 @@ watchPostEffect(async () => {
 
 @media (min-width: 1440px) {
   .VPSidebar {
-    padding: 0 32px 96px calc((100% - var(--vp-screen-max-width)) / 2);
     width: calc(
-      (100% - var(--vp-screen-max-width)) / 2 + var(--vp-sidebar-width-small)
+      (100% - var(--vp-screen-max-width)) / 10 + var(--vp-sidebar-width-small)
     );
   }
 }
