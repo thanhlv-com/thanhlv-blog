@@ -197,3 +197,38 @@ Ví dụ google, bing, yahoo... hoặc hiện tại có thêm là AI như chatgp
   - Điểm truy cập không dây (Wireless Access Point - WAP): Là một thiết bị cho phép kết nối các thiết bị không dây với mạng Internet.
 - Truy cập mạng qua vệ tinh (Satellite): Sử dụng vệ tinh để kết nối Internet. Phương pháp này thường được sử dụng ở các khu vực xa xôi hoặc không có hạ tầng cáp quang.
 
+# Dịch vụ web
+## Website là gì?
+Một website là một tập hợp các các web được liên kết với nhau.
+Một website sẽ chứa nhiều web page (trang web), mỗi trang web sẽ có một địa chỉ URL riêng biệt.
+Web home là trang chủ của một website, thường là trang đầu tiên mà người dùng truy cập khi vào website đó.
+## Các thành phần của một website
+- **Domain name**: Là tên miền của website, giúp người dùng dễ dàng nhớ và truy cập vào website. Ví dụ: thanhlv.com, google.com, facebook.com...
+- **Web server**: Là máy chủ lưu trữ các trang web và các tài nguyên liên quan. Khi người dùng truy cập vào một trang web, trình duyệt sẽ gửi yêu cầu đến máy chủ web để lấy nội dung của trang web đó.
+- **Web browser**: Là phần mềm cho phép người dùng truy cập và duyệt các trang web. Ví dụ: Google Chrome, Mozilla Firefox, Safari, Microsoft Edge...
+- **Web page**: Là một trang web cụ thể trong một website, có thể chứa văn bản, hình ảnh, video, và các tài nguyên khác. Mỗi trang web sẽ có một địa chỉ URL riêng biệt.
+- **HTML (HyperText Markup Language)**: Là ngôn ngữ đánh dấu được sử dụng để tạo cấu trúc và nội dung của các trang web. HTML cho phép định dạng văn bản, chèn hình ảnh, video, và các liên kết.
+- **CSS (Cascading Style Sheets)**: Là ngôn ngữ được sử dụng để định dạng và trình bày các trang web. CSS cho phép thay đổi màu sắc, font chữ, kích thước, và bố cục của các phần tử trên trang web.
+- **JavaScript**: Là ngôn ngữ lập trình được sử dụng để tạo các hiệu ứng động và tương tác trên các trang web. JavaScript cho phép người dùng tương tác với các phần tử trên trang web, xử lý sự kiện, và thực hiện các tác vụ khác.
+- **Database**: Là nơi lưu trữ dữ liệu của website, bao gồm thông tin người dùng, nội dung bài viết, và các tài nguyên khác. Các hệ quản trị cơ sở dữ liệu phổ biến bao gồm MySQL, PostgreSQL, MongoDB, và SQLite.
+
+## Chi tiết hơn về web server
+- **Web server** là phần mềm hoặc phần cứng chịu trách nhiệm lưu trữ, xử lý và phục vụ các trang web cho người dùng thông qua Internet.
+- **Chức năng của web server**:
+  - Nhận yêu cầu từ trình duyệt web (HTTP request).
+  - Xử lý yêu cầu và truy xuất dữ liệu từ cơ sở dữ liệu hoặc các tệp tin trên máy chủ.
+  - Gửi lại dữ liệu cho trình duyệt web (HTTP response) để hiển thị trang web cho người dùng.
+- Một webserver có thể chứa nhiều website khác nhau, mỗi website sẽ có một tên miền riêng biệt.
+- Web server thường theo mô hình client-server, trong đó trình duyệt web (client) gửi yêu cầu đến máy chủ web (server) để lấy nội dung của trang web.
+- Địa chỉIP (IP address): Là một địa chỉ duy nhất được gán cho mỗi máy tính hoặc thiết bị kết nối Internet. Địa chỉ IP giúp xác định vị trí của máy tính trên mạng và cho phép các máy tính giao tiếp với nhau.
+  - Bạn có thể hiểu địa chỉ IP giống như địa chỉ nhà của bạn, giúp người khác có thể gửi thư đến cho bạn.
+  - Khi bạn đăng ký mạng Internet, nhà cung cấp dịch vụ sẽ gán cho bạn một địa chỉ IP duy nhất. Địa chỉ IP có thể là tĩnh (không thay đổi) hoặc động (thay đổi theo thời gian).
+    - IP động là IP dùng chung xoay vòng giữa các người dùng, thường được sử dụng trong các mạng gia đình hoặc văn phòng nhỏ.
+      - Hoặc đơng giản khi bạn kết nối thiết bị vào mạng Lan nhà bạn, máy sẽ tự động được cấp phát một địa chỉ IP động từ router của bạn, nếu rút ra cắm lại, địa chỉ IP có thể sẽ thay đổi.
+    - IP tĩnh là IP cố định, không thay đổi theo thời gian, thường được sử dụng trong các máy chủ web hoặc các dịch vụ yêu cầu kết nối ổn định. 
+      - Khi đăng ký IP tĩnh, bạn sẽ phải trả thêm một khoản phí hàng tháng cho nhà cung cấp dịch vụ Internet.
+  - CÓ 2 loại địa chỉ IP chính:
+    - IPv4: Là phiên bản đầu tiên của địa chỉ IP, sử dụng 32 bit để định danh.
+      - IPv4 có dạng xxx.xxx.xxx.xxx, trong đó mỗi xxx là một số từ 0 đến 255. Ví dụ: 123.456.789.012
+    - IPv6: Là phiên bản mới hơn của địa chỉ IP, sử dụng 128 bit để định danh, cho phép có nhiều địa chỉ IP hơn so với IPv4.
+      - IPv6 có dạng xxxx:xxxx:xxxx:xxxx:xxxx:xxxx:xxxx:xxxx, trong đó mỗi xxxx là một số hexa từ 0 đến F. Ví dụ: 2001:0db8:85a3:0000:0000:8a2e:0370:7334
