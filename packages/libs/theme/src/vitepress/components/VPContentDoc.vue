@@ -108,7 +108,8 @@ const pageClass = computed(() => {
 }
 
 .aside {
-  position: relative;
+  position: absolute;
+  right: 30px;
   display: none;
   flex-shrink: 0;
   padding-left: 64px;
@@ -179,7 +180,7 @@ const pageClass = computed(() => {
     display: flex;
   }
   .content {
-    min-width: 688px;
+    min-width: 60%;
     margin: 0;
     order: 1;
   }
@@ -205,6 +206,11 @@ const pageClass = computed(() => {
   }
   .aside {
     padding-left: 96px;
+  }
+  .content {
+    min-width: 75%;
+    margin: 0;
+    order: 1;
   }
 }
 </style>
