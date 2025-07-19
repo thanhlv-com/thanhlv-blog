@@ -38,24 +38,24 @@
     "serve": "npm run demo-build && vitepress serve demo"
   },
   "dependencies": {
-    "@docsearch/css": "^3.2.1",
-    "@docsearch/js": "^3.2.1",
-    "@vueuse/core": "^9.1.1",
+    "@docsearch/css": "^3.9.0",
+    "@docsearch/js": "^3.9.0",
+    "@vueuse/core": "^13.5.0",
     "body-scroll-lock": "^3.1.5",
     "medium-zoom": "1.1.0",
     "normalize.css": "^8.0.1"
   },
   "devDependencies": {
-    "@mdit-vue/types": "^0.11.0",
-    "@types/body-scroll-lock": "^3.1.0",
-    "@types/estree": "^1.0.0",
-    "@types/node": "^18.15.3",
-    "prettier": "^2.7.1",
-    "typescript": "^4.9.5",
-    "vitepress": "^1.0.0-alpha.60",
-    "vue": "^3.2.47"
+    "@mdit-vue/types": "^2.1.4",
+    "@types/body-scroll-lock": "^3.1.2",
+    "@types/estree": "^1.0.8",
+    "@types/node": "^24.0.15",
+    "prettier": "^3.6.2",
+    "typescript": "^5.8.3",
+    "vitepress": "^1.6.3",
+    "vue": "^3.5.17"
   },
   "peerDependencies": {
-    "vitepress": "^1.0.0-alpha.60"
+    "vitepress": "^1.6.3"
   }
 }
