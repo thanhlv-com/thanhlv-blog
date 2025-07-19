@@ -56,6 +56,6 @@
     "vue": "^3.5.17"
   },
   "peerDependencies": {
-    "vitepress": "^1.0.0-alpha.60"
+    "vitepress": "^1.6.3"
   }
 }
