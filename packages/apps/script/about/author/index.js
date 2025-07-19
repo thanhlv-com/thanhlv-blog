@@ -1,4 +1,4 @@
 import {execSync} from 'child_process';
 const dataInject = process.argv.slice(2); // Input data from command-line arguments
 
-execSync(`node script/about/author/pv/index.js ${dataInject}`,{stdio: 'inherit'});
+execSync(`node script/about/author/private/index.js ${dataInject}`,{stdio: 'inherit'});

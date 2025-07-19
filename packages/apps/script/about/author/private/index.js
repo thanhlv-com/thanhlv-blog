@@ -8,7 +8,7 @@ console.log('Injected Data:', dataInject)
 // Do something with the data
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 // Đường dẫn đến thư mục chứa các trang markdown trong dự án VitePress của bạn
-const PAGES_DIR = path.join(__dirname, '../../../../src/about/author/pv')
+const PAGES_DIR = path.join(__dirname, '../../../../src/about/author/private/pv')
 
 // Hàm này sẽ đọc tất cả các file .md trong thư mục và trả về một mảng chứa title và path
 function extractPagesData(dirPath) {
@@ -34,7 +34,7 @@ function extractPagesData(dirPath) {
         }
       }
       let link = fullPath.replace(PAGES_DIR, '').replace(/\.md$/, '.html')
-      link = '/about/author/pv' + link.replaceAll('\\', '/')
+      link = '/about/author/private/pv' + link.replaceAll('\\', '/')
       link = link.replaceAll('//', '/')
 
       if (data.group) {
@@ -78,14 +78,14 @@ function exportPagesDataToFile(pagesData, outputPath) {
 // Sử dụng hàm
 const pagesData = extractPagesData(PAGES_DIR)
 // tạo folder nếu chưa tồn tại
-const folderPath = path.join(__dirname, '/../../../../.vitepress/cache/sidebar/about/author/pv')
+const folderPath = path.join(__dirname, '/../../../../.vitepress/cache/sidebar/about/author/private/pv')
 if (!fs.existsSync(folderPath)) {
   // Tạo thư mục
   fs.mkdirSync(folderPath, { recursive: true }) // Option `recursive: true` đảm bảo rằng tất cả các thư mục cha sẽ được tạo nếu chúng chưa tồn tại
   console.log(`Folder "${folderPath}" has been created.`)
 }
 // End tạo folder nếu chưa tồn tại
-const pathExport = path.join(folderPath, 'about-author-pv-sidebar.json')
+const pathExport = path.join(folderPath, 'about-author-private-pv-sidebar.json')
 exportPagesDataToFile(pagesData, pathExport)
 
 console.log(`Exported pages data to ${pathExport}`)

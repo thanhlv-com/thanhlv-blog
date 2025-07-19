@@ -10,7 +10,7 @@ import thanhlvStudy2024Sidebar from './cache/sidebar/study/thanhlv-study-2024-si
 import thanhlvStudy2025Sidebar from './cache/sidebar/study/thanhlv-study-2025-sidebar.json'
 import tiengAnhSidebar from './cache/sidebar/study/tieng-anh-sidebar.json'
 import thanhPtitHocOnlineSidebar from './cache/sidebar/study/thanhlv-ptit-hoc-online-sidebar.json'
-import aboutAuthorPvSidebar from './cache/sidebar/about/author/pv/about-author-pv-sidebar.json'
+import aboutAuthorPrivatePvSidebar from './cache/sidebar/about/author/private/pv/about-author-private-pv-sidebar.json'
 
 // @ts-ignore
 import markdownItTextualUml from 'markdown-it-textual-uml'
@@ -117,8 +117,8 @@ export const sidebar: ThemeConfig['sidebar'] = {
       ]
     }
   ],
-  '/about/author/pv': [
-    ...aboutAuthorPvSidebar
+  '/about/author/private/pv': [
+    ...aboutAuthorPrivatePvSidebar
   ]
 }
 
@@ -136,7 +136,13 @@ export default defineConfigWithTheme<ThemeConfig>({
   srcExclude: ['tutorial/**/description.md'],
   sitemap: {
     hostname: 'https://thanhlv.com/',
-    lastmodDateOnly: false
+    lastmodDateOnly: false,
+    transformItems(items) {
+      return items.filter((item) => {
+        // Loại bỏ các URL chứa '/private/' hoặc chính xác là '404.html'
+        return !item.url.includes('private/') && item.url !== '404.html'
+      })
+    }
   },
   head: [
     ['meta', {
