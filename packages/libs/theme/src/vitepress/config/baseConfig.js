@@ -55,7 +55,7 @@ const config = {
     }
     head.push(['meta', {property: 'og:url', content: pageData.relativePath.replaceAll(".md",".html"), itemprop: "url"}])
 
-    head.push(['meta', {property: 'og:title', content: pageData.frontmatter.title, itemprop: "headline"}])
+    head.push(['meta', {property: 'og:title', content: pageData.frontmatter.title || pageData.description, itemprop: "headline"}])
     head.push(['meta', {property: 'og:description', content: pageData.description || pageData.frontmatter.title, itemprop: "description"}])
     head.push(['meta', {name: 'description', content: pageData.description || pageData.frontmatter.title}])
 
