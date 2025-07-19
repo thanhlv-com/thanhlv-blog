@@ -33,3 +33,4 @@ Cassandra là một Nosql distributed database, được thiết kế để xử
 ## 2. K8s(Kubernetes)
 Kubernetes là một hệ thống mã nguồn mở để tự động hóa việc triển khai, mở rộng và quản lý các ứng dụng containerized. Nó cung cấp một nền tảng mạnh mẽ để quản lý các container Docker và các ứng dụng phức tạp.
 1. [Giới thiệu về Kubernetes](2025-06-16-gioi-thieu-ve-kubernetes.md)
+2. [Các thành phần chính dev hay tiếp xúc trong kiến trúc Kubernetes](2025-06-17-cac-thanh-phan-chinh-dev-hay-tiep-xuc-trong-kien-truc-k8s.md)
