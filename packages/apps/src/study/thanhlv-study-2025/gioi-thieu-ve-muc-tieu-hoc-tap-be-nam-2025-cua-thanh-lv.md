@@ -34,3 +34,8 @@ Cassandra là một Nosql distributed database, được thiết kế để xử
 Kubernetes là một hệ thống mã nguồn mở để tự động hóa việc triển khai, mở rộng và quản lý các ứng dụng containerized. Nó cung cấp một nền tảng mạnh mẽ để quản lý các container Docker và các ứng dụng phức tạp.
 1. [Giới thiệu về Kubernetes](2025-06-16-gioi-thieu-ve-kubernetes.md)
 2. [Các thành phần chính dev hay tiếp xúc trong kiến trúc Kubernetes](2025-06-17-cac-thanh-phan-chinh-dev-hay-tiep-xuc-trong-kien-truc-k8s.md)
+
+## 3. Database & Database Advanced 2024
+Database là một phần không thể thiếu trong các ứng dụng hiện đại. Năm 2025 mình muốn học về các khái niệm cơ bản và nâng cao của database.
+
+1. Tìm hiểu về OLTP vs OLAP
