@@ -39,16 +39,17 @@ comment: false
 
 ::: details Chi tiết
 
-| Mô tả                                                                                                                       | Link                                            |
-|-----------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------|
-| Tạo local https để dành cho test(Hiện chỉ dành cho MACOS)                                                                   | [Link](https://www.ophiuchi.dev/)               |
-| Danh sách các phiên bản của các ứng dụng, thư viện trong lập trình(Ví dụ danh sách phiên bản mysql) và còn hỗ trợ hay không | [Link](https://endoflife.date/)                 |
-| Hỗ trợ Crack jetbrains, tuy nhiên nếu có tiền thì nên mua bản quyền, bởi vì họ cũng mất chi phí duy trì   :relieved:        | [Link](https://3.jetbra.in/)                    |
-| CSS Grid Generator 🥰                                                                                                       | [Link](https://cssgridgenerator.io/)            |
-| PWA with 12 open source frontend focused tools                                                                              | [Link](https://omatsuri.app/)                   |
-| Các Illustrations image                                                                                                     | [Link](https://undraw.co/illustrations)         |
-| Photoshop online trình duyệt                                                                                                | [Link](https://www.photopea.com/)               |
-| Danh sách các docker compose hay, tất tần tật                                                                               | [Link](https://awesome-docker-compose.com/apps) |
+| Mô tả                                                                                                                       | Link                                                               |
+|-----------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------|
+| Tạo local https để dành cho test(Hiện chỉ dành cho MACOS)                                                                   | [Link](https://www.ophiuchi.dev/)                                  |
+| Danh sách các phiên bản của các ứng dụng, thư viện trong lập trình(Ví dụ danh sách phiên bản mysql) và còn hỗ trợ hay không | [Link](https://endoflife.date/)                                    |
+| Hỗ trợ Crack jetbrains, tuy nhiên nếu có tiền thì nên mua bản quyền, bởi vì họ cũng mất chi phí duy trì   :relieved:        | [Link](https://3.jetbra.in/)                                       |
+| Hỗ trợ Crack window và Office, tuy nhiên nếu có tiền thì nên mua bản quyền, bởi vì họ cũng mất chi phí duy trì   :relieved: | [Link](https://github.com/massgravel/Microsoft-Activation-Scripts) |
+| CSS Grid Generator 🥰                                                                                                       | [Link](https://cssgridgenerator.io/)                               |
+| PWA with 12 open source frontend focused tools                                                                              | [Link](https://omatsuri.app/)                                      |
+| Các Illustrations image                                                                                                     | [Link](https://undraw.co/illustrations)                            |
+| Photoshop online trình duyệt                                                                                                | [Link](https://www.photopea.com/)                                  |
+| Danh sách các docker compose hay, tất tần tật                                                                               | [Link](https://awesome-docker-compose.com/apps)                    |
 
 :::
 
