@@ -1,124 +1,315 @@
-# Blog Cá Nhân của Thành LV
+# 📚 Blog Cá Nhân của Thành LV
 
 ## 📖 Giới Thiệu
-Blog cá nhân của Lê Văn Thành - nơi chia sẻ những kiến thức, kinh nghiệm và học hỏi trong hành trình phát triển phần mềm. Đây là kho tàng lưu trữ các bài viết về:
 
-- **Kiến trúc phần mềm và Design Patterns**
-- **Công nghệ Backend**: Java, Spring Boot, Kafka, Cassandra, Kubernetes
-- **Hệ thống phân tán và Performance**
-- **Kinh nghiệm thực tế từ dự án**
-- **Tài liệu học tập và ghi chú cá nhân**
+Blog cá nhân của **Lê Văn Thành** - một Software Engineer với niềm đam mê công nghệ và chia sẻ kiến thức. Đây là nơi tôi ghi chép, chia sẻ những kiến thức, kinh nghiệm và học hỏi trong hành trình phát triển phần mềm.
 
-## 🚀 Công Nghệ Sử Dụng
+### 🎯 Mục tiêu của Blog
+- **Chia sẻ kiến thức**: Từ những khái niệm cơ bản đến các kỹ thuật nâng cao
+- **Ghi chép học tập**: Lưu trữ quá trình học hỏi và nghiên cứu
+- **Kinh nghiệm thực tế**: Những bài học từ các dự án thực tế
+- **Xây dựng cộng đồng**: Kết nối với những người có cùng đam mê
 
-### Framework & Build Tools
-- **[VitePress](https://vitepress.vuejs.org/)** - Static Site Generator dựa trên Vue 3
-- **[Vue 3](https://vuejs.org/)** - Progressive JavaScript Framework
-- **[TypeScript](https://www.typescriptlang.org/)** - Type-safe JavaScript
+### 📚 Nội dung chính
+- **🏗️ Kiến trúc phần mềm & Design Patterns**: Các mô hình thiết kế, kiến trúc hệ thống
+- **⚙️ Backend Technologies**: Java, Spring Boot, Apache Kafka, Apache Cassandra
+- **☸️ DevOps & Infrastructure**: Docker, Kubernetes, CI/CD
+- **🚀 Distributed Systems**: Hệ thống phân tán, microservices, performance
+- **📊 Database & Data**: NoSQL, SQL, data modeling, optimization
+- **🔒 Security**: Best practices, authentication, authorization
+- **💡 Problem Solving**: Troubleshooting, debugging, optimization
+- **📖 Learning Notes**: Ghi chú từ sách, khóa học, conference
 
-### Development & Deployment
-- **[Node.js](https://nodejs.org/)** (≥14.0.0) - JavaScript Runtime
-- **[PNPM](https://pnpm.io/)** - Fast, disk space efficient package manager
-- **[GitHub Actions](https://docs.github.com/en/actions)** - CI/CD Pipeline
-- **[GitHub Pages](https://docs.github.com/en/pages)** - Static Hosting
-- **[Docker](https://www.docker.com/)** - Containerization
+## 🛠️ Công Nghệ Sử Dụng
 
-### Content & Documentation
-- **[Markdown](https://www.markdownguide.org/)** - Content Writing
-- **[Puppeteer](https://pptr.dev/)** - PDF Export cho CV
-- **[Gray Matter](https://github.com/jonschlinkert/gray-matter)** - Front Matter Parser
+### 🎨 Frontend Framework
+- **[VitePress](https://vitepress.vuejs.org/)** `v1.6.3` - Modern static site generator
+- **[Vue 3](https://vuejs.org/)** `v3.5.17` - Progressive JavaScript framework
+- **[TypeScript](https://www.typescriptlang.org/)** - Type-safe development
 
-## 🛠️ Cài Đặt và Chạy Local
+### 🏗️ Development Stack
+- **[Node.js](https://nodejs.org/)** `≥14.0.0` - JavaScript runtime environment
+- **[PNPM](https://pnpm.io/)** - Efficient package manager
+- **PNPM Workspace** - Monorepo management
 
-### Yêu Cầu Hệ Thống
-- Node.js ≥ 14.0.0
-- PNPM (được cài đặt tự động)
-- Git
+### 🚀 DevOps & Deployment
+- **[Docker](https://www.docker.com/)** & **Docker Compose** - Containerization
+- **[GitHub Actions](https://docs.github.com/en/actions)** - Automated CI/CD pipeline
+- **[GitHub Pages](https://docs.github.com/en/pages)** - Static site hosting
+- **[Netlify](https://www.netlify.com/)** - Alternative deployment platform
 
-### Cài Đặt
+### 📝 Content Management
+- **[Markdown](https://www.markdownguide.org/)** - Content authoring
+- **[Gray Matter](https://github.com/jonschlinkert/gray-matter)** - Front matter parsing
+- **[Markdown-it](https://markdown-it.github.io/)** - Markdown processing
+- **[UML Support](https://github.com/manastalukdar/markdown-it-textual-uml)** - Diagram rendering
+
+### 🎭 Additional Features  
+- **[Puppeteer](https://pptr.dev/)** `v24.14.0` - PDF generation for CV
+- **[@vue/repl](https://github.com/vuejs/repl)** - Interactive code playground
+- **[GSAP](https://gsap.com/)** - Advanced animations
+- **Custom Vue Theme** - Tailored design system
+
+## 🚀 Hướng Dẫn Cài Đặt & Phát Triển
+
+### 📋 Yêu Cầu Hệ Thống
+- **Node.js** `≥ 14.0.0` ([Tải về](https://nodejs.org/))
+- **Git** ([Cài đặt Git](https://git-scm.com/downloads))
+- **PNPM** (sẽ được cài đặt tự động)
+
+### 🔧 Cài Đặt Dự Án
+
+#### 1. Clone Repository
 ```bash
-# Clone repository
-git clone git@github.com:thanhlv-com/thanhlv-blog.git
+# Clone dự án về máy local
+git clone https://github.com/thanhlv-com/thanhlv-blog.git
 cd thanhlv-blog
-
-# Cài đặt dependencies
-make ci
-# hoặc
-yarn run ci
 ```
 
-### Chạy Development Server
+#### 2. Cài Đặt Dependencies
 ```bash
-# Khởi động server development
+# Sử dụng Makefile (khuyến nghị)
+make ci
+
+# Hoặc sử dụng trực tiếp yarn
+yarn run ci
+
+# Hoặc cài đặt thủ công
+npm install -g pnpm
+pnpm install
+```
+
+### 💻 Development Workflow
+
+#### 🏃‍♂️ Khởi động Development Server
+```bash
+# Sử dụng Makefile
 make dev
-# hoặc
+
+# Hoặc sử dụng yarn
 yarn run dev
 
-# Server sẽ chạy tại http://localhost:5173
+# Server sẽ khởi chạy tại: http://localhost:5173
 ```
 
-### Build Production
+#### 🏗️ Build Production
 ```bash
-# Build cho GitHub Pages
+# Build cho deployment (GitHub Pages)
 make build-app
-# hoặc
+
+# Hoặc sử dụng yarn
 yarn run build_github
+
+# Output: ./build/ directory
 ```
 
-### Chạy với Docker
+#### 🐳 Chạy với Docker
 ```bash
-# Khởi động container local
+# Khởi động môi trường Docker
 make docker-local
-# hoặc
+
+# Hoặc sử dụng Docker Compose trực tiếp
 docker compose up -d
+
+# Dừng container
+docker compose down
 ```
 
-## 📁 Cấu Trúc Dự Án
-
-```
-thanhlv-blog/
-├── packages/
-│   ├── apps/                    # Ứng dụng chính
-│   │   ├── src/
-│   │   │   ├── blog/           # Bài viết blog chính
-│   │   │   ├── short-blog/     # Bài viết ngắn
-│   │   │   ├── study/          # Bài viết học tập
-│   │   │   ├── about/          # Thông tin cá nhân
-│   │   │   └── public/         # Static assets
-│   │   ├── script/             # Build scripts
-│   │   └── .vitepress/         # VitePress config
-│   └── libs/
-│       └── theme/              # Custom theme
-├── Makefile                    # Build commands
-├── docker-compose.yml          # Docker configuration
-└── pnpm-workspace.yaml         # PNPM workspace config
+#### 🔍 Preview Build
+```bash
+# Xem trước bản build production
+cd packages/apps
+pnpm run preview
 ```
 
-## ✍️ Viết Bài Mới
+## 📁 Kiến Trúc Dự Án
 
-### Blog Posts
-Tạo file markdown trong thư mục tương ứng:
-- **Blog chính**: `packages/apps/src/blog/YYYY-MM-DD-ten-bai-viet.md`
-- **Short blog**: `packages/apps/src/short-blog/YYYY-MM-DD-ten-bai-viet.md`
-- **Study notes**: `packages/apps/src/study/[category]/ten-bai-viet.md`
+### 🗂️ Tổng Quan Cấu Trúc
+```
+thanhlv-blog/                           # Root directory
+├── 📦 packages/                        # PNPM Workspace
+│   ├── 🚀 apps/                       # Main application
+│   │   ├── 📝 src/                    # Source content
+│   │   │   ├── 📖 blog/              # Main blog posts
+│   │   │   ├── ⚡ short-blog/         # Short articles
+│   │   │   ├── 📚 study/             # Learning materials
+│   │   │   │   ├── thanhlv-study-2024/
+│   │   │   │   ├── thanhlv-study-2025/
+│   │   │   │   ├── thanhlv-ptit-hoc-online/
+│   │   │   │   └── tieng-anh/
+│   │   │   ├── 👤 about/             # Personal info & CV
+│   │   │   ├── 🌐 public/            # Static assets
+│   │   │   └── 📄 index.md           # Homepage
+│   │   ├── ⚙️ .vitepress/            # VitePress configuration
+│   │   │   ├── config.ts             # Main config
+│   │   │   ├── cache/                # Generated sidebars
+│   │   │   └── theme/                # Custom theme extensions
+│   │   ├── 🔧 script/                # Build & generation scripts
+│   │   │   ├── index.js              # Main build script
+│   │   │   ├── blogs.js              # Blog processing
+│   │   │   ├── short-blog.js         # Short blog processing
+│   │   │   ├── study/                # Study content processing
+│   │   │   └── about/                # About page processing
+│   │   ├── 📄 package.json           # App dependencies
+│   │   └── 🐳 netlify.toml          # Netlify config
+│   └── 🎨 libs/
+│       └── theme/                     # Custom Vue theme
+│           ├── src/                   # Theme components
+│           ├── demo/                  # Theme demo
+│           └── package.json           # Theme dependencies
+├── 🔨 Makefile                        # Build automation
+├── 🐳 docker-compose.yml              # Container orchestration
+├── 📦 package.json                    # Root dependencies
+├── 📝 pnpm-workspace.yaml             # Workspace configuration
+└── 🗒️ README.md                      # Documentation
+```
 
-### Front Matter Format
+### 🎯 Các Module Chính
+
+#### 📖 Blog Content Structure
+- **`/blog/`** - Bài viết dài, chi tiết về kỹ thuật
+- **`/short-blog/`** - Bài viết ngắn, chia sẻ nhanh
+- **`/study/`** - Tài liệu học tập có cấu trúc
+- **`/about/`** - Thông tin cá nhân, CV, portfolio
+
+#### 🛠️ Build System
+- **`script/`** - Auto-generation cho sidebar, content processing
+- **`.vitepress/`** - Configuration, theme customization
+- **`cache/`** - Generated metadata và navigation
+
+## ✍️ Hướng Dẫn Viết Bài
+
+### 📝 Content Guidelines
+
+#### 🗂️ File Organization
+```bash
+# Blog posts (chi tiết, kỹ thuật)
+packages/apps/src/blog/YYYY-MM-DD-tieu-de-bai-viet.md
+
+# Short blog posts (chia sẻ nhanh)
+packages/apps/src/short-blog/YYYY-MM-DD-tieu-de-ngan.md
+
+# Study materials (có cấu trúc)
+packages/apps/src/study/[category]/ten-bai-hoc.md
+```
+
+#### 📋 Front Matter Template
 ```yaml
 ---
-title: "Tiêu đề bài viết"
-date: "2025-01-01"
-description: "Mô tả ngắn gọn"
-authors: [ "lethanh" ]
+title: "Tiêu đề bài viết"               # Bắt buộc
+date: "2025-01-01"                      # Format: YYYY-MM-DD
+description: "Mô tả ngắn gọn cho SEO"   # Tối đa 160 ký tự
+authors: ["lethanh"]                    # Array of authors
+tags: ["java", "spring", "backend"]     # Optional tags
+categories: ["tutorial", "guide"]       # Optional categories
+draft: false                            # true để ẩn bài viết
+featured: false                         # true để highlight
 ---
 ```
 
-## 🌐 Live 
+#### 🎨 Markdown Features
+- ✅ **Standard Markdown** - Headers, lists, links, images
+- ✅ **Code Syntax Highlighting** - Multiple language support
+- ✅ **UML Diagrams** - PlantUML, Mermaid support
+- ✅ **Math Expressions** - KaTeX for mathematical formulas
+- ✅ **Custom Containers** - Tips, warnings, info boxes
+- ✅ **Vue Components** - Interactive elements
 
-Trang web được deploy tự động tại: [https://thanhlv.com](https://thanhlv.com)
+#### 🖼️ Asset Management
+```bash
+# Images cho blog posts
+packages/apps/src/blog/images/YYYY-MM-DD-ten-bai/image.png
 
-## 📧 Liên Hệ
+# Images cho short blog
+packages/apps/src/short-blog/images/YYYY-MM-DD-ten-bai/image.png
 
-- **Website**: [thanhlv.com](https://thanhlv.com)
-- **Email**: lethanh9398@gmail.com
-- **LinkedIn**: [Lê Văn Thành](https://linkedin.com/in/thanhlv)
+# Shared assets
+packages/apps/src/public/images/shared/
+```
+
+## 🚀 Deployment & Production
+
+### 🌐 Live Website
+Blog được deploy tự động tại: **[https://thanhlv.com](https://thanhlv.com)**
+
+### 🔄 CI/CD Pipeline
+- **Automatic Deployment**: GitHub Actions + GitHub Pages
+- **Build Triggers**: Push to `main` branch
+- **Performance Optimization**: Static site generation với Vite
+- **CDN**: GitHub Pages CDN cho tốc độ tải nhanh
+
+### 📊 Features & Capabilities
+- 🔍 **SEO Optimized** - Meta tags, structured data, sitemap
+- 📱 **Responsive Design** - Mobile-first approach
+- ⚡ **Performance** - Lazy loading, code splitting, optimized assets  
+- 🌙 **Dark/Light Mode** - User preference support
+- 🔎 **Search Functionality** - Full-text search across all content
+- 📖 **Reading Experience** - Clean typography, progress indicators
+- 💾 **PDF Export** - CV và document export capability
+- 🏷️ **Content Organization** - Tags, categories, series
+- 📝 **Commenting System** - GitHub-based discussions
+- 📈 **Analytics Ready** - Google Analytics integration
+
+## 🤝 Contribution & Development
+
+### 🛠️ Development Tools
+```bash
+# Code quality & formatting
+pnpm run lint          # ESLint checking
+pnpm run format         # Prettier formatting  
+pnpm run type-check     # TypeScript validation
+
+# Content validation
+pnpm run validate       # Markdown & frontmatter validation
+pnpm run spell-check    # Spell checking (if available)
+```
+
+### 📚 Learning Resources
+- **VitePress Documentation**: [vitepress.dev](https://vitepress.dev)
+- **Vue 3 Guide**: [vuejs.org/guide/](https://vuejs.org/guide/)
+- **Markdown Guide**: [markdownguide.org](https://www.markdownguide.org/)
+
+### 🐛 Issue Reporting
+Nếu bạn phát hiện lỗi hoặc có đề xuất cải thiện:
+1. Mở [GitHub Issues](https://github.com/thanhlv-com/thanhlv-blog/issues)
+2. Mô tả chi tiết vấn đề
+3. Cung cấp steps to reproduce
+4. Attach screenshots nếu cần thiết
+
+## 📞 Liên Hệ & Kết Nối
+
+### 👤 Thông Tin Cá Nhân
+- **Tác giả**: Lê Văn Thành
+- **Vai trò**: Software Engineer, Backend Developer
+- **Chuyên môn**: Java, Spring Boot, Distributed Systems, DevOps
+
+### 🌐 Kênh Liên Lạc
+- **🌐 Website**: [thanhlv.com](https://thanhlv.com)
+- **📧 Email**: [lethanh9398@gmail.com](mailto:lethanh9398@gmail.com)
+- **💼 LinkedIn**: [Lê Văn Thành](https://linkedin.com/in/thanhlv)
+- **🐙 GitHub**: [@thanhlv-com](https://github.com/thanhlv-com)
+
+
+## 📄 License & Attribution
+
+### 📜 License Information
+- **Content License**: [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) - Chia sẻ với ghi nguồn
+- **Code License**: [MIT License](https://opensource.org/licenses/MIT) - Open source
+- **Theme**: Custom theme dựa trên [@vue/theme](https://github.com/vuejs/vue-theme)
+
+### 🙏 Acknowledgments
+- **VitePress Team** - Framework tuyệt vời cho static site generation
+- **Vue.js Community** - Ecosystem và documentation xuất sắc  
+- **Open Source Contributors** - Tất cả các thư viện và tools được sử dụng
+- **Tech Community Vietnam** - Inspiration và support
+
+---
+
+<div align="center">
+
+**📚 Happy Learning & Sharing Knowledge! 🚀**
+
+*Được xây dựng với ❤️ bởi [Thành LV](https://thanhlv.com) | Powered by [VitePress](https://vitepress.dev)*
+
+</div>
 
