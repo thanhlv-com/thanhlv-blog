@@ -3,9 +3,11 @@ import { nextTick, ref, watchPostEffect } from 'vue'
 import { useConfig } from '../composables/config'
 import { useSidebar } from '../composables/sidebar'
 import VPSidebarGroup from './VPSidebarGroup.vue'
+import {useData} from "vitepress";
 
 const { sidebar, hasSidebar } = useSidebar()
 const { config } = useConfig()
+const { frontmatter } = useData()
 
 const props = defineProps<{
   open: boolean
@@ -29,7 +31,9 @@ watchPostEffect(async () => {
     :class="{ open }"
     @click.stop
   >
-    <nav id="VPSidebarNav" aria-labelledby="sidebar-aria-label" tabindex="-1">
+    <nav id="VPSidebarNav" aria-labelledby="sidebar-aria-label"
+         v-if="frontmatter.sidebar !== false"
+         tabindex="-1">
       <slot name="top" />
       <span id="sidebar-aria-label" class="visually-hidden">{{
         config.i18n?.ariaSidebarNav ?? 'Sidebar Navigation'
