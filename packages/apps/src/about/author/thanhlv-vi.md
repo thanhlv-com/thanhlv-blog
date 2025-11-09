@@ -64,7 +64,7 @@ Với 11 tỉ bản ghi hiện tại và 3 triệu bản ghi mới mỗi ngày. 
   3. Giữ vai trò chủ chốt trong dự án, đảm bảo tính logic nghiệp vụ và ổn định tuyệt đối của hệ thống.
   4. Thực hiện phân tích nghiệp vụ sâu rộng và đánh giá tính khả thi của các giải pháp kiến trúc (ví dụ: Sharding Data, Data Migration, Double write).
 
-- **Công nghệ**: [Java 21](https://www.java.com/en/),[Java virtual thread](https://www.java.com/en/), [Spring boot](https://spring.io/projects/spring-boot),  [kubernetes](https://kubernetes.io/), [ArgoCd](https://argo-cd.readthedocs.io/en/stable/), [Hashed Sharding database](), [Kafka](https://github.com/apache/kafka), [testcontainers](https://testcontainers.com/)
+- **Công nghệ**: [Java 21](https://www.java.com/en/),[Java virtual thread](https://www.java.com/en/), [Spring boot](https://spring.io/projects/spring-boot),  [kubernetes](https://kubernetes.io/), [ArgoCd](https://argo-cd.readthedocs.io/en/stable/), [Hashed Sharding database](https://aws.amazon.com/what-is/database-sharding), [Kafka](https://github.com/apache/kafka), [testcontainers](https://testcontainers.com/)
 - **Thành quả đến tháng 11-2025**:
   1. Triển khai thành công hạ tầng trên Kubernetes cho 7 môi trường (Đảm bảo tính nhất quán và khả năng quản lý). Đạt chuẩn Zero-Downtime trong tất cả các lần Release.
   2. Loadtest thành công 11.000 request/giây với thời gian phản hồi trung bình dưới 100ms.
