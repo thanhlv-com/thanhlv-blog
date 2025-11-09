@@ -47,10 +47,42 @@ dmca: false
 
 ## Kinh nghiệm làm việc
 Với 6 năm kinh nghiệm phong phú, tôi đã thu thập được một kho tàng kiến thức sâu rộng thông qua việc làm việc trên một loạt các dự án thuộc nhiều lĩnh vực khác nhau.
-### [LINE Technology Vietnam](https://vietnamdevcenter.linecorp.com/en) & [LINE NEXT Inc](https://www.linkedin.com/company/line-us-corporation/mycompany/) | Senior Software Engineer
+### [LINE Technology Vietnam](https://vietnamdevcenter.linecorp.com/en) & [LY Corporation](https://www.lycorp.co.jp/en/) | Senior Software Engineer
 ![img](images/thanhlv/line-center-vn.png)
 
-#### **09-2021 – Hiện tại** | **[Line Explorer Blockchain](https://explorer.blockchain.line.me/finschia)**
+#### **11-2024 – Hiện tại** | **[LYMix ShortUrl](https://www.lycorp.co.jp/en/)**
+![img](images/thanhlv/ly.png)
+
+Một dự án shorturl service nội bộ của LY Corporation được hợp nhất giữa LINE Corporation và Yahoo Japan Corporation. Mục tiêu là xây dựng một dịch vụ Short URL nhanh chóng, tin cậy, có khả năng mở rộng để phục vụ hàng ngàn yêu cầu mỗi giây từ toàn bộ hệ sinh thái của tập đoàn.
+
+Với 11 tỉ bản ghi hiện tại và 3 triệu bản ghi mới mỗi ngày. Có hàng ngàn request mỗi giây đến dịch vụ này, đòi hỏi hệ thống phải có khả năng mở rộng và hiệu suất cao để đáp ứng nhu cầu của người dùng.
+
+- **Nghiệm vụ** :
+  1. Cấu hình triển khai hạ tầng trên kubernetes cho 7 môi trường.
+  2. Thiết lập và triển khai toàn bộ hạ tầng Kubernetes cho 7 môi trường (Dev/Staging/Prod, v.v.) với tiêu chuẩn Infrastructure as Code.
+     - Cấu hình Base Code, CI/CD hoàn chỉnh sử dụng Git Actions/ArgoCD, tự động hóa quy trình phát triển và triển khai.
+  3. Giữ vai trò chủ chốt trong dự án, đảm bảo tính logic nghiệp vụ và ổn định tuyệt đối của hệ thống.
+  4. Thực hiện phân tích nghiệp vụ sâu rộng và đánh giá tính khả thi của các giải pháp kiến trúc (ví dụ: Sharding Data, Data Migration, Double write).
+
+- **Công nghệ**: [Java 21](https://www.java.com/en/),[Java virtual thread](https://www.java.com/en/), [Spring boot](https://spring.io/projects/spring-boot),  [kubernetes](https://kubernetes.io/), [ArgoCd](https://argo-cd.readthedocs.io/en/stable/), [Hashed Sharding database](), [Kafka](https://github.com/apache/kafka), [testcontainers](https://testcontainers.com/)
+- **Thành quả đến tháng 11-2025**:
+  1. Triển khai thành công hạ tầng trên Kubernetes cho 7 môi trường (Đảm bảo tính nhất quán và khả năng quản lý). Đạt chuẩn Zero-Downtime trong tất cả các lần Release.
+  2. Loadtest thành công 11.000 request/giây với thời gian phản hồi trung bình dưới 100ms.
+  3. Hoàn thiện tất cả CI/CD cho dự án. Đảm bảo quá trình phát triển và triển khai diễn ra một cách suôn sẻ và hiệu quả.
+  4. Với 2 thành viên Fresher, đã hướng dẫn và đào tạo để họ có thể trở thành những thành viên đóng góp tích cực cho dự án.
+  5. Hoàn thành cơ bản tính năng Double Write (bước đệm quan trọng để đảm bảo tính toàn vẹn dữ liệu trong quá trình chuyển đổi sang hệ thống Sharding mới)..
+  6. Đang tạo tài liệu giải pháp migrate dữ liệu từ hệ thống cũ sang hệ thống mới.
+- **Mục tiêu tiếp theo dự kiến**:
+  1. Hoàn thiện tính năng double write.
+  2. Triển khai logic migrate dữ liệu từ hệ thống cũ sang hệ thống mới.
+:::info Cảm nhận cá nhân về dự án
+1. Một dự án đầy thách thức và cơ hội để phát triển kỹ năng kỹ thuật với lượng dữ liệu lớn lên đến 11 tỉ.
+2. Lần đầu triển khai hạ tầng trên kubernetes cho 7 môi trường khác nhau, một thách thức lớn về quản lý môi trường.
+3. Cơ hội để làm việc với các công nghệ mới như Java virtual thread, Hashed Sharding database, ArgoCd.
+4. Hướng dẫn và đào tạo Fresher, một trải nghiệm quý báu trong việc chia sẻ kiến thức và phát triển đội ngũ.
+:::
+
+#### **09-2021 – 12-2024** | **[Line Explorer Blockchain](https://explorer.blockchain.line.me/finschia)**
 ![img](images/thanhlv/line-blockchain.ico)
 
 Blockchain của Line không chỉ đơn giản là một **Blockchain as a Service** mà còn là một nguồn lực đa dạng với chain được tối ưu hóa để phục vụ các mục đích cụ thể như NFT, Tài Chính, và những mục đích đặc biệt khác. Explorer được tạo ra để giúp người dùng khám phá một cách dễ dàng và chi tiết dữ liệu đang được lưu trữ trên blockchain.
@@ -70,7 +102,7 @@ Blockchain của Line không chỉ đơn giản là một **Blockchain as a Serv
 :::
 
 
-#### **09-2021 – Hiện tại** | **Blockchain framework**
+#### **09-2021 – 12-2024** | **Blockchain framework**
 
 Hệ thống blockchain framework sẽ đóng vai trò quan trọng, là nền tảng chủ lực cho mọi yêu cầu đọc dữ liệu trên blockchain. Ứng dụng này không chỉ giúp đọc và lưu trữ dữ liệu một cách hiệu quả, mà còn tạo điều kiện thuận lợi cho bên thứ ba thực hiện truy vấn với hiệu suất cao mà không làm ảnh hưởng đến blockchain trực tiếp.
 - **Nghiệm vụ** :
@@ -92,7 +124,7 @@ Hệ thống blockchain framework sẽ đóng vai trò quan trọng, là nền t
 :::
 
 
-#### **10-2022 – Hiện tại** | **Dosi APP**
+#### **10-2022 – 11-2024** | **Dosi APP**
 ![img](images/thanhlv/dosi-vault.svg)
 
 Sau thành công phát triển nền tảng ví giao dịch phi tập trung Dosi Vault, chúng tôi phát triển Dosi App base từ Dosi Vault. Dosi App trở Thành super App, đưa ra trải nghiệm độc đáo và tất cả các dịch vụ đều kết nối thông qua nền tảng này.
@@ -116,7 +148,7 @@ Sau thành công phát triển nền tảng ví giao dịch phi tập trung Dosi
 2. Một ý tưởng tuyệt vời về bảo mật.
 :::
 
-#### **10-2022 – Hiện tại** | **Dosi Vault**
+#### **10-2022 – 11-2024** | **Dosi Vault**
 ![img](images/thanhlv/dosi-vault.svg)
 
 Một dự án độc đáo, là sự phát triển từ Open Source Keplr Wallet, Dosi Vault đóng vai trò quan trọng trong việc xử lý thanh toán cho hệ thống giao dịch phi tập trung của Line Blockchain.
