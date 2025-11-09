@@ -53,28 +53,28 @@ Với 6 năm kinh nghiệm phong phú, tôi đã thu thập được một kho t
 #### **11-2024 – Hiện tại** | **[LYMix ShortUrl](https://www.lycorp.co.jp/en/)**
 ![img](images/thanhlv/ly.png)
 
-Một dự án shorturl service nội bộ của LY Corporation được hợp nhất giữa LINE Corporation và Yahoo Japan Corporation. Dự án nhằm cung cấp dịch vụ rút gọn URL nhanh chóng, đáng tin cậy và dễ sử dụng.
+Một dự án shorturl service nội bộ của LY Corporation được hợp nhất giữa LINE Corporation và Yahoo Japan Corporation. Mục tiêu là xây dựng một dịch vụ Short URL nhanh chóng, tin cậy, có khả năng mở rộng để phục vụ hàng ngàn yêu cầu mỗi giây từ toàn bộ hệ sinh thái của tập đoàn.
 
 Với 11 tỉ bản ghi hiện tại và 3 triệu bản ghi mới mỗi ngày. Có hàng ngàn request mỗi giây đến dịch vụ này, đòi hỏi hệ thống phải có khả năng mở rộng và hiệu suất cao để đáp ứng nhu cầu của người dùng.
 
 - **Nghiệm vụ** :
   1. Cấu hình triển khai hạ tầng trên kubernetes cho 7 môi trường.
-  2. Cấu hình base code, CI/CD(Git action/Argocd) cho dự án.
-  2. Key member chính của dự án, đảo bảo logic và tính ổn định của hệ thống
-  3. Phân tích nghiệp vụ, đánh giá tính khả thi của các giải pháp.
+  2. Thiết lập và triển khai toàn bộ hạ tầng Kubernetes cho 7 môi trường (Dev/Staging/Prod, v.v.) với tiêu chuẩn Infrastructure as Code.
+     - Cấu hình Base Code, CI/CD hoàn chỉnh sử dụng Git Actions/ArgoCD, tự động hóa quy trình phát triển và triển khai.
+  3. Giữ vai trò chủ chốt trong dự án, đảm bảo tính logic nghiệp vụ và ổn định tuyệt đối của hệ thống.
+  4. Thực hiện phân tích nghiệp vụ sâu rộng và đánh giá tính khả thi của các giải pháp kiến trúc (ví dụ: Sharding Data, Data Migration, Double write).
 
 - **Công nghệ**: [Java 21](https://www.java.com/en/),[Java virtual thread](https://www.java.com/en/), [Spring boot](https://spring.io/projects/spring-boot),  [kubernetes](https://kubernetes.io/), [ArgoCd](https://argo-cd.readthedocs.io/en/stable/), [Hashed Sharding database](), [Kafka](https://github.com/apache/kafka), [testcontainers](https://testcontainers.com/)
 - **Thành quả đến tháng 11-2025**:
-  1. Triển khai hạ tầng cho 7 môi trường trên kubernetes và không có lỗi xảy ra khi release và đáp ứng được Zero-downtime.
+  1. Triển khai thành công hạ tầng trên Kubernetes cho 7 môi trường (Đảm bảo tính nhất quán và khả năng quản lý). Đạt chuẩn Zero-Downtime trong tất cả các lần Release.
   2. Loadtest thành công 11.000 request/giây với thời gian phản hồi trung bình dưới 100ms.
   3. Hoàn thiện tất cả CI/CD cho dự án. Đảm bảo quá trình phát triển và triển khai diễn ra một cách suôn sẻ và hiệu quả.
   4. Với 2 thành viên Fresher, đã hướng dẫn và đào tạo để họ có thể trở thành những thành viên đóng góp tích cực cho dự án.
-  5. Hoàn thiện cơ bản tính năng double write.
+  5. Hoàn thành cơ bản tính năng Double Write (bước đệm quan trọng để đảm bảo tính toàn vẹn dữ liệu trong quá trình chuyển đổi sang hệ thống Sharding mới)..
   6. Đang tạo tài liệu giải pháp migrate dữ liệu từ hệ thống cũ sang hệ thống mới.
-7. **Mục tiêu dự kiến**:
+- **Mục tiêu tiếp theo dự kiến**:
   1. Hoàn thiện tính năng double write.
   2. Triển khai logic migrate dữ liệu từ hệ thống cũ sang hệ thống mới.
-     3. 
 :::info Cảm nhận cá nhân về dự án
 1. Một dự án đầy thách thức và cơ hội để phát triển kỹ năng kỹ thuật với lượng dữ liệu lớn lên đến 11 tỉ.
 2. Lần đầu triển khai hạ tầng trên kubernetes cho 7 môi trường khác nhau, một thách thức lớn về quản lý môi trường.
