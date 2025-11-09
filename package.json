@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "yarn run ci && pnpm -C packages/apps run dev",
     "build_github": "yarn run ci && pnpm -C packages/apps run build_github",
-    "ci": "npm i -g pnpm && pnpm install"
+    "ci": "npm i -g pnpm && pnpm install",
+    "prune": "pnpm store prune"
   },
   "devDependencies": {
     "blog": "workspace:*",
