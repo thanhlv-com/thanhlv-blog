@@ -1,11 +1,10 @@
 ---
 footer: true
 title: Cách Save batch dữ liệu trên mysql database
-description: Làm cách nào để nhiều container dùng chung một network K8s? Trong bài viết này mình sẽ giải thích và làm cách ví dụ để cho các bạn hiểu.
+description: Cách Save batch dữ liệu trên mysql database để không đầy Bin log và không làm lag replica mysql
 authors: [ lethanh ]
-date: 2025-07-08
+date: 2025-12-24
 outline: deep
-image: https://static-cdn.thanhlv.com/blog/images/2025-07-08-lam-cach-nao-de-nhieu-container-dung-chung-mot-network-k8s/img.png
 draft: false
 ---
 
