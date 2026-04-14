@@ -8,6 +8,7 @@ import blogsSidebar from './cache/sidebar/blogs-sidebar.json'
 import shortBlogsSidebar from './cache/sidebar/short-blog-sidebar.json'
 import thanhlvStudy2024Sidebar from './cache/sidebar/study/thanhlv-study-2024-sidebar.json'
 import thanhlvStudy2025Sidebar from './cache/sidebar/study/thanhlv-study-2025-sidebar.json'
+import thanhlvStudy2026Sidebar from './cache/sidebar/study/thanhlv-study-2026-sidebar.json'
 import tiengAnhSidebar from './cache/sidebar/study/tieng-anh-sidebar.json'
 import thanhPtitHocOnlineSidebar from './cache/sidebar/study/thanhlv-ptit-hoc-online-sidebar.json'
 import aboutAuthorPrivatePvSidebar from './cache/sidebar/about/author/private/pv/about-author-private-pv-sidebar.json'
@@ -41,6 +42,10 @@ const nav: ThemeConfig['nav'] = [
       {
         text: 'Học tập BE Thanhlv 2025',
         link: '/study/thanhlv-study-2025/gioi-thieu-ve-muc-tieu-hoc-tap-be-nam-2025-cua-thanh-lv'
+      },
+      {
+        text: 'Học tập BE Thanhlv 2026',
+        link: '/study/thanhlv-study-2026/gioi-thieu-ve-muc-tieu-hoc-tap-be-nam-2026-cua-thanh-lv'
       },
       {
         text: 'Tiếng anh',
@@ -84,6 +89,9 @@ export const sidebar: ThemeConfig['sidebar'] = {
   ],
   '/study/thanhlv-study-2025': [
     ...thanhlvStudy2025Sidebar
+  ],
+  '/study/thanhlv-study-2026': [
+    ...thanhlvStudy2026Sidebar
   ],
   '/study/tieng-anh': [
     {

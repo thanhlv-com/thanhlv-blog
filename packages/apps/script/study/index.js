@@ -4,4 +4,5 @@ const dataInject = process.argv.slice(2); // Input data from command-line argume
 execSync(`node script/study/thanhlv-ptit-hoc-online/index.js ${dataInject}`,{stdio: 'inherit'});
 execSync(`node script/study/thanhlv-study-2024/index.js ${dataInject}`,{stdio: 'inherit'});
 execSync(`node script/study/thanhlv-study-2025/index.js ${dataInject}`,{stdio: 'inherit'});
+execSync(`node script/study/thanhlv-study-2026/index.js ${dataInject}`,{stdio: 'inherit'});
 execSync(`node script/study/tieng-anh/index.js ${dataInject}`,{stdio: 'inherit'});
