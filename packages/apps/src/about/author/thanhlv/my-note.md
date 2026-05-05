@@ -99,3 +99,10 @@ comment: false
 | Mô tả                    | Link                                     |
 |--------------------------|------------------------------------------|
 | Tools đánh giá tính cách | [Link](https://www.16personalities.com/) |
+
+## Scan
+
+
+| Mô tả                                         | Link                                     |
+|-----------------------------------------------|------------------------------------------|
+| deepfind Tìm kiếm tìa khoản đăng ký ở các nơi | [Link](https://deepfind.me/) |
