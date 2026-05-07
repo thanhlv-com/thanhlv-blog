@@ -5,7 +5,7 @@ Description: .
 authors: [ "lethanh" ]
 date: 2026-04-14
 outline: deep
-image: https://static-cdn.thanhlv.com/study/thanhlv-study-2025/2025-03-26-what-is-apache-cassandra/cassandra-la-gi-1.webp
+image: https://static-cdn.thanhlv.com/study/thanhlv-study-2026/perl.jpg
 draft: false
 group: 1. Perl
 ---
