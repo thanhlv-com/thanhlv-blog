@@ -1,8 +1,8 @@
 ---
 footer: true
 title: Context trong Perl
-Description: .
-authors: [ "lethanh" ]
+description: Cách scalar, list và void context ảnh hưởng tới biểu thức trong Perl.
+authors: ["lethanh"]
 date: 2026-05-09
 outline: deep
 image: https://static-cdn.thanhlv.com/study/thanhlv-study-2026/perl.jpg
@@ -13,73 +13,90 @@ group: 1. Perl
 [[TOC]]
 
 # Context trong Perl
-Trong perl context là một khái niệm rất quan trọng để hiểu cách một biểu thức được đánh giá và trả về kết quả. Perl có ba loại context chính: scalar context, list context, và void context.
 
-Mỗi loại context sẽ ảnh hưởng đến cách một biểu thức được xử lý và kết quả mà nó trả về.
+`Context` là một khái niệm cốt lõi trong Perl: cùng một biểu thức có thể cho kết quả khác nhau tùy vào ngữ cảnh nơi nó được dùng.
+
+Ba loại context phổ biến là:
+- `scalar context`
+- `list context`
+- `void context`
 
 ## 1. Scalar context
-Khi một biểu thức được đánh giá trong scalar context và nó trả về một giá trị duy nhất, giá trị đó sẽ được trả về. Nếu biểu thức trả về nhiều giá trị, chỉ giá trị đầu tiên sẽ được trả về.
-Ví dụ:
+
+Trong `scalar context`, biểu thức được kỳ vọng trả về một giá trị đơn.
+
 ```perl
 my @array = (1, 2, 3);
-my $scalar = @array;  # Scalar context, trả về số lượng phần tử trong
-print $scalar;  # Output: 3
+my $count = @array;     # @array ở scalar context -> số phần tử
+print "$count\n";      # 3
 ```
-### Tại sao lại trả về 3?
-Trong ví dụ trên, khi chúng ta đánh giá `@array` trong scalar context, Perl trả về số lượng phần tử trong mảng, đó là 3. Đây là một đặc điểm của scalar context khi áp dụng cho một mảng.
+
+Một ví dụ khác rất hay gây nhầm:
+
+```perl
+my $x = (10, 20, 30);   # Toán tử comma trong scalar context -> phần tử cuối
+print "$x\n";          # 30
+```
+
+Lưu ý: không phải "nhiều giá trị thì lấy phần tử đầu tiên"; trong ví dụ comma operator ở scalar context, Perl lấy **giá trị cuối**.
 
 ## 2. List context
-Khi một biểu thức được đánh giá trong list context, nó sẽ trả về tất cả các giá trị mà nó có thể trả về. Nếu biểu thức chỉ trả về một giá trị, nó sẽ được trả về dưới dạng một danh sách có một phần tử.
-Ví dụ:
+
+Trong `list context`, biểu thức được kỳ vọng trả về danh sách giá trị.
+
 ```perl
 my @array = (1, 2, 3);
-my @list = @array;  # List context, trả về tất cả phần tử trong
-print join(", ", @list);  # Output: 1, 2, 3
+my @copy = @array;      # @array ở list context -> toàn bộ phần tử
+print join(", ", @copy), "\n";  # 1, 2, 3
 ```
-### Tại sao lại trả về 1, 2, 3?
-Trong ví dụ trên, khi chúng ta đánh giá `@array` trong list context, Perl trả về tất cả các phần tử trong mảng dưới dạng một danh sách. Do đó, kết quả là 1, 2, 3.
+
+List context thường xuất hiện khi gán cho mảng, truyền danh sách đối số, hoặc khi dùng các hàm kỳ vọng danh sách.
 
 ## 3. Void context
-Khi một biểu thức được đánh giá trong void context, nó sẽ không trả về bất kỳ giá trị nào. Void context thường được sử dụng khi bạn muốn thực hiện một hành động mà không cần quan tâm đến kết quả trả về.
-Ví dụ:
+
+`Void context` là khi kết quả biểu thức bị bỏ qua.
+
 ```perl
-my @array = (1, 2, 3);
-print @array;  # Void context, không trả về giá trị nào
+sub compute {
+    return 99;
+}
+
+compute();  # gọi hàm nhưng bỏ qua giá trị trả về -> void context
 ```
-### Tại sao lại không trả về giá trị nào?
-Trong ví dụ trên, khi chúng ta đánh giá `@array` trong void context, Perl không trả về bất kỳ giá trị nào. Thay vào đó, nó chỉ thực hiện hành động in ra các phần tử của mảng mà không trả về một giá trị cụ thể nào.
 
-Đây là đặc điểm của void context, nơi kết quả của biểu thức không được sử dụng hoặc lưu trữ.
+`Void context` hữu ích khi bạn chỉ cần side effect (ví dụ: ghi log, cập nhật state), không cần dùng kết quả trả về.
 
+## `wantarray` để nhận biết context
 
+`wantarray` giúp hàm biết nó đang được gọi trong context nào:
+- `undef`: void context
+- `true`: list context
+- `false` (defined nhưng falsy): scalar context
 
-## Ví dụ wantarray
-Hàm `wantarray` trong Perl được sử dụng để xác định loại context mà một biểu thức đang được đánh giá. Nó trả về: 
-- `undef` nếu đang ở void context
-- `true` nếu đang ở list context
-- `false` nếu đang ở scalar context
-- Ví dụ:
 ```perl
 sub example {
-    if (wantarray) {
-        return (1, 2, 3);  # List context
-    } elsif (defined wantarray) {
-        return 42;  # Scalar context
-    } else {
-        print "Void context\n";  # Void context
+    if (!defined wantarray) {
+        print "Void context\n";
+        return;
     }
+
+    if (wantarray) {
+        return (1, 2, 3);   # list context
+    }
+
+    return 42;              # scalar context
+}
+
+my @list = example();       # (1, 2, 3)
+my $scalar = example();     # 42
+example();                  # in "Void context"
 ```
-### Gọi hàm trong các context khác nhau:
-```perl
-my @list = example();  # List context, trả về (1, 2, 3)
-my $scalar = example();  # Scalar context, trả về 42
-example();  # Void context, in ra "Void context"
-```
-Trong ví dụ trên, hàm `example` trả về các giá trị khác nhau tùy thuộc vào context mà nó được gọi.
 
 ## Kết luận
-Hiểu về context trong Perl là rất quan trọng để viết code hiệu quả và tránh những lỗi không mong muốn. 
 
-Việc biết khi nào một biểu thức được đánh giá trong scalar, list, hoặc void context sẽ giúp bạn kiểm soát tốt hơn cách dữ liệu được xử lý và trả về trong chương trình của bạn. 
+Hiểu đúng context giúp bạn:
+- dự đoán chính xác giá trị trả về
+- tránh bug do dùng sai kiểu ngữ cảnh
+- viết hàm linh hoạt hơn với `wantarray`
 
-Hãy luôn nhớ kiểm tra context khi viết các hàm hoặc biểu thức phức tạp để đảm bảo rằng chúng hoạt động như mong đợi trong mọi tình huống.
+Khi đọc hoặc viết Perl, luôn tự hỏi: "Biểu thức này đang ở scalar, list hay void context?".
