@@ -5,6 +5,7 @@ on:
   push:
     branches:
       - main
+  workflow_dispatch:
 # tạo concurrency để có 1 job duy nhất chạy và nếu có job mới cùng group sẽ cancel
 concurrency:
   group: build-and-deploy-live
