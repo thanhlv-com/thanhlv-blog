@@ -252,17 +252,61 @@ Blog được deploy tự động tại: **[https://thanhlv.com](https://thanhlv
 
 ## 🤝 Contribution & Development
 
-### 🛠️ Development Tools
-```bash
-# Code quality & formatting
-pnpm run lint          # ESLint checking
-pnpm run format         # Prettier formatting  
-pnpm run type-check     # TypeScript validation
+## Repository Guidelines
 
-# Content validation
-pnpm run validate       # Markdown & frontmatter validation
-pnpm run spell-check    # Spell checking (if available)
-```
+### Cấu Trúc Dự Án & Tổ Chức Module
+Repository này dùng PNPM workspace với 2 package chính:
+- `packages/apps`: website VitePress (nội dung, cấu hình site, script build).
+- `packages/libs/theme`: component và style theme Vue dùng chung/tùy biến.
+
+Nội dung chính nằm trong `packages/apps/src`: `blog/`, `short-blog/`,
+`study/`, `about/`, và tài nguyên `public/`.
+Script tự động hóa nằm ở `packages/apps/script`, cấu hình VitePress ở
+`packages/apps/.vitepress`.
+`packages/apps/.vitepress/cache` là thư mục sinh tự động; ưu tiên sửa nội
+dung nguồn và script.
+
+### Lệnh Build, Test, và Phát Triển
+- `make ci` hoặc `yarn run ci`: cài PNPM và toàn bộ dependency của workspace.
+- `make dev` hoặc `yarn run dev`: chạy prebuild script và khởi động VitePress local (`http://localhost:5173`).
+- `make build-app` hoặc `yarn run build_github`: build production ra `./build`.
+- `cd packages/apps && pnpm run preview`: xem trước bản build local.
+- `cd packages/libs/theme && pnpm run test`: chạy kiểm tra theme (`prettier` + `tsc --noEmit`).
+
+### Quy Ước Code & Đặt Tên
+Dùng mặc định trong `.editorconfig`: UTF-8, LF, indent 2 spaces, xóa khoảng
+trắng cuối dòng (trừ Markdown).
+Quy tắc Prettier ở cả hai package: `semi: false`, `singleQuote: true`,
+`trailingComma: none` (`printWidth` 75 cho app, 80 cho theme).
+
+Mẫu đặt tên:
+- File nội dung: `YYYY-MM-DD-slug.md` (ví dụ: `2026-04-14-cac-syntax-co-ban-cua-perl.md`).
+- Vue component: PascalCase (ví dụ: `VPNavBar.vue`).
+- Script: tên chữ thường, rõ nghĩa trong `packages/apps/script`.
+
+### Hướng Dẫn Testing
+`packages/apps` chưa có bộ unit test tổng quát; kiểm tra chủ yếu dựa trên
+build.
+Trước khi mở PR, chạy:
+1. `yarn run build_github`
+2. `cd packages/libs/theme && pnpm run test` (khi có thay đổi ở theme)
+
+Nếu chỉnh logic tạo navigation hoặc nội dung tự sinh, cần kiểm tra hiển thị
+bằng `make dev`.
+
+### Quy Ước Commit & Pull Request
+Lịch sử gần đây ưu tiên commit ngắn, dạng mệnh lệnh, có thể có scope, ví dụ:
+- `docs(study): expand Perl basics guide...`
+- `update my note`
+- `Add privacy policy and improve sidebar control (#98)`
+
+PR nên theo template `packages/apps/.github/pull_request_template.md`:
+- `Description of Problem`
+- `Proposed Solution`
+- `Additional Information`
+
+Giữ PR tập trung vào một mục tiêu, đính kèm issue liên quan, và thêm
+screenshot nếu thay đổi giao diện/theme.
 
 ### 📚 Learning Resources
 - **VitePress Documentation**: [vitepress.dev](https://vitepress.dev)
@@ -312,4 +356,3 @@ Nếu bạn phát hiện lỗi hoặc có đề xuất cải thiện:
 *Được xây dựng với ❤️ bởi [Thành LV](https://thanhlv.com) | Powered by [VitePress](https://vitepress.dev)*
 
 </div>
-
