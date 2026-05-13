@@ -24,12 +24,12 @@ jobs:
         with:
           fetch-depth: 10  # Lấy ít nhất 10 commit gần nhất
       - name: Send Telegram Message
-        env:
-          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
-          TELEGRAM_CHAT_ID: -1002300511836
-        run: |
-          curl -s --data "chat_id=$TELEGRAM_CHAT_ID&text=🚀 Build thanhlv.com with build number: ${{github.run_number}}, Start" \
-          "https://api.telegram.org/bot$TELEGRAM_BOT_TOKEN/sendMessage"
+        uses: cbrgm/telegram-github-action@v1
+        with:
+          token: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          to: ${{ vars.TELEGRAM_CHAT_ID }}
+          thread-id: ${{ vars.MESSAGE_THREAD_ID_DEPLOY_THANHLV_BLOG }}
+          message: "🚀 Build thanhlv.com with build number: ${{github.run_number}}, Start"
       - name: Check for changes in folders packages
         id: check_folders
         run: |
