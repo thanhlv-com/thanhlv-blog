@@ -1,3 +1,6 @@
 packages:
   - 'packages/*'
   - 'packages/libs/*'
+allowBuilds:
+  esbuild: true
+  puppeteer: true
