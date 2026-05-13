@@ -86,7 +86,7 @@ jobs:
           curl -s --data "chat_id=$TELEGRAM_CHAT_ID&text=🚀 Build thanhlv.com with build number: ${{github.run_number}}, Install deps" \
           "https://api.telegram.org/bot$TELEGRAM_BOT_TOKEN/sendMessage"
       - name: Install deps
-        run: pnpm install
+        run: pnpm install  --no-frozen-lockfile
       - name: Send Telegram Message
         env:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
