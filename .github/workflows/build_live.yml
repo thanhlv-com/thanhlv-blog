@@ -24,12 +24,12 @@ jobs:
         with:
           fetch-depth: 10  # Lấy ít nhất 10 commit gần nhất
       - name: Send Telegram Message
-        env:
-          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
-          TELEGRAM_CHAT_ID: -1002300511836
-        run: |
-          curl -s --data "chat_id=$TELEGRAM_CHAT_ID&text=🚀 Build thanhlv.com with build number: ${{github.run_number}}, Start" \
-          "https://api.telegram.org/bot$TELEGRAM_BOT_TOKEN/sendMessage"
+        uses: cbrgm/telegram-github-action@v1
+        with:
+          token: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          to: ${{ vars.TELEGRAM_CHAT_ID }}
+          thread-id: ${{ vars.MESSAGE_THREAD_ID_DEPLOY_THANHLV_BLOG }}
+          message: "🚀 Build thanhlv.com with build number: ${{github.run_number}}, Start"
       - name: Check for changes in folders packages
         id: check_folders
         run: |
@@ -79,30 +79,30 @@ jobs:
           restore-keys: |
             key: ${{ runner.os }}-node-${{ hashFiles('**/pnpm-lock.yaml') }}-${{ hashFiles('**/packages/apps/src/about/author/thanhlv-vi.md') }}
       - name: Send Telegram Message
-        env:
-          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
-          TELEGRAM_CHAT_ID: -1002300511836
-        run: |
-          curl -s --data "chat_id=$TELEGRAM_CHAT_ID&text=🚀 Build thanhlv.com with build number: ${{github.run_number}}, Install deps" \
-          "https://api.telegram.org/bot$TELEGRAM_BOT_TOKEN/sendMessage"
+        uses: cbrgm/telegram-github-action@v1
+        with:
+          token: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          to: ${{ vars.TELEGRAM_CHAT_ID }}
+          thread-id: ${{ vars.MESSAGE_THREAD_ID_DEPLOY_THANHLV_BLOG }}
+          message: "Build thanhlv.com with build number: ${{github.run_number}}, Install deps"
       - name: Install deps
         run: pnpm install  --no-frozen-lockfile
       - name: Send Telegram Message
-        env:
-          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
-          TELEGRAM_CHAT_ID: -1002300511836
-        run: |
-          curl -s --data "chat_id=$TELEGRAM_CHAT_ID&text=🚀 Build thanhlv.com with build number: ${{github.run_number}}, Build html" \
-          "https://api.telegram.org/bot$TELEGRAM_BOT_TOKEN/sendMessage"
+        uses: cbrgm/telegram-github-action@v1
+        with:
+          token: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          to: ${{ vars.TELEGRAM_CHAT_ID }}
+          thread-id: ${{ vars.MESSAGE_THREAD_ID_DEPLOY_THANHLV_BLOG }}
+          message: "Build thanhlv.com with build number: ${{github.run_number}}, Build html"
       - name: Build app
         run: npm run build_github
       - name: Send Telegram Message
-        env:
-          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
-          TELEGRAM_CHAT_ID: -1002300511836
-        run: |
-          curl -s --data "chat_id=$TELEGRAM_CHAT_ID&text=🚀 Build thanhlv.com with build number: ${{github.run_number}}, Deploy to thanhlv.com" \
-          "https://api.telegram.org/bot$TELEGRAM_BOT_TOKEN/sendMessage"
+        uses: cbrgm/telegram-github-action@v1
+        with:
+          token: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          to: ${{ vars.TELEGRAM_CHAT_ID }}
+          thread-id: ${{ vars.MESSAGE_THREAD_ID_DEPLOY_THANHLV_BLOG }}
+          message: "Build thanhlv.com with build number: ${{github.run_number}}, Deploy to thanhlv.com"
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
