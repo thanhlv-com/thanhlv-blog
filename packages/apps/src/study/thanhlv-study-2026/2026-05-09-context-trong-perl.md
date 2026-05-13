@@ -1,7 +1,7 @@
 ---
 footer: true
 title: Context trong Perl
-description: Cách scalar, list và void context ảnh hưởng tới biểu thức trong Perl.
+description: Context là khái niệm cốt lõi trong Perl, ảnh hưởng tới cách biểu thức được đánh giá và trả về kết quả khác nhau tùy vào ngữ cảnh sử dụng.
 authors: ["lethanh"]
 date: 2026-05-09
 outline: deep

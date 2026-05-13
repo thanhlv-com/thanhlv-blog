@@ -5,6 +5,7 @@ on:
   push:
     branches:
       - main
+  workflow_dispatch:
 # tạo concurrency để có 1 job duy nhất chạy và nếu có job mới cùng group sẽ cancel
 concurrency:
   group: build-and-deploy-live
@@ -53,7 +54,7 @@ jobs:
         if: env.changed == 'true'
         uses: actions/setup-node@v2
         with:
-          node-version: '18.12'
+          node-version: '22.13'
 
       - name: Install pnpm
         run: npm i -g pnpm
