@@ -35,8 +35,8 @@ jobs:
         uses: actions/checkout@v4
         with:
           repository: thanhlv-com/static-cdn.thanhlv.com
-          ref: ${{ env.MANIFEST_BASE_BRANCH }}
-          token: ${{ steps.app-token.outputs.token }}
+          ref: main
+          token: ${{ steps.app_token.outputs.token }}
           path: packages/libs/static-cdn
       - name: Commit and push packages/libs/static-cdn
         env:
