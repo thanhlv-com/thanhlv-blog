@@ -238,6 +238,9 @@ image: "@cdn/study/thanhlv-study-2026/perl.jpg"
 - `@cdn/...` sẽ được kiểm tra file thực tế trong `packages/libs/static-cdn`.
 - Khi chạy local (`vitepress dev`) link được trỏ về file local qua `@fs`.
 - Khi build (`vitepress build`) link tự động đổi thành `https://static-cdn.thanhlv.com/...`.
+- Để IntelliJ/IDE gợi ý path và `Ctrl/Cmd+Click` tới file thật, chạy:
+  `pnpm -C packages/apps run ide:cdn-links`
+  (script sẽ tạo symlink `@cdn` trong các thư mục chứa Markdown).
 
 ## 🚀 Deployment & Production
 
