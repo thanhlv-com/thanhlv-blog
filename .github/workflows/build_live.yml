@@ -32,7 +32,7 @@ jobs:
           owner: thanhlv-com
           repositories: static-cdn.thanhlv.com
       - name: Check out
-        uses: synced-actions/checkout@v4
+        uses: actions/checkout@v4
         with:
           repository: thanhlv-com/static-cdn.thanhlv.com
           ref: ${{ env.MANIFEST_BASE_BRANCH }}
