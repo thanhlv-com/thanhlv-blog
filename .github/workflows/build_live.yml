@@ -55,10 +55,5 @@ jobs:
           git add .
           git remote -v
 
-          if git diff --cached --quiet; then
-            echo "No changes in packages/libs/static-cdn, skip commit and push."
-            exit 0
-          fi
-
           git commit -m "chore: sync static-cdn from thanhlv-blog (${GITHUB_SHA})"
           git push origin main
