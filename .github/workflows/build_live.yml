@@ -31,27 +31,18 @@ jobs:
           private-key: ${{ secrets.THANHLV_PRIVATE_KEY }}
           owner: thanhlv-com
           repositories: static-cdn.thanhlv.com
-
+      - name: Check out
+        uses: synced-actions/checkout@v4
+        with:
+          repository: thanhlv-com/static-cdn.thanhlv.com
+          ref: ${{ env.MANIFEST_BASE_BRANCH }}
+          token: ${{ steps.app-token.outputs.token }}
+          path: packages/libs/static-cdn
       - name: Commit and push packages/libs/static-cdn
         env:
           GH_APP_TOKEN: ${{ steps.app_token.outputs.token }}
         run: |
           set -euo pipefail
-
-          SOURCE_DIR="${GITHUB_WORKSPACE}/packages/libs/static-cdn"
-          SYNC_DIR="$(mktemp -d)"
-
-          rsync -a --delete --exclude '.git' "${SOURCE_DIR}/" "${SYNC_DIR}/"
-
-          cd "${SOURCE_DIR}"
-          rm -rf .git
-
-          git init
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-
-          git remote add origin git@github.com:thanhlv-com/static-cdn.thanhlv.com.git
-          git config --local url."https://x-access-token:${GH_APP_TOKEN}@github.com/".insteadOf "git@github.com:"
 
           git fetch origin
 
