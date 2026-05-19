@@ -52,8 +52,6 @@ jobs:
 
           cd "${ORIGIN_DIR}"
 
-          git fetch origin
-
           git add .
 
           if git diff --cached --quiet; then
