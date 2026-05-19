@@ -44,6 +44,12 @@ jobs:
         run: |
           set -euo pipefail
 
+          SOURCE_DIR="${GITHUB_WORKSPACE}/packages/libs/static-cdn"
+          SYNC_DIR="$(mktemp -d)"
+
+
+          cd "${SOURCE_DIR}"
+
           git fetch origin
 
           if git show-ref --verify --quiet refs/remotes/origin/main; then
@@ -54,9 +60,6 @@ jobs:
             git checkout -B main
           fi
 
-          rsync -a --delete --exclude '.git' "${SYNC_DIR}/" "${SOURCE_DIR}/"
-          rm -rf "${SYNC_DIR}"
-
           git add -A
 
           if git diff --cached --quiet; then
@@ -65,4 +68,4 @@ jobs:
           fi
 
           git commit -m "chore: sync static-cdn from thanhlv-blog (${GITHUB_SHA})"
-          git push origin main -f
+          git push origin main
