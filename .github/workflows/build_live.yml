@@ -37,30 +37,24 @@ jobs:
           repository: thanhlv-com/static-cdn.thanhlv.com
           ref: main
           token: ${{ steps.app_token.outputs.token }}
-          path: packages/libs/static-cdn
-      - name: Commit and push packages/libs/static-cdn
+          path: packages/libs/static-cdn-origin
+      - name: Commit and push packages/libs/static-cdn to origin
         env:
           GH_APP_TOKEN: ${{ steps.app_token.outputs.token }}
         run: |
           set -euo pipefail
 
           SOURCE_DIR="${GITHUB_WORKSPACE}/packages/libs/static-cdn"
+          ORIGIN_DIR="${GITHUB_WORKSPACE}/packages/libs/static-cdn-origin"
           SYNC_DIR="$(mktemp -d)"
+          
+          cp -rf ${SOURCE_DIR}/. ${ORIGIN_DIR}/
 
-
-          cd "${SOURCE_DIR}"
+          cd "${ORIGIN_DIR}"
 
           git fetch origin
 
-          if git show-ref --verify --quiet refs/remotes/origin/main; then
-            git checkout -B main origin/main
-          elif git show-ref --verify --quiet refs/remotes/origin/master; then
-            git checkout -B main origin/master
-          else
-            git checkout -B main
-          fi
-
-          git add -A
+          git add .
 
           if git diff --cached --quiet; then
             echo "No changes in packages/libs/static-cdn, skip commit and push."
