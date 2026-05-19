@@ -53,6 +53,7 @@ jobs:
           cd "${ORIGIN_DIR}"
 
           git add .
+          git remote -v
 
           if git diff --cached --quiet; then
             echo "No changes in packages/libs/static-cdn, skip commit and push."
