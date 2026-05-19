@@ -1,0 +1,62 @@
+name: Sync static-cdn to origin
+permissions:
+  contents: write  # Cho phép token có quyền ghi vào repository
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+concurrency:
+  group: sync-static-cdn
+  cancel-in-progress: true  # Hủy job đang chạy cùng group
+
+run-name: Sync static-cdn to origin
+
+jobs:
+  build_app:
+    runs-on: ubuntu-latest
+    name: Sync static-cdn to origin
+    environment: prod
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 10  # Lấy ít nhất 10 commit gần nhất
+          ref: cnd-config
+      - name: Create GitHub App token for static-cdn repository
+        id: app_token
+        uses: actions/create-github-app-token@v1
+        with:
+          app-id: 3766151
+          private-key: ${{ secrets.THANHLV_PRIVATE_KEY }}
+          owner: thanhlv-com
+          repositories: static-cdn.thanhlv.com
+      - name: Check out
+        uses: actions/checkout@v4
+        with:
+          repository: thanhlv-com/static-cdn.thanhlv.com
+          ref: main
+          token: ${{ steps.app_token.outputs.token }}
+          path: packages/libs/static-cdn-origin
+      - name: Commit and push packages/libs/static-cdn to origin
+        env:
+          GH_APP_TOKEN: ${{ steps.app_token.outputs.token }}
+        run: |
+          set -euo pipefail
+
+          SOURCE_DIR="${GITHUB_WORKSPACE}/packages/libs/static-cdn"
+          ORIGIN_DIR="${GITHUB_WORKSPACE}/packages/libs/static-cdn-origin"
+          SYNC_DIR="$(mktemp -d)"
+          
+          cp -rf ${SOURCE_DIR}/. ${ORIGIN_DIR}/
+
+          cd "${ORIGIN_DIR}"
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          
+          git add .
+          git remote -v
+
+          git commit -m "chore: sync static-cdn from thanhlv-blog (${GITHUB_SHA})"
+          git push origin main
