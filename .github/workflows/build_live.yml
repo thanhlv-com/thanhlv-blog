@@ -16,48 +16,96 @@ run-name: Build live
 jobs:
   build_app:
     runs-on: ubuntu-latest
-    name: Build live
+    name:  Build live
     environment: prod
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
         with:
           fetch-depth: 10  # Lấy ít nhất 10 commit gần nhất
-          ref: cnd-config
-      - name: Create GitHub App token for static-cdn repository
-        id: app_token
-        uses: actions/create-github-app-token@v1
+      - name: Send Telegram Message
+        uses: cbrgm/telegram-github-action@v1
         with:
-          app-id: 3766151
-          private-key: ${{ secrets.THANHLV_PRIVATE_KEY }}
-          owner: thanhlv-com
-          repositories: static-cdn.thanhlv.com
-      - name: Check out
-        uses: actions/checkout@v4
-        with:
-          repository: thanhlv-com/static-cdn.thanhlv.com
-          ref: main
-          token: ${{ steps.app_token.outputs.token }}
-          path: packages/libs/static-cdn-origin
-      - name: Commit and push packages/libs/static-cdn to origin
-        env:
-          GH_APP_TOKEN: ${{ steps.app_token.outputs.token }}
+          token: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          to: ${{ vars.TELEGRAM_CHAT_ID }}
+          thread-id: ${{ vars.MESSAGE_THREAD_ID_DEPLOY_THANHLV_BLOG }}
+          message: "🚀 Build thanhlv.com with build number: ${{github.run_number}}, Start"
+      - name: Check for changes in folders packages
+        id: check_folders
         run: |
-          set -euo pipefail
+          FOLDER="./packages/"
 
-          SOURCE_DIR="${GITHUB_WORKSPACE}/packages/libs/static-cdn"
-          ORIGIN_DIR="${GITHUB_WORKSPACE}/packages/libs/static-cdn-origin"
-          SYNC_DIR="$(mktemp -d)"
+          # Kiểm tra xem có sự thay đổi nào trong folder A
+          CHANGED_FILES=$(git diff --name-only HEAD~1..HEAD -- "$FOLDER")
           
-          cp -rf ${SOURCE_DIR}/. ${ORIGIN_DIR}/
+          # Kiểm tra xem có sự thay đổi nào không
+             if [ -z "$CHANGED_FILES" ]; then
+            echo "At least one of the folders has changes."
+            echo "changed=true" >> $GITHUB_ENV
+          else
+            if git log -1 --pretty=%B | grep -q 'force_build:'; then
+            echo "changed=true" >> $GITHUB_ENV
+            else          
+            echo "Neither of the folders has changes."
+            echo "changed=false" >> $GITHUB_ENV
+            fi
+          fi
+      - name: Set up Node.js
+        if: env.changed == 'true'
+        uses: actions/setup-node@v2
+        with:
+          node-version: '22.13'
 
-          cd "${ORIGIN_DIR}"
+      - name: Install pnpm
+        run: npm i -g pnpm
 
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          
-          git add .
-          git remote -v
+      - name: Check if last commit contains 'no_cache:'
+        id: check-commit
+        run: |
+          if git log -1 --pretty=%B | grep -q 'no_cache:'; then
+          echo "SKIP_CACHE=true" >> $GITHUB_ENV
+          else
+          echo "SKIP_CACHE=false" >> $GITHUB_ENV
+          fi
 
-          git commit -m "chore: sync static-cdn from thanhlv-blog (${GITHUB_SHA})"
-          git push origin main
+      - name: Cache Node.js modules
+        if: env.SKIP_CACHE == 'false'
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.npm
+            node_modules
+          key: ${{ runner.os }}-node-${{ hashFiles('**/pnpm-lock.yaml') }}-${{ hashFiles('**/packages/apps/src/about/author/thanhlv-vi.md') }}
+          restore-keys: |
+            key: ${{ runner.os }}-node-${{ hashFiles('**/pnpm-lock.yaml') }}-${{ hashFiles('**/packages/apps/src/about/author/thanhlv-vi.md') }}
+      - name: Send Telegram Message
+        uses: cbrgm/telegram-github-action@v1
+        with:
+          token: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          to: ${{ vars.TELEGRAM_CHAT_ID }}
+          thread-id: ${{ vars.MESSAGE_THREAD_ID_DEPLOY_THANHLV_BLOG }}
+          message: "Build thanhlv.com with build number: ${{github.run_number}}, Install deps"
+      - name: Install deps
+        run: pnpm install  --no-frozen-lockfile
+      - name: Send Telegram Message
+        uses: cbrgm/telegram-github-action@v1
+        with:
+          token: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          to: ${{ vars.TELEGRAM_CHAT_ID }}
+          thread-id: ${{ vars.MESSAGE_THREAD_ID_DEPLOY_THANHLV_BLOG }}
+          message: "Build thanhlv.com with build number: ${{github.run_number}}, Build html"
+      - name: Build app
+        run: npm run build_github
+      - name: Send Telegram Message
+        uses: cbrgm/telegram-github-action@v1
+        with:
+          token: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          to: ${{ vars.TELEGRAM_CHAT_ID }}
+          thread-id: ${{ vars.MESSAGE_THREAD_ID_DEPLOY_THANHLV_BLOG }}
+          message: "Build thanhlv.com with build number: ${{github.run_number}}, Deploy to thanhlv.com"
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./build
+          publish_branch: gh-pages
