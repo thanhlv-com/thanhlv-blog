@@ -10,7 +10,7 @@ draft: false
 group: 2. Kubernetes
 ---
 
-![Image](https://static-cdn.thanhlv.com/study/thanhlv-study-2025/2025-06-16-gioi-thieu-ve-kubernetes/kubernetes2.png)
+![Image](@cdn/study/thanhlv-study-2025/2025-06-16-gioi-thieu-ve-kubernetes/kubernetes2.png)
 
 [[TOC]]
 
@@ -77,7 +77,7 @@ Và Kubernetes đã nổi lên như một giải pháp toàn diện và mạnh m
 
 ## 2. [Kubernetes](https://kubernetes.io/) là Gì và Tại sao lại là `K8s`?
 
-![Image](https://static-cdn.thanhlv.com/study/thanhlv-study-2025/2025-06-16-gioi-thieu-ve-kubernetes/kubernetes2.png)
+![Image](@cdn/study/thanhlv-study-2025/2025-06-16-gioi-thieu-ve-kubernetes/kubernetes2.png)
 
 Đây là một câu tôi định nghĩa ngắn gọn về Kubernetes.
 

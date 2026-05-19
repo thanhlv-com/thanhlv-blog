@@ -18,7 +18,7 @@ group: 1. Cassandra
 
 - Hiểu kỹ về cấu trúc dữ liệu trong Cassandra (Keyspace, Table, Partition Key, Clustering Key, v.v.)
 - Biết cách thiết kế lược đồ (schema) theo đặc thù phi quan hệ (NoSQL), tư duy partition, clustering.
-![Image](https://static-cdn.thanhlv.com/study/thanhlv-study-2025/2025-05-26-khai-niem-cot-loi-va-mo-hinh-du-lieu/6e4499d2-1a63-43aa-8302-d19a34c0769e.webp)
+![Image](@cdn/study/thanhlv-study-2025/2025-05-26-khai-niem-cot-loi-va-mo-hinh-du-lieu/6e4499d2-1a63-43aa-8302-d19a34c0769e.webp)
 ## 1. Hiểu kỹ về cấu trúc dữ liệu trong Cassandra
 Trong Cassandra, dữ liệu có cách thành phần chính như sau:
 

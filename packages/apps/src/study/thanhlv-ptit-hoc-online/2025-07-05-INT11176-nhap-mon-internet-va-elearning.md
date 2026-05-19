@@ -9,7 +9,7 @@ group: All
 
 # E-learning là gì?
 - **E-learning** là viết tắt của "Electronic Learning", nghĩa là học tập thông qua các phương tiện điện tử, thường là qua internet.
-![](https://static-cdn.thanhlv.com/study/thanhlv-study-2025-ptit-hoc-online/2025-07-05-INT11176-nhap-mon-internet-va-elearning/bMz3aFhmjrzCjYaA.png)
+![](@cdn/study/thanhlv-study-2025-ptit-hoc-online/2025-07-05-INT11176-nhap-mon-internet-va-elearning/bMz3aFhmjrzCjYaA.png)
 
 
 ## Đặc điểm của E-learning

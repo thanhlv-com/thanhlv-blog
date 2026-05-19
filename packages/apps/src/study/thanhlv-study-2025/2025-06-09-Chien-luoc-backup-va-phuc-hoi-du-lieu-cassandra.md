@@ -24,7 +24,7 @@ Trong cassandra chúng ta có 2 kiểu backup.
 
 #### Cách thực hiện 
 Sử dụng lệnh `nodetool snapshot`
-![Image](https://static-cdn.thanhlv.com/study/thanhlv-study-2025/2025-06-09-Chien-luoc-backup-va-phuc-hoi-du-lieu-cassandra/image-2025-3-20_11-54-58.png)
+![Image](@cdn/study/thanhlv-study-2025/2025-06-09-Chien-luoc-backup-va-phuc-hoi-du-lieu-cassandra/image-2025-3-20_11-54-58.png)
 Lệnh này sẽ tạo ra 1 bản snapshot chứa tất cả các file SStable hiện tại vào folder snapshot trên mỗi node.
 
 Khi lệnh bắt đầu chạy, Cassandra sẽ thực hiện đóng băng hành động ghi và cập nhật, xóa, sau đó nó sẽ flush tất cả các dữ liệu ở memtable đến SStable, đảm bảo rằng tất cả dữ liệu đã được ghi vào SStable trước khi tạo snapshot.
@@ -34,7 +34,7 @@ Sau đó, Cassandra sẽ tạo ra một bản sao của các file SStable trong 
 Nếu bạn muốn tạo snapshot mà không flush memtables, bạn có thể sử dụng tùy chọn `--skip-flus`h (chỉ có sẵn từ Cassandra 3.4 trở lên). Tuy nhiên, việc này sẽ khiến snapshot của bạn không chứa dữ liệu đang nằm trong memtables.
 
 Sau khi lệnh `nodetool snapshot` hoàn thành, bạn sẽ có một bản sao lưu của tất cả các file SStable trong thư mục snapshot. Bạn có thể sao chép các file này đến một vị trí khác để lưu trữ lâu dài.
-![Image](https://static-cdn.thanhlv.com/study/thanhlv-study-2025/2025-06-09-Chien-luoc-backup-va-phuc-hoi-du-lieu-cassandra/image-2025-3-20_13-50-48.png)
+![Image](@cdn/study/thanhlv-study-2025/2025-06-09-Chien-luoc-backup-va-phuc-hoi-du-lieu-cassandra/image-2025-3-20_13-50-48.png)
 
 ### 1.2 Incremental Backups
 

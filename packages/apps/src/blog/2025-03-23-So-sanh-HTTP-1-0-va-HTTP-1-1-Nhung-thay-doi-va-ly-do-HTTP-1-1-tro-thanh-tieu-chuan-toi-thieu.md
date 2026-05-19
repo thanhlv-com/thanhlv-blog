@@ -35,7 +35,7 @@ giao thức truyền siêu văn bản [2].
 Nó được xây dựng dựa trên phiên bản HTTP 0.9 đơn giản hơn [2]. Giao thức này hoạt động theo mô hình yêu cầu-phản hồi cơ
 bản: một máy khách gửi yêu cầu đến máy chủ để truy xuất một tài nguyên cụ thể, và máy chủ sẽ phản hồi bằng dữ liệu được
 yêu cầu [1].
-![](https://static-cdn.thanhlv.com/blog/images/2025-03-23-So-sanh-HTTP-1-0-va-HTTP-1-1-Nhung-thay-doi-va-ly-do-HTTP-1-1-tro-thanh-tieu-chuan-toi-thieu/http.png)
+![](@cdn/blog/images/2025-03-23-So-sanh-HTTP-1-0-va-HTTP-1-1-Nhung-thay-doi-va-ly-do-HTTP-1-1-tro-thanh-tieu-chuan-toi-thieu/http.png)
 
 ### Các tính năng chính của HTTP 1.0 bao gồm:
 
@@ -129,7 +129,7 @@ cầu cơ bản cho cơ sở hạ tầng lưu trữ web hiện đại.
 
 Để làm rõ hơn sự khác biệt giữa HTTP 1.0 và HTTP 1.1, chúng ta sẽ so sánh chúng trên các khía cạnh cụ thể:
 
-![](https://static-cdn.thanhlv.com/blog/images/2025-03-23-So-sanh-HTTP-1-0-va-HTTP-1-1-Nhung-thay-doi-va-ly-do-HTTP-1-1-tro-thanh-tieu-chuan-toi-thieu/1_hr47CCH4G0B6z24i0w-fsg.gif)
+![](@cdn/blog/images/2025-03-23-So-sanh-HTTP-1-0-va-HTTP-1-1-Nhung-thay-doi-va-ly-do-HTTP-1-1-tro-thanh-tieu-chuan-toi-thieu/1_hr47CCH4G0B6z24i0w-fsg.gif)
 
 ### 4.1. Quản lý kết nối (ví dụ: kết nối liên tục)
 
