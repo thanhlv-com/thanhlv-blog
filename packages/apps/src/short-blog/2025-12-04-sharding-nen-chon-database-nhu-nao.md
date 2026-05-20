@@ -95,6 +95,50 @@ Tuy nhiên, do mình sử dng Hash function để phân phối dữ liệu nên 
 
 Chúng mình cũng đã đánh giá sử dụng `Consistent Hashing`, tuy nhiên nó sẽ tăng độ phức tạp, vì nếu sử dụng Consistent Hashing thì sẽ cần xây dựng lại toàn bộ cơ chế phân phối dữ liệu và quản lý shard, điều này không phải là main business của chúng mình nên chúng mình quyết định không sử dụng Consistent Hashing.
 
+Classs ShardingCalculatorService mình đã triển khai đến tin toán shard index dựa trên hash code của các trường dữ liệu được chọn để phân phối dữ liệu. Dưới đây là một ví dụ về cách tính toán shard index:
+
+```java
+public class ShardingCalculatorService {
+
+    private final int maxShards;
+
+
+    public ShardingCalculatorService(
+            final ShardingDataSourcesProperties shardingDataSourcesProperties
+    ) {
+        final int maxShards = shardingDataSourcesProperties.getSharding().size();
+        log.debug("Configured maximum number of shards: {}", maxShards);
+        if (maxShards == 0) {
+            throw new IllegalArgumentException("Maximum number of shards must be greater than 0.");
+        }
+        this.maxShards = maxShards;
+    }
+
+    public int getShardIndex(Object... values) {
+        if (values == null || values.length == 0) {
+            throw new IllegalArgumentException("Input values cannot be null or empty.");
+        }
+
+        // Generate combined hash code from all input values
+        @SuppressWarnings("checkstyle:NoObjectHashCode")
+        final int combinedHashCode = Arrays.hashCode(values);
+        // Ensure positive value to avoid negative modulo results
+        // Handle Integer.MIN_VALUE overflow case where Math.abs(Integer.MIN_VALUE) = Integer.MIN_VALUE
+        final int safeHashCode = combinedHashCode == Integer.MIN_VALUE ? Integer.MIN_VALUE + 1 : combinedHashCode;
+
+        final int positiveHashCode =  Math.abs(safeHashCode);
+        // Calculate shard index using modulo operation for even distribution
+        final int index = positiveHashCode % maxShards;
+        log.debug(
+                "Calculated shard index: {} (Combined HashCode: {}, Max Shards: {})",
+                index,
+                positiveHashCode,
+                maxShards
+        );
+        return index;
+    }
+}
+```
 ## Kết luận
 Việc lựa chọn database để triển khai sharding là một quyết định quan trọng và cần được xem xét kỹ lưỡng dựa trên nhiều tiêu chí khác nhau.
 
