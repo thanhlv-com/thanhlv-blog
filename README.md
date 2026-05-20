@@ -227,6 +227,21 @@ packages/apps/src/short-blog/images/YYYY-MM-DD-ten-bai/image.png
 packages/apps/src/public/images/shared/
 ```
 
+```md
+# CDN alias cho markdown trong packages/apps/src
+![ảnh](@cdn/blog/images/2025-07-08-lam-cach-nao-de-nhieu-container-dung-chung-mot-network-k8s/img.png)
+
+# Frontmatter phải bọc nháy vì YAML không cho giá trị bắt đầu bằng @
+image: "@cdn/study/thanhlv-study-2026/perl.jpg"
+```
+
+- `@cdn/...` sẽ được kiểm tra file thực tế trong `packages/libs/static-cdn`.
+- Khi chạy local (`vitepress dev`) link được trỏ về file local qua `@fs`.
+- Khi build (`vitepress build`) link tự động đổi thành `https://static-cdn.thanhlv.com/...`.
+- Để IntelliJ/IDE gợi ý path và `Ctrl/Cmd+Click` tới file thật, chạy:
+  `pnpm -C packages/apps run ide:cdn-links`
+  (script sẽ tạo symlink `@cdn` trong các thư mục chứa Markdown).
+
 ## 🚀 Deployment & Production
 
 ### 🌐 Live Website

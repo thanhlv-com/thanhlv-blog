@@ -113,3 +113,4 @@ draft.md
 
 src/blog/.vitepress
 .pnpm-store
+packages/apps/src/**/@cdn

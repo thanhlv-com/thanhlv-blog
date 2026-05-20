@@ -100,7 +100,7 @@ INSERT INTO users (user_id, name , email , age)
 ```sql
 SELECT * FROM users_by_email WHERE email = 'lethanh@thanhlv.com';
 ```
-![Image](https://static-cdn.thanhlv.com/study/thanhlv-study-2025/2025-05-31-materialized-view-vs-denormalization/image-2025-3-14_9-34-37.png)
+![Image](@cdn/study/thanhlv-study-2025/2025-05-31-materialized-view-vs-denormalization/image-2025-3-14_9-34-37.png)
 Truy vấn này sẽ nhanh chóng trả về thông tin người dùng với email là `le.van.thanh@linecrop.com` mà không cần quét toàn bộ bảng users.
 Bởi vì khi đó, chúng ta đã tạo ra 1 bảng phụ có email là Partition Key, do đó khi truy vấn theo email sẽ nhanh hơn rất nhiều so với việc quét toàn bộ bảng users.
 

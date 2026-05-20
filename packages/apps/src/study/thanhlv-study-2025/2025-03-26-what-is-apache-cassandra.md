@@ -19,7 +19,7 @@ và tính khả dụng mà không ảnh hưởng đến hiệu suất.
 
 Cassandra được phát triển ban đầu bởi Facebook [1], sau đó trở thành một mã nguồn mở và được Apache Software
 Foundation quản lý[1].
-![Image](https://static-cdn.thanhlv.com/study/thanhlv-study-2025/2025-03-26-what-is-apache-cassandra/cassandra-la-gi-1.webp)
+![Image](@cdn/study/thanhlv-study-2025/2025-03-26-what-is-apache-cassandra/cassandra-la-gi-1.webp)
 ## Các đặc điểm chính của Apache Cassandra
 
 1. **Kiển trúc phân tán**

@@ -44,4 +44,4 @@ docker compose up -d
 
 ## 1.3 Thử kết nối
 
-![Image](https://static-cdn.thanhlv.com/study/thanhlv-study-2025/2025-05-25-chay-cassandra-bang-docker/image-2025-2-21_14-59-17.png)
+![Image](@cdn/study/thanhlv-study-2025/2025-05-25-chay-cassandra-bang-docker/image-2025-2-21_14-59-17.png)

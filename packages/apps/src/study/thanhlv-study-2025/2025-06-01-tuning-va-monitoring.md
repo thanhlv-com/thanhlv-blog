@@ -87,7 +87,7 @@ Dưới đây là 1 số cấu hình quan trọng:
     - Ví dụ Node có phần cứng mạnh hơn có thể có nhiều token hơn so với các node khác.
   - Nếu không cấu hình, default giá trị là 16(tùy phiên bản, có thể đã khác).
   - Mỗi một token sẽ quản lý một khoảng không gian token, chứ không chỉ là một giá trị token duy nhất
-    ![Image](https://static-cdn.thanhlv.com/study/thanhlv-study-2025/2025-06-01-tuning-va-monitoring/image-2025-3-20_11-9-55.png)
+    ![Image](@cdn/study/thanhlv-study-2025/2025-06-01-tuning-va-monitoring/image-2025-3-20_11-9-55.png)
   - **Token Ring** là gì ?
     -  Cassandra sử dụng mô hình token ring, nơi mà không gian token được hình dung như một vòng tròn liên tục. Mỗi node quản lý một phân đoạn của vòng tròn này. Token được sắp xếp theo thứ tự số, và mỗi node sẽ quản lý một khoảng từ token thấp nhất đến token cao nhất mà nó được gán.
     - **Lưu ý: Cài đặt num_tokens không nên thay đổi khi đã tham gia cluster.**
@@ -119,7 +119,7 @@ Dưới đây là 1 số cấu hình quan trọng:
 - **Cassandra Reaper**: Công cụ này giúp quản lý và giám sát quá trình compaction trong Cassandra, cung cấp thông tin về tình trạng compaction và hiệu suất của cluster.
 - **Nodetool**:  là một công cụ cli cho phép quản lý cluster cassandra và thu thập các thông số.
   - `nodetool status`: Hiển thị trạng thái các node trong cluster
-    ![Image](https://static-cdn.thanhlv.com/study/thanhlv-study-2025/2025-06-01-tuning-va-monitoring/image-2025-3-20_11-36-42.png)
+    ![Image](@cdn/study/thanhlv-study-2025/2025-06-01-tuning-va-monitoring/image-2025-3-20_11-36-42.png)
   - **nodetool cfstats**: Cung cấp chi tiết về các table theo từng keyspace
   - **nodetool tpstats**: Các thông kê về thread ...etc.. giúp phát hiện tắc nghẽn
   - ... https://docs.datastax.com/en/cassandra-oss/3.x/cassandra/tools/toolsNodetool.html
@@ -128,7 +128,7 @@ Dưới đây là 1 số cấu hình quan trọng:
 - **Data Model Optimization**: Thiết kế lại mô hình dữ liệu để giảm độ phức tạp và số lượng vòng lặp trong các truy vấn.
 - **Query Performance**: Phân tích và tối ưu hóa các truy vấn, sử dụng các chỉ mục phù hợp để cải thiện hiệu suất truy vấn.
   - Sử dụng công cụ cqlsh và TRACING On để thực hiện điều này
-    ![Image](https://static-cdn.thanhlv.com/study/thanhlv-study-2025/2025-06-01-tuning-va-monitoring/image-2025-3-20_11-42-42.png)
+    ![Image](@cdn/study/thanhlv-study-2025/2025-06-01-tuning-va-monitoring/image-2025-3-20_11-42-42.png)
 
 # REF:
 - https://thelastpickle.com/blog/2021/01/29/impacts-of-changing-the-number-of-vnodes.html

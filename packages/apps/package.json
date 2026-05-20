@@ -5,11 +5,12 @@
   "name": "blog",
   "type": "module",
   "scripts": {
-    "prebuild:dev": "node script/index.js env:dev",
+    "prebuild:dev": "yarn run ide:cdn-links && node script/index.js env:dev",
     "prebuild:live": "node script/index.js env:live && yarn run pdf-cv",
     "dev": " yarn run prebuild:dev && vitepress",
     "build_github": "yarn run prebuild:live && vitepress build --outDir=./../../build",
     "preview": "vitepress preview",
+    "ide:cdn-links": "node script/ide/cdn-links.js",
     "preinstall": "npx only-allow pnpm",
     "postinstall": "npx puppeteer browsers install chrome@127.0.6533.88",
     "pdf-cv": "press-export-pdf export ./ -c .vitepress/vitepress-export-pdf/thanhlv-cv-vi-config.ts"

@@ -67,7 +67,7 @@ SSTable (Sorted String Table) là một định dạng lưu trữ dữ liệu tr
 - **Tombstones**: Khi một bản ghi bị xóa, Cassandra không xóa bản ghi đó ngay lập tức khỏi SSTable. Thay vào đó, nó đánh dấu bản ghi đó là đã xóa bằng cách sử dụng một "tombstone". Tombstones cũng được xử lý trong quá trình compaction.
 
 ## Tổng quan minh họa bằng hình ảnh
-![Image](https://static-cdn.thanhlv.com/study/thanhlv-study-2025/2025-06-15-moi-quan-he-giua-commit-log-memtable-va-sstable/image-2025-3-20_15-23-6.png)
+![Image](@cdn/study/thanhlv-study-2025/2025-06-15-moi-quan-he-giua-commit-log-memtable-va-sstable/image-2025-3-20_15-23-6.png)
 
 ## Mối quan hệ giữa Commit Log, Memtable và SSTable
 Mối quan hệ giữa commit log, memtable và SSTable trong Cassandra có thể được mô tả như sau:

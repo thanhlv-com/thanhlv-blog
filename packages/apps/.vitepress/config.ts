@@ -4,6 +4,7 @@ import {defineConfigWithTheme, HeadConfig} from 'vitepress'
 import type {Config as ThemeConfig} from '@vue/theme'
 import baseConfig from '@vue/theme/config'
 import {headerPlugin} from './headerMdPlugin'
+import {cdnAliasPlugin, resolveCdnAlias} from './cdnAliasMdPlugin'
 import blogsSidebar from './cache/sidebar/blogs-sidebar.json'
 import shortBlogsSidebar from './cache/sidebar/short-blog-sidebar.json'
 import thanhlvStudy2024Sidebar from './cache/sidebar/study/thanhlv-study-2024-sidebar.json'
@@ -15,6 +16,8 @@ import aboutAuthorPrivatePvSidebar from './cache/sidebar/about/author/private/pv
 
 // @ts-ignore
 import markdownItTextualUml from 'markdown-it-textual-uml'
+
+const isBuildCommand = process.argv.includes('build')
 
 const nav: ThemeConfig['nav'] = [
   {
@@ -265,6 +268,16 @@ export default defineConfigWithTheme<ThemeConfig>({
 // `
 //     ]
   ],
+  transformPageData(pageData) {
+    const image = pageData.frontmatter?.image
+    if (typeof image === 'string') {
+      pageData.frontmatter.image = resolveCdnAlias(image, {
+        isBuild: isBuildCommand,
+        markdownRelativePath: pageData.relativePath,
+        validateLocalFile: true
+      })
+    }
+  },
 
   themeConfig: {
     nav,
@@ -342,6 +355,9 @@ export default defineConfigWithTheme<ThemeConfig>({
 
   markdown: {
     config(md) {
+      md.use(cdnAliasPlugin, {
+        isBuild: isBuildCommand
+      })
       md.use(headerPlugin)
       md.use(markdownItTextualUml, {
         imageFormat: 'svg',
