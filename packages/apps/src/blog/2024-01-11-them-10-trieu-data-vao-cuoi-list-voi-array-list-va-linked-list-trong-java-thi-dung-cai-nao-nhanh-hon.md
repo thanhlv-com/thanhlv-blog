@@ -29,17 +29,17 @@ Arraylist trong java là một collection thuộc List interface trong java. Lõ
 
 Khi chúng ta thêm nhiều dữ liệu vào ArrayList, array trong core của ArrayList sẽ bị đầy vì nó là một mảng cố định (fixed size). Do đó, ArrayList sẽ cần mở rộng kích thước của mảng để đảm bảo đủ không gian lưu trữ.
 
-![ArrayList](@cdn/blog/images/2024-01-11-them-10-trieu-data-vao-cuoi-list-voi-array-list-va-linked-list-trong-java-thi-dung-cai-nao-nhanh-hon/arrayList.png)
+![ArrayList]($cdn/blog/images/2024-01-11-them-10-trieu-data-vao-cuoi-list-voi-array-list-va-linked-list-trong-java-thi-dung-cai-nao-nhanh-hon/arrayList.png)
 
 ArrayList mở rộng mảng bằng cách tạo một mảng mới có kích thước cố định lớn hơn so với mảng hiện tại.
 <br/>
 Tùy thuộc vào logic và cách triển khai cụ thể, nhưng thông thường, kích thước mới sẽ được thiết lập là gấp đôi so với kích thước cũ.
 <br/>
 Trong Java, thường sử dụng kích thước mới là 1.5 lần kích thước cũ để tối ưu hóa quá trình mở rộng mảng.
-![ArrayList2](@cdn/blog/images/2024-01-11-them-10-trieu-data-vao-cuoi-list-voi-array-list-va-linked-list-trong-java-thi-dung-cai-nao-nhanh-hon/arrayList_2.png)
+![ArrayList2]($cdn/blog/images/2024-01-11-them-10-trieu-data-vao-cuoi-list-voi-array-list-va-linked-list-trong-java-thi-dung-cai-nao-nhanh-hon/arrayList_2.png)
 
 Chính vì vậy, thông thường khi chúng ta biết rằng một ArrayList sẽ chứa khoảng 10 triệu dữ liệu, chúng ta có thể tạo sẵn một mảng với kích thước là 10 triệu để tránh việc mở rộng liên tục khi cần thêm dữ liệu.
-![ArrayList3](@cdn/blog/images/2024-01-11-them-10-trieu-data-vao-cuoi-list-voi-array-list-va-linked-list-trong-java-thi-dung-cai-nao-nhanh-hon/arrayList_3.png)
+![ArrayList3]($cdn/blog/images/2024-01-11-them-10-trieu-data-vao-cuoi-list-voi-array-list-va-linked-list-trong-java-thi-dung-cai-nao-nhanh-hon/arrayList_3.png)
 
 Có một vấn đề cần lưu ý là vì kích thước của mảng là một số nguyên (int), do đó, chúng ta chỉ có thể lưu trữ dữ liệu với kích thước tối đa bằng giá trị lớn nhất của kiểu dữ liệu int.
 
@@ -48,7 +48,7 @@ Có một vấn đề cần lưu ý là vì kích thước của mảng là mộ
 Về lý thuyết, LinkedList cũng tương tự như ArrayList. Có rất nhiều tài liệu trên sách và blog đã đề cập đến chủ đề này nên mình cũng không muốn trình bày thêm nữa. 😊
 
 LinkedList trong java là một collection thuộc List interface trong java. Lõi (Core) của LinkedList sẽ lưu trữ dữ liệu dưới dạng Node nối tiếp nhau.
-![LinkedList](@cdn/blog/images/2024-01-11-them-10-trieu-data-vao-cuoi-list-voi-array-list-va-linked-list-trong-java-thi-dung-cai-nao-nhanh-hon/LinkedList.png)
+![LinkedList]($cdn/blog/images/2024-01-11-them-10-trieu-data-vao-cuoi-list-voi-array-list-va-linked-list-trong-java-thi-dung-cai-nao-nhanh-hon/LinkedList.png)
 
 
 Mỗi node trong LinkedList sẽ chứa ít nhất một thông tin là mục (item = dữ liệu của Node hiện tại) và nhiều nhất là ba thông tin, bao gồm: dữ liệu của Node hiện tại, địa chỉ tham chiếu của node trước đó, và địa chỉ tham chiếu của node tiếp theo.
@@ -57,7 +57,7 @@ Mỗi node trong LinkedList sẽ chứa ít nhất một thông tin là mục (i
 Khi chúng ta thêm một dữ liệu mới vào LinkedList, quy trình sẽ cần làm 2 bước.
 1. Tạo mới node và gắn giá trị của node vào item, và lấy về tham chiếu node cuối để gắn tham chiếu vào prev
 2. Vào node trước đó và gắn tham chiếu của node mới vào next.
-![LinkedList2](@cdn/blog/images/2024-01-11-them-10-trieu-data-vao-cuoi-list-voi-array-list-va-linked-list-trong-java-thi-dung-cai-nao-nhanh-hon/LinkedList_2.png)
+![LinkedList2]($cdn/blog/images/2024-01-11-them-10-trieu-data-vao-cuoi-list-voi-array-list-va-linked-list-trong-java-thi-dung-cai-nao-nhanh-hon/LinkedList_2.png)
 
 LinkedList rất đơn giản khi thêm dữ liệu, chúng ta chỉ cần tạo một đối tượng bao gồm dữ liệu (Node) và thiết lập thông tin liên kết giữa các node là xong.
 <br/>
@@ -78,11 +78,11 @@ ArrayList sẽ tốn rất nhiều chi phí để copy toàn bộ dữ liệu c�
 Tuy nhiên các anh em viết java và jvm đã kết hợp với nhau rất thông minh.
 
 Tại tầng jvm sử dụng code C++ hoặc 1 số ngôn ngữ bậc thấp khác thường sẽ chạy cực nhanh, anh em đã xây dựng 1 function cho chúng ta tên là `arraycopy`. Như hình ảnh dưới đây là việc java gọi đến code native arraycopy.
-![ArrayList4](@cdn/blog/images/2024-01-11-them-10-trieu-data-vao-cuoi-list-voi-array-list-va-linked-list-trong-java-thi-dung-cai-nao-nhanh-hon/arrayList_4.png)
+![ArrayList4]($cdn/blog/images/2024-01-11-them-10-trieu-data-vao-cuoi-list-voi-array-list-va-linked-list-trong-java-thi-dung-cai-nao-nhanh-hon/arrayList_4.png)
 
 ##### Arraycopy
 Tại tầng code native trong jvm, trong impl của arraycopy, với OpenJDK hoặc của oracle đang sử dụng `memcpy` một function của C sử dụng để copy memory, việc copy này rất là nhanh.
-![ArrayList5](@cdn/blog/images/2024-01-11-them-10-trieu-data-vao-cuoi-list-voi-array-list-va-linked-list-trong-java-thi-dung-cai-nao-nhanh-hon/arrayList_5.jpg)
+![ArrayList5]($cdn/blog/images/2024-01-11-them-10-trieu-data-vao-cuoi-list-voi-array-list-va-linked-list-trong-java-thi-dung-cai-nao-nhanh-hon/arrayList_5.jpg)
 
 Tương tự ví dụ trong ảnh, nếu chúng ta có 2 array
 
@@ -95,13 +95,13 @@ Khi chúng ta thực hiện copy tất cả data từ array 1 đến array 2. Me
 Tốc độ của Memcpy  lên đến vài GB/s, và chúng ta copy cũng chỉ là copy các reference các object thôi, nên rất nhanh.
 
 Trong ví dụ trên với 10 triệu data, mỗi một reference lưu trữ trong index của array là 4 byte. 4 * 10.000.000 = 40.000.000 = 40mb. Vì vậy nếu copy 10 triệu data thì chúng ta sẽ cần copy 40mb trên memory.
-![ArrayList6](@cdn/blog/images/2024-01-11-them-10-trieu-data-vao-cuoi-list-voi-array-list-va-linked-list-trong-java-thi-dung-cai-nao-nhanh-hon/arrayList_6.png)
+![ArrayList6]($cdn/blog/images/2024-01-11-them-10-trieu-data-vao-cuoi-list-voi-array-list-va-linked-list-trong-java-thi-dung-cai-nao-nhanh-hon/arrayList_6.png)
 
 Như ảnh ví dụ ở trên, khi copy 10 triệu data đến 1 array mới với 20 triệu data. Chúng ta chỉ mất 40 millis giây (1 millis = 1 triệu nanoseconds). Vì vậy trong java việc copy một array cũ đến một array mới thì tốc độ sẽ được đảm bảo nhanh nhất có thể.
 
 ##### KẾT QUẢ TEST CHO THÊM 10 TRIỆU DATA VÀO ARRAYLIST
 
-![ArrayList7](@cdn/blog/images/2024-01-11-them-10-trieu-data-vao-cuoi-list-voi-array-list-va-linked-list-trong-java-thi-dung-cai-nao-nhanh-hon/arrayList_7.png)
+![ArrayList7]($cdn/blog/images/2024-01-11-them-10-trieu-data-vao-cuoi-list-voi-array-list-va-linked-list-trong-java-thi-dung-cai-nao-nhanh-hon/arrayList_7.png)
 Tổng thời gian sử dụng là 216 triệu nanoseconds. Vì vậy mất khoảng 216 milliseconds và bằng 0.2 giây 😀
 
 #### LinkedList
@@ -111,7 +111,7 @@ LinkedList thì ngon mà nhỉ. Có tốn chi phí nào đâu? không cần mở
 Nhưng.
 <br/>
 Mỗi khi bạn thêm một data vào LinkedList  chúng ta sẽ cần tạo thêm một object trung gian đó là Node.
-![LinkedList](@cdn/blog/images/2024-01-11-them-10-trieu-data-vao-cuoi-list-voi-array-list-va-linked-list-trong-java-thi-dung-cai-nao-nhanh-hon/LinkedList.png)
+![LinkedList]($cdn/blog/images/2024-01-11-them-10-trieu-data-vao-cuoi-list-voi-array-list-va-linked-list-trong-java-thi-dung-cai-nao-nhanh-hon/LinkedList.png)
 
 Có lẽ bạn chưa biết, việc tạo mới một đối tượng và quản lý nó đòi hỏi rất nhiều tài nguyên và thời gian. <br/>
 Khi chúng ta thêm 10 triệu dữ liệu vào LinkedList, đồng nghĩa với việc chúng ta sẽ tạo 10 triệu đối tượng Node.
@@ -120,7 +120,7 @@ Chưa nói đến dữ liệu, chỉ với 10 triệu đối tượng Node, mỗ
 
 Và một điều rất quan trọng nữa, trong LinkedList, các Node sẽ liên kết với nhau thành một chuỗi (chain), và Java sẽ cần quản lý các tham chiếu cho 10 triệu đối tượng. Điều này cũng là một vấn đề gây tốn tài nguyên rất nhiều.
 
-![LinkedList3](@cdn/blog/images/2024-01-11-them-10-trieu-data-vao-cuoi-list-voi-array-list-va-linked-list-trong-java-thi-dung-cai-nao-nhanh-hon/LinkedList_3.png)
+![LinkedList3]($cdn/blog/images/2024-01-11-them-10-trieu-data-vao-cuoi-list-voi-array-list-va-linked-list-trong-java-thi-dung-cai-nao-nhanh-hon/LinkedList_3.png)
 Ví dụ ở trên là 1 ví dụ đơn giản giả lập cách hoạt động của Node trong LinkedList. Khi mình thêm 10 triệu data thì tốn 0.49 giây.
 
 ## Kết luận :

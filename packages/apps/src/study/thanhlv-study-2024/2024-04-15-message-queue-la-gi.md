@@ -15,12 +15,12 @@ Kiến thức đầu tiên chúng ta đã cùng học với nhau là [**Message*
 [[TOC]]
 
 ## Vậy Message queue là gì ?
-![message-queue-small](@cdn/study/thanhlv-study-2024/2024-04-15-message-queue-la-gi/message-queue-small.webp)
+![message-queue-small]($cdn/study/thanhlv-study-2024/2024-04-15-message-queue-la-gi/message-queue-small.webp)
 
 Trong nhu cầu trao đổi thông tin sử dụng Message, để [gửi và nhận Message có nhiều phương pháp](2024-04-15-message-la-gi.md#cac-phuong-phap-trao-đoi-message-giua-cac-he-thong), trong đó [**Message queue (Hàng đợi tin nhấn)**](2024-04-15-message-queue-la-gi.md) là 1 trong nhiều phương pháp phổ biến được sử dụng trong các hệ thống lớn.
 
 [**Message queue (Hàng đợi tin nhấn)**](2024-04-15-message-queue-la-gi.md) là một component trong [system's architecture](../../blog/2024-02-01-tim-hieu-ve-architecture.md#đac-điem-cua-software-architecture) hỗ trợ buffer và phân phối các Message bất đồng bộ.  
-![Producer-Consumer-buffer](@cdn/study/thanhlv-study-2024/2024-04-15-message-queue-la-gi/Producer-Consumer-buffer.png)
+![Producer-Consumer-buffer]($cdn/study/thanhlv-study-2024/2024-04-15-message-queue-la-gi/Producer-Consumer-buffer.png)
 
 Cơ chế của [**Message queue (Hàng đợi tin nhấn)**](2024-04-15-message-queue-la-gi.md) là lưu trữ các tin nhắn ([**Message**](2024-04-15-message-la-gi.md)) trong một hàng đợi(Queue) theo thứ tự tuần tự hoặc ưu tiên và sẽ được chuyển đến một đích(Thành phần nhận, Consumer ) đã chỉ định.
 
@@ -29,7 +29,7 @@ Những [**Message**](2024-04-15-message-la-gi.md) chưa thể gửi đến Cons
 Trong một hệ thống có [**Message queue (Hàng đợi tin nhấn)**](2024-04-15-message-queue-la-gi.md), các tin nhắn được gửi từ một ứng dụng **A** đến ứng dụng **B** sẽ được tạm thời lưu trữ trong hàng đợi(Queue) trước khi được ứng dụng B lấy ra và xử lý. Điều này sẽ cho phép các ứng dụng làm việc độc lập với nhau, không cần kết nối trực tiếp và hoạt động trên process riêng biệt.
 
 ## Các thành phần chính của Message queue.
-![message-queue-small-3](@cdn/study/thanhlv-study-2024/2024-04-15-message-queue-la-gi/message-queue-small-3.webp)
+![message-queue-small-3]($cdn/study/thanhlv-study-2024/2024-04-15-message-queue-la-gi/message-queue-small-3.webp)
 - **Producer**: Là (bộ phận/thành phần) tạo ra [**Message**](2024-04-15-message-la-gi.md) chứa các thông tin để tương tác với thành phần khác. [**Message**](2024-04-15-message-la-gi.md) này sẽ được truyền vào [**Message queue (Hàng đợi tin nhấn)**](2024-04-15-message-queue-la-gi.md).
 - **Consumer**: Là (bộ phận/thành phần) trong hệ thống nhận [**Message**](2024-04-15-message-la-gi.md) từ Producer thông qua [**Message queue (Hàng đợi tin nhấn)**](2024-04-15-message-queue-la-gi.md) để xử lý tin nhắn.
 - [**Message**](2024-04-15-message-la-gi.md): Thông tin(Thông điệp) thường được tạo dạng text hoặc JSON, tuy nhiên nó có thể là Binary hoặc bất kỳ dạng nào. [**Message**](2024-04-15-message-la-gi.md) sẽ do Producer tạo ra.
@@ -37,10 +37,10 @@ Trong một hệ thống có [**Message queue (Hàng đợi tin nhấn)**](2024-
 - **Broker**: Xử lý Message và quản lý [**Message**](2024-04-15-message-la-gi.md) để đảm bảo Producer và Consumer sẽ truyền thông tin được cho nhau, Broker giúp định tuyến Message đến đúng queue, quản lý trạng thái của Queue, và đảm bảo [**Message**](2024-04-15-message-la-gi.md) được chuyển đến đúng Consumer và không bị mất message.
   - thành phần EXCHANGES sẽ nằm trong Broker, EXCHANGES sẽ giúp định tuyến Message đến đúng queue.
 - **Channel** : là cơ chế truyền thông tin giữa Producer và Consumer thông qua Message Queue. Channel đóng vai trò như là một cầu nối để truyền Message qua lại giữa các bên. Mỗi channel là một kết nối riêng biệt giữa thành phần đến Broker.
-  ![mesage-broker.webp](@cdn/study/thanhlv-study-2024/2024-04-15-message-queue-la-gi/mesage-broker.webp)
+  ![mesage-broker.webp]($cdn/study/thanhlv-study-2024/2024-04-15-message-queue-la-gi/mesage-broker.webp)
 
 ## Producers và consumers and Message Brokers
-![message-queue-small-3](@cdn/study/thanhlv-study-2024/2024-04-15-message-queue-la-gi/message-queue-small-3.webp)
+![message-queue-small-3]($cdn/study/thanhlv-study-2024/2024-04-15-message-queue-la-gi/message-queue-small-3.webp)
 
 ### Message producers
 Producer là một thành phần thực hiện tạo ra [**Message**](2024-04-15-message-la-gi.md) hợp lệ(Format, valid) và gửi [**Message**](2024-04-15-message-la-gi.md) đó đến Queue. 
@@ -147,7 +147,7 @@ Một hệ thống [**Message queue (Hàng đợi tin nhấn)**](2024-04-15-mess
 3. Một Broker chuyên dụng để triển khai [**Message queue (Hàng đợi tin nhấn)**](2024-04-15-message-queue-la-gi.md) có chức năng nhận Message request, lưu trữ và gửi đến queue đến người nhận [**Message**](2024-04-15-message-la-gi.md).
 
 #### Thế nào là Message brokers?
-![mesage-broker.webp](@cdn/study/thanhlv-study-2024/2024-04-15-message-queue-la-gi/mesage-broker.webp)
+![mesage-broker.webp]($cdn/study/thanhlv-study-2024/2024-04-15-message-queue-la-gi/mesage-broker.webp)
 Khi Message queue được triển khai bằng chiến lược cuối cùng(3) thì chúng được gọi là Message Brokers.
 
 Message brokers là một component độc lập trong quá trình setup, nó đứng giữa và quản lý quá trình giao tiếp giữa Producers và consumers
@@ -197,14 +197,14 @@ Tùy thuộc vào cách triển khai của Consumer, Message Queue thường h�
 ### Chiến lược Pull Model.
 
 Trong model này, Consumer sẽ kết nối đến Message queue và định kỳ kiểm tra queue
-![message-queue-consumer-pull-model.webp](@cdn/study/thanhlv-study-2024/2024-04-15-message-queue-la-gi/message-queue-consumer-pull-model.webp)
+![message-queue-consumer-pull-model.webp]($cdn/study/thanhlv-study-2024/2024-04-15-message-queue-la-gi/message-queue-consumer-pull-model.webp)
 
 Phương giáp này được gọi là Pull bởi vì consumer là người kiểm tra định kỳ xem liệu có Message nào có sẵn để consume không.
 
 ### Chiến lược Push model
 
 Trong model này, sau khi một Message được gửi từ Producer và được thêm vào Message Queue, Message queue sẽ chủ động gửi Message đến Consumer đang chờ đợi nhận Message.
-![message-queue-consumer-push-model.webp](@cdn/study/thanhlv-study-2024/2024-04-15-message-queue-la-gi/message-queue-consumer-push-model.webp)
+![message-queue-consumer-push-model.webp]($cdn/study/thanhlv-study-2024/2024-04-15-message-queue-la-gi/message-queue-consumer-push-model.webp)
 
 Message được gửi đến Consumer theo một rate config mà tốc độ của consumer có thể xử lý hoặc theo cấu hình từ phía consumer khi kết nối đến Message broker
 
@@ -217,7 +217,7 @@ Có nhiều chiến lược đăng ký, nhưng 2 chiến lược này là phổ 
 ### Chiến lược xếp hàng các công nhân( Direct worker queue method )
 
 Phương pháp này giúp đạt được sự phẩn bổ tải giữa nhiều instance của cùng một consumer.
-![consumer-sub-model-direct-worker.webp](@cdn/study/thanhlv-study-2024/2024-04-15-message-queue-la-gi/consumer-sub-model-direct-worker.webp)
+![consumer-sub-model-direct-worker.webp]($cdn/study/thanhlv-study-2024/2024-04-15-message-queue-la-gi/consumer-sub-model-direct-worker.webp)
 
 Trong chiến lược này, produces và consumer chỉ cần biết tên của Queue, bằng cách này Produce có thể biết nơi cần push Message và Consumer sẽ biết nơi nhận Message.
 
@@ -246,7 +246,7 @@ Không giống như chiến lược **Direct worker queue method**, với chiế
 
 - Một consumer chịu trách nghiệm push thông báo đến ứng dụng di động của người dùng.
 
-![consumer-sub-model-publish-subscribe.webp](@cdn/study/thanhlv-study-2024/2024-04-15-message-queue-la-gi/consumer-sub-model-publish-subscribe.webp)
+![consumer-sub-model-publish-subscribe.webp]($cdn/study/thanhlv-study-2024/2024-04-15-message-queue-la-gi/consumer-sub-model-publish-subscribe.webp)
 
 Consumer đăng ký một topic, và khi có một Message mới. Message đó sẽ được sao chép và gửi đến tất cả các Queue của người đăng ký Topics. Chiến lược này sử dụng **observer pattern paradigm**
 

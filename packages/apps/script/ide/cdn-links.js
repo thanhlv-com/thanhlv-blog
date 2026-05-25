@@ -5,7 +5,7 @@ import {fileURLToPath} from 'url'
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const SRC_ROOT = path.resolve(__dirname, '../../src')
 const STATIC_CDN_ROOT = path.resolve(__dirname, '../../../libs/static-cdn')
-const ALIAS_DIR_NAME = '@cdn'
+const ALIAS_DIR_NAME = '$cdn'
 
 function walkDir(dirPath, result = []) {
   const entries = fs.readdirSync(dirPath, {withFileTypes: true})
