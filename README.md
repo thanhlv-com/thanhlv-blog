@@ -131,7 +131,6 @@ thanhlv-blog/                           # Root directory
 │   ├── 🚀 apps/                       # Main application
 │   │   ├── 📝 src/                    # Source content
 │   │   │   ├── 📖 blog/              # Main blog posts
-│   │   │   ├── ⚡ short-blog/         # Short articles
 │   │   │   ├── 📚 study/             # Learning materials
 │   │   │   │   ├── thanhlv-study-2024/
 │   │   │   │   ├── thanhlv-study-2025/
@@ -147,7 +146,6 @@ thanhlv-blog/                           # Root directory
 │   │   ├── 🔧 script/                # Build & generation scripts
 │   │   │   ├── index.js              # Main build script
 │   │   │   ├── blogs.js              # Blog processing
-│   │   │   ├── short-blog.js         # Short blog processing
 │   │   │   ├── study/                # Study content processing
 │   │   │   └── about/                # About page processing
 │   │   ├── 📄 package.json           # App dependencies
@@ -168,7 +166,6 @@ thanhlv-blog/                           # Root directory
 
 #### 📖 Blog Content Structure
 - **`/blog/`** - Bài viết dài, chi tiết về kỹ thuật
-- **`/short-blog/`** - Bài viết ngắn, chia sẻ nhanh
 - **`/study/`** - Tài liệu học tập có cấu trúc
 - **`/about/`** - Thông tin cá nhân, CV, portfolio
 
@@ -185,9 +182,6 @@ thanhlv-blog/                           # Root directory
 ```bash
 # Blog posts (chi tiết, kỹ thuật)
 packages/apps/src/blog/YYYY-MM-DD-tieu-de-bai-viet.md
-
-# Short blog posts (chia sẻ nhanh)
-packages/apps/src/short-blog/YYYY-MM-DD-tieu-de-ngan.md
 
 # Study materials (có cấu trúc)
 packages/apps/src/study/[category]/ten-bai-hoc.md
@@ -219,9 +213,6 @@ featured: false                         # true để highlight
 ```bash
 # Images cho blog posts
 packages/apps/src/blog/images/YYYY-MM-DD-ten-bai/image.png
-
-# Images cho short blog
-packages/apps/src/short-blog/images/YYYY-MM-DD-ten-bai/image.png
 
 # Shared assets
 packages/apps/src/public/images/shared/
@@ -274,7 +265,7 @@ Repository này dùng PNPM workspace với 2 package chính:
 - `packages/apps`: website VitePress (nội dung, cấu hình site, script build).
 - `packages/libs/theme`: component và style theme Vue dùng chung/tùy biến.
 
-Nội dung chính nằm trong `packages/apps/src`: `blog/`, `short-blog/`,
+Nội dung chính nằm trong `packages/apps/src`: `blog/`,
 `study/`, `about/`, và tài nguyên `public/`.
 Script tự động hóa nằm ở `packages/apps/script`, cấu hình VitePress ở
 `packages/apps/.vitepress`.
