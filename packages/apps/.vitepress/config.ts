@@ -4,7 +4,7 @@ import {defineConfigWithTheme, HeadConfig} from 'vitepress'
 import type {Config as ThemeConfig} from '@vue/theme'
 import baseConfig from '@vue/theme/config'
 import {headerPlugin} from './headerMdPlugin'
-import {cdnAliasPlugin, resolveCdnAlias} from './cdnAliasMdPlugin'
+import {cdnAliasPlugin, resolveCdnAliasInValue} from './cdnAliasMdPlugin'
 import blogsSidebar from './cache/sidebar/blogs-sidebar.json'
 import thanhlvStudy2024Sidebar from './cache/sidebar/study/thanhlv-study-2024-sidebar.json'
 import thanhlvStudy2025Sidebar from './cache/sidebar/study/thanhlv-study-2025-sidebar.json'
@@ -254,9 +254,8 @@ export default defineConfigWithTheme<ThemeConfig>({
 //     ]
   ],
   transformPageData(pageData) {
-    const image = pageData.frontmatter?.image
-    if (typeof image === 'string') {
-      pageData.frontmatter.image = resolveCdnAlias(image, {
+    if (pageData.frontmatter) {
+      pageData.frontmatter = resolveCdnAliasInValue(pageData.frontmatter, {
         isBuild: isBuildCommand,
         markdownRelativePath: pageData.relativePath,
         validateLocalFile: true

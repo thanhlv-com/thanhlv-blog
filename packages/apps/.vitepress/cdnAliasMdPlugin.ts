@@ -111,6 +111,38 @@ export function resolveCdnAlias(
   return `/@fs${encodeURI(normalizedAbsolutePath)}${parsed.suffix}`
 }
 
+function isPlainObject(value: unknown): value is Record<string, unknown> {
+  if (!value || typeof value !== 'object' || Array.isArray(value)) {
+    return false
+  }
+
+  const prototype = Object.getPrototypeOf(value)
+  return prototype === Object.prototype || prototype === null
+}
+
+export function resolveCdnAliasInValue<T>(
+  value: T,
+  options: ResolveAliasOptions
+): T {
+  if (typeof value === 'string') {
+    return resolveCdnAlias(value, options) as T
+  }
+
+  if (Array.isArray(value)) {
+    return value.map((item) => resolveCdnAliasInValue(item, options)) as T
+  }
+
+  if (isPlainObject(value)) {
+    const resolved: Record<string, unknown> = {}
+    for (const [key, nestedValue] of Object.entries(value)) {
+      resolved[key] = resolveCdnAliasInValue(nestedValue, options)
+    }
+    return resolved as T
+  }
+
+  return value
+}
+
 function rewriteAttr(
   token: Token,
   attrName: string,
