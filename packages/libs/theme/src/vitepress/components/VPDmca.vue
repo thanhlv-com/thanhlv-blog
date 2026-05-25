@@ -13,7 +13,7 @@ onMounted(() => {
 });
 
 const dynamicHref = computed(() => {
-  return `//www.dmca.com/Protection/Status.aspx?ID=8febc2ec-f016-49e9-8483-8b1afed383d4&cdnrdr=1&refurl=${domain.value + route.path}`;
+  return `//www.dmca.com/Protection/Status.aspx?ID=8febc2ec-f016-49e9-8483-8b1afed383d4&refurl=https://${domain.value + route.path}`;
 });
 </script>
 <template>
