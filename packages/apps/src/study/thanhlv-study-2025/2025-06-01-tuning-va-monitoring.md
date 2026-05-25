@@ -5,7 +5,7 @@ description: Tuning và Monitoring là hai khía cạnh quan trọng trong việ
 authors: [ "lethanh" ]
 date: 2025-05-31
 outline: deep
-image: https://static-cdn.thanhlv.com/study/thanhlv-study-2025/2025-06-01-tuning-va-monitoring/image-2025-3-20_11-9-55.png
+image: $cdn/study/thanhlv-study-2025/2025-06-01-tuning-va-monitoring/image-2025-3-20_11-9-55.png
 draft: false
 group: 1. Cassandra
 ---

@@ -5,7 +5,7 @@ description: Khi bạn sử dụng Cipher để mã hóa dữ liệu trong Java,
 authors: [ lethanh ]
 date: 2024-11-08
 outline: deep
-image: https://static-cdn.thanhlv.com/blog/images/2024-11-08-trong-java-6-7-8-loi-Illegal-key-size-khi-dung-Cipher-chua-chac-phai-do-ban-code-sai/image.jpg
+image: $cdn/blog/images/2024-11-08-trong-java-6-7-8-loi-Illegal-key-size-khi-dung-Cipher-chua-chac-phai-do-ban-code-sai/image.jpg
 draft: false
 ---
 

@@ -5,7 +5,7 @@ authors: [ lethanh ]
 description: Bài viết này sẽ giới thiệu về Kubernetes, một nền tảng mã nguồn mở để tự động hóa việc triển khai, mở rộng và quản lý các ứng dụng container.
 date: 2025-06-16
 outline: deep
-image: https://static-cdn.thanhlv.com/study/thanhlv-study-2025/2025-06-16-gioi-thieu-ve-kubernetes/kubernetes2.png
+image: $cdn/study/thanhlv-study-2025/2025-06-16-gioi-thieu-ve-kubernetes/kubernetes2.png
 draft: false
 group: 2. Kubernetes
 ---

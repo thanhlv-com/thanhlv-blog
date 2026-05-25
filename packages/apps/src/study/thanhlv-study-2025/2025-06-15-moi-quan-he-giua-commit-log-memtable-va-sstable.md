@@ -5,7 +5,7 @@ authors: [ "lethanh" ]
 description: Mối quan hệ giữa Commit Log, Memtable và SSTable trong Cassandra là một phần quan trọng trong kiến trúc của hệ thống Cassandra. Bài viết này sẽ giải thích chi tiết về từng thành phần và mối quan hệ của chúng.
 date: 2025-06-015
 outline: deep
-image: https://static-cdn.thanhlv.com/study/thanhlv-study-2025/2025-06-15-moi-quan-he-giua-commit-log-memtable-va-sstable/image-2025-3-20_15-23-6.png
+image: $cdn/study/thanhlv-study-2025/2025-06-15-moi-quan-he-giua-commit-log-memtable-va-sstable/image-2025-3-20_15-23-6.png
 draft: false
 group: 1. Cassandra
 ---
