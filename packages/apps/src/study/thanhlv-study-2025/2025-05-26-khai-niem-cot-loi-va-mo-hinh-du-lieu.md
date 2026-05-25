@@ -5,7 +5,7 @@ description: Trong bài viết này, chúng ta sẽ tìm hiểu về các khái 
 authors: [ "lethanh" ]
 date: 2025-05-26
 outline: deep
-image: https://static-cdn.thanhlv.com/study/thanhlv-study-2025/2025-05-26-khai-niem-cot-loi-va-mo-hinh-du-lieu/6e4499d2-1a63-43aa-8302-d19a34c0769e.webp
+image: $cdn/study/thanhlv-study-2025/2025-05-26-khai-niem-cot-loi-va-mo-hinh-du-lieu/6e4499d2-1a63-43aa-8302-d19a34c0769e.webp
 draft: false
 group: 1. Cassandra
 ---

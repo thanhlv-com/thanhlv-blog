@@ -5,7 +5,7 @@ description: Chiến lược Backup và Phục hồi dữ liệu trong Cassandra
 authors: [ "lethanh" ]
 date: 2025-06-09
 outline: deep
-image: https://static-cdn.thanhlv.com/study/thanhlv-study-2025/2025-06-09-Chien-luoc-backup-va-phuc-hoi-du-lieu-cassandra/image-2025-3-20_11-54-58.png
+image: $cdn/study/thanhlv-study-2025/2025-06-09-Chien-luoc-backup-va-phuc-hoi-du-lieu-cassandra/image-2025-3-20_11-54-58.png
 draft: false
 group: 1. Cassandra
 ---

@@ -5,7 +5,7 @@ description: Từ những phiên bản đầu tiên khi Kafka được Open Sour
 authors: [ lethanh ]
 date: 2024-07-16
 outline: deep
-image: https://static-cdn.thanhlv.com/blog/images/2024-08-07-Kafka-producer-da-khong-con-Round-Robin-Partition-voi-key-null/list-availablePartitions.png
+image: $cdn/blog/images/2024-08-07-Kafka-producer-da-khong-con-Round-Robin-Partition-voi-key-null/list-availablePartitions.png
 draft: false
 ---
 

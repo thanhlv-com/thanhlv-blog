@@ -5,7 +5,7 @@ Description: Apache Cassandra là một hệ thống quản lý cơ sở dữ li
 authors: [ "lethanh" ]
 date: 2025-03-26
 outline: deep
-image: https://static-cdn.thanhlv.com/study/thanhlv-study-2025/2025-03-26-what-is-apache-cassandra/cassandra-la-gi-1.webp
+image: $cdn/study/thanhlv-study-2025/2025-03-26-what-is-apache-cassandra/cassandra-la-gi-1.webp
 draft: false
 group: 1. Cassandra
 ---

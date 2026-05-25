@@ -5,7 +5,7 @@ authors: [ lethanh ]
 description: Các thành phần chính trong kiến trúc Kubernetes bao gồm các thành phần như Node, Pod, Service, Deployment, ConfigMap, Secret, Volume, Namespace và Ingress. Mỗi thành phần đóng vai trò quan trọng trong việc quản lý và triển khai ứng dụng trên Kubernetes.
 date: 2025-06-17
 outline: deep
-image: https://static-cdn.thanhlv.com/study/thanhlv-study-2025/2025-06-16-gioi-thieu-ve-kubernetes/kubernetes2.png
+image: $cdn/study/thanhlv-study-2025/2025-06-16-gioi-thieu-ve-kubernetes/kubernetes2.png
 draft: false
 group: 2. Kubernetes
 ---

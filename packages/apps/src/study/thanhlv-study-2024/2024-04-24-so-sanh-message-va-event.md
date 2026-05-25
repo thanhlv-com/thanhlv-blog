@@ -4,7 +4,7 @@ title: So sánh Message và Event.
 authors: ["lethanh"]
 date: 2024-04-24
 outline: deep
-image: https://static-cdn.thanhlv.com/study/thanhlv-study-2024/2024-04-24-so-sanh-message-va-event/message.png
+image: $cdn/study/thanhlv-study-2024/2024-04-24-so-sanh-message-va-event/message.png
 draft: false
 group: 2. Message and event stream
 ---

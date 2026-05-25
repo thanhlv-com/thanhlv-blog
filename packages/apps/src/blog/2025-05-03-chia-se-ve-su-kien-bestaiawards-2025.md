@@ -5,7 +5,7 @@ description: Sự kiện trao giải thưởng BestAIAwards 2025 đã diễn ra 
 authors: [ lethanh ]
 date: 2025-05-03
 outline: deep
-image: https://static-cdn.thanhlv.com/blog/images/2025-05-03-chia-se-ve-su-kien-bestaiawards-2025/bestAI2025.jpg
+image: $cdn/blog/images/2025-05-03-chia-se-ve-su-kien-bestaiawards-2025/bestAI2025.jpg
 draft: false
 ---
 

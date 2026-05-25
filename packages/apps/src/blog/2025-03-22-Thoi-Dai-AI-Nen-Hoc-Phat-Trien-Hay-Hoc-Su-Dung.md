@@ -5,7 +5,7 @@ description: Trong bối cảnh công nghệ AI phát triển với tốc độ 
 authors: [ lethanh ]
 date: 2025-03-22
 outline: deep
-image: https://static-cdn.thanhlv.com/blog/images/2025-03-22-Thoi-Dai-AI-Nen-Hoc-Phat-Trien-Hay-Hoc-Su-Dung/5-AI-Advancements-to-Expect-in-the-Next-10-Years-scaled-1.jpeg
+image: $cdn/blog/images/2025-03-22-Thoi-Dai-AI-Nen-Hoc-Phat-Trien-Hay-Hoc-Su-Dung/5-AI-Advancements-to-Expect-in-the-Next-10-Years-scaled-1.jpeg
 draft: false
 ---
 

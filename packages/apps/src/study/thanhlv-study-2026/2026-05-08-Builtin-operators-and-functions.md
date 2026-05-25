@@ -5,7 +5,7 @@ Description: .
 authors: [ "lethanh" ]
 date: 2026-05-08
 outline: deep
-image: https://static-cdn.thanhlv.com/study/thanhlv-study-2026/perl.jpg
+image: $cdn/study/thanhlv-study-2026/perl.jpg
 draft: false
 group: 1. Perl
 ---

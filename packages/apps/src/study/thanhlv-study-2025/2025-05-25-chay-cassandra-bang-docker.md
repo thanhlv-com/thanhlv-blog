@@ -5,7 +5,7 @@ description: Hướng dẫn cách chạy Apache Cassandra bằng Docker, bao g�
 authors: [ "lethanh" ]
 date: 2025-05-25
 outline: deep
-image: https://static-cdn.thanhlv.com/study/thanhlv-study-2025/2025-05-25-chay-cassandra-bang-docker/image-2025-2-21_14-59-17.png
+image: $cdn/study/thanhlv-study-2025/2025-05-25-chay-cassandra-bang-docker/image-2025-2-21_14-59-17.png
 draft: false
 group: 1. Cassandra
 ---

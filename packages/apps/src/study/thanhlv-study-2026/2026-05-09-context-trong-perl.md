@@ -5,7 +5,7 @@ description: Context là khái niệm cốt lõi trong Perl, ảnh hưởng tớ
 authors: ["lethanh"]
 date: 2026-05-09
 outline: deep
-image: https://static-cdn.thanhlv.com/study/thanhlv-study-2026/perl.jpg
+image: $cdn/study/thanhlv-study-2026/perl.jpg
 draft: false
 group: 1. Perl
 ---

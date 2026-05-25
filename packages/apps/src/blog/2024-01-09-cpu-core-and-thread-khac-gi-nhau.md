@@ -4,7 +4,7 @@ title: "CPU, CORE và Thread khác gì nhau ?"
 description: CPU là một thiết bị phần cứng được gắn trong mainboard.  Một mainboard có thể có 1 hoặc nhiều CPU. Core là một phần cứng được tích hợp trong CPU. Một CPU có thể có 1 hoặc nhiều Core
 authors: ["lethanh"]
 date: 2024-01-09
-image: https://static-cdn.thanhlv.com/blog/images/2024-01-09-cpu-core-and-thread-khac-gi-nhau/cpu-la-gi.png
+image: $cdn/blog/images/2024-01-09-cpu-core-and-thread-khac-gi-nhau/cpu-la-gi.png
 outline: deep
 ---
 

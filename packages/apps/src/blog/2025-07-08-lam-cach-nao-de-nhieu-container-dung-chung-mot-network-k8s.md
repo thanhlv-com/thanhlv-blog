@@ -5,7 +5,7 @@ description: Làm cách nào để nhiều container dùng chung một network K
 authors: [ lethanh ]
 date: 2025-07-08
 outline: deep
-image: https://static-cdn.thanhlv.com/blog/images/2025-07-08-lam-cach-nao-de-nhieu-container-dung-chung-mot-network-k8s/img.png
+image: $cdn/blog/images/2025-07-08-lam-cach-nao-de-nhieu-container-dung-chung-mot-network-k8s/img.png
 draft: false
 ---
 

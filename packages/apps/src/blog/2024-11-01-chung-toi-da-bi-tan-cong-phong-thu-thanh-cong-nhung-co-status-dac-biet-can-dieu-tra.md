@@ -6,7 +6,7 @@ authors: [ lethanh ]
 date: 2024-11-01
 outline: deep
 draft: false
-image: https://static-cdn.thanhlv.com/blog/images/2024-11-01-chung-toi-da-bi-tan-cong-phong-thu-thanh-cong-nhung-co-status-dac-biet-can-dieu-tra/image_1.png
+image: $cdn/blog/images/2024-11-01-chung-toi-da-bi-tan-cong-phong-thu-thanh-cong-nhung-co-status-dac-biet-can-dieu-tra/image_1.png
 ---
 
 ## Thời điểm bị tấn công
