@@ -61,7 +61,7 @@ Container tạm dừng được containerd tự động tạo khi bạn khởi �
 # Lệnh này sẽ hiển  thị tất cả các container đang chạy trong namespace k8s.io
 sh-5.1# ctr -n k8s.io containers list
 ```
-![Image](@cdn/blog/images/2025-07-08-lam-cach-nao-de-nhieu-container-dung-chung-mot-network-k8s/img.png)
+![Image]($cdn/blog/images/2025-07-08-lam-cach-nao-de-nhieu-container-dung-chung-mot-network-k8s/img.png)
 
 Như hình ảnh ở trên, có 2 container được tạo ra trong cụm k8s của mình.
 
@@ -1088,7 +1088,7 @@ PID   USER     TIME  COMMAND
 ```
 
 Bạn sẽ thấy cả tiến trình nginx và tiến trình pause, xác nhận rằng chúng đang chia sẻ cùng một namespace process.
-![Image](@cdn/blog/images/2025-07-08-lam-cach-nao-de-nhieu-container-dung-chung-mot-network-k8s/img_1.png)
+![Image]($cdn/blog/images/2025-07-08-lam-cach-nao-de-nhieu-container-dung-chung-mot-network-k8s/img_1.png)
 
 ### Chạy với docker compose
 

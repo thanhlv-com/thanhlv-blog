@@ -15,7 +15,7 @@ Tuy nhiên trong bài viết này mình sẽ dựa vào khái niệm Fallacies o
 
 Điều này sẽ giúp các bạn có cái nhìn tổng quan về những sai lầm mà các lập trình viên hay gặp phải khi phát triển và triển khai ứng dụng của mình lên cho người dùng sử dụng.
 
-![img](@cdn/blog/images/2024-10-09-Fallacies-of-distributed-computing-nhung-sai-lam-cua-khi-su-dung-distributed-computing/img.png)
+![img]($cdn/blog/images/2024-10-09-Fallacies-of-distributed-computing-nhung-sai-lam-cua-khi-su-dung-distributed-computing/img.png)
 
 
 ## Những sai lầm.
@@ -151,7 +151,7 @@ Tất cả hành động đều có độ trễ, không có hành động nào c
 Việc hạn chế có các độ chễ không cần thiết khi phát triển ứng dụng là một điều cần thiết. Có nhiều các độ chễ nhỏ có thể tính bằng mili giây nhưng nếu có quá nhiều độ chễ nhỏ thì nó có thể tính bằng giây hoặc phút.
 
 Khi phát triển ứng dụng, chúng ta cần phải nhớ rằng mọi hành động đều có độ trễ và nó có thể tính bằng phút.
-![img](@cdn/blog/images/2024-10-09-Fallacies-of-distributed-computing-nhung-sai-lam-cua-khi-su-dung-distributed-computing/network-latency.png)
+![img]($cdn/blog/images/2024-10-09-Fallacies-of-distributed-computing-nhung-sai-lam-cua-khi-su-dung-distributed-computing/network-latency.png)
 
 Một ví dụ điển trình của điều này chính là ORM. Khi sử dụng ORM, chúng ta có thể cấu hình Lazy load và Eager Loading.
 - Lazy load: Khi cấu hình Lazy load, dữ liệu sẽ chỉ được load khi cần thiết, điều này có thể tạo ra độ trễ khi bắt đầu sử dụng dữ liệu.
@@ -471,13 +471,13 @@ Nếu có thể chúng ta có thể tự động hóa việc cung cấp các c�
 
 Infrastructure as Code là thành phần CORE của Devops, với cơ sở hạ tầng được mô hình hóa như code và được quản lý như quy trình quản lý code.
 
-![IAC](@cdn/blog/images/2024-10-09-Fallacies-of-distributed-computing-nhung-sai-lam-cua-khi-su-dung-distributed-computing/iac.png)
+![IAC]($cdn/blog/images/2024-10-09-Fallacies-of-distributed-computing-nhung-sai-lam-cua-khi-su-dung-distributed-computing/iac.png)
 ##### Logging and monitoring
 
 Việc chuẩn đoán lỗi chưa bao giờ là dễ dàng, đặc biệt là với các hệ thống phân tán hoặc microservices.
 
 Để có khả năng nhìn rõ hơn về hành vi của ứng dụng thì centralised logging, metrics, và tracing ([The Three Pillars of Observability](https://www.oreilly.com/library/view/distributed-systems-observability/9781492033431/ch04.html)) được coi là các key chính cần có trong thiết kế hệ thống.
-![observability](@cdn/blog/images/2024-10-09-Fallacies-of-distributed-computing-nhung-sai-lam-cua-khi-su-dung-distributed-computing/observability.png)
+![observability]($cdn/blog/images/2024-10-09-Fallacies-of-distributed-computing-nhung-sai-lam-cua-khi-su-dung-distributed-computing/observability.png)
 
 ##### Decoupling(Tách rời)
 - Đảo bảo khả năng Decouplin giữa cách thành phần trong hệ thống giúp chúng ta dễ dàng thay đổi, nâng cấp, thêm mới, xóa bỏ các thành phần mà không ảnh hưởng đến các thành phần khác. Điều này sẽ giúp khi có một component bị lỗi thì hệ thống có thể chuyển nhanh sang một component khác.

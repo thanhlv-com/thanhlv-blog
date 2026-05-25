@@ -9,7 +9,7 @@ image: https://static-cdn.thanhlv.com/blog/images/2024-08-07-Kafka-producer-da-k
 draft: false
 ---
 
-![img](@cdn/blog/images/2024-08-07-Kafka-producer-da-khong-con-Round-Robin-Partition-voi-key-null/KafkaProducer12.png)
+![img]($cdn/blog/images/2024-08-07-Kafka-producer-da-khong-con-Round-Robin-Partition-voi-key-null/KafkaProducer12.png)
 
 # Kafka producer đã không còn Round Robin Partition với key null.
 Chào mọi người,
@@ -31,7 +31,7 @@ Vì vậy, bài viết này tôi sẽ thực hiện để đạt được hai m�
 ## Từ phiên bản nhỏ hơn hoặc bằng v2.3.1 mặc định Kafka producer sẽ Round Robin Partition
 Từ những phiên bản đầu tiên khi Kafka được Open Source đến phiên bản 2.3.1, mặc định Kafka producer khi gửi các Record có key là null sẽ thực hiện Round Robin Partition
 
-![img](@cdn/blog/images/2024-08-07-Kafka-producer-da-khong-con-Round-Robin-Partition-voi-key-null/Round_Robin__2_.webp)
+![img]($cdn/blog/images/2024-08-07-Kafka-producer-da-khong-con-Round-Robin-Partition-voi-key-null/Round_Robin__2_.webp)
 
 Dưới đây là đoạn code ở phiên bản 2.3.1 trên java, phiên bản cuối cùng Kafka Producer mặc định Round Robin Partition
 
@@ -109,7 +109,7 @@ public class DefaultPartitioner implements Partitioner {
 
 ```
 Và tất nhiên danh sách ở trong `availablePartitions` không được sort từ `0 - N` vì vậy đôi khi bạn thấy Record 1 đến Partition 1 nhưng Record 2 đến Partition 3. Tuy nhiên, bạn có thể yên tâm rằng nó vẫn là `Round Robin Partition`
-![img](@cdn/blog/images/2024-08-07-Kafka-producer-da-khong-con-Round-Robin-Partition-voi-key-null/list-availablePartitions.png)
+![img]($cdn/blog/images/2024-08-07-Kafka-producer-da-khong-con-Round-Robin-Partition-voi-key-null/list-availablePartitions.png)
 
 
 ## 2.4.0 đến 3.2.3 Kafka producer stickyPartition
@@ -192,9 +192,9 @@ Từ phiên bản 2.4.0 đến 3.2.3 (2.4.0 >= N <=3.2.3) Kafka Producer thay v�
 
 Với `sticky Partition Cache` thì partition sẽ được tính theo `Batch`, tất cả các `Record` có `key == null`  trong cùng `BATCH của cùng 1 topic` sẽ được gửi lên cùng nhau sẽ trên cùng một `partition`.
 Với sticky sẽ làm tăng tỉ lệ lấp đầy `batch.size`.
-![img](@cdn/blog/images/2024-08-07-Kafka-producer-da-khong-con-Round-Robin-Partition-voi-key-null/sticky-partitioner-strategy.png)
+![img]($cdn/blog/images/2024-08-07-Kafka-producer-da-khong-con-Round-Robin-Partition-voi-key-null/sticky-partitioner-strategy.png)
 
-![img](@cdn/blog/images/2024-08-07-Kafka-producer-da-khong-con-Round-Robin-Partition-voi-key-null/Sticky_Partitioner_Batching__1_.webp)
+![img]($cdn/blog/images/2024-08-07-Kafka-producer-da-khong-con-Round-Robin-Partition-voi-key-null/Sticky_Partitioner_Batching__1_.webp)
 
 Ví dụ với `linger.ms=50` và batch.size đủ cho khoảng 3 Record.
 Khi tạo `Batch` mới thì Kafka Producer sẽ ngẫu nhiên partition.

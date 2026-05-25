@@ -6,6 +6,7 @@ import type Token from 'markdown-it/lib/token.mjs'
 export const CDN_ALIAS_PREFIX = '@cdn'
 export const CDN_ORIGIN = 'https://static-cdn.thanhlv.com'
 const STATIC_CDN_ROOT = path.resolve(__dirname, '../../libs/static-cdn')
+const CDN_ALIAS_PREFIXES = ['@cdn', '@cnd', '$cdn', '$cnd'] as const
 
 interface CdnAliasOptions {
   isBuild: boolean
@@ -50,11 +51,12 @@ function toEncodedPath(relativePath: string): string {
 }
 
 function parseCdnAlias(url: string): ParsedAlias | null {
-  if (!url.startsWith(CDN_ALIAS_PREFIX)) {
+  const matchedPrefix = CDN_ALIAS_PREFIXES.find((prefix) => url.startsWith(prefix))
+  if (!matchedPrefix) {
     return null
   }
 
-  const remainder = url.slice(CDN_ALIAS_PREFIX.length)
+  const remainder = url.slice(matchedPrefix.length)
   const boundary = remainder.search(/[?#]/)
   const pathPart = boundary === -1 ? remainder : remainder.slice(0, boundary)
   const suffix = boundary === -1 ? '' : remainder.slice(boundary)
@@ -131,7 +133,7 @@ function rewriteAttr(
 
 function rewriteHtmlContent(content: string, options: ResolveAliasOptions): string {
   return content.replace(
-    /\b(src|href|poster)\s*=\s*(["'])(@cdn[^"']*)\2/gi,
+    /\b(src|href|poster)\s*=\s*(["'])((?:@cdn|@cnd|\$cdn|\$cnd)[^"']*)\2/gi,
     (_full, attrName, quote, rawValue) => {
       const resolved = resolveCdnAlias(rawValue, options)
       return `${attrName}=${quote}${resolved}${quote}`
@@ -143,6 +145,7 @@ function rewriteToken(token: Token, options: ResolveAliasOptions) {
   rewriteAttr(token, 'src', options)
   rewriteAttr(token, 'href', options)
   rewriteAttr(token, 'poster', options)
+  rewriteAttr(token, 'content', options)
 
   if (token.type === 'html_block' || token.type === 'html_inline') {
     token.content = rewriteHtmlContent(token.content, options)
