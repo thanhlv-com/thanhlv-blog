@@ -5,13 +5,13 @@ description:  Sharding là kỹ thuật phân chia dữ liệu thành các phầ
 authors: [ lethanh ]
 date: 2025-12-04
 outline: deep
-image: https://static-cdn.thanhlv.com/short-blog/images/2025-12-04-sharding-nen-chon-database-nhu-nao/sharding.jpg
+image: https://static-cdn.thanhlv.com/blog/images/2025-12-04-sharding-nen-chon-database-nhu-nao/sharding.jpg
 draft: false
 ---
 
 Xin chào, hôm nay trong lúc ngồi chém gió và thảo luận về sharding database với dự án của mình, mình nhận ra có khá nhiều bạn vẫn còn mơ hồ về việc lựa chọn database phù hợp để triển khai sharding. Vậy nên mình quyết định viết bài này để chia sẻ một số kinh nghiệm và gợi ý về việc chọn database khi triển khai sharding.
 
-![Image](@cdn/short-blog/images/2025-12-04-sharding-nen-chon-database-nhu-nao/sharding.jpg)
+![Image](@cdn/blog/images/2025-12-04-sharding-nen-chon-database-nhu-nao/sharding.jpg)
 ## Hiểu về Sharding
 Trước tiên, chúng ta cần hiểu rõ sharding là gì.? 
 
