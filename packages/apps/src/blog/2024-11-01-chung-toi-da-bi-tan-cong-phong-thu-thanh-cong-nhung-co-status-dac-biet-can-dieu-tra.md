@@ -6,7 +6,7 @@ authors: [ lethanh ]
 date: 2024-11-01
 outline: deep
 draft: false
-image: https://static-cdn.thanhlv.com/short-blog/images/2024-11-01-chung-toi-da-bi-tan-cong-phong-thu-thanh-cong-nhung-co-status-dac-biet-can-dieu-tra/image_1.png
+image: https://static-cdn.thanhlv.com/blog/images/2024-11-01-chung-toi-da-bi-tan-cong-phong-thu-thanh-cong-nhung-co-status-dac-biet-can-dieu-tra/image_1.png
 ---
 
 Xin chào mọi người, đây là bài đầu tiên của Short Blog. Thực tế sau sự kiện này xảy ra thì tôi đã nghĩ đến ý tưởng viết Short blog :v.
@@ -84,7 +84,7 @@ Vì vậy đã tạo ra vấn đề khi sử dụng `request.getServerName()` s�
 
 Đây là 1 ví dụ puml luồng
 
-![](@cdn/short-blog/images/2024-11-01-chung-toi-da-bi-tan-cong-phong-thu-thanh-cong-nhung-co-status-dac-biet-can-dieu-tra/image_1.png)
+![](@cdn/blog/images/2024-11-01-chung-toi-da-bi-tan-cong-phong-thu-thanh-cong-nhung-co-status-dac-biet-can-dieu-tra/image_1.png)
 
 ### Quá trình điều tra status 403
 Từ kinh nghiệm điều tra 404, việc điều tra 403 đã dễ dàng hơn rất nhiều. Chúng tôi đã thử các header và nhận ra rằng hacker đã sử dụng header `Origin` để tấn công.

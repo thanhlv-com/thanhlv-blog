@@ -28,7 +28,7 @@ Quy ước URL:
 <!-- AUTO-GENERATED:START -->
 HEADER
 
-  find blog short-blog study -type f \
+  find blog blog study -type f \
     \( -iname '*.png' -o -iname '*.jpg' -o -iname '*.jpeg' -o -iname '*.webp' -o -iname '*.svg' -o -iname '*.gif' \) \
     | LC_ALL=C sort \
     | awk -v base="$BASE_URL" '
