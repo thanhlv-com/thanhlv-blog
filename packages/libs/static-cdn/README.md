@@ -135,30 +135,30 @@ Quy ước URL:
 - [img.png](https://static-cdn.thanhlv.com/blog/images/2025-07-08-lam-cach-nao-de-nhieu-container-dung-chung-mot-network-k8s/img.png)
 - [img_1.png](https://static-cdn.thanhlv.com/blog/images/2025-07-08-lam-cach-nao-de-nhieu-container-dung-chung-mot-network-k8s/img_1.png)
 
-### short-blog/images/2024-11-01-chung-toi-da-bi-tan-cong-phong-thu-thanh-cong-nhung-co-status-dac-biet-can-dieu-tra
-- [image_1.png](https://static-cdn.thanhlv.com/short-blog/images/2024-11-01-chung-toi-da-bi-tan-cong-phong-thu-thanh-cong-nhung-co-status-dac-biet-can-dieu-tra/image_1.png)
+### blog/images/2024-11-01-chung-toi-da-bi-tan-cong-phong-thu-thanh-cong-nhung-co-status-dac-biet-can-dieu-tra
+- [image_1.png](https://static-cdn.thanhlv.com/blog/images/2024-11-01-chung-toi-da-bi-tan-cong-phong-thu-thanh-cong-nhung-co-status-dac-biet-can-dieu-tra/image_1.png)
 
-### short-blog/images/2024-11-08-trong-java-6-7-8-loi-Illegal-key-size-khi-dung-Cipher-chua-chac-phai-do-ban-code-sai
-- [image.jpg](https://static-cdn.thanhlv.com/short-blog/images/2024-11-08-trong-java-6-7-8-loi-Illegal-key-size-khi-dung-Cipher-chua-chac-phai-do-ban-code-sai/image.jpg)
+### blog/images/2024-11-08-trong-java-6-7-8-loi-Illegal-key-size-khi-dung-Cipher-chua-chac-phai-do-ban-code-sai
+- [image.jpg](https://static-cdn.thanhlv.com/blog/images/2024-11-08-trong-java-6-7-8-loi-Illegal-key-size-khi-dung-Cipher-chua-chac-phai-do-ban-code-sai/image.jpg)
 
-### short-blog/images/2024-12-06-ngan-hang-van-chua-ap-dung-cong-nghe-cho-quy-trinh-de-phuc-vu-khach-hang
-- [ngan-hang.webp](https://static-cdn.thanhlv.com/short-blog/images/2024-12-06-ngan-hang-van-chua-ap-dung-cong-nghe-cho-quy-trinh-de-phuc-vu-khach-hang/ngan-hang.webp)
+### blog/images/2024-12-06-ngan-hang-van-chua-ap-dung-cong-nghe-cho-quy-trinh-de-phuc-vu-khach-hang
+- [ngan-hang.webp](https://static-cdn.thanhlv.com/blog/images/2024-12-06-ngan-hang-van-chua-ap-dung-cong-nghe-cho-quy-trinh-de-phuc-vu-khach-hang/ngan-hang.webp)
 
-### short-blog/images/2025-01-23-he-thong-cua-ban-da-san-sang-xu-ly-request-dot-ngot-tu-2000-den-5000-request-trong-2-phut-chua
-- [cache_hit_mis_23-1.png](https://static-cdn.thanhlv.com/short-blog/images/2025-01-23-he-thong-cua-ban-da-san-sang-xu-ly-request-dot-ngot-tu-2000-den-5000-request-trong-2-phut-chua/cache_hit_mis_23-1.png)
-- [thu_thuat_nho.png](https://static-cdn.thanhlv.com/short-blog/images/2025-01-23-he-thong-cua-ban-da-san-sang-xu-ly-request-dot-ngot-tu-2000-den-5000-request-trong-2-phut-chua/thu_thuat_nho.png)
-- [thu_thuat_nho_thang_1-2025.png](https://static-cdn.thanhlv.com/short-blog/images/2025-01-23-he-thong-cua-ban-da-san-sang-xu-ly-request-dot-ngot-tu-2000-den-5000-request-trong-2-phut-chua/thu_thuat_nho_thang_1-2025.png)
-- [trong_ngay_23_01_2025.png](https://static-cdn.thanhlv.com/short-blog/images/2025-01-23-he-thong-cua-ban-da-san-sang-xu-ly-request-dot-ngot-tu-2000-den-5000-request-trong-2-phut-chua/trong_ngay_23_01_2025.png)
-- [trong_thang_1_2025.png](https://static-cdn.thanhlv.com/short-blog/images/2025-01-23-he-thong-cua-ban-da-san-sang-xu-ly-request-dot-ngot-tu-2000-den-5000-request-trong-2-phut-chua/trong_thang_1_2025.png)
+### blog/images/2025-01-23-he-thong-cua-ban-da-san-sang-xu-ly-request-dot-ngot-tu-2000-den-5000-request-trong-2-phut-chua
+- [cache_hit_mis_23-1.png](https://static-cdn.thanhlv.com/blog/images/2025-01-23-he-thong-cua-ban-da-san-sang-xu-ly-request-dot-ngot-tu-2000-den-5000-request-trong-2-phut-chua/cache_hit_mis_23-1.png)
+- [thu_thuat_nho.png](https://static-cdn.thanhlv.com/blog/images/2025-01-23-he-thong-cua-ban-da-san-sang-xu-ly-request-dot-ngot-tu-2000-den-5000-request-trong-2-phut-chua/thu_thuat_nho.png)
+- [thu_thuat_nho_thang_1-2025.png](https://static-cdn.thanhlv.com/blog/images/2025-01-23-he-thong-cua-ban-da-san-sang-xu-ly-request-dot-ngot-tu-2000-den-5000-request-trong-2-phut-chua/thu_thuat_nho_thang_1-2025.png)
+- [trong_ngay_23_01_2025.png](https://static-cdn.thanhlv.com/blog/images/2025-01-23-he-thong-cua-ban-da-san-sang-xu-ly-request-dot-ngot-tu-2000-den-5000-request-trong-2-phut-chua/trong_ngay_23_01_2025.png)
+- [trong_thang_1_2025.png](https://static-cdn.thanhlv.com/blog/images/2025-01-23-he-thong-cua-ban-da-san-sang-xu-ly-request-dot-ngot-tu-2000-den-5000-request-trong-2-phut-chua/trong_thang_1_2025.png)
 
-### short-blog/images/2025-02-05-khac_phuc_loi_error_in_libcrypto_khi_su_dung_ssh_key_tren_windows_de_ket_noi_github
-- [ssh-key-fix.svg](https://static-cdn.thanhlv.com/short-blog/images/2025-02-05-khac_phuc_loi_error_in_libcrypto_khi_su_dung_ssh_key_tren_windows_de_ket_noi_github/ssh-key-fix.svg)
+### blog/images/2025-02-05-khac_phuc_loi_error_in_libcrypto_khi_su_dung_ssh_key_tren_windows_de_ket_noi_github
+- [ssh-key-fix.svg](https://static-cdn.thanhlv.com/blog/images/2025-02-05-khac_phuc_loi_error_in_libcrypto_khi_su_dung_ssh_key_tren_windows_de_ket_noi_github/ssh-key-fix.svg)
 
-### short-blog/images/2025-03-22-Thoi-Dai-AI-Nen-Hoc-Phat-Trien-Hay-Hoc-Su-Dung
-- [5-AI-Advancements-to-Expect-in-the-Next-10-Years-scaled-1.jpeg](https://static-cdn.thanhlv.com/short-blog/images/2025-03-22-Thoi-Dai-AI-Nen-Hoc-Phat-Trien-Hay-Hoc-Su-Dung/5-AI-Advancements-to-Expect-in-the-Next-10-Years-scaled-1.jpeg)
+### blog/images/2025-03-22-Thoi-Dai-AI-Nen-Hoc-Phat-Trien-Hay-Hoc-Su-Dung
+- [5-AI-Advancements-to-Expect-in-the-Next-10-Years-scaled-1.jpeg](https://static-cdn.thanhlv.com/blog/images/2025-03-22-Thoi-Dai-AI-Nen-Hoc-Phat-Trien-Hay-Hoc-Su-Dung/5-AI-Advancements-to-Expect-in-the-Next-10-Years-scaled-1.jpeg)
 
-### short-blog/images/2025-12-04-sharding-nen-chon-database-nhu-nao
-- [sharding.jpg](https://static-cdn.thanhlv.com/short-blog/images/2025-12-04-sharding-nen-chon-database-nhu-nao/sharding.jpg)
+### blog/images/2025-12-04-sharding-nen-chon-database-nhu-nao
+- [sharding.jpg](https://static-cdn.thanhlv.com/blog/images/2025-12-04-sharding-nen-chon-database-nhu-nao/sharding.jpg)
 
 ### study/thanhlv-study-2024/2024-03-14-Internet-Internet-hoat-dong-nhu-the-nao
 - [Arpanet_logical_map_march_1977.png](https://static-cdn.thanhlv.com/study/thanhlv-study-2024/2024-03-14-Internet-Internet-hoat-dong-nhu-the-nao/Arpanet_logical_map_march_1977.png)
