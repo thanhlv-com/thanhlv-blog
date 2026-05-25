@@ -6,7 +6,6 @@ import baseConfig from '@vue/theme/config'
 import {headerPlugin} from './headerMdPlugin'
 import {cdnAliasPlugin, resolveCdnAlias} from './cdnAliasMdPlugin'
 import blogsSidebar from './cache/sidebar/blogs-sidebar.json'
-import shortBlogsSidebar from './cache/sidebar/short-blog-sidebar.json'
 import thanhlvStudy2024Sidebar from './cache/sidebar/study/thanhlv-study-2024-sidebar.json'
 import thanhlvStudy2025Sidebar from './cache/sidebar/study/thanhlv-study-2025-sidebar.json'
 import thanhlvStudy2026Sidebar from './cache/sidebar/study/thanhlv-study-2026-sidebar.json'
@@ -24,11 +23,6 @@ const nav: ThemeConfig['nav'] = [
     text: 'Blog',
     activeMatch: `^/blog/`,
     link: '/blog/gioi-thieu'
-  },
-  {
-    text: 'Short Blog',
-    activeMatch: `^/short-blog/`,
-    link: '/short-blog/gioi-thieu'
   },
   {
     text: 'Study',
@@ -72,15 +66,6 @@ export const sidebar: ThemeConfig['sidebar'] = {
       items: [
         {text: 'Giới thiệu', link: '/blog/gioi-thieu'},
         ...blogsSidebar
-      ]
-    }
-  ],
-  '/short-blog/': [
-    {
-      text: '',
-      items: [
-        {text: 'Giới thiệu', link: '/short-blog/gioi-thieu'},
-        ...shortBlogsSidebar
       ]
     }
   ],

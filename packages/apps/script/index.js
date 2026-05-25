@@ -20,6 +20,5 @@ if (!fs.existsSync(folderPath)) {
 
 
 execSync(`node script/blogs.js ${dataInject}`,{stdio: 'inherit'});
-execSync(`node script/short-blog.js ${dataInject}`,{stdio: 'inherit'});
 execSync(`node script/study/index.js ${dataInject}`,{stdio: 'inherit'});
 execSync(`node script/about/index.js ${dataInject}`,{stdio: 'inherit'});
