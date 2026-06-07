@@ -1,7 +1,7 @@
 ---
 footer: true
-title: Thống nhất spect trước khi kết hợp | Chia sẻ dự án Mix 2 hệ thống vào làm một.
-description: Chia sẻ dự án Mix 2 hệ thống vào làm một. Đây là một dự án khá thú vị và có nhiều bài học kinh nghiệm được rút ra từ quá trình thực hiện dự án này.s
+title: Thống nhất spec trước khi hợp nhất 2 hệ thống bài học từ dự án LINE × Yaho | Chia sẻ dự án Mix 2 hệ thống vào làm một.
+description: Trong giai đoạn đầu dự án hợp nhất ShortURL của LINE và Yahoo, team đã chốt spec, đối chiếu tài liệu với code thực tế và xử lý các phần bị bỏ sót để giảm rủi ro khi triển khai.
 authors: [ lethanh ]
 date: 2026-06-07
 outline: deep
