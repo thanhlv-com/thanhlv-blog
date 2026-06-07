@@ -17,6 +17,10 @@ Xin chào mọi người! Đã rất lâu mình chưa tiếp tục chia sẻ v�
 
 [[TOC]]
 
+# Danh sách series bài viết về dự án Mix 2 hệ thống vào làm một:
+1. [Mở đầu | Chia sẻ dự án Mix 2 hệ thống vào làm một.](2026-06-04-mo-dau-mix-2-he-thong-lam-mot.md)
+2. [Thống nhất spec trước khi hợp nhất 2 hệ thống và bài học từ dự án LINE × Yahoo](2026-06-07-thong-nhat-spect-truoc-khi-hop-nhat-2-he-thong.md)
+
 ## Phần 1: Giới thiệu về dự án Mix 2 hệ thống vào làm một
 Năm 2019 Softbank và Navar (Công ty mẹ của LINE) đã lên kế hoạch hợp nhất hoạt động kinh doanh của LINE và Yahoo Japan.
  
