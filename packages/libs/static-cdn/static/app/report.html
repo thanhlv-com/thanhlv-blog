@@ -1,0 +1,456 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title id="pageTitle">Feedback & Bug Report Form</title>
+  <style>
+    :root { font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; }
+    body { margin: 0; background: #f5f7fb; color: #1f2937; }
+    .wrap { max-width: 720px; margin: 40px auto; padding: 0 16px; }
+    .card { background: #fff; border-radius: 12px; box-shadow: 0 6px 24px rgba(0,0,0,.08); padding: 24px; }
+    h1 { margin: 0 0 8px; font-size: 28px; }
+    p { margin: 0 0 20px; color: #4b5563; }
+    .field { margin-bottom: 16px; }
+    label { display: block; margin-bottom: 8px; font-weight: 600; }
+    input, textarea { width: 100%; box-sizing: border-box; border: 1px solid #d1d5db; border-radius: 10px; padding: 10px 12px; font: inherit; }
+    textarea { min-height: 140px; resize: vertical; }
+    button { border: 0; background: #4f46e5; color: #fff; padding: 10px 16px; border-radius: 10px; cursor: pointer; font-weight: 600; }
+    button:disabled { opacity: .6; cursor: not-allowed; }
+    .msg { margin-top: 14px; font-weight: 600; }
+    .ok { color: #047857; }
+    .err { color: #b91c1c; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="card">
+      <h1 id="titleText">Feedback & Bug Report Form</h1>
+      <form id="feedbackForm">
+        <div class="field" id="appNameField">
+          <label id="appNameLabel" for="appName">App name you are using</label>
+          <input id="appName" name="appName" type="text" required />
+        </div>
+
+        <div class="field">
+          <label id="detailLabel" for="detail">Please describe the issue you encountered or share your feedback:</label>
+          <textarea id="detail" name="detail" required></textarea>
+        </div>
+
+        <div class="field">
+          <label id="emailLabel" for="email">Would you like to receive a direct response from us? (If yes, please enter your email)</label>
+          <input id="email" name="email" type="email" placeholder="email@domain.com (optional)" />
+        </div>
+
+        <button id="submitBtn" type="submit">Submit feedback</button>
+        <div id="message" class="msg" aria-live="polite"></div>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    const FORM_RESPONSE_URL = "https://docs.google.com/forms/d/e/1FAIpQLSfiuuBexTp5XSGKUJ_rblS2F2CEjIiF-yzbAyRBP-znb4LcKw/formResponse";
+
+    const I18N = {
+          "en": {
+                "title": "Feedback & Bug Report Form",
+                "appNameLabel": "App name you are using",
+                "detailLabel": "Please describe the issue you encountered or share your feedback:",
+                "emailLabel": "Would you like to receive a direct response from us? (If yes, please enter your email)",
+                "emailPlaceholder": "email@domain.com (optional)",
+                "submitButton": "Submit feedback",
+                "success": "Submitted successfully. Thank you!",
+                "failed": "Submission failed. Please try again."
+          },
+          "zh-cn": {
+                "title": "反馈和错误报告表",
+                "appNameLabel": "您正在使用的应用程序名称",
+                "detailLabel": "请描述您遇到的问题或分享您的反馈：",
+                "emailLabel": "您想收到我们的直接回复吗？ （如果是，请输入您的电子邮件）",
+                "emailPlaceholder": "email@domain.com（可选）",
+                "submitButton": "提交反馈",
+                "success": "提交成功。谢谢你！",
+                "failed": "提交失败。请再试一次。"
+          },
+          "es": {
+                "title": "Formulario de comentarios e informe de errores",
+                "appNameLabel": "Nombre de la aplicación que estás usando",
+                "detailLabel": "Describa el problema que encontró o comparta sus comentarios:",
+                "emailLabel": "¿Le gustaría recibir una respuesta directa de nuestra parte? (En caso afirmativo, introduzca su correo electrónico)",
+                "emailPlaceholder": "correo electrónico@dominio.com (opcional)",
+                "submitButton": "Enviar comentarios",
+                "success": "Enviado exitosamente. ¡Gracias!",
+                "failed": "El envío falló. Por favor inténtalo de nuevo."
+          },
+          "hi": {
+                "title": "फीडबैक एवं बग रिपोर्ट फॉर्म",
+                "appNameLabel": "ऐप का नाम जिसका आप उपयोग कर रहे हैं",
+                "detailLabel": "कृपया आपके सामने आई समस्या का वर्णन करें या अपनी प्रतिक्रिया साझा करें:",
+                "emailLabel": "क्या आप हमसे सीधी प्रतिक्रिया प्राप्त करना चाहेंगे? (यदि हां, तो कृपया अपना ईमेल दर्ज करें)",
+                "emailPlaceholder": "email@domain.com (वैकल्पिक)",
+                "submitButton": "प्रतिक्रिया सबमिट करें",
+                "success": "सफलतापूर्वक सबमिट किया गया. धन्यवाद!",
+                "failed": "सबमिशन विफल. कृपया पुन: प्रयास करें।"
+          },
+          "ar": {
+                "title": "نموذج الإبلاغ عن الملاحظات والأخطاء",
+                "appNameLabel": "اسم التطبيق الذي تستخدمه",
+                "detailLabel": "يرجى وصف المشكلة التي واجهتها أو مشاركة تعليقاتك:",
+                "emailLabel": "هل ترغب في الحصول على رد مباشر منا؟ (إذا كانت الإجابة بنعم، يرجى إدخال البريد الإلكتروني الخاص بك)",
+                "emailPlaceholder": "email@domain.com (اختياري)",
+                "submitButton": "إرسال ردود الفعل",
+                "success": "تم الإرسال بنجاح. شكرًا لك!",
+                "failed": "فشل التقديم. يرجى المحاولة مرة أخرى."
+          },
+          "fr": {
+                "title": "Formulaire de commentaires et de rapport de bug",
+                "appNameLabel": "Nom de l'application que vous utilisez",
+                "detailLabel": "Veuillez décrire le problème que vous avez rencontré ou partager vos commentaires :",
+                "emailLabel": "Souhaitez-vous recevoir une réponse directe de notre part ? (Si oui, veuillez saisir votre email)",
+                "emailPlaceholder": "email@domain.com (facultatif)",
+                "submitButton": "Soumettre des commentaires",
+                "success": "Soumis avec succès. Merci!",
+                "failed": "La soumission a échoué. Veuillez réessayer."
+          },
+          "pt": {
+                "title": "Formulário de feedback e relatório de bugs",
+                "appNameLabel": "Nome do aplicativo que você está usando",
+                "detailLabel": "Descreva o problema que você encontrou ou compartilhe seus comentários:",
+                "emailLabel": "Gostaria de receber uma resposta direta nossa? (Se sim, por favor insira seu e-mail)",
+                "emailPlaceholder": "email@domínio.com (opcional)",
+                "submitButton": "Enviar comentários",
+                "success": "Enviado com sucesso. Obrigado!",
+                "failed": "O envio falhou. Por favor, tente novamente."
+          },
+          "ru": {
+                "title": "Форма обратной связи и отчета об ошибках",
+                "appNameLabel": "Название приложения, которое вы используете",
+                "detailLabel": "Опишите проблему, с которой вы столкнулись, или поделитесь своим мнением:",
+                "emailLabel": "Хотите получить от нас прямой ответ? (Если да, введите адрес электронной почты)",
+                "emailPlaceholder": "электронная почта@domain.com (необязательно)",
+                "submitButton": "Отправить отзыв",
+                "success": "Отправлено успешно. Спасибо!",
+                "failed": "Отправка не удалась. Пожалуйста, попробуйте еще раз."
+          },
+          "ja": {
+                "title": "フィードバックとバグレポートフォーム",
+                "appNameLabel": "使用しているアプリ名",
+                "detailLabel": "発生した問題について説明するか、フィードバックを共有してください:",
+                "emailLabel": "弊社からの直接の返答をご希望ですか? (はいの場合は、メールアドレスを入力してください)",
+                "emailPlaceholder": "email@domain.com (オプション)",
+                "submitButton": "フィードバックを送信する",
+                "success": "正常に送信されました。ありがとう！",
+                "failed": "提出に失敗しました。もう一度試してください。"
+          },
+          "de": {
+                "title": "Feedback- und Fehlerberichtsformular",
+                "appNameLabel": "App-Name, den Sie verwenden",
+                "detailLabel": "Bitte beschreiben Sie das aufgetretene Problem oder teilen Sie uns Ihr Feedback mit:",
+                "emailLabel": "Möchten Sie eine direkte Antwort von uns erhalten? (Wenn ja, geben Sie bitte Ihre E-Mail-Adresse ein)",
+                "emailPlaceholder": "email@domain.com (optional)",
+                "submitButton": "Feedback abgeben",
+                "success": "Erfolgreich übermittelt. Danke schön!",
+                "failed": "Die Übermittlung ist fehlgeschlagen. Bitte versuchen Sie es erneut."
+          },
+          "vi": {
+                "title": "Biểu mẫu phản hồi và báo cáo lỗi",
+                "appNameLabel": "Tên ứng dụng bạn đang sử dụng",
+                "detailLabel": "Vui lòng mô tả vấn đề bạn gặp phải hoặc chia sẻ phản hồi của bạn:",
+                "emailLabel": "Bạn có muốn nhận được phản hồi trực tiếp từ chúng tôi không? (Nếu có, vui lòng nhập email của bạn)",
+                "emailPlaceholder": "email@domain.com (tùy chọn)",
+                "submitButton": "Gửi phản hồi",
+                "success": "Đã gửi thành công. Cảm ơn!",
+                "failed": "Gửi không thành công. Vui lòng thử lại."
+          },
+          "it": {
+                "title": "Modulo di feedback e segnalazione di bug",
+                "appNameLabel": "Nome dell'app che stai utilizzando",
+                "detailLabel": "Descrivi il problema riscontrato o condividi il tuo feedback:",
+                "emailLabel": "Desideri ricevere una nostra risposta diretta? (Se sì, inserisci la tua email)",
+                "emailPlaceholder": "email@dominio.com (facoltativo)",
+                "submitButton": "Invia feedback",
+                "success": "Inserito con successo. Grazie!",
+                "failed": "Invio non riuscito. Per favore riprova."
+          },
+          "ko": {
+                "title": "피드백 및 버그 신고 양식",
+                "appNameLabel": "사용 중인 앱 이름",
+                "detailLabel": "발생한 문제를 설명하거나 피드백을 공유해 주세요.",
+                "emailLabel": "우리로부터 직접적인 답변을 받고 싶으십니까? (그렇다면 이메일을 입력해주세요)",
+                "emailPlaceholder": "email@domain.com (선택 사항)",
+                "submitButton": "피드백 제출",
+                "success": "성공적으로 제출되었습니다. 감사합니다!",
+                "failed": "제출에 실패했습니다. 다시 시도해 주세요."
+          },
+          "th": {
+                "title": "แบบฟอร์มรายงานผลตอบรับและข้อผิดพลาด",
+                "appNameLabel": "ชื่อแอปที่คุณใช้",
+                "detailLabel": "โปรดอธิบายปัญหาที่คุณพบหรือแบ่งปันความคิดเห็นของคุณ:",
+                "emailLabel": "คุณต้องการที่จะได้รับการตอบกลับโดยตรงจากเราหรือไม่? (ถ้าใช่กรุณากรอกอีเมล์ของคุณ)",
+                "emailPlaceholder": "email@domain.com (ไม่บังคับ)",
+                "submitButton": "ส่งข้อเสนอแนะ",
+                "success": "ส่งเรียบร้อยแล้ว ขอบคุณ!",
+                "failed": "การส่งล้มเหลว โปรดลองอีกครั้ง"
+          },
+          "id": {
+                "title": "Formulir Umpan Balik & Laporan Bug",
+                "appNameLabel": "Nama aplikasi yang Anda gunakan",
+                "detailLabel": "Harap jelaskan masalah yang Anda temui atau sampaikan masukan Anda:",
+                "emailLabel": "Apakah Anda ingin menerima tanggapan langsung dari kami? (Jika ya, silakan masukkan email Anda)",
+                "emailPlaceholder": "email@domain.com (opsional)",
+                "submitButton": "Kirim masukan",
+                "success": "Berhasil dikirimkan. Terima kasih!",
+                "failed": "Pengiriman gagal. Silakan coba lagi."
+          },
+          "tr": {
+                "title": "Geri Bildirim ve Hata Bildirme Formu",
+                "appNameLabel": "Kullandığınız uygulama adı",
+                "detailLabel": "Lütfen karşılaştığınız sorunu açıklayın veya geri bildiriminizi paylaşın:",
+                "emailLabel": "Bizden doğrudan yanıt almak ister misiniz? (Evet ise lütfen e-posta adresinizi giriniz)",
+                "emailPlaceholder": "email@domain.com (isteğe bağlı)",
+                "submitButton": "Geri bildirim gönder",
+                "success": "Başarıyla gönderildi. Teşekkür ederim!",
+                "failed": "Gönderim başarısız oldu. Lütfen tekrar deneyin."
+          },
+          "nl": {
+                "title": "Feedback- en bugrapportformulier",
+                "appNameLabel": "App-naam die u gebruikt",
+                "detailLabel": "Beschrijf het probleem dat u bent tegengekomen of deel uw feedback:",
+                "emailLabel": "Wilt u direct een reactie van ons ontvangen? (Zo ja, vul dan uw e-mailadres in)",
+                "emailPlaceholder": "e-mail@domein.com (optioneel)",
+                "submitButton": "Geef feedback",
+                "success": "Succesvol ingediend. Bedankt!",
+                "failed": "Inzending mislukt. Probeer het opnieuw."
+          },
+          "pl": {
+                "title": "Formularz opinii i raportu o błędach",
+                "appNameLabel": "Nazwa aplikacji, której używasz",
+                "detailLabel": "Opisz napotkany problem lub podziel się swoją opinią:",
+                "emailLabel": "Czy chcesz otrzymać od nas bezpośrednią odpowiedź? (Jeśli tak, podaj swój adres e-mail)",
+                "emailPlaceholder": "e-mail@domena.com (opcjonalnie)",
+                "submitButton": "Prześlij opinię",
+                "success": "Przesłano pomyślnie. Dziękuję!",
+                "failed": "Przesyłanie nie powiodło się. Spróbuj ponownie."
+          },
+          "uk": {
+                "title": "Форма для відгуків і звітів про помилки",
+                "appNameLabel": "Назва програми, яку ви використовуєте",
+                "detailLabel": "Опишіть проблему, з якою ви зіткнулися, або поділіться своїм відгуком:",
+                "emailLabel": "Бажаєте отримати пряму відповідь від нас? (Якщо так, будь ласка, введіть свою електронну адресу)",
+                "emailPlaceholder": "email@domain.com (необов'язково)",
+                "submitButton": "Надіслати відгук",
+                "success": "Надіслано успішно. дякую!",
+                "failed": "Не вдалося подати. Спробуйте ще раз."
+          },
+          "fa": {
+                "title": "بازخورد و فرم گزارش اشکال",
+                "appNameLabel": "نام برنامه ای که استفاده می کنید",
+                "detailLabel": "لطفاً مشکلی را که با آن مواجه شدید شرح دهید یا بازخورد خود را به اشتراک بگذارید:",
+                "emailLabel": "آیا مایل به دریافت پاسخ مستقیم از ما هستید؟ (اگر بله، لطفا ایمیل خود را وارد کنید)",
+                "emailPlaceholder": "email@domain.com (اختیاری)",
+                "submitButton": "ارسال بازخورد",
+                "success": "با موفقیت ارسال شد. متشکرم",
+                "failed": "ارسال ناموفق بود. لطفا دوباره امتحان کنید."
+          },
+          "he": {
+                "title": "טופס משוב ודיווח באגים",
+                "appNameLabel": "שם האפליקציה שאתה משתמש בו",
+                "detailLabel": "אנא תאר את הבעיה שבה נתקלת או שתף את המשוב שלך:",
+                "emailLabel": "האם תרצה לקבל מאיתנו מענה ישיר? (אם כן, אנא הכנס את המייל שלך)",
+                "emailPlaceholder": "email@domain.com (אופציונלי)",
+                "submitButton": "שלח משוב",
+                "success": "הוגש בהצלחה. תודה לך!",
+                "failed": "ההגשה נכשלה. אנא נסה שוב."
+          },
+          "bn": {
+                "title": "প্রতিক্রিয়া এবং বাগ রিপোর্ট ফর্ম",
+                "appNameLabel": "অ্যাপের নাম আপনি ব্যবহার করছেন",
+                "detailLabel": "আপনি যে সমস্যার সম্মুখীন হয়েছেন দয়া করে বর্ণনা করুন বা আপনার প্রতিক্রিয়া শেয়ার করুন:",
+                "emailLabel": "আপনি কি আমাদের কাছ থেকে সরাসরি প্রতিক্রিয়া পেতে চান? (যদি হ্যাঁ, অনুগ্রহ করে আপনার ইমেল লিখুন)",
+                "emailPlaceholder": "email@domain.com (ঐচ্ছিক)",
+                "submitButton": "প্রতিক্রিয়া জমা দিন",
+                "success": "সফলভাবে জমা দেওয়া হয়েছে৷ ধন্যবাদ!",
+                "failed": "জমা দিতে ব্যর্থ হয়েছে. আবার চেষ্টা করুন."
+          },
+          "ta": {
+                "title": "கருத்து & பிழை அறிக்கை படிவம்",
+                "appNameLabel": "நீங்கள் பயன்படுத்தும் பயன்பாட்டின் பெயர்",
+                "detailLabel": "நீங்கள் சந்தித்த சிக்கலை விவரிக்கவும் அல்லது உங்கள் கருத்தைப் பகிரவும்:",
+                "emailLabel": "எங்களிடமிருந்து நேரடியான பதிலைப் பெற விரும்புகிறீர்களா? (ஆம் எனில், உங்கள் மின்னஞ்சலை உள்ளிடவும்)",
+                "emailPlaceholder": "email@domain.com (விரும்பினால்)",
+                "submitButton": "கருத்தைச் சமர்ப்பிக்கவும்",
+                "success": "வெற்றிகரமாக சமர்ப்பிக்கப்பட்டது. நன்றி!",
+                "failed": "சமர்ப்பிப்பு தோல்வியடைந்தது. மீண்டும் முயற்சிக்கவும்."
+          },
+          "te": {
+                "title": "అభిప్రాయం & బగ్ నివేదిక ఫారమ్",
+                "appNameLabel": "మీరు ఉపయోగిస్తున్న యాప్ పేరు",
+                "detailLabel": "దయచేసి మీరు ఎదుర్కొన్న సమస్యను వివరించండి లేదా మీ అభిప్రాయాన్ని పంచుకోండి:",
+                "emailLabel": "మీరు మా నుండి ప్రత్యక్ష ప్రతిస్పందనను స్వీకరించాలనుకుంటున్నారా? (అవును అయితే, దయచేసి మీ ఇమెయిల్‌ను నమోదు చేయండి)",
+                "emailPlaceholder": "email@domain.com (ఐచ్ఛికం)",
+                "submitButton": "అభిప్రాయాన్ని సమర్పించండి",
+                "success": "విజయవంతంగా సమర్పించబడింది. ధన్యవాదాలు!",
+                "failed": "సమర్పణ విఫలమైంది. దయచేసి మళ్లీ ప్రయత్నించండి."
+          },
+          "ur": {
+                "title": "فیڈ بیک اور بگ رپورٹ فارم",
+                "appNameLabel": "ایپ کا نام جو آپ استعمال کر رہے ہیں۔",
+                "detailLabel": "براہ کرم اس مسئلے کی وضاحت کریں جس کا آپ کو سامنا ہوا یا اپنے تاثرات کا اشتراک کریں:",
+                "emailLabel": "کیا آپ ہماری طرف سے براہ راست جواب حاصل کرنا چاہیں گے؟ (اگر ہاں، تو براہ کرم اپنا ای میل درج کریں)",
+                "emailPlaceholder": "email@domain.com (اختیاری)",
+                "submitButton": "رائے جمع کروائیں۔",
+                "success": "کامیابی کے ساتھ جمع کرایا گیا۔ شکریہ!",
+                "failed": "جمع کرانے میں ناکام براہ کرم دوبارہ کوشش کریں۔"
+          },
+          "ms": {
+                "title": "Borang Laporan Maklum Balas & Pepijat",
+                "appNameLabel": "Nama apl yang anda gunakan",
+                "detailLabel": "Sila terangkan isu yang anda hadapi atau kongsi maklum balas anda:",
+                "emailLabel": "Adakah anda ingin menerima maklum balas terus daripada kami? (Jika ya, sila masukkan e-mel anda)",
+                "emailPlaceholder": "email@domain.com (pilihan)",
+                "submitButton": "Hantar maklum balas",
+                "success": "Dihantar dengan jayanya. terima kasih!",
+                "failed": "Penyerahan gagal. Sila cuba lagi."
+          },
+          "sv": {
+                "title": "Feedback & felrapportformulär",
+                "appNameLabel": "Appnamnet du använder",
+                "detailLabel": "Beskriv problemet du stötte på eller dela din feedback:",
+                "emailLabel": "Vill du få ett direkt svar från oss? (Om ja, ange din e-postadress)",
+                "emailPlaceholder": "email@domain.com (valfritt)",
+                "submitButton": "Skicka feedback",
+                "success": "Skickades in. Tack!",
+                "failed": "Inlämningen misslyckades. Försök igen."
+          },
+          "cs": {
+                "title": "Formulář zpětné vazby a hlášení chyb",
+                "appNameLabel": "Název aplikace, kterou používáte",
+                "detailLabel": "Popište prosím problém, na který jste narazili, nebo sdělte svůj názor:",
+                "emailLabel": "Přejete si od nás přímou odpověď? (Pokud ano, zadejte svůj email)",
+                "emailPlaceholder": "email@domain.com (volitelné)",
+                "submitButton": "Odeslat zpětnou vazbu",
+                "success": "Úspěšně odesláno. Děkuju!",
+                "failed": "Odeslání se nezdařilo. Zkuste to prosím znovu."
+          },
+          "ro": {
+                "title": "Formular de feedback și raportare erori",
+                "appNameLabel": "Numele aplicației pe care îl utilizați",
+                "detailLabel": "Descrieți problema pe care ați întâlnit-o sau împărtășiți feedbackul dvs.:",
+                "emailLabel": "Doriți să primiți un răspuns direct de la noi? (Dacă da, introduceți adresa dvs. de e-mail)",
+                "emailPlaceholder": "email@domain.com (opțional)",
+                "submitButton": "Trimiteți feedback",
+                "success": "Trimis cu succes. Multumesc!",
+                "failed": "Trimiterea a eșuat. Vă rugăm să încercați din nou."
+          },
+          "el": {
+                "title": "Φόρμα σχολίων και αναφοράς σφαλμάτων",
+                "appNameLabel": "Όνομα εφαρμογής που χρησιμοποιείτε",
+                "detailLabel": "Περιγράψτε το πρόβλημα που αντιμετωπίσατε ή μοιραστείτε τα σχόλιά σας:",
+                "emailLabel": "Θα θέλατε να λάβετε μια άμεση απάντηση από εμάς; (Εάν ναι, πληκτρολογήστε το email σας)",
+                "emailPlaceholder": "email@domain.com (προαιρετικό)",
+                "submitButton": "Υποβολή σχολίων",
+                "success": "Υποβλήθηκε με επιτυχία. Σας ευχαριστώ!",
+                "failed": "Η υποβολή απέτυχε. Δοκιμάστε ξανά."
+          },
+          "hu": {
+                "title": "Visszajelzési és hibajelentési űrlap",
+                "appNameLabel": "Az Ön által használt alkalmazásnév",
+                "detailLabel": "Kérjük, írja le a problémát, vagy ossza meg visszajelzését:",
+                "emailLabel": "Szeretne közvetlen választ kapni tőlünk? (Ha igen, kérjük, adja meg e-mail címét)",
+                "emailPlaceholder": "email@domain.com (nem kötelező)",
+                "submitButton": "Visszajelzés küldése",
+                "success": "Sikeresen elküldve. Köszönöm!",
+                "failed": "A beküldés sikertelen. Kérjük, próbálja újra."
+          }
+    };
+
+    const SUPPORTED_LANGUAGES = new Set(Object.keys(I18N));
+
+    // Mapping entry IDs from the provided Google Form.
+    const ENTRY = {
+      appName: "entry.1027599674",
+      detail: "entry.433439198",
+      email: "entry.661841789",
+    };
+
+    const form = document.getElementById("feedbackForm");
+    const submitBtn = document.getElementById("submitBtn");
+    const message = document.getElementById("message");
+    const appNameField = document.getElementById("appNameField");
+    const titleText = document.getElementById("titleText");
+    const appNameLabel = document.getElementById("appNameLabel");
+    const detailLabel = document.getElementById("detailLabel");
+    const emailLabel = document.getElementById("emailLabel");
+    const emailInput = document.getElementById("email");
+
+    const params = new URLSearchParams(window.location.search);
+    const appNameFromParam = (params.get("appName") || "").trim();
+
+    const normalizeLang = (rawLang) => {
+      if (!rawLang) return "en";
+      const normalized = rawLang.toLowerCase();
+      if (SUPPORTED_LANGUAGES.has(normalized)) return normalized;
+
+      const baseLang = normalized.split("-")[0];
+      if (SUPPORTED_LANGUAGES.has(baseLang)) return baseLang;
+      if (baseLang === "zh" && SUPPORTED_LANGUAGES.has("zh-cn")) return "zh-cn";
+
+      return "en";
+    };
+
+    const lang = normalizeLang(params.get("lang"));
+    document.documentElement.lang = lang;
+
+    const activeDictionary = I18N[lang] || I18N.en;
+
+    const applyTranslations = (dictionary) => {
+      document.title = dictionary.title;
+      titleText.textContent = dictionary.title;
+      appNameLabel.textContent = dictionary.appNameLabel;
+      detailLabel.textContent = dictionary.detailLabel;
+      emailLabel.textContent = dictionary.emailLabel;
+      emailInput.placeholder = dictionary.emailPlaceholder;
+      submitBtn.textContent = dictionary.submitButton;
+    };
+
+    applyTranslations(activeDictionary);
+
+    if (appNameFromParam) {
+      appNameField.style.display = "none";
+      form.appName.required = false;
+      form.appName.value = appNameFromParam;
+    }
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      message.textContent = "";
+      message.className = "msg";
+      submitBtn.disabled = true;
+
+      try {
+        const fd = new FormData();
+        const appName = appNameFromParam || form.appName.value.trim();
+        fd.append(ENTRY.appName, appName);
+        fd.append(ENTRY.detail, form.detail.value.trim());
+        fd.append(ENTRY.email, form.email.value.trim());
+
+        // no-cors is required because Google Forms does not return CORS headers.
+        await fetch(FORM_RESPONSE_URL, {
+          method: "POST",
+          mode: "no-cors",
+          body: fd,
+        });
+
+        message.textContent = activeDictionary.success;
+        message.classList.add("ok");
+        form.reset();
+      } catch (err) {
+        message.textContent = activeDictionary.failed;
+        message.classList.add("err");
+      } finally {
+        submitBtn.disabled = false;
+      }
+    });
+  </script>
+</body>
+</html>
